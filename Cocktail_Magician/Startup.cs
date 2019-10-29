@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Cocktail_Magician.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Cocktail_Magician_DB;
 
 namespace Cocktail_Magician
 {
@@ -35,6 +36,11 @@ namespace Cocktail_Magician
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddDbContext<CMContext>(options => {
+                options.EnableSensitiveDataLogging();
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection"));
+            });
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));

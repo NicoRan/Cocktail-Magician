@@ -13,4 +13,9 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.4" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <ProjectReference Include="..\Cocktail_Magician_DB\Cocktail_Magician_DB.csproj" />
+  </ItemGroup>
+
 </Project>
