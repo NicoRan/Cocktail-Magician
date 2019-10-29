@@ -7,5 +7,6 @@ namespace Cocktail_Magician_DB.Models
 {
     public class User : IdentityUser
     {
+
     }
 }

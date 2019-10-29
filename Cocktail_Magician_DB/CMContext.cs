@@ -15,10 +15,24 @@ namespace Cocktail_Magician_DB
 
         }
 
-        public CMContext(DbContextOptions<CMContext> options) 
+        public CMContext(DbContextOptions<CMContext> options)
             : base(options)
         {
 
+        }
+
+        public DbSet<Bar> Bars { get; set; }
+
+        public DbSet<Cocktail> Cocktails { get; set; }
+        public DbSet<CocktailIngredient> CocktailIngredients { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+        public DbSet<Ingredient> Ingredients { get; set; }
+
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+
+            base.OnModelCreating(builder);
         }
     }
 }

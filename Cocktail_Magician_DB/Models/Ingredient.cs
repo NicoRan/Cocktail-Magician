@@ -4,13 +4,10 @@ using System.Text;
 
 namespace Cocktail_Magician_DB.Models
 {
-    public class Bar
+    public class Ingredient
     {
-        public string BarId { get; set; }
+        public string IngredientId { get; set; }
         public string Name { get; set; }
-        public string Address { get; set; }
-        public double Rating { get; set; }
-        public string Picture { get; set; }
         public ICollection<Cocktail> Cocktails { get; set; }
     }
 }
