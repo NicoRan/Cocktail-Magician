@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29411.108
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cocktail_Magician", "Cocktail_Magician\Cocktail_Magician.csproj", "{880B6663-8803-4DC9-8D4E-7F5C40473F6B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cocktail_Magician_DB", "Cocktail_Magician_DB\Cocktail_Magician_DB.csproj", "{1A5EDABA-6342-49CB-A25C-D2B652B4E65F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{880B6663-8803-4DC9-8D4E-7F5C40473F6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{880B6663-8803-4DC9-8D4E-7F5C40473F6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{880B6663-8803-4DC9-8D4E-7F5C40473F6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{880B6663-8803-4DC9-8D4E-7F5C40473F6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A5EDABA-6342-49CB-A25C-D2B652B4E65F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A5EDABA-6342-49CB-A25C-D2B652B4E65F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A5EDABA-6342-49CB-A25C-D2B652B4E65F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A5EDABA-6342-49CB-A25C-D2B652B4E65F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {046EC2A9-F427-450E-8172-C670AE86F928}
+	EndGlobalSection
+EndGlobal
