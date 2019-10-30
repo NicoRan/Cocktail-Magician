@@ -12,5 +12,6 @@ namespace Cocktail_Magician_DB.Models
         public double Rating { get; set; }
         public string Picture { get; set; }
         public ICollection<Cocktail> Cocktails { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }
