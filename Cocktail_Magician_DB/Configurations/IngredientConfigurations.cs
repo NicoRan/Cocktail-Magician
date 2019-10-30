@@ -7,12 +7,13 @@ using System.Text;
 
 namespace Cocktail_Magician_DB.Configurations
 {
-    public class BarConfigurations : IEntityTypeConfiguration<Bar>
+    public class IngredientConfigurations : IEntityTypeConfiguration<Ingredient>
     {
-        public void Configure(EntityTypeBuilder<Bar> builder)
+        public void Configure(EntityTypeBuilder<Ingredient> builder)
         {
+
             builder
-                .HasKey(bar => bar.BarId);
+                .HasKey(k => k.IngredientId);
 
             builder
                 .Property(bar => bar.Name)
@@ -20,14 +21,7 @@ namespace Cocktail_Magician_DB.Configurations
                 .IsRequired();
 
             builder
-                .Property(bar => bar.Address)
-                .IsRequired();
-
-            builder
-                .Property(bar => bar.Rating);
-
-            builder
-                .HasIndex(bar => bar.Name)
+                .HasIndex(ingredient => ingredient.Name)
                 .IsUnique();
 
         }

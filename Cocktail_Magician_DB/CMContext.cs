@@ -11,10 +11,6 @@ namespace Cocktail_Magician_DB
 {
     public class CMContext : IdentityDbContext<User>
     {
-        public CMContext()
-        {
-
-        }
 
         public CMContext(DbContextOptions<CMContext> options)
             : base(options)
@@ -24,13 +20,20 @@ namespace Cocktail_Magician_DB
 
         public DbSet<Bar> Bars { get; set; }
         public DbSet<Cocktail> Cocktails { get; set; }
-        public DbSet<CocktailIngredient> CocktailIngredients { get; set; }
-        public DbSet<Comment> Comments { get; set; }
-        public DbSet<Ingredient> Ingredients { get; set; }
+
+        //public DbSet<CocktailIngredient> CocktailIngredients { get; set; }
+        //public DbSet<Comment> Comments { get; set; }
+        //public DbSet<Ingredient> Ingredients { get; set; }
+        public DbSet<BarCocktail> BarCocktails { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new BarConfigurations());
+            builder.ApplyConfiguration(new CocktailConfigurations());
+            builder.ApplyConfiguration(new BarCocktailConfigurations());
+            builder.ApplyConfiguration(new CocktailIngredientConfigurations());
+            builder.ApplyConfiguration(new IngredientConfigurations());
+
 
             base.OnModelCreating(builder);
         }

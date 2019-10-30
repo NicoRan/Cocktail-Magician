@@ -6,9 +6,12 @@ namespace Cocktail_Magician_DB.Models
 {
     public class Cocktail
     {
-        public int CocktailId { get; set; }
+        public string CocktailId { get; set; }
         public string Name { get; set; }
-        public ICollection<Bar> Bars { get; set; }
+        public double Rating { get; set; }
+        public ICollection<BarCocktail> BarCocktails { get; set; }
+        //
+        public ICollection<CocktailIngredient> CocktailIngredient { get; set; }
         public bool IsDeleted { get; set; }
     }
 }

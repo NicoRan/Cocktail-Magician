@@ -7,27 +7,24 @@ using System.Text;
 
 namespace Cocktail_Magician_DB.Configurations
 {
-    public class BarConfigurations : IEntityTypeConfiguration<Bar>
+    public class CocktailConfigurations : IEntityTypeConfiguration<Cocktail>
     {
-        public void Configure(EntityTypeBuilder<Bar> builder)
+
+        public void Configure(EntityTypeBuilder<Cocktail> builder)
         {
             builder
-                .HasKey(bar => bar.BarId);
+                .HasKey(k => k.CocktailId);
 
             builder
-                .Property(bar => bar.Name)
+                .Property(cocktail => cocktail.Name)
                 .HasMaxLength(35)
                 .IsRequired();
 
             builder
-                .Property(bar => bar.Address)
-                .IsRequired();
+                .Property(cocktail => cocktail.Rating);
 
             builder
-                .Property(bar => bar.Rating);
-
-            builder
-                .HasIndex(bar => bar.Name)
+                .HasIndex(cocktail => cocktail.Name)
                 .IsUnique();
 
         }

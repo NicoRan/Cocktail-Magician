@@ -8,6 +8,6 @@ namespace Cocktail_Magician_DB.Models
     {
         public string IngredientId { get; set; }
         public string Name { get; set; }
-        public ICollection<Cocktail> Cocktails { get; set; }
+        public ICollection<CocktailIngredient> CocktailIngredient { get; set; }
     }
 }
