@@ -78,7 +78,7 @@ namespace Cocktail_Magician_DB.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Ingredient",
+                name: "Ingredients",
                 columns: table => new
                 {
                     IngredientId = table.Column<string>(nullable: false),
@@ -86,7 +86,7 @@ namespace Cocktail_Magician_DB.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Ingredient", x => x.IngredientId);
+                    table.PrimaryKey("PK_Ingredients", x => x.IngredientId);
                 });
 
             migrationBuilder.CreateTable(
@@ -220,7 +220,7 @@ namespace Cocktail_Magician_DB.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CocktailIngredient",
+                name: "CocktailIngredients",
                 columns: table => new
                 {
                     CocktailId = table.Column<string>(nullable: false),
@@ -228,17 +228,17 @@ namespace Cocktail_Magician_DB.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CocktailIngredient", x => new { x.CocktailId, x.IngredientId });
+                    table.PrimaryKey("PK_CocktailIngredients", x => new { x.CocktailId, x.IngredientId });
                     table.ForeignKey(
-                        name: "FK_CocktailIngredient_Cocktails_CocktailId",
+                        name: "FK_CocktailIngredients_Cocktails_CocktailId",
                         column: x => x.CocktailId,
                         principalTable: "Cocktails",
                         principalColumn: "CocktailId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CocktailIngredient_Ingredient_IngredientId",
+                        name: "FK_CocktailIngredients_Ingredients_IngredientId",
                         column: x => x.IngredientId,
-                        principalTable: "Ingredient",
+                        principalTable: "Ingredients",
                         principalColumn: "IngredientId",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -294,8 +294,8 @@ namespace Cocktail_Magician_DB.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_CocktailIngredient_IngredientId",
-                table: "CocktailIngredient",
+                name: "IX_CocktailIngredients_IngredientId",
+                table: "CocktailIngredients",
                 column: "IngredientId");
 
             migrationBuilder.CreateIndex(
@@ -305,8 +305,8 @@ namespace Cocktail_Magician_DB.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Ingredient_Name",
-                table: "Ingredient",
+                name: "IX_Ingredients_Name",
+                table: "Ingredients",
                 column: "Name",
                 unique: true);
         }
@@ -332,7 +332,7 @@ namespace Cocktail_Magician_DB.Migrations
                 name: "BarCocktails");
 
             migrationBuilder.DropTable(
-                name: "CocktailIngredient");
+                name: "CocktailIngredients");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -347,7 +347,7 @@ namespace Cocktail_Magician_DB.Migrations
                 name: "Cocktails");
 
             migrationBuilder.DropTable(
-                name: "Ingredient");
+                name: "Ingredients");
         }
     }
 }

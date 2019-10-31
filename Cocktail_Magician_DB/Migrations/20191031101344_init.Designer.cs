@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cocktail_Magician_DB.Migrations
 {
     [DbContext(typeof(CMContext))]
-    [Migration("20191030151525_init")]
+    [Migration("20191031101344_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -91,7 +91,7 @@ namespace Cocktail_Magician_DB.Migrations
 
                     b.HasIndex("IngredientId");
 
-                    b.ToTable("CocktailIngredient");
+                    b.ToTable("CocktailIngredients");
                 });
 
             modelBuilder.Entity("Cocktail_Magician_DB.Models.Ingredient", b =>
@@ -108,7 +108,7 @@ namespace Cocktail_Magician_DB.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("Ingredient");
+                    b.ToTable("Ingredients");
                 });
 
             modelBuilder.Entity("Cocktail_Magician_DB.Models.User", b =>

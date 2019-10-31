@@ -89,7 +89,7 @@ namespace Cocktail_Magician_DB.Migrations
 
                     b.HasIndex("IngredientId");
 
-                    b.ToTable("CocktailIngredient");
+                    b.ToTable("CocktailIngredients");
                 });
 
             modelBuilder.Entity("Cocktail_Magician_DB.Models.Ingredient", b =>
@@ -106,7 +106,7 @@ namespace Cocktail_Magician_DB.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("Ingredient");
+                    b.ToTable("Ingredients");
                 });
 
             modelBuilder.Entity("Cocktail_Magician_DB.Models.User", b =>

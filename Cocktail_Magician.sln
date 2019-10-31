@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29411.108
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cocktail_Magician", "Cocktail_Magician\Cocktail_Magician.csproj", "{880B6663-8803-4DC9-8D4E-7F5C40473F6B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cocktail_Magician", "Cocktail_Magician\Cocktail_Magician.csproj", "{880B6663-8803-4DC9-8D4E-7F5C40473F6B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cocktail_Magician_DB", "Cocktail_Magician_DB\Cocktail_Magician_DB.csproj", "{1A5EDABA-6342-49CB-A25C-D2B652B4E65F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cocktail_Magician_DB", "Cocktail_Magician_DB\Cocktail_Magician_DB.csproj", "{1A5EDABA-6342-49CB-A25C-D2B652B4E65F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cocktail_Magician_Services", "Cocktail_Magician_Services\Cocktail_Magician_Services.csproj", "{05A2848E-D126-4D40-83AC-4970C8227EF1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{1A5EDABA-6342-49CB-A25C-D2B652B4E65F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A5EDABA-6342-49CB-A25C-D2B652B4E65F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A5EDABA-6342-49CB-A25C-D2B652B4E65F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05A2848E-D126-4D40-83AC-4970C8227EF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05A2848E-D126-4D40-83AC-4970C8227EF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05A2848E-D126-4D40-83AC-4970C8227EF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05A2848E-D126-4D40-83AC-4970C8227EF1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
