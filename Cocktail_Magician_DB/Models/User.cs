@@ -11,6 +11,5 @@ namespace Cocktail_Magician_DB.Models
         public ICollection<BarComment> BarComments { get; set; }
         public ICollection<CocktailComment> CocktailComments { get; set; }
         public ICollection<CocktailRating> CocktailRatings { get; set; }
-
     }
 }

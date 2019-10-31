@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cocktail_Magician_DB.Migrations
 {
     [DbContext(typeof(CMContext))]
-    [Migration("20191031101344_init")]
+    [Migration("20191031184225_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -60,9 +60,40 @@ namespace Cocktail_Magician_DB.Migrations
                     b.ToTable("BarCocktails");
                 });
 
+            modelBuilder.Entity("Cocktail_Magician_DB.Models.BarComment", b =>
+                {
+                    b.Property<string>("UserId");
+
+                    b.Property<string>("BarId");
+
+                    b.Property<string>("Comment")
+                        .IsRequired();
+
+                    b.HasKey("UserId", "BarId");
+
+                    b.HasIndex("BarId");
+
+                    b.ToTable("BarComment");
+                });
+
+            modelBuilder.Entity("Cocktail_Magician_DB.Models.BarRating", b =>
+                {
+                    b.Property<string>("UserId");
+
+                    b.Property<string>("BarId");
+
+                    b.Property<int>("Grade");
+
+                    b.HasKey("UserId", "BarId");
+
+                    b.HasIndex("BarId");
+
+                    b.ToTable("BarRating");
+                });
+
             modelBuilder.Entity("Cocktail_Magician_DB.Models.Cocktail", b =>
                 {
-                    b.Property<string>("CocktailId")
+                    b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<bool>("IsDeleted");
@@ -71,14 +102,28 @@ namespace Cocktail_Magician_DB.Migrations
                         .IsRequired()
                         .HasMaxLength(35);
 
-                    b.Property<double>("Rating");
-
-                    b.HasKey("CocktailId");
+                    b.HasKey("Id");
 
                     b.HasIndex("Name")
                         .IsUnique();
 
                     b.ToTable("Cocktails");
+                });
+
+            modelBuilder.Entity("Cocktail_Magician_DB.Models.CocktailComment", b =>
+                {
+                    b.Property<string>("UserId");
+
+                    b.Property<string>("CocktailId");
+
+                    b.Property<string>("Comment")
+                        .IsRequired();
+
+                    b.HasKey("UserId", "CocktailId");
+
+                    b.HasIndex("CocktailId");
+
+                    b.ToTable("CocktailComment");
                 });
 
             modelBuilder.Entity("Cocktail_Magician_DB.Models.CocktailIngredient", b =>
@@ -92,6 +137,21 @@ namespace Cocktail_Magician_DB.Migrations
                     b.HasIndex("IngredientId");
 
                     b.ToTable("CocktailIngredients");
+                });
+
+            modelBuilder.Entity("Cocktail_Magician_DB.Models.CocktailRating", b =>
+                {
+                    b.Property<string>("UserId");
+
+                    b.Property<string>("CocktailId");
+
+                    b.Property<int>("Grade");
+
+                    b.HasKey("UserId", "CocktailId");
+
+                    b.HasIndex("CocktailId");
+
+                    b.ToTable("CocktailRating");
                 });
 
             modelBuilder.Entity("Cocktail_Magician_DB.Models.Ingredient", b =>
@@ -289,6 +349,45 @@ namespace Cocktail_Magician_DB.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("Cocktail_Magician_DB.Models.BarComment", b =>
+                {
+                    b.HasOne("Cocktail_Magician_DB.Models.Bar", "Bar")
+                        .WithMany("BarComments")
+                        .HasForeignKey("BarId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Cocktail_Magician_DB.Models.User", "User")
+                        .WithMany("BarComments")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Cocktail_Magician_DB.Models.BarRating", b =>
+                {
+                    b.HasOne("Cocktail_Magician_DB.Models.Bar", "Bar")
+                        .WithMany("BarRatings")
+                        .HasForeignKey("BarId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Cocktail_Magician_DB.Models.User", "User")
+                        .WithMany("BarRatings")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Cocktail_Magician_DB.Models.CocktailComment", b =>
+                {
+                    b.HasOne("Cocktail_Magician_DB.Models.Cocktail", "Cocktail")
+                        .WithMany("CocktailComments")
+                        .HasForeignKey("CocktailId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Cocktail_Magician_DB.Models.User", "User")
+                        .WithMany("CocktailComments")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("Cocktail_Magician_DB.Models.CocktailIngredient", b =>
                 {
                     b.HasOne("Cocktail_Magician_DB.Models.Cocktail", "Cocktail")
@@ -299,6 +398,19 @@ namespace Cocktail_Magician_DB.Migrations
                     b.HasOne("Cocktail_Magician_DB.Models.Ingredient", "Ingredient")
                         .WithMany("CocktailIngredient")
                         .HasForeignKey("IngredientId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Cocktail_Magician_DB.Models.CocktailRating", b =>
+                {
+                    b.HasOne("Cocktail_Magician_DB.Models.Cocktail", "Cocktail")
+                        .WithMany("CocktailRatings")
+                        .HasForeignKey("CocktailId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Cocktail_Magician_DB.Models.User", "User")
+                        .WithMany("CocktailRatings")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

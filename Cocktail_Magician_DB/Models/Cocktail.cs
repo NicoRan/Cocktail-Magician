@@ -6,12 +6,15 @@ namespace Cocktail_Magician_DB.Models
 {
     public class Cocktail
     {
-        public Cocktail(string name, double rating)
+        public Cocktail()
+        {
+
+        }
+        public Cocktail(string name)
         {
             this.Name = name;
-            this.Rating = rating;
         }
-        public string CocktailId { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
         public bool IsDeleted { get; set; }
 

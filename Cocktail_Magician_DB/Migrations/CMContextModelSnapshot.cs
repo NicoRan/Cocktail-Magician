@@ -35,6 +35,8 @@ namespace Cocktail_Magician_DB.Migrations
 
                     b.Property<string>("Picture");
 
+                    b.Property<double>("Rating");
+
                     b.HasKey("BarId");
 
                     b.HasIndex("Name")
@@ -89,7 +91,7 @@ namespace Cocktail_Magician_DB.Migrations
 
             modelBuilder.Entity("Cocktail_Magician_DB.Models.Cocktail", b =>
                 {
-                    b.Property<string>("CocktailId")
+                    b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<bool>("IsDeleted");
@@ -98,7 +100,7 @@ namespace Cocktail_Magician_DB.Migrations
                         .IsRequired()
                         .HasMaxLength(35);
 
-                    b.HasKey("CocktailId");
+                    b.HasKey("Id");
 
                     b.HasIndex("Name")
                         .IsUnique();
