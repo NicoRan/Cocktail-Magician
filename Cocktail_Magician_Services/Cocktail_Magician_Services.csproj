@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Cocktail_Magician_DB\Cocktail_Magician_DB.csproj" />
+  </ItemGroup>
+
 </Project>

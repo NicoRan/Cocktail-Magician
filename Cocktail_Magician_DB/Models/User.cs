@@ -7,6 +7,6 @@ namespace Cocktail_Magician_DB.Models
 {
     public class User : IdentityUser
     {
-
+        public ICollection<Comment> Commetns { get; set; }
     }
 }
