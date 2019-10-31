@@ -23,8 +23,6 @@ namespace Cocktail_Magician_DB.Configurations
                 .Property(bar => bar.Address)
                 .IsRequired();
 
-            builder
-                .Property(bar => bar.Rating);
 
             builder
                 .HasIndex(bar => bar.Name)

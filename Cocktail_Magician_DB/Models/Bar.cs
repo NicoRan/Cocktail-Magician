@@ -25,10 +25,12 @@ namespace Cocktail_Magician_DB.Models
         public string Name { get; set; }
         [MinLength(5, ErrorMessage = "Address should at least 5 symbols!")]
         public string Address { get; set; }
-        [Column(TypeName = "double(18,1)")]
         public double Rating { get; set; }
         public string Picture { get; set; }
+        public bool IsDeleted { get; set; }
+
         public ICollection<BarCocktail> BarCocktails { get; set; }
-        public bool IsDeleted { get; set; } = false;
+        public ICollection<BarRating> BarRatings { get; set; }
+        public ICollection<BarComment> BarComments { get; set; }
     }
 }

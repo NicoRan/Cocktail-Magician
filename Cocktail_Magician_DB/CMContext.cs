@@ -31,7 +31,10 @@ namespace Cocktail_Magician_DB
             builder.ApplyConfiguration(new BarCocktailConfigurations());
             builder.ApplyConfiguration(new CocktailIngredientConfigurations());
             builder.ApplyConfiguration(new IngredientConfigurations());
-
+            builder.ApplyConfiguration(new BarCommentConfiguration());
+            builder.ApplyConfiguration(new BarRatingConfigurations());
+            builder.ApplyConfiguration(new CocktailCommentConfigurations());
+            builder.ApplyConfiguration(new CocktailRatingConfiguration());
 
             base.OnModelCreating(builder);
         }

@@ -13,9 +13,11 @@ namespace Cocktail_Magician_DB.Models
         }
         public string CocktailId { get; set; }
         public string Name { get; set; }
-        public double Rating { get; set; }
+        public bool IsDeleted { get; set; }
+
         public ICollection<BarCocktail> BarCocktails { get; set; }
         public ICollection<CocktailIngredient> CocktailIngredient { get; set; }
-        public bool IsDeleted { get; set; } = false;
+        public ICollection<CocktailComment> CocktailComments { get; set; }
+        public ICollection<CocktailRating> CocktailRatings { get; set; }
     }
 }

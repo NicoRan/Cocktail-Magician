@@ -20,8 +20,6 @@ namespace Cocktail_Magician_DB.Configurations
                 .HasMaxLength(35)
                 .IsRequired();
 
-            builder
-                .Property(cocktail => cocktail.Rating);
 
             builder
                 .HasIndex(cocktail => cocktail.Name)
