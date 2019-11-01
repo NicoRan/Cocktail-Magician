@@ -1,6 +1,7 @@
-﻿@{
-    Layout = null;
-}
+﻿
+@model LoginAndRegisterModel
+@inject SignInManager<User> SignInManager
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,17 +33,13 @@
                   integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
         </environment>*@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-          asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
-          crossorigin="anonymous"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
+   
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i|Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i&display=swap" rel="stylesheet" type="text/css">
     <link href="~/font-faces/metropolis/metropolis.css" rel="stylesheet" type="text/css">
 
     <link href="~/css/font-icons.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="~/bootstrap/css/bootstrap.min.css" media="screen">
-    <link href="~/css/animate.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="~/lib/bootstrap/dist/css/bootstrap.min.css" media="screen">
+    <link href="~/css/animate.min.css" rel="stylesheet" type="text/css">
     <link href="~/css/main.css" rel="stylesheet" type="text/css">
     <link href="~/css/plugin.css" rel="stylesheet" type="text/css">
 
@@ -53,37 +50,53 @@
 <body class="with-waypoint-sticky">
     <div class="body-inner">
         <header id="header-waypoint-sticky" class="header-main header-mobile-menu with-absolute-navbar">
-            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-                <div class="container">
-                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Cocktail_Magician</a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                        <partial name="_LoginPartial" />
-                        <ul class="navbar-nav flex-grow-1">
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Test">Test</a>
-                            </li>
-                        </ul>
-                    </div>
+            <div class="header-outer clearfix">
+                <div class="header-inner">
+                    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                        <div class="container">
+                            
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                                    aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                                <li class="d-none d-sm-block">
+                                    <a href="#loginFormTabInModal-register" data-toggle="modal" data-target="#loginFormTabInModal" data-backdrop="static" data-keyboard="false">
+                                        <span class="icon-font"><i class="icon-user-follow"></i></span> Register
+                                    </a>
+                                </li>
+                                <li class="d-none d-sm-block">
+                                    <a href="#loginFormTabInModal-login" data-toggle="modal" data-target="#loginFormTabInModal" data-backdrop="static" data-keyboard="false" class="mr-5">
+                                        <span class="icon-font"><i class="icon-login"></i></span> Login
+                                    </a>
+                                </li>
+                                <ul class="navbar-nav flex-grow-1">
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                                    </li>
+                                    @if (SignInManager.IsSignedIn(User))
+                                    {
+                                        <li class="nav-item">
+                                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Test">Test</a>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
                 </div>
-            </nav>
+            </div>
         </header>
         <div class="hero-banner hero-banner-01 overlay-light opacity-2 overlay-relative overlay-gradient gradient-white alt-option-03" style="background-image:url('../images/image-bg/01.jpg'); background-position: top center;">
 
             <div class="hero-inner">
 
                 <div class="container">
-                    <h1>Go <span class="font200">tour <span class="block">with <span class="font700">Gi</span>Jalan </span></span></h1>
-                    <p class="font-lg spacing-1">Visit Europe, America, Asia, Africa or beyond!</p>
+                    <h1 class="text-danger">Co<span class="font200">cktail <span class="font700">Ma</span>gician </span></h1>
+
 
                     <div class="search-form-main">
                         <form>
@@ -184,12 +197,12 @@
                                                     </a>
                                                     <div class="dropdown-menu" aria-labelledby="dropdownLangauge">
                                                         <div class="dropdown-menu-inner">
-                                                            <a class="dropdown-item" href="#"><span class="image"><img src="font-icons/flaticon-flags-4/png/260-united-kingdom.png" alt="image" /></span>English</a>
-                                                            <a class="dropdown-item" href="#"><span class="image"><img src="font-icons/flaticon-flags-4/png/013-italy.png" alt="image" /></span>Italiano</a>
-                                                            <a class="dropdown-item" href="#"><span class="image"><img src="font-icons/flaticon-flags-4/png/063-japan.png" alt="image" /></span>日本語</a>
-                                                            <a class="dropdown-item" href="#"><span class="image"><img src="font-icons/flaticon-flags-4/png/162-germany.png" alt="image" /></span>Deutsch</a>
-                                                            <a class="dropdown-item" href="#"><span class="image"><img src="font-icons/flaticon-flags-4/png/218-turkey.png" alt="image" /></span>Türkçe</a>
-                                                            <a class="dropdown-item" href="#"><span class="image"><img src="font-icons/flaticon-flags-4/png/238-thailand.png" alt="image" /></span>ภาษาไทย</a>
+                                                            <a class="dropdown-item" href="#"><span class="image"><img src="~/font-icons/flaticon-flags-4/png/260-united-kingdom.png" alt="image" /></span>English</a>
+                                                            <a class="dropdown-item" href="#"><span class="image"><img src="~/font-icons/flaticon-flags-4/png/013-italy.png" alt="image" /></span>Italiano</a>
+                                                            <a class="dropdown-item" href="#"><span class="image"><img src="~/font-icons/flaticon-flags-4/png/063-japan.png" alt="image" /></span>日本語</a>
+                                                            <a class="dropdown-item" href="#"><span class="image"><img src="~/font-icons/flaticon-flags-4/png/162-germany.png" alt="image" /></span>Deutsch</a>
+                                                            <a class="dropdown-item" href="#"><span class="image"><img src="~/font-icons/flaticon-flags-4/png/218-turkey.png" alt="image" /></span>Türkçe</a>
+                                                            <a class="dropdown-item" href="#"><span class="image"><img src="~/font-icons/flaticon-flags-4/png/238-thailand.png" alt="image" /></span>ภาษาไทย</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -369,6 +382,109 @@
             </div>
         </footer>
     </div>
+
+    <div class="modal fade modal-with-tabs form-login-modal" id="loginFormTabInModal" aria-labelledby="modalWIthTabsLabel" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content shadow-lg">
+
+                <nav class="d-none">
+                    <ul class="nav external-link-navs clearfix">
+                        <li><a class="active" data-toggle="tab" href="#loginFormTabInModal-login">Sign-in</a></li>
+                        <li><a data-toggle="tab" href="#loginFormTabInModal-register">Register </a></li>
+                        <li><a data-toggle="tab" href="#loginFormTabInModal-forgot-pass">Forgot Password </a></li>
+                    </ul>
+                </nav>
+
+                <div class="tab-content">
+
+                    <div role="tabpanel" class="tab-pane active" id="loginFormTabInModal-login">
+
+                        <div class="form-login">
+
+                            <div class="form-header">
+                                <h4>Welcome Back to SiteName</h4>
+                                <p>Sign in to your account to continue using SiteName</p>
+                            </div>
+
+                            <div class="form-body">
+
+                                @await Html.PartialAsync("_LoginViewPartial")
+
+                            </div>
+
+                            <div class="form-footer">
+                                <p>Not a member yet? <a href="#loginFormTabInModal-register" class="tab-external-link font600">Sign up</a> for free</p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div role="tabpanel" class="tab-pane fade in" id="loginFormTabInModal-register">
+
+                        <div class="form-login">
+
+                            <div class="form-header">
+                                <h4>Join SiteName for Free</h4>
+                                <p>Access thousands of online classes in design, business, and more!</p>
+                            </div>
+
+                            <div class="form-body">
+
+                                @await Html.PartialAsync("_RegisterViewPartial")
+
+                            </div>
+
+                            <div class="form-footer">
+                                <p>Already a member? <a href="#loginFormTabInModal-login" class="tab-external-link font600">Sign in</a></p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div role="tabpanel" class="tab-pane fade in" id="loginFormTabInModal-forgot-pass">
+
+                        <div class="form-login">
+
+                            <div class="form-header">
+                                <h4>Lost your password?</h4>
+                                <p>Please provide your detail.</p>
+                            </div>
+
+                            <div class="form-body">
+                                <form method="post" action="#">
+                                    <p class="line-145">We'll send password reset instructions to the email address associated with your account.</p>
+                                    <div class="row">
+                                        <div class="col-12 col-md-10 col-lg-8">
+                                            <div class="form-group">
+                                                <input type="password" class="form-control" placeholder="password" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-primary mt-5">Retreive password</button>
+                                </form>
+                            </div>
+
+                            <div class="form-footer">
+                                <p>Back to <a href="#loginFormTabInModal-login" class="tab-external-link font600">Sign in</a> or <a href="#loginFormTabInModal-register" class="tab-external-link font600">Sign up</a></p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="text-center pb-20">
+                    <button type="button" class="close" data-dismiss="modal" aria-labelledby="Close">
+                        <span aria-hidden="true"><i class="far fa-times-circle"></i></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a id="back-to-top" href="#" class="back-to-top" role="button" title="Click to return to top" data-toggle="tooltip" data-placement="left"><i class="elegent-icon-arrow_carrot-up"></i></a>
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
@@ -387,9 +503,9 @@
                 integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o">
         </script>
     </environment>
-    <script type="text/javascript" src="js/jquery-2.2.4.min.js"></script>
-    <script type="text/javascript" src="js/plugins.js"></script>
-    <script type="text/javascript" src="js/custom-core.js"></script>
+    <script type="text/javascript" src="~/js/jquery-2.2.4.min.js"></script>
+    <script type="text/javascript" src="~/js/plugins.js"></script>
+    <script type="text/javascript" src="~/js/custom-core.js"></script>
 
     @RenderSection("Scripts", required: false)
 </body>

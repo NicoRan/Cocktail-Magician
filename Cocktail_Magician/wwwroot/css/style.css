@@ -4157,3 +4157,8 @@ ul.review-list > li .review-content {
 .quick-form-box .btn:hover {
     color: #FFF;
 }
+
+.text-outline-white {
+    color: aliceblue;
+    text-shadow: -1px -1px 0 #E5E5E5, 1px -1px 0 #E5E5E5, -1px 1px 0 #E5E5E5, 1px 1px 0 #E5E5E5;
+}
