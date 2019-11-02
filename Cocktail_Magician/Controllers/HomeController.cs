@@ -5,14 +5,31 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Cocktail_Magician.Models;
+using Cocktail_Magician_Services.Contracts;
 
 namespace Cocktail_Magician.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly IBarManager _barManager;
+        public HomeController(IBarManager barManager)
         {
-            return View();
+            this._barManager = barManager;
+        }
+        public async Task<IActionResult> Index()
+        {
+            var topBars = await this._barManager.GetTopRatedBars();
+            var topBarsViewModel = topBars.Select(bar => new FrontPageTopRatedBarsViewModel
+            {
+                Name = bar.Name,
+                Address = bar.Address,
+                Rating = (double)bar.Rating,
+                Picture = bar.Picture
+            })
+                .ToList();
+            var model = new AllClassModels();
+            model.Index = topBarsViewModel;
+            return View(model);
         }
 
         public IActionResult Privacy()

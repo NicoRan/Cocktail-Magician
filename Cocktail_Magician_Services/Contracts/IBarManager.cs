@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Cocktail_Magician_DB.Models;
 
 namespace Cocktail_Magician_Services.Contracts
@@ -8,5 +9,6 @@ namespace Cocktail_Magician_Services.Contracts
         Task<Bar> CreateBar(string name, string address, double rating, string picture);
         Task RemoveBar(string id);
         Task<Bar> GetBar(string id);
+        Task<List<Bar>> GetTopRatedBars();
     }
 }

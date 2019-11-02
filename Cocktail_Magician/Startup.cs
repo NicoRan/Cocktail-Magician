@@ -17,6 +17,9 @@ using Cocktail_Magician_DB.Models;
 using Cocktail_Magician.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Cocktail_Magician_DB.DataSeeder;
+using Cocktail_Magician_Services.Contracts;
+using Cocktail_Magician_Services;
 
 namespace Cocktail_Magician
 {
@@ -62,13 +65,15 @@ namespace Cocktail_Magician
                 .AddEntityFrameworkStores<CMContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddScoped<IBarManager, BarManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, CMContext context)
         {
-
             app.UpdateDatabase();
+            DataSeeder.SeedBars(context);
 
             if (env.IsDevelopment())
             {

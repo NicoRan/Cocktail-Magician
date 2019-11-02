@@ -1,7 +1,5 @@
-﻿
-@model LoginAndRegisterModel
+﻿@model AllClassModels
 @inject SignInManager<User> SignInManager
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,28 +15,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <!-- Fav and Touch Icons -->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
-    <link rel="shortcut icon" href="images/ico/favicon.png">
-    @*<environment include="Development">
-            <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        </environment>
-        <environment exclude="Development">
-            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-                  asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-                  asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
-                  crossorigin="anonymous"
-                  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
-        </environment>*@
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="~/images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="~/images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="~/images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="~/images/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="~/images/ico/favicon.png">
    
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i|Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i&display=swap" rel="stylesheet" type="text/css">
     <link href="~/font-faces/metropolis/metropolis.css" rel="stylesheet" type="text/css">
 
     <link href="~/css/font-icons.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="~/lib/bootstrap/dist/css/bootstrap.min.css" media="screen">
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="screen">
     <link href="~/css/animate.min.css" rel="stylesheet" type="text/css">
     <link href="~/css/main.css" rel="stylesheet" type="text/css">
     <link href="~/css/plugin.css" rel="stylesheet" type="text/css">
@@ -49,12 +38,13 @@
 </head>
 <body class="with-waypoint-sticky">
     <div class="body-inner">
+        <!-- Header start -->
         <header id="header-waypoint-sticky" class="header-main header-mobile-menu with-absolute-navbar">
             <div class="header-outer clearfix">
                 <div class="header-inner">
                     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light mb-3">
                         <div class="container">
-                           
+
                             <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                                 <partial name="_LoginPartial" />
                                 <ul class="navbar-nav flex-grow-1">
@@ -77,24 +67,19 @@
                 </div>
             </div>
         </header>
+        <!-- Header end -->
         <div class="hero-banner hero-banner-01 overlay-light opacity-2 overlay-relative overlay-gradient gradient-white alt-option-03" style="background-image:url('../images/image-bg/01.jpg'); background-position: top center;">
-
             <div class="hero-inner">
-
                 <div class="container">
                     <h1 class="text-danger">Co<span class="font200">cktail <span class="font700">Ma</span>gician </span></h1>
-
-
+                    <!-- Search Bar start -->
                     <div class="search-form-main">
                         <form>
                             <div class="from-inner">
-
                                 <div class="row shrink-auto-sm gap-1">
-
                                     <div class="col-12 col-auto">
                                         <div class="col-inner">
                                             <div class="row cols-1 cols-sm-3 gap-1">
-
                                                 <div class="col">
                                                     <div class="col-inner">
                                                         <div class="form-group">
@@ -135,7 +120,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
                                             </div>
                                         </div>
                                     </div>
@@ -145,39 +129,30 @@
                                             <a href="#" class="btn btn-primary btn-block"><i class="ion-android-search"></i></a>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </form>
                     </div>
-
+                    <!-- Search Bar end -->
                 </div>
-
             </div>
         </div>
-
-        @RenderBody()
-
+        <section>
+            <div class="container">
+                @RenderBody()
+            </div>
+        </section>
+        <!--Footer start -->
         <footer class="footer-wrapper light scrollspy-footer">
-
             <div class="footer-top">
-
                 <div class="container">
-
                     <div class="row shrink-auto-md align-items-lg-center gap-10">
-
                         <div class="col-12 col-shrink order-last-md">
-
                             <div class="col-inner">
-
                                 <div class="footer-dropdowns">
-
                                     <div class="row shrink-auto gap-30 align-items-center">
-
                                         <div class="col-auto">
-
                                             <div class="col-inner">
-
                                                 <div class="dropdown dropdown-smooth-01 dropdown-language">
                                                     <a href="#" class="btn btn-text-inherit btn-interactive" id="dropdownLangauge" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                         <span class="image"><img src="~/font-icons/flaticon-flags-4/png/260-united-kingdom.png" alt="image" /></span> English
@@ -193,15 +168,11 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
                                             </div>
-
                                         </div>
 
                                         <div class="col-shrink">
-
                                             <div class="col-inner">
-
                                                 <div class="dropdown dropdown-smooth-01 dropdown-currency">
                                                     <a href="#" class="btn btn-text-inherit btn-interactive" id="dropdownCurrency" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                         <span class="icon-font"><i class="oi oi-dollar text-primary mr-5"></i></span> US dollar
@@ -215,21 +186,14 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
                                             </div>
-
                                         </div>
-
                                     </div>
-
                                 </div>
-
                             </div>
-
                         </div>
 
                         <div class="col-12 col-auto">
-
                             <div class="col-inner">
                                 <ul class="footer-contact-list">
                                     <li>
@@ -240,39 +204,27 @@
                                     </li>
                                 </ul>
                             </div>
-
                         </div>
-
                     </div>
 
                     <hr class="opacity-7" />
-
                 </div>
-
             </div>
 
             <div class="main-footer">
-
                 <div class="container">
-
                     <div class="row gap-50">
-
                         <div class="col-12 col-lg-5">
 
                             <p class="mt-20">Excited him now natural saw passage offices you minuter. At by asked being court hopes. Farther so friends am to detract. Forbade concern do private be. Offending residence but men engrossed shy.</p>
-
                             <a href="#" class="text-capitalize font14 h6 line-1 mb-0 font500 mt-30">read more <i class="elegent-icon-arrow_right font18 inline-block-middle"></i></a>
 
                         </div>
 
                         <div class="col-12 col-lg-7">
-
                             <div class="col-inner">
-
                                 <div class="row shrink-auto-sm gap-30">
-
                                     <div class="col-6 col-shrink">
-
                                         <div class="col-inner">
                                             <h5 class="footer-title">About company</h5>
                                             <ul class="footer-menu-list set-width">
@@ -284,11 +236,9 @@
                                                 <li><a href="#">Privacy notice</a></li>
                                             </ul>
                                         </div>
-
                                     </div>
 
                                     <div class="col-6 col-shrink">
-
                                         <div class="col-inner">
                                             <h5 class="footer-title">Customer Service</h5>
                                             <ul class="footer-menu-list set-width">
@@ -300,11 +250,9 @@
                                                 <li><a href="#">Site map</a></li>
                                             </ul>
                                         </div>
-
                                     </div>
 
                                     <div class="col-12 col-auto">
-
                                         <div class="col-inner">
                                             <h5 class="footer-title">Newsletter &amp; Social</h5>
                                             <p class="font12">Savings her pleased are several started females met. Short her not among being any.</p>
@@ -324,27 +272,17 @@
                                                 <a href="#"><i class="fab fa-flickr"></i></a>
                                             </div>
                                         </div>
-
                                     </div>
-
                                 </div>
-
                             </div>
-
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
 
             <div class="bottom-footer">
-
                 <div class="container">
-
                     <div class="row shrink-auto-md gap-10 gap-40-lg">
-
                         <div class="col-auto">
                             <div class="col-inner">
                                 <ul class="footer-menu-list-02">
@@ -361,15 +299,14 @@
                                 <p class="footer-copy-right"> &#169; 2005 – 2018 <span class="text-primary">MyCompany Ltd.,</span> All Rights Reserved.</p>
                             </div>
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
         </footer>
+        <!--Footer start -->
     </div>
 
+    <!-- Login, Register, Logout floating buttons start -->
     <div class="modal fade modal-with-tabs form-login-modal" id="loginFormTabInModal" aria-labelledby="modalWIthTabsLabel" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content shadow-lg">
@@ -383,9 +320,7 @@
                 </nav>
 
                 <div class="tab-content">
-
                     <div role="tabpanel" class="tab-pane active" id="loginFormTabInModal-login">
-
                         <div class="form-login">
 
                             <div class="form-header">
@@ -394,46 +329,34 @@
                             </div>
 
                             <div class="form-body">
-
-                                @await Html.PartialAsync("_LoginViewPartial")
-
+                                @*@await  Html.PartialAsync("_LoginViewPartial")*@
+                                <partial name="_LoginViewPartial" model="@Model.Login"/>
                             </div>
-
                             <div class="form-footer">
                                 <p>Not a member yet? <a href="#loginFormTabInModal-register" class="tab-external-link font600">Sign up</a> for free</p>
                             </div>
-
                         </div>
-
                     </div>
 
                     <div role="tabpanel" class="tab-pane fade in" id="loginFormTabInModal-register">
-
                         <div class="form-login">
-
                             <div class="form-header">
                                 <h4>Join SiteName for Free</h4>
                                 <p>Access thousands of online classes in design, business, and more!</p>
                             </div>
 
                             <div class="form-body">
-
-                                @await Html.PartialAsync("_RegisterViewPartial")
-
+                                <partial name="_RegisterViewPartial" model="@Model.Register" />
                             </div>
 
                             <div class="form-footer">
                                 <p>Already a member? <a href="#loginFormTabInModal-login" class="tab-external-link font600">Sign in</a></p>
                             </div>
-
                         </div>
-
                     </div>
 
                     <div role="tabpanel" class="tab-pane fade in" id="loginFormTabInModal-forgot-pass">
-
                         <div class="form-login">
-
                             <div class="form-header">
                                 <h4>Lost your password?</h4>
                                 <p>Please provide your detail.</p>
@@ -456,11 +379,8 @@
                             <div class="form-footer">
                                 <p>Back to <a href="#loginFormTabInModal-login" class="tab-external-link font600">Sign in</a> or <a href="#loginFormTabInModal-register" class="tab-external-link font600">Sign up</a></p>
                             </div>
-
                         </div>
-
                     </div>
-
                 </div>
 
                 <div class="text-center pb-20">
@@ -471,6 +391,8 @@
             </div>
         </div>
     </div>
+    <!-- Login, Register, Logout floating buttons end -->
+
     <a id="back-to-top" href="#" class="back-to-top" role="button" title="Click to return to top" data-toggle="tooltip" data-placement="left"><i class="elegent-icon-arrow_carrot-up"></i></a>
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -495,5 +417,6 @@
     <script type="text/javascript" src="~/js/custom-core.js"></script>
 
     @RenderSection("Scripts", required: false)
+    <partial name="_ValidationScriptsPartial" />
 </body>
 </html>

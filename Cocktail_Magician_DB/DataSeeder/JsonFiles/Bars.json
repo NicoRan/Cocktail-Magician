@@ -1,0 +1,62 @@
+﻿[
+  {
+    "name": "Sputnik Cocktail Bar",
+    "address": "bul. \"Yanko Sakazov\" 17, 1527 Sofia Center, Sofia",
+    "rating": 4.6,
+    "picture": "https://www.capital.bg/shimg/oo_2615067.jpg"
+  },
+  {
+    "name": "5L Speakeasy bar",
+    "address": "ul. \"Tsar Ivan Shishman\" 15, 1000 Sofia Center, Sofia",
+    "rating": 4.7,
+    "picture": "https://goguide.bg/upload/places/inner/1545062232Kultura.jpg"
+  },
+  {
+    "name": "Kathrine Cocktail - Bar",
+    "address": "Sq. P. R, bul. \"Пенчо Славейков\" 7А, 1000 Sofia",
+    "rating": 4.4,
+    "picture": "https://www.austinchronicle.com/binary/41ae/food_feature1-1.jpg"
+  },
+  {
+    "name": "The Cocktail Bar",
+    "address": "ul. \"Angel Kanchev\" 9, 1000 Sofia Center, Sofia",
+    "rating": 4.4,
+    "picture": "https://natasticbulgaria.files.wordpress.com/2015/05/the-cocktail-bar-sofia.jpg"
+  },
+  {
+    "name": "65 Fireflies",
+    "address": "ul. \"Solunska\" 65, 1000 Sofia Center, Sofia",
+    "rating": 4.6,
+    "picture": "https://media-cdn.tripadvisor.com/media/photo-s/11/b4/ff/a9/all-the-sitting-you-may.jpg"
+  },
+  {
+    "name": "By the Way",
+    "address": "ul. \"Georgi S. Rakovski\" 166, 2227 Sofia Center, Sofia",
+    "rating": 4.5,
+    "picture": "http://mysofiaapartments.com/wp-content/uploads/2015/11/By-the-way.jpg"
+  },
+  {
+    "name": "CAGE urban bar",
+    "address": "bul. \"Aleksandar Stamboliyski\" 81a, 1303 Pette Kyosheta, Sofia",
+    "rating": 4.2,
+    "picture": "https://goguide.bg/upload/ckfinder/images/_MG_8845.JPG"
+  },
+  {
+    "name": "Bar White",
+    "address": "bul. \"Slivnitsa\" 228, 1309 Sveta Troitsa, Sofia",
+    "rating": 4.2,
+    "picture": "https://goguide.bg/upload/ckfinder/images/15(18).jpg"
+  },
+  {
+    "name": "One More Bar",
+    "address": "ul. \"Tsar Ivan Shishman\" 12, 1000 Sofia Center, Sofia",
+    "rating": 4.4,
+    "picture": "https://otg.imgix.net/assets/grid/sofia/center/one-more-bar/One-More-Bar-02.jpg?auto=format%2Ccompress&crop=focalpoint&fit=min&fm=jpg&fp-x=0.5&fp-y=0.5&ixlib=php-1.1.0&q=80&w=1200&s=adc807e6ec6d289b797327e31335d369"
+  },
+  {
+    "name": "Bar Escobar",
+    "address": "bul. \"Vasil Levski\" 3, 1142 Sofia Center, Sofia",
+    "rating": 4.1,
+    "picture": "http://www.programata.bg/img/gallery/gallery_42837.jpg"
+  }
+]

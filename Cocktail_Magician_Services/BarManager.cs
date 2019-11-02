@@ -57,5 +57,15 @@ namespace Cocktail_Magician_Services
 
             return bar;
         }
+
+        public async Task<List<Bar>> GetTopRatedBars()
+        {
+            var bars = await this._context.Bars
+                .OrderByDescending(bar => bar.Rating)
+                .ThenBy(bar => bar.Name)
+                .Take(6)
+                .ToListAsync();
+            return bars;
+        }
     }
 }

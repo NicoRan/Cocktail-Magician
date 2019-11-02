@@ -1,5 +1,5 @@
 ﻿@{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>Manage your account</h1>
@@ -12,11 +12,9 @@
             <partial name="_ManageNav" />
         </div>
         <div class="col-md-9">
-            @RenderBody()
+            
         </div>
     </div>
 </div>
 
-@section Scripts {
-    @RenderSection("Scripts", required: false)
-}
+

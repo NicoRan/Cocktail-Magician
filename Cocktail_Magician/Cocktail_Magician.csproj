@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Cocktail_Magician_DB\Cocktail_Magician_DB.csproj" />
+    <ProjectReference Include="..\Cocktail_Magician_Services\Cocktail_Magician_Services.csproj" />
   </ItemGroup>
 
 </Project>
