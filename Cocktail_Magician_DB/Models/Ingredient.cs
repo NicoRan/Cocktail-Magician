@@ -6,6 +6,10 @@ namespace Cocktail_Magician_DB.Models
 {
     public class Ingredient
     {
+        public Ingredient()
+        {
+
+        }
         public Ingredient(string name)
         {
             this.Name = name;
