@@ -34,7 +34,7 @@ namespace Cocktail_Magician.Controllers
 
         public IActionResult Privacy()
         {
-            return View();
+            return View(new AllClassModels());
         }
 
         public IActionResult Test()
