@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Long Island Iced Tea",
+    "rating": 4.9,
+    "ingredients": {
+      "name": "White Rum"
+    },
+    {
+      "name": "Vodka"
+    },
+    {
+      "name": "Gin"
+    },
+    {
+      "name": "Tequila"
+    },
+    {
+      "name": "Triple Sec"
+    },
+    {
+      "name": "Lemon juice"
+    },
+    {
+      "name": "Coca-Cola"
+    }
+  }
+]
