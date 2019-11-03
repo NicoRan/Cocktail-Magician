@@ -39,7 +39,7 @@ namespace Cocktail_Magician.Controllers
 
         public IActionResult Test()
         {
-            return View();
+            return View(new AllClassModels());
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

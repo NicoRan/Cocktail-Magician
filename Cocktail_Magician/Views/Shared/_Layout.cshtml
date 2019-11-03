@@ -20,7 +20,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="~/images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="~/images/ico/apple-touch-icon-57-precomposed.png">
     <link rel="shortcut icon" href="~/images/ico/favicon.png">
-   
+
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
 
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i|Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i&display=swap" rel="stylesheet" type="text/css">
@@ -68,62 +68,41 @@
             </div>
         </header>
         <!-- Header end -->
+
+        <!-- Image and Search Bar start -->
         <div class="hero-banner hero-banner-01 overlay-light opacity-2 overlay-relative overlay-gradient gradient-white alt-option-03" style="background-image:url('../images/image-bg/01.jpg'); background-position: top center;">
             <div class="hero-inner">
                 <div class="container">
                     <h1 class="text-danger">Co<span class="font200">cktail <span class="font700">Ma</span>gician </span></h1>
-                    <!-- Search Bar start -->
                     <div class="search-form-main">
                         <form>
                             <div class="from-inner">
                                 <div class="row shrink-auto-sm gap-1">
                                     <div class="col-12 col-auto">
                                         <div class="col-inner">
-                                            <div class="row cols-1 cols-sm-3 gap-1">
-                                                <div class="col">
+                                            <div class="row cols-2 cols-md-2 gap-2">
+                                                <div class="col-4">
                                                     <div class="col-inner">
                                                         <div class="form-group">
-                                                            <label>Tour Type</label>
+                                                            <label>Search Type</label>
                                                             <select class="chosen-the-basic form-control form-control-sm" placeholder="Select one" tabindex="2">
                                                                 <option></option>
                                                                 <option>All</option>
-                                                                <option>Adventure</option>
-                                                                <option>City tour</option>
-                                                                <option>Honeymoon</option>
-                                                                <option>Cultural</option>
+                                                                <option>Bars</option>
+                                                                <option>Cocktails</option>
                                                             </select>
                                                         </div>
                                                     </div>
                                                 </div>
-
-                                                <div class="col">
-                                                    <div class="col-inner">
-                                                        <div class="form-group">
-                                                            <label>Destination</label>
-                                                            <select class="chosen-the-basic form-control form-control-sm" placeholder="Select two" tabindex="2">
-                                                                <option></option>
-                                                                <option>All</option>
-                                                                <option>Asia</option>
-                                                                <option>Europe</option>
-                                                                <option>Africa</option>
-                                                                <option>America</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col">
-                                                    <div class="col-inner">
-                                                        <div class="form-group">
-                                                            <label>When</label>
-                                                            <input type="text" class="form-control form-readonly-control air-datepicker" placeholder="Pick a month" data-min-view="months" data-view="months" data-date-format="MM yyyy" data-language="en" data-auto-close="true" readonly>
-                                                        </div>
+                                                <div class="col-8-max">
+                                                    <div class="form-group">
+                                                        <label>Enter keyword</label>
+                                                        <input type="text" class="form-control form-readonly-control" placeholder="Search:">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="col-12 col-shrink">
                                         <div class="col-inner">
                                             <a href="#" class="btn btn-primary btn-block"><i class="ion-android-search"></i></a>
@@ -133,10 +112,10 @@
                             </div>
                         </form>
                     </div>
-                    <!-- Search Bar end -->
                 </div>
             </div>
         </div>
+        <!-- Image and Search Bar end -->
         <section>
             <div class="container">
                 @RenderBody()
@@ -330,7 +309,7 @@
 
                             <div class="form-body">
                                 @*@await  Html.PartialAsync("_LoginViewPartial")*@
-                                <partial name="_LoginViewPartial" model="@Model.Login"/>
+                                <partial name="_LoginViewPartial" model="@Model.Login" />
                             </div>
                             <div class="form-footer">
                                 <p>Not a member yet? <a href="#loginFormTabInModal-register" class="tab-external-link font600">Sign up</a> for free</p>
