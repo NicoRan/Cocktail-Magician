@@ -6,15 +6,21 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Cocktail_Magician.Models;
 using Cocktail_Magician_Services.Contracts;
+using Cocktail_Magician.Areas.Identity.Pages.Account;
+using Microsoft.AspNetCore.Identity;
+using Cocktail_Magician_DB.Models;
 
 namespace Cocktail_Magician.Controllers
 {
     public class HomeController : Controller
     {
         private readonly IBarManager _barManager;
-        public HomeController(IBarManager barManager)
+        private readonly UserManager<User> _userManager;
+
+        public HomeController(IBarManager barManager, UserManager<User> userManager)
         {
-            this._barManager = barManager;
+            _barManager = barManager;
+            _userManager = userManager;
         }
         public async Task<IActionResult> Index()
         {
@@ -29,6 +35,7 @@ namespace Cocktail_Magician.Controllers
                 .ToList();
             var model = new AllClassModels();
             model.Index = topBarsViewModel;
+            //model.Register = new RegisterModel();
             return View(model);
         }
 

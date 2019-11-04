@@ -46,6 +46,12 @@ namespace Cocktail_Magician_Services
             }
         }
 
+        public async Task<ICollection<Ingredient>> GetIngredientsAsync()
+        {
+           var allIngredients = await _context.Ingredients.ToListAsync();
+            return allIngredients;
+        }
+
         private bool CheckIfIngredientExist(string name)
         => _context.Ingredients.Any(i => i.Name == name);
 

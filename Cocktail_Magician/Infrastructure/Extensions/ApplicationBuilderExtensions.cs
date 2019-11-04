@@ -25,19 +25,31 @@ namespace Cocktail_Magician.Infrastructure.Extensions
 
                 Task.Run(async () =>
                 {
-                    var adminName = "Administrator";
+                    var memberRole = "Member";
 
-                    var exists = await roleManager.RoleExistsAsync(adminName);
+                    var memberRoleExist = await roleManager.RoleExistsAsync(memberRole);
 
-                    if (!exists)
+                    if (!memberRoleExist)
                     {
-                        await roleManager.CreateAsync(new IdentityRole
-                        {
-                            Name = adminName
+                        await roleManager.CreateAsync(new IdentityRole 
+                        { 
+                            Name = memberRole 
                         });
                     }
 
-                    var adminUser = await userManager.FindByNameAsync(adminName);
+                    var adminRole = "Administrator";
+
+                    var adminRoleExists = await roleManager.RoleExistsAsync(adminRole);
+
+                    if (!adminRoleExists)
+                    {
+                        await roleManager.CreateAsync(new IdentityRole
+                        {
+                            Name = adminRole
+                        });
+                    }
+
+                    var adminUser = await userManager.FindByNameAsync(adminRole);
 
                     if (adminUser == null)
                     {
@@ -49,7 +61,7 @@ namespace Cocktail_Magician.Infrastructure.Extensions
 
                         // By default it takes minimum 6 symbols
                         await userManager.CreateAsync(adminUser, "admin");
-                        await userManager.AddToRoleAsync(adminUser, adminName);
+                        await userManager.AddToRoleAsync(adminUser, adminRole);
                     }
                 })
                 .GetAwaiter()
