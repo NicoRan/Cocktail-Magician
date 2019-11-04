@@ -25,7 +25,9 @@ namespace Cocktail_Magician_DB.DataSeeder
                     Name = bar.Name,
                     Address = bar.Address,
                     Rating = bar.Rating,
-                    Picture = bar.Picture
+                    Information = bar.Information,
+                    Picture = bar.Picture,
+                    MapDirections = bar.MapDirections
                 });
 
                 context.SaveChanges();

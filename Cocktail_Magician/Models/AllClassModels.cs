@@ -12,6 +12,7 @@ namespace Cocktail_Magician.Models
         public LoginModel Login { get; set; }
         public RegisterModel Register { get; set; }
         public LogoutModel Logout { get; set; }
-        public IEnumerable<FrontPageTopRatedBarsViewModel> Index { get; set; }
+        public BarViewModel Bar { get; set; }
+        public IEnumerable<BarViewModel> Index { get; set; }
     }
 }
