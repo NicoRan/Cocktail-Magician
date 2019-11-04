@@ -16,7 +16,7 @@ namespace Cocktail_Magician_Services
 
         public BarManager(CMContext context)
         {
-            this._context = context ?? throw new ArgumentNullException(nameof(context));
+            _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
         public async Task<Bar> CreateBar(string name, string address, double rating, string picture)
@@ -31,21 +31,21 @@ namespace Cocktail_Magician_Services
                 throw new ArgumentException();
             }
 
-            var barToFind = this._context.Bars.SingleOrDefault(bar => bar.Name == barToAdd.Name && bar.Address == barToAdd.Address);
+            var barToFind = _context.Bars.SingleOrDefault(bar => bar.Name == barToAdd.Name && bar.Address == barToAdd.Address);
 
             if (barToFind != null)
             {
                 throw new InvalidOperationException("Book already exists in the catalogue");
             }
 
-            await this._context.Bars.AddAsync(barToAdd);
-            await this._context.SaveChangesAsync();
+            await _context.Bars.AddAsync(barToAdd);
+            await _context.SaveChangesAsync();
             return barToAdd;
         }
 
         public async Task RemoveBar(string id)
         {
-            Bar barToRemove = await this.GetBar(id);
+            Bar barToRemove = await GetBar(id);
             barToRemove.IsDeleted = true;
             this._context.Bars.Update(barToRemove);
             await this._context.SaveChangesAsync();
@@ -53,14 +53,14 @@ namespace Cocktail_Magician_Services
 
         public async Task<Bar> GetBar(string id)
         {
-            var bar = await this._context.Bars.Where(b => !b.IsDeleted).FirstOrDefaultAsync(b => b.BarId == id);
+            var bar = await _context.Bars.Where(b => !b.IsDeleted).FirstOrDefaultAsync(b => b.BarId == id);
 
             return bar;
         }
 
         public async Task<List<Bar>> GetTopRatedBars()
         {
-            var bars = await this._context.Bars
+            var bars = await _context.Bars
                 .OrderByDescending(bar => bar.Rating)
                 .ThenBy(bar => bar.Name)
                 .Take(6)

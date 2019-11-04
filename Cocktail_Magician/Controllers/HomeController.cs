@@ -19,13 +19,7 @@ namespace Cocktail_Magician.Controllers
         public async Task<IActionResult> Index()
         {
             var topBars = await this._barManager.GetTopRatedBars();
-            var topBarsViewModel = topBars.Select(bar => new FrontPageTopRatedBarsViewModel
-            {
-                Name = bar.Name,
-                Address = bar.Address,
-                Rating = (double)bar.Rating,
-                Picture = bar.Picture
-            })
+            var topBarsViewModel = topBars.Select(bar => new BarViewModel(bar))
                 .ToList();
             var model = new AllClassModels();
             model.Index = topBarsViewModel;

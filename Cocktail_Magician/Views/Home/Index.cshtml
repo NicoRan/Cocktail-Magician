@@ -92,9 +92,10 @@
     @*<partial name="_TopRatedBars" />*@
     @foreach (var bar in @Model.Index)
     {
+        
         <div class="col">
             <figure class="tour-grid-item-01">
-                <a href="#">
+                <a asp-controller="Bars" asp-action="Details" asp-route-id="@bar.BarId">
                     <div class="image">
                         <img src="@bar.Picture" alt="images" />
                     </div>
