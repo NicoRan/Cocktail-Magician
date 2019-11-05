@@ -46,26 +46,36 @@ namespace Cocktail_Magician.Controllers
         }
 
         // GET: Bars/Create
-        //public IActionResult Create()
-        //{
-        //    return View();
-        //}
+        public IActionResult Create()
+        {
+            return View(new AllClassModels());
+        }
 
         // POST: Bars/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create([Bind("BarId,Name,Address,Rating,Picture,IsDeleted")] Bar bar)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _context.Add(bar);
-        //        await _context.SaveChangesAsync();
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(bar);
-        //}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(AllClassModels barView)
+        {
+            var bar = new Bar()
+            {
+                Name = barView.Bar.Name,
+                Address = barView.Bar.Address,
+                Information = barView.Bar.Information,
+                Picture = barView.Bar.Picture,
+                MapDirections = barView.Bar.Map
+            };
+            if (ModelState.IsValid)
+            {
+
+                await _barManager.CreateBar(bar);
+                return RedirectToAction("Index", "Home");
+            }
+            var model = new AllClassModels();
+            
+            return View(model);
+        }
 
         //// GET: Bars/Edit/5
         //public async Task<IActionResult> Edit(string id)

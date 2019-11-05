@@ -6,7 +6,7 @@ namespace Cocktail_Magician_Services.Contracts
 {
     public interface IBarManager
     {
-        Task<Bar> CreateBar(string name, string address, double rating, string picture);
+        Task<Bar> CreateBar(Bar bar);
         Task RemoveBar(string id);
         Task<Bar> GetBar(string id);
         Task<List<Bar>> GetTopRatedBars();

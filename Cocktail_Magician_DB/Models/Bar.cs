@@ -12,19 +12,23 @@ namespace Cocktail_Magician_DB.Models
         {
 
         }
-        public Bar(string name, string address, double rating, string picture)
+        public Bar(string name, string address, double rating, string information, string picture, string mapDirections)
         {
-            this.Name = name;
-            this.Address = address;
-            this.Rating = rating;
-            this.Picture = picture;
+            Name = name;
+            Address = address;
+            Rating = rating;
+            Information = information;
+            Picture = picture;
+            MapDirections = mapDirections;
         }
         public string BarId { get; set; }
+        [Required(ErrorMessage = "A name is required!")]
         [MinLength(3, ErrorMessage = "Name should be between 3 and 35 symbols!")]
         [MaxLength(35, ErrorMessage = "Name should be between 3 and 35 symbols!")]
         public string Name { get; set; }
         [MinLength(5, ErrorMessage = "Address should at least 5 symbols!")]
         public string Address { get; set; }
+        [MinLength(5, ErrorMessage = "Information should be atleast 5 symbols!")]
         public string Information { get; set; }
         public double Rating { get; set; }
         public string Picture { get; set; }

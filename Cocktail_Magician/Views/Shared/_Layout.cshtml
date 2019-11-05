@@ -60,6 +60,12 @@
                                             <a class="nav-link text-danger" asp-area="" asp-controller="Home" asp-action="Test">Test</a>
                                         </li>
                                     }
+                                    @if (User.IsInRole("Administrator"))
+                                    {
+                                        <li class="nav-item">
+                                            <a class="nav-link text-danger" asp-area="" asp-controller="Bars" asp-action="Create">Create</a>
+                                        </li>
+                                    }
                                 </ul>
                             </div>
                         </div>

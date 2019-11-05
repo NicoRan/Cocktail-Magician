@@ -19,23 +19,23 @@ namespace Cocktail_Magician_Services
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task<Bar> CreateBar(string name, string address, double rating, string picture)
+        public async Task<Bar> CreateBar(Bar barToCreate)
         {
             var barToAdd = new Bar();
             try
             {
-                barToAdd = new Bar(name, address, rating, picture);
+                barToAdd = barToCreate;
             }
             catch
             {
-                throw new ArgumentException();
+                throw new ArgumentException("Wrong parameters are passed!");
             }
 
             var barToFind = _context.Bars.SingleOrDefault(bar => bar.Name == barToAdd.Name && bar.Address == barToAdd.Address);
 
             if (barToFind != null)
             {
-                throw new InvalidOperationException("Book already exists in the catalogue");
+                throw new InvalidOperationException("Bar already exists in the catalogue");
             }
 
             await _context.Bars.AddAsync(barToAdd);

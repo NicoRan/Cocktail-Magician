@@ -1,51 +1,90 @@
-﻿@model Cocktail_Magician_DB.Models.Bar
+﻿@model AllClassModels
 
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
+<div class="container pt-30">
+    <div class="row gap-20 gap-lg-40">
+        <div class="col-12 col-lg-7">
+            <div class="content-wrapper">
+                <div class="form-draft-payment">
 
-<h4>Bar</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                    <!-- Creating Bar Form start -->
+                    <form asp-action="Create" method="post">
+                        <h4 class="heading-title"><span>Bar Details</span></h4>
+                        <div class="row gap-15 mb-15">
+                            <div class="w-100 d-block d-md-none"></div>
+                            <div class="col-6 col-md-5">
+                                <div class="form-group">
+                                    <label>Name</label>
+                                    <input asp-for="@Model.Bar.Name" class="form-control" placeholder="Input:" />
+                                    <span asp-validation-for="@Model.Bar.Name" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-5">
+                                <div class="form-group">
+                                    <label>Address</label>
+                                    <input asp-for="@Model.Bar.Address" class="form-control" placeholder="Input:" />
+                                    <span asp-validation-for="@Model.Bar.Address" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-12">
+                                <div class="form-group">
+                                    <label>Information</label>
+                                    <input asp-for="@Model.Bar.Information" class="form-control" placeholder="Input:" />
+                                    <span asp-validation-for="@Model.Bar.Information" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-6 col-sm-6 col-md-7">
+                                <div class="form-group">
+                                    <label>Picture</label>
+                                    <input asp-for="@Model.Bar.Picture" class="form-control" placeholder="Input:" />
+                                    <span asp-validation-for="@Model.Bar.Picture" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-5">
+                                <div class="form-group">
+                                    <label>Map</label>
+                                    <input asp-for="@Model.Bar.Map" class="form-control" placeholder="Input:" />
+                                    <span asp-validation-for="@Model.Bar.Map" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="mv-40">
+                        <div class="row mt-20">
+                            <div class="col-sm-8 col-md-6">
+                                <button type="submit" class="btn btn-primary">Submit Now</button>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- Creating Bar Form end -->
+
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Address" class="control-label"></label>
-                <input asp-for="Address" class="form-control" />
-                <span asp-validation-for="Address" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Rating" class="control-label"></label>
-                <input asp-for="Rating" class="form-control" />
-                <span asp-validation-for="Rating" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Picture" class="control-label"></label>
-                <input asp-for="Picture" class="form-control" />
-                <span asp-validation-for="Picture" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsDeleted" /> @Html.DisplayNameFor(model => model.IsDeleted)
-                </label>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
+
+        <div class="col-12 col-lg-5">
+            <!-- Side bar instruction start -->
+            <aside class="sticky-kit sidebar-wrapper no-border">
+                <div class="booking-box">
+                    <div class="box-heading"><h3 class="h6 text-white text-uppercase">Creating Bar Instructions</h3></div>
+                    <div class="box-content">
+                        <ul class="border-top mt-20 pt-15">
+                            <li class="clearfix"><i class="elegent-icon-check_alt2 text-success"></i>For picture you can add a link from the web</li>
+                            <li class="clearfix"><i class="elegent-icon-check_alt2 text-success"></i>Address you can copy from google maps or other GPS app</li>
+                            <li class="clearfix"><i class="elegent-icon-check_alt2 text-success"></i>For the map, go to maps.google.com. Type the location in the search box and click on Share. In the new window chose Embed a map and copy the HTML code.</li>
+                            <li class="clearfix border-top font700 text-uppercase"></li>
+                        </ul>
+                    </div>
+                    <div class="box-bottom bg-light">
+                        <h6 class="font-sm">We are the best site for a night out in Sofia</h6>
+                        <p class="font-sm">Our custom tour program, direct call <span class="text-primary">+66857887444</span>.</p>
+                    </div>
+                </div>
+            </aside>
+            <!-- Side bar instruction end -->
+        </div>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
