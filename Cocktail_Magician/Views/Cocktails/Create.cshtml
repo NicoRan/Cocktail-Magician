@@ -1,4 +1,4 @@
-﻿@model CocktailViewModel
+﻿@model CreateCocktailViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -19,17 +19,18 @@
                             <div class="col-6 col-md-5">
                                 <div class="form-group">
                                     <label>Name</label>
-                                    <input asp-for="@Model.Name" class="form-control" placeholder="Input:" />
-                                    <span asp-validation-for="@Model.Name" class="text-danger"></span>
+                                    <input asp-for="@Model.Cocktail.Name" class="form-control" placeholder="Input:" />
+                                    <span asp-validation-for="@Model.Cocktail.Name" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="col-6 col-md-12">
                                 <div class="form-group chosen-bg-light">
                                     <label>Ingredients</label>
-                                    <select asp-for="@Model.Ingredients" class="chosen-the-basic chosen-container-multi">
-                                        <option value="White Rum">White Rum</option>
-                                        <option value="Lime juice">Lime juice</option>
-                                        <option value="Sprite">Sprite</option>
+                                    <select asp-for="@Model.Cocktail.Ingredients" class="chosen-the-basic chosen-container-multi">
+                                        @foreach (var ingredient in @Model.Ingredients)
+                                        {
+                                            <option value="@ingredient">@ingredient</option>
+                                        }
                                     </select>
                                     <span asp-validation-for="@Model.Ingredients" class="text-danger"></span>
                                 </div>
@@ -55,7 +56,7 @@
                     <div class="box-heading"><h3 class="h6 text-white text-uppercase">Creating Cocktail Instructions</h3></div>
                     <div class="box-content">
                         <ul class="border-top mt-20 pt-15">
-                            
+
                             <li class="clearfix"><i class="elegent-icon-check_alt2 text-success"></i>For ingredients you can pick more than one</li>
                             <li class="clearfix border-top font700 text-uppercase"></li>
                         </ul>

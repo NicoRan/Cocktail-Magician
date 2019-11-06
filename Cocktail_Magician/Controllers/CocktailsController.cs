@@ -15,10 +15,12 @@ namespace Cocktail_Magician.Controllers
     public class CocktailsController : Controller
     {
         private readonly ICocktailManager _cocktailManager;
+        private readonly IIngredientManager _ingredientManager;
 
-        public CocktailsController(ICocktailManager cocktailManager)
+        public CocktailsController(ICocktailManager cocktailManager, IIngredientManager ingredientManager)
         {
             _cocktailManager = cocktailManager;
+            _ingredientManager = ingredientManager;
         }
 
         // GET: Cocktails
@@ -46,9 +48,16 @@ namespace Cocktail_Magician.Controllers
         //}
 
         // GET: Cocktails/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            return View();
+            var createCocktail = new CreateCocktailViewModel();
+            createCocktail.Ingredients = new List<string>();
+            var listOfIngredients = await _ingredientManager.GetIngredientsAsync();
+            foreach (var item in listOfIngredients)
+            {
+                createCocktail.Ingredients.Add(item.Name);
+            }
+            return View(createCocktail);
         }
 
         // POST: Cocktails/Create
@@ -56,25 +65,18 @@ namespace Cocktail_Magician.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(CocktailViewModel cocktail)
+        public async Task<IActionResult> Create(CreateCocktailViewModel cocktailToCreate)
         {
             if (ModelState.IsValid)
             {
                 var cocktailToAdd = new Cocktail()
                 {
-                    Name = cocktail.Name
+                    Name = cocktailToCreate.Cocktail.Name
                 };
-                var ingredientsToAdd = new List<Ingredient>();
-                foreach (var ingredient in cocktail.Ingredients)
-                {
-                    Ingredient ingredientToAdd = new Ingredient();
-                    ingredientToAdd.Name = ingredient;
-                    ingredientsToAdd.Add(ingredientToAdd);
-                }
-                await _cocktailManager.CreateCocktail(cocktailToAdd, ingredientsToAdd);
+                await _cocktailManager.CreateCocktail(cocktailToAdd, cocktailToCreate.Cocktail.Ingredients);
                 return RedirectToAction("Index", "Home");
             }
-            return View(cocktail);
+            return View(cocktailToCreate);
         }
 
         // GET: Cocktails/Edit/5

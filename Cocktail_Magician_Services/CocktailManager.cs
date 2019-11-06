@@ -19,7 +19,7 @@ namespace Cocktail_Magician_Services
             _ingredientManager = ingredientManager;
         }
 
-        public async Task<Cocktail> CreateCocktail(Cocktail cocktail, List<Ingredient> ingredients)
+        public async Task<Cocktail> CreateCocktail(Cocktail cocktail, List<string> ingredients)
         {
             var cocktailToAdd = new Cocktail
             {
@@ -28,7 +28,7 @@ namespace Cocktail_Magician_Services
             cocktailToAdd.CocktailIngredient = new List<CocktailIngredient>();
             foreach (var ingredient in ingredients)
             {
-                var findIngredient = await _ingredientManager.FindIngredientByNameAsync(ingredient.Name);
+                var findIngredient = await _ingredientManager.FindIngredientByNameAsync(ingredient);
                 if (findIngredient != null)
                 {
                     cocktailToAdd.CocktailIngredient.Add(new CocktailIngredient() { Cocktail = cocktail, Ingredient = findIngredient });
