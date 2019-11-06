@@ -38,17 +38,13 @@ namespace Cocktail_Magician.Controllers
                 return NotFound();
             }
             var barViewModel = new BarViewModel(bar);
-            var model = new AllClassModels
-            {
-                Bar = barViewModel
-            };
-            return View(model);
+            return View(barViewModel);
         }
 
         // GET: Bars/Create
         public IActionResult Create()
         {
-            return View(new AllClassModels());
+            return View();
         }
 
         // POST: Bars/Create
@@ -56,15 +52,15 @@ namespace Cocktail_Magician.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(AllClassModels barView)
+        public async Task<IActionResult> Create(BarViewModel barView)
         {
             var bar = new Bar()
             {
-                Name = barView.Bar.Name,
-                Address = barView.Bar.Address,
-                Information = barView.Bar.Information,
-                Picture = barView.Bar.Picture,
-                MapDirections = barView.Bar.Map
+                Name = barView.Name,
+                Address = barView.Address,
+                Information = barView.Information,
+                Picture = barView.Picture,
+                MapDirections = barView.Map
             };
             if (ModelState.IsValid)
             {
@@ -72,9 +68,8 @@ namespace Cocktail_Magician.Controllers
                 await _barManager.CreateBar(bar);
                 return RedirectToAction("Index", "Home");
             }
-            var model = new AllClassModels();
             
-            return View(model);
+            return View(barView);
         }
 
         //// GET: Bars/Edit/5

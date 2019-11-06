@@ -27,20 +27,12 @@ namespace Cocktail_Magician.Controllers
             var topBars = await this._barManager.GetTopRatedBars();
             var topBarsViewModel = topBars.Select(bar => new BarViewModel(bar))
                 .ToList();
-            var model = new AllClassModels();
-            model.Index = topBarsViewModel;
-            //model.Register = new RegisterModel();
-            return View(model);
+            return View(topBarsViewModel);
         }
 
         public IActionResult Privacy()
         {
-            return View(new AllClassModels());
-        }
-
-        public IActionResult Test()
-        {
-            return View(new AllClassModels());
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -1,4 +1,4 @@
-﻿@model AllClassModels
+﻿@model BarViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -19,36 +19,36 @@
                             <div class="col-6 col-md-5">
                                 <div class="form-group">
                                     <label>Name</label>
-                                    <input asp-for="@Model.Bar.Name" class="form-control" placeholder="Input:" />
-                                    <span asp-validation-for="@Model.Bar.Name" class="text-danger"></span>
+                                    <input asp-for="@Model.Name" class="form-control" placeholder="Input:" />
+                                    <span asp-validation-for="@Model.Name" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="col-6 col-md-5">
                                 <div class="form-group">
                                     <label>Address</label>
-                                    <input asp-for="@Model.Bar.Address" class="form-control" placeholder="Input:" />
-                                    <span asp-validation-for="@Model.Bar.Address" class="text-danger"></span>
+                                    <input asp-for="@Model.Address" class="form-control" placeholder="Input:" />
+                                    <span asp-validation-for="@Model.Address" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="col-6 col-md-12">
                                 <div class="form-group">
                                     <label>Information</label>
-                                    <input asp-for="@Model.Bar.Information" class="form-control" placeholder="Input:" />
-                                    <span asp-validation-for="@Model.Bar.Information" class="text-danger"></span>
+                                    <input asp-for="@Model.Information" class="form-control" placeholder="Input:" />
+                                    <span asp-validation-for="@Model.Information" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="col-6 col-sm-6 col-md-7">
                                 <div class="form-group">
                                     <label>Picture</label>
-                                    <input asp-for="@Model.Bar.Picture" class="form-control" placeholder="Input:" />
-                                    <span asp-validation-for="@Model.Bar.Picture" class="text-danger"></span>
+                                    <input asp-for="@Model.Picture" class="form-control" placeholder="Input:" />
+                                    <span asp-validation-for="@Model.Picture" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="col-12 col-sm-6 col-md-5">
                                 <div class="form-group">
                                     <label>Map</label>
-                                    <input asp-for="@Model.Bar.Map" class="form-control" placeholder="Input:" />
-                                    <span asp-validation-for="@Model.Bar.Map" class="text-danger"></span>
+                                    <input asp-for="@Model.Map" class="form-control" placeholder="Input:" />
+                                    <span asp-validation-for="@Model.Map" class="text-danger"></span>
                                 </div>
                             </div>
                         </div>

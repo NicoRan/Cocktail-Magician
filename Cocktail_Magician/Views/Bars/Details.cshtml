@@ -1,4 +1,4 @@
-﻿@model AllClassModels
+﻿@model BarViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -13,7 +13,7 @@
             <div class="slick-carousel-inner">
                 <div class="slick-hero-alt-02">
                     <div class="slick-item">
-                        <div class="image"><img src="@Model.Bar.Picture" alt="Images" /></div>
+                        <div class="image"><img src="@Model.Picture" alt="Images" /></div>
                     </div>
                 </div>
             </div>
@@ -23,24 +23,24 @@
                 <div class="col-12 col-lg-8">
                     <div class="content-wrapper">
                         <div id="detail-content-sticky-nav-01" class="detail-header mb-30">
-                            <h3>@Model.Bar.Name</h3>
+                            <h3>@Model.Name</h3>
 
                             <div class="d-flex flex-column flex-sm-row align-items-sm-center mb-20">
                                 <div class="mr-15 font-lg">
-                                    <i class="elegent-icon-pin_alt text-warning"></i> @Model.Bar.Address
+                                    <i class="elegent-icon-pin_alt text-warning"></i> @Model.Address
                                 </div>
                                 <div>
                                     <div class="rating-item rating-inline">
                                         <div class="rating-icons">
-                                            <input type="hidden" class="rating" data-filled="rating-icon ri-star rating-rated" data-empty="rating-icon ri-star-empty" data-fractions="2" data-readonly value="@Model.Bar.Rating" />
+                                            <input type="hidden" class="rating" data-filled="rating-icon ri-star rating-rated" data-empty="rating-icon ri-star-empty" data-fractions="2" data-readonly value="@Model.Rating" />
                                         </div>
-                                        <p class="rating-text font600 text-muted font-12 letter-spacing-1"><span class="text-dark mr-3">@Model.Bar.Rating/5</span></p>
+                                        <p class="rating-text font600 text-muted font-12 letter-spacing-1"><span class="text-dark mr-3">@Model.Rating/5</span></p>
                                     </div>
                                 </div>
                             </div>
                             <div class="mb-30"></div>
                             <!-- Breaf bar information -->
-                            <p>@Model.Bar.Information</p>
+                            <p>@Model.Information</p>
                             <h5 class="mt-30">Cocktails offered</h5>
                             <!-- Make a foreach loop to get all cocktails the bar offers start -->
                             <ul class="list-icon-data-attr font-ionicons">
@@ -54,7 +54,7 @@
                         <div class="mb-50"></div>
                         <div id="detail-content-sticky-nav-03" class="fullwidth-horizon-sticky-section">
                             <h4 class="heading-title">Map</h4>
-                            <iframe src="@Model.Bar.Map" width="750" height="600" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+                            <iframe src="@Model.Map" width="750" height="600" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
                         </div>
                         <div class="mb-20"></div>
                         <div id="detail-content-sticky-nav-06" class="fullwidth-horizon-sticky-section">
@@ -73,7 +73,7 @@
                                 <li>
                                     <div class="review-man d-flex">
                                         <div class="image mr-15">
-                                            <img src="images/image-man/01.jpg" alt="image" class="image-circle" />
+                                            <img src="~/images/image-man/01.gif" alt="image" class="image-circle" />
                                         </div>
                                         <div class="line-125">
                                             <h6 class="line-125 mb-3">Antony Robert</h6>
@@ -92,7 +92,7 @@
                                 <li>
                                     <div class="review-man d-flex">
                                         <div class="image mr-15">
-                                            <img src="images/image-man/02.jpg" alt="image" class="image-circle" />
+                                            <img src="~/images/image-man/02.jpg" alt="image" class="image-circle" />
                                         </div>
                                         <div class="line-125">
                                             <h6 class="line-125 mb-3">Mohammed Salem</h6>
@@ -111,7 +111,7 @@
                                 <li>
                                     <div class="review-man d-flex">
                                         <div class="image mr-15">
-                                            <img src="images/image-man/03.jpg" alt="image" class="image-circle" />
+                                            <img src="~/images/image-man/03.jpg" alt="image" class="image-circle" />
                                         </div>
                                         <div class="line-125">
                                             <h6 class="line-125 mb-3">Ange Ermolova</h6>
@@ -130,7 +130,7 @@
                                 <li>
                                     <div class="review-man d-flex">
                                         <div class="image mr-15">
-                                            <img src="images/image-man/04.jpg" alt="image" class="image-circle" />
+                                            <img src="~/images/image-man/04.png" alt="image" class="image-circle" />
                                         </div>
                                         <div class="line-125">
                                             <h6 class="line-125 mb-3">Ange Ermolova</h6>
@@ -149,7 +149,7 @@
                                 <li>
                                     <div class="review-man d-flex">
                                         <div class="image mr-15">
-                                            <img src="images/image-man/05.jpg" alt="image" class="image-circle" />
+                                            <img src="~/images/image-man/05.png" alt="image" class="image-circle" />
                                         </div>
                                         <div class="line-125">
                                             <h6 class="line-125 mb-3">Christine Gateau</h6>

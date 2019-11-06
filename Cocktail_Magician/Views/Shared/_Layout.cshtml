@@ -1,5 +1,9 @@
-﻿@model AllClassModels
+﻿@inject UserManager<User> UserManager
 @inject SignInManager<User> SignInManager
+@inject ILogger<LoginModel> LoggerLogin
+@inject ILogger<RegisterModel> LoggerRegister
+@inject IEmailSender EmailSender
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,12 +58,6 @@
                                     <li class="nav-item">
                                         <a class="nav-link text-danger" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                                     </li>
-                                    @if (SignInManager.IsSignedIn(User))
-                                    {
-                                        <li class="nav-item">
-                                            <a class="nav-link text-danger" asp-area="" asp-controller="Home" asp-action="Test">Test</a>
-                                        </li>
-                                    }
                                     @if (User.IsInRole("Administrator"))
                                     {
                                         <li class="nav-item">
@@ -74,7 +72,6 @@
             </div>
         </header>
         <!-- Header end -->
-
         <!-- Image and Search Bar start -->
         <div class="hero-banner hero-banner-01 overlay-light opacity-2 overlay-relative overlay-gradient gradient-white alt-option-03" style="background-image:url('../../images/image-bg/01.jpg'); background-position: top center;">
             <div class="hero-inner">
@@ -314,8 +311,7 @@
                             </div>
 
                             <div class="form-body">
-                                @*@await  Html.PartialAsync("_LoginViewPartial")*@
-                                <partial name="_LoginViewPartial" model="@Model.Login" />
+                                @await Html.PartialAsync("_LoginViewPartial", new LoginModel(SignInManager, LoggerLogin))
                             </div>
                             <div class="form-footer">
                                 <p>Not a member yet? <a href="#loginFormTabInModal-register" class="tab-external-link font600">Sign up</a> for free</p>
@@ -331,7 +327,7 @@
                             </div>
 
                             <div class="form-body">
-                                <partial name="_RegisterViewPartial" model="@Model.Register" />
+                                @await Html.PartialAsync("_RegisterViewPartial", new RegisterModel(UserManager, SignInManager, LoggerRegister, EmailSender))
                             </div>
 
                             <div class="form-footer">
@@ -379,24 +375,38 @@
     <!-- Login, Register, Logout floating buttons end -->
 
     <a id="back-to-top" href="#" class="back-to-top" role="button" title="Click to return to top" data-toggle="tooltip" data-placement="left"><i class="elegent-icon-arrow_carrot-up"></i></a>
-    <environment include="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                asp-fallback-test="window.jQuery"
-                crossorigin="anonymous"
-                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
-        </script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
-                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
-                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-                crossorigin="anonymous"
-                integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o">
-        </script>
-    </environment>
+    @*<environment include="Development">
+            <script src="~/lib/jquery/dist/jquery.js"></script>
+            <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+        </environment>
+        <environment exclude="Development">
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+                    asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                    asp-fallback-test="window.jQuery"
+                    crossorigin="anonymous"
+                    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
+            </script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+                    asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
+                    asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                    crossorigin="anonymous"
+                    integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o">
+            </script>
+        </environment>*@
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+            asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+            asp-fallback-test="window.jQuery"
+            crossorigin="anonymous"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+            asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
+            asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+            crossorigin="anonymous"
+            integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o">
+    </script>
     <script type="text/javascript" src="~/js/jquery-2.2.4.min.js"></script>
     <script type="text/javascript" src="~/js/plugins.js"></script>
     <script type="text/javascript" src="~/js/custom-core.js"></script>
