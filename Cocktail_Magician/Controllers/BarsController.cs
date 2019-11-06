@@ -15,11 +15,9 @@ namespace Cocktail_Magician.Controllers
     public class BarsController : Controller
     {
         private readonly IBarManager _barManager;
-        private readonly CMContext _context;
 
-        public BarsController(CMContext context, IBarManager barManager)
+        public BarsController(IBarManager barManager)
         {
-            _context = context;
             _barManager = barManager;
         }
 
@@ -124,22 +122,22 @@ namespace Cocktail_Magician.Controllers
         //}
 
         // GET: Bars/Delete/5
-        public async Task<IActionResult> Delete(string id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+        //public async Task<IActionResult> Delete(string id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var bar = await _context.Bars
-                .FirstOrDefaultAsync(m => m.BarId == id);
-            if (bar == null)
-            {
-                return NotFound();
-            }
+        //    var bar = await _context.Bars
+        //        .FirstOrDefaultAsync(m => m.BarId == id);
+        //    if (bar == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return View(bar);
-        }
+        //    return View(bar);
+        //}
 
         // POST: Bars/Delete/5
         //[HttpPost, ActionName("Delete")]
@@ -152,9 +150,9 @@ namespace Cocktail_Magician.Controllers
         //    return RedirectToAction(nameof(Index));
         //}
 
-        private bool BarExists(string id)
-        {
-            return _context.Bars.Any(e => e.BarId == id);
-        }
+        //private bool BarExists(string id)
+        //{
+        //    return _context.Bars.Any(e => e.BarId == id);
+        //}
     }
 }

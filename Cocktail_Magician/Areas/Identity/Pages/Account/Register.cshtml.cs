@@ -48,6 +48,8 @@ namespace Cocktail_Magician.Areas.Identity.Pages.Account
         {
             [Required]
             [Display(Name = "Username")]
+            [MinLength(3, ErrorMessage = "Username should be between 3 and 25 symbols!"),
+                MaxLength(25, ErrorMessage = "Username should be between 3 and 25 symbols!")]
             public string Username { get; set; }
 
             [Required]

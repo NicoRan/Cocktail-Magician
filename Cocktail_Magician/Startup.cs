@@ -67,6 +67,8 @@ namespace Cocktail_Magician
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddScoped<IBarManager, BarManager>();
+            services.AddScoped<ICocktailManager, CocktailManager>();
+            services.AddScoped<IIngredientManager, IngredientManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
