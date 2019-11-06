@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Cocktail_Magician.Areas.Identity.Pages.Account
 {
@@ -21,6 +22,11 @@ namespace Cocktail_Magician.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
+        public RegisterModel()
+        {
+
+        }
+        [ActivatorUtilitiesConstructor]
         public RegisterModel(
             UserManager<User> userManager,
             SignInManager<User> signInManager,

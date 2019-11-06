@@ -1,10 +1,4 @@
-﻿@inject UserManager<User> UserManager
-@inject SignInManager<User> SignInManager
-@inject ILogger<LoginModel> LoggerLogin
-@inject ILogger<RegisterModel> LoggerRegister
-@inject IEmailSender EmailSender
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -311,7 +305,7 @@
                             </div>
 
                             <div class="form-body">
-                                @await Html.PartialAsync("_LoginViewPartial", new LoginModel(SignInManager, LoggerLogin))
+                                @await Html.PartialAsync("_LoginViewPartial", new LoginModel())
                             </div>
                             <div class="form-footer">
                                 <p>Not a member yet? <a href="#loginFormTabInModal-register" class="tab-external-link font600">Sign up</a> for free</p>
@@ -327,7 +321,7 @@
                             </div>
 
                             <div class="form-body">
-                                @await Html.PartialAsync("_RegisterViewPartial", new RegisterModel(UserManager, SignInManager, LoggerRegister, EmailSender))
+                                @await Html.PartialAsync("_RegisterViewPartial", new RegisterModel())
                             </div>
 
                             <div class="form-footer">
@@ -375,24 +369,7 @@
     <!-- Login, Register, Logout floating buttons end -->
 
     <a id="back-to-top" href="#" class="back-to-top" role="button" title="Click to return to top" data-toggle="tooltip" data-placement="left"><i class="elegent-icon-arrow_carrot-up"></i></a>
-    @*<environment include="Development">
-            <script src="~/lib/jquery/dist/jquery.js"></script>
-            <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
-        </environment>
-        <environment exclude="Development">
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
-                    asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                    asp-fallback-test="window.jQuery"
-                    crossorigin="anonymous"
-                    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
-            </script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
-                    asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
-                    asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-                    crossorigin="anonymous"
-                    integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o">
-            </script>
-        </environment>*@
+    
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
