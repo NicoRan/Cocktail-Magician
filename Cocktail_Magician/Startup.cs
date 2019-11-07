@@ -47,9 +47,6 @@ namespace Cocktail_Magician
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection"));
             });
-            //services.AddDbContext<ApplicationDbContext>(options =>
-            //    options.UseSqlServer(
-            //        Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDefaultIdentity<User>(options =>
             {
@@ -69,6 +66,7 @@ namespace Cocktail_Magician
             services.AddScoped<IBarManager, BarManager>();
             services.AddScoped<ICocktailManager, CocktailManager>();
             services.AddScoped<IIngredientManager, IngredientManager>();
+            services.AddScoped<ISearchManager, SearchManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

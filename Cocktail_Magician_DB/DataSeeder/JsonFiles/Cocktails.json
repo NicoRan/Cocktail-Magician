@@ -3,6 +3,9 @@
     "name": "Long Island Iced Tea",
     "rating": 4.9,
     "picture": "http://shake-that.com/wp-content/uploads/2015/07/Long-Island-Iced-Tea-780x780.jpg",
+    "ingredients": [
+      "White Rum"
+    ]
   },
   {
     "name": "Mojito",
