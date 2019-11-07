@@ -1,4 +1,4 @@
-﻿@*@model Cocktail_Magician_DB.Models.Bar
+﻿@model Cocktail_Magician_DB.Models.Bar
 
 @{
     ViewData["Title"] = "Delete";
@@ -25,6 +25,12 @@
             @Html.DisplayFor(model => model.Address)
         </dd>
         <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Information)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Information)
+        </dd>
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Rating)
         </dt>
         <dd class = "col-sm-10">
@@ -35,6 +41,12 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Picture)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MapDirections)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MapDirections)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.IsDeleted)
@@ -49,4 +61,4 @@
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>
-</div>*@
+</div>

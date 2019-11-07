@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Cocktail_Magician.Areas.BarMagician.Models;
 using Cocktail_Magician.Models;
 using Cocktail_Magician_DB.Models;
 using Cocktail_Magician_Services.Contracts;
@@ -20,8 +21,9 @@ namespace Cocktail_Magician.Controllers
         {
             return View();
         }
+
         [HttpGet]
-        public IActionResult Search([FromQuery] string criteria, [FromQuery] string type)
+        public IActionResult Search(string criteria, string type)
         {
             //After Implementing Mappers, this will be simplified
             var resultsBars = new List<Bar>();

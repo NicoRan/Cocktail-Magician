@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using Cocktail_Magician_DB;
 using Cocktail_Magician_DB.Models;
 using Cocktail_Magician_Services.Contracts;
-using Cocktail_Magician.Models;
 using Cocktail_Magician.Areas.BarMagician.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Cocktail_Magician.Areas.BarMagician.Controllers
 {
@@ -42,6 +42,8 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
         }
 
         // GET: Bars/Create
+        [HttpGet]
+        [Authorize(Roles = "Administrator")]
         public IActionResult Create()
         {
             return View();
@@ -52,6 +54,7 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Create(BarViewModel barView)
         {
             var bar = new Bar()

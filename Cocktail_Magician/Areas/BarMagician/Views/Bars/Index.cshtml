@@ -1,4 +1,4 @@
-﻿@*@model IEnumerable<Cocktail_Magician_DB.Models.Bar>
+﻿@model IEnumerable<Cocktail_Magician_DB.Models.Bar>
 
 @{
     ViewData["Title"] = "Index";
@@ -20,10 +20,16 @@
                 @Html.DisplayNameFor(model => model.Address)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Information)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Rating)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Picture)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MapDirections)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.IsDeleted)
@@ -41,10 +47,16 @@
                 @Html.DisplayFor(modelItem => item.Address)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.Information)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Rating)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Picture)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MapDirections)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IsDeleted)
@@ -57,4 +69,4 @@
         </tr>
 }
     </tbody>
-</table>*@
+</table>

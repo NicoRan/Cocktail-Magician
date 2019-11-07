@@ -57,7 +57,7 @@
                             <div class="col-inner">
                                 <ul class="nav-mini-right">
                                     <partial name="_LoginPartial" />
-                                    
+
                                     <li class="d-block d-sm-none">
                                         <a href="#loginFormTabInModal-register" data-toggle="modal" data-target="#loginFormTabInModal" data-backdrop="static" data-keyboard="false">
                                             Login / Register
@@ -83,25 +83,19 @@
                                             <ul class="main-nav">
                                                 <li>
                                                     <a asp-area="" asp-controller="Home" asp-action="Index"><span class="icon-font"><i class="elegent-icon-house_alt"></i></span> Home</a>
-                                                    
+
                                                 </li>
-                                                <li>
-                                                    <a>Manage</a>
-                                                    <ul>
-                                                        <li><a href="tour-result-list.html">Bars</a></li>
-                                                        <li><a href="tour-result-grid.html">Cocktails</a></li>
-                                                        <li><a href="tour-detail.html">Detail 01</a></li>
-                                                        <li><a href="tour-detail-02.html">Detail 02</a></li>
-                                                        <li><a href="tour-detail-03.html">Detail 03</a></li>
-                                                        <li><a href="tour-detail-04.html">Detail 04</a></li>
-                                                        <li><a href="tour-detail-05.html">Detail 05</a></li>
-                                                        <li><a href="tour-detail-empty-booking.html">Detail - empty booking</a></li>
-                                                        <li><a href="tour-payment.html">Payment</a></li>
-                                                        <li><a href="tour-conformation.html">Conformation</a></li>
-                                                        <li><a href="destinations-01.html">Destinations 01</a></li>
-                                                        <li><a href="destinations-02.html">Destinations 02</a></li>
-                                                    </ul>
-                                                </li>
+                                                @if (User.IsInRole("Administrator"))
+                                                {
+                                                    <li>
+                                                        <a href="#">Manage</a>
+                                                        <ul>
+                                                            <li><a asp-area="BarMagician" asp-controller="Bars" asp-action="Create">Create Bar</a></li>
+                                                            <li><a asp-area="BarMagician" asp-controller="Cocktails" asp-action="Create">Create Cocktail</a></li>
+                                                        </ul>
+                                                    </li>
+                                                }
+
                                                 <li>
                                                     <a href="javascript:void(0)">Blog</a>
                                                     <ul>
@@ -160,10 +154,10 @@
         </header>
         <!-- Header end -->
         <!-- Image and Search Bar start -->
-        <div class="hero-banner hero-banner-01 overlay-light opacity-2 overlay-relative overlay-gradient gradient-white alt-option-03" style="background-image:url('../../images/image-bg/01.jpg'); background-position: top center;">
+        <div class="hero-banner hero-banner-01 overlay-light opacity-2 overlay-relative overlay-gradient gradient-white alt-option-03" style="background-image:url('https://s3-ap-southeast-2.amazonaws.com/est-web/Maybe-Sammy-5.jpg'); background-position: top center;">
             <div class="hero-inner">
                 <div class="container">
-                    <h1 class="text-danger">Co<span class="font200">cktail <p><span class="font700">Ma</span>gician</p> </span></h1>
+                    <h1 class="text-danger">Co<span class="font200">cktail <span class="font700">Ma</span>gician </span></h1>
                     <div class="search-form-main">
                         @await Html.PartialAsync("_SearchBarPartial", new SearchModel())
                     </div>
@@ -427,7 +421,7 @@
     <!-- Login, Register, Logout floating buttons end -->
 
     <a id="back-to-top" href="#" class="back-to-top" role="button" title="Click to return to top" data-toggle="tooltip" data-placement="left"><i class="elegent-icon-arrow_carrot-up"></i></a>
-    
+
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"

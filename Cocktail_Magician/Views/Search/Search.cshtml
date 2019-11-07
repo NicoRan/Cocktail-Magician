@@ -1,7 +1,7 @@
 ﻿@model SearchResultViewModel
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "_Layout";
 }
 
     <div class="main-wrapper scrollspy-container">
@@ -92,8 +92,8 @@
 
                                     <div class="clear mb-10"></div>
 
-                                    <button class="btn btn-toggle btn-text-inherit text-primary text-uppercase font10 letter-spacing-2 font600 collapsed collapsed-on padding-0" type="buttom" data-toggle="collapse" data-target="#filerStartPointShowHide">Show more (+)</button>
-                                    <button class="btn btn-toggle btn-text-inherit text-uppercase font10 letter-spacing-2 font600 collapsed collapsed-off padding-0" type="buttom" data-toggle="collapse" data-target="#filerStartPointShowHide">Show less (-)</button>
+                                    <button class="btn btn-toggle btn-text-inherit text-primary text-uppercase font10 letter-spacing-2 font600 collapsed collapsed-on padding-0" type="button" data-toggle="collapse" data-target="#filerStartPointShowHide">Show more (+)</button>
+                                    <button class="btn btn-toggle btn-text-inherit text-uppercase font10 letter-spacing-2 font600 collapsed collapsed-off padding-0" type="button" data-toggle="collapse" data-target="#filerStartPointShowHide">Show less (-)</button>
 
                                 </div>
 
@@ -155,8 +155,8 @@
 
                                     <div class="clear mb-10"></div>
 
-                                    <button class="btn btn-toggle btn-text-inherit text-primary text-uppercase font10 letter-spacing-2 font600 collapsed collapsed-on padding-0" type="buttom" data-toggle="collapse" data-target="#filerStartPointShowHide">Show more (+)</button>
-                                    <button class="btn btn-toggle btn-text-inherit text-uppercase font10 letter-spacing-2 font600 collapsed collapsed-off padding-0" type="buttom" data-toggle="collapse" data-target="#filerStartPointShowHide">Show less (-)</button>
+                                    <button class="btn btn-toggle btn-text-inherit text-primary text-uppercase font10 letter-spacing-2 font600 collapsed collapsed-on padding-0" type="button" data-toggle="collapse" data-target="#filerStartPointShowHide">Show more (+)</button>
+                                    <button class="btn btn-toggle btn-text-inherit text-uppercase font10 letter-spacing-2 font600 collapsed collapsed-off padding-0" type="button" data-toggle="collapse" data-target="#filerStartPointShowHide">Show less (-)</button>
 
                                 </div>
 
@@ -232,7 +232,7 @@
                                         <!-- One result item start -->
                                         <figure class="tour-long-item-01">
 
-                                            <a asp-controller="Bars" asp-action="Details" asp-route-id="@bar.BarId">
+                                            <a asp-area="BarMagician" asp-controller="Bars" asp-action="Details" asp-route-id="@bar.BarId">
 
                                                 <div class="d-flex flex-column flex-sm-row align-items-xl-center">
 
