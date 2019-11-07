@@ -1,0 +1,373 @@
+﻿@model SearchResultViewModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="main-wrapper scrollspy-container">
+
+        <section class="page-wrapper page-result pb-0">
+
+            <div class="container sticky-kit">
+
+                <div class="row equal-height gap-30 gap-lg-40">
+
+                    <div class="col-12 col-lg-4">
+
+                        <aside class="sidebar-wrapper pv">
+
+                            <div class="sidebar-box">
+
+                                <div class="box-title"><h5>Price Range</h5></div>
+
+                                <div class="box-content">
+                                    <input id="price_range" />
+                                </div>
+
+                            </div>
+
+                            <div class="sidebar-box">
+
+                                <div class="box-title"><h5>Star Slider</h5></div>
+
+                                <div class="box-content">
+                                    <input id="star_range" />
+                                </div>
+
+                            </div>
+
+                            <div class="sidebar-box">
+
+                                <div class="box-title"><h5>Starting Point</h5></div>
+
+                                <div class="box-content">
+
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="filerStartPoint-01" name="filerStartPoint" checked>
+                                        <label class="custom-control-label" for="filerStartPoint-01">Berlin <span class="text-muted font-sm">(854)</span></label>
+                                    </div>
+
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="filerStartPoint-02" name="filerStartPoint">
+                                        <label class="custom-control-label" for="filerStartPoint-02">Paris <span class="checkbox-count">(25)</span></label>
+                                    </div>
+
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="filerStartPoint-03" name="filerStartPoint">
+                                        <label class="custom-control-label" for="filerStartPoint-03">Munich <span class="checkbox-count">(254)</span></label>
+                                    </div>
+
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="filerStartPoint-04" name="filerStartPoint">
+                                        <label class="custom-control-label" for="filerStartPoint-04">Lyon<span class="checkbox-count">(22)</span></label>
+                                    </div>
+
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="filerStartPoint-05" name="filerStartPoint">
+                                        <label class="custom-control-label" for="filerStartPoint-05">Vienna  <span class="checkbox-count">(9)</span></label>
+                                    </div>
+
+                                    <div id="filerStartPointShowHide" class="collapse">
+
+                                        <div class="collapse-inner">
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="filerStartPoint-06" name="filerStartPoint">
+                                                <label class="custom-control-label" for="filerStartPoint-06">Toulouse <span class="checkbox-count">(3)</span></label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="filerStartPoint-06" name="filerStartPoint" />
+                                                <label class="custom-control-label" for="filerStartPoint-06">Graz <span class="checkbox-count">(25)</span></label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="filerStartPoint-07" name="filerStartPoint" />
+                                                <label class="custom-control-label" for="filerStartPoint-07">Linz  <span class="checkbox-count">(2)</span></label>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="clear mb-10"></div>
+
+                                    <button class="btn btn-toggle btn-text-inherit text-primary text-uppercase font10 letter-spacing-2 font600 collapsed collapsed-on padding-0" type="buttom" data-toggle="collapse" data-target="#filerStartPointShowHide">Show more (+)</button>
+                                    <button class="btn btn-toggle btn-text-inherit text-uppercase font10 letter-spacing-2 font600 collapsed collapsed-off padding-0" type="buttom" data-toggle="collapse" data-target="#filerStartPointShowHide">Show less (-)</button>
+
+                                </div>
+
+                            </div>
+
+                            <div class="sidebar-box">
+
+                                <div class="box-title"><h5>Endong Point</h5></div>
+
+                                <div class="box-content">
+
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="filerEndPoint-01" name="filerEndPoint" checked>
+                                        <label class="custom-control-label" for="filerEndPoint-01">Berlin <span class="text-muted font-sm">(854)</span></label>
+                                    </div>
+
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="filerEndPoint-02" name="filerEndPoint">
+                                        <label class="custom-control-label" for="filerEndPoint-02">Paris <span class="checkbox-count">(25)</span></label>
+                                    </div>
+
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="filerEndPoint-03" name="filerEndPoint">
+                                        <label class="custom-control-label" for="filerEndPoint-03">Munich <span class="checkbox-count">(254)</span></label>
+                                    </div>
+
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="filerEndPoint-04" name="filerEndPoint">
+                                        <label class="custom-control-label" for="filerEndPoint-04">Lyon<span class="checkbox-count">(22)</span></label>
+                                    </div>
+
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="filerEndPoint-05" name="filerEndPoint">
+                                        <label class="custom-control-label" for="filerEndPoint-05">Vienna  <span class="checkbox-count">(9)</span></label>
+                                    </div>
+
+                                    <div id="filerStartPointShowHide" class="collapse">
+
+                                        <div class="collapse-inner">
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="filerEndPoint-06" name="filerEndPoint" />
+                                                <label class="custom-control-label" for="filerEndPoint-06">Toulouse <span class="checkbox-count">(3)</span></label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="filerEndPoint-07" name="filerEndPoint" />
+                                                <label class="custom-control-label" for="filerEndPoint-07">Graz <span class="checkbox-count">(25)</span></label>
+                                            </div>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="filerEndPoint-08" name="filerEndPoint" />
+                                                <label class="custom-control-label" for="filerEndPoint-08">Linz <span class="checkbox-count">(2)</span></label>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="clear mb-10"></div>
+
+                                    <button class="btn btn-toggle btn-text-inherit text-primary text-uppercase font10 letter-spacing-2 font600 collapsed collapsed-on padding-0" type="buttom" data-toggle="collapse" data-target="#filerStartPointShowHide">Show more (+)</button>
+                                    <button class="btn btn-toggle btn-text-inherit text-uppercase font10 letter-spacing-2 font600 collapsed collapsed-off padding-0" type="buttom" data-toggle="collapse" data-target="#filerStartPointShowHide">Show less (-)</button>
+
+                                </div>
+
+                            </div>
+
+                            <div class="sidebar-box">
+
+                                <div class="box-title"><h5>Filter Select</h5></div>
+
+                                <div class="box-content">
+                                    <div class="form-group">
+                                        <select data-placeholder="Filter Select" class="chosen-the-basic form-control" tabindex="2">
+                                            <option value=""></option>
+                                            <option value="filter-select-0">Filter Select One</option>
+                                            <option value="filter-select-1">Filter Select Two</option>
+                                            <option value="filter-select-2">Filter Select Three</option>
+                                            <option value="filter-select-3">Filter Select Four</option>
+                                            <option value="filter-select-4">Filter Select Five</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="sidebar-box">
+
+                                <div class="box-title"><h5>Filter Text</h5></div>
+
+                                <div class="box-content">
+                                    <p>Park fat she nor does play deal our. Procured sex material his offering humanity laughing moderate can. Unreserved had she nay dissimilar admiration interested.</p>
+                                </div>
+
+                            </div>
+
+                        </aside>
+
+                    </div>
+
+                    <div class="col-12 col-lg-8">
+
+                        <div class="content-wrapper pv">
+
+                            <div class="d-flex justify-content-between flex-row align-items-center sort-group page-result-01">
+                                <div class="sort-box">
+                                    <div class="d-flex align-items-center sort-item">
+                                        <label class="sort-label d-none d-sm-flex">Sort by:</label>
+                                        <div class="sort-form">
+                                            <select class="chosen-the-basic form-control" tabindex="2">
+                                                <option value="sort-by-1">Name: A to Z</option>
+                                                <option value="sort-by-2">Name: Z to A</option>
+                                                <option value="sort-by-3">Price: Hight to Low</option>
+                                                <option value="sort-by-4">Price: Low to High</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="sort-box">
+                                    <div class="d-flex align-items-center sort-item">
+                                        <label class="sort-label d-none d-sm-flex">View as:</label>
+                                        <ul class="sort-nav">
+                                            <li><a href="#"><i class="fas fa-th"></i></a></li>
+                                            <li><a href="#" class="active"><i class="fas fa-th-list"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tour-long-item-wrapper-01">
+                                @if (Model.Bars != null)
+                                {
+                                    @foreach (var bar in Model.Bars)
+                                    {
+                                        <!-- One result item start -->
+                                        <figure class="tour-long-item-01">
+
+                                            <a asp-controller="Bars" asp-action="Details" asp-route-id="@bar.BarId">
+
+                                                <div class="d-flex flex-column flex-sm-row align-items-xl-center">
+
+                                                    <div>
+                                                        <div class="image">
+                                                            <img src="@bar.Picture" alt="images" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div>
+
+                                                        <figcaption class="content">
+                                                            <h5>@bar.Name</h5>
+                                                            <ul class="item-meta">
+                                                                <li>
+                                                                    <i class="elegent-icon-pin_alt text-warning"></i> @bar.Address
+                                                                </li>
+                                                                <li>
+                                                                    <div class="rating-item rating-sm rating-inline clearfix">
+                                                                        <div class="rating-icons">
+                                                                            <input type="hidden" class="rating" data-filled="rating-icon ri-star rating-rated" data-empty="rating-icon ri-star-empty" data-fractions="2" data-readonly value="@bar.Rating" /> @bar.Rating / 5
+                                                                        </div>
+                                                                        @*<p class="rating-text font600 text-muted font-12 letter-spacing-2">44 reviews</p>*@
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+                                                            <p>@bar.Information</p>
+                                                        </figcaption>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </a>
+
+                                        </figure>
+                                        <!-- One result item start -->
+                                    }
+                                }
+                                @if (Model.Cocktails != null)
+                                {
+                                    @foreach (var cocktail in Model.Cocktails)
+                                    {
+                                        <!-- One result item start -->
+                                        <figure class="tour-long-item-01">
+                                            <a href="#">
+                                                <div class="d-flex flex-column flex-sm-row align-items-xl-center">
+
+                                                    <div>
+                                                        <div class="image">
+                                                            <img src="@cocktail.Picture" alt="images" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div>
+
+                                                        <figcaption class="content">
+                                                            <h5>@cocktail.Name</h5>
+                                                            <ul class="item-meta">
+
+                                                                <li>
+                                                                    <div class="rating-item rating-sm rating-inline clearfix">
+                                                                        <div class="rating-icons">
+                                                                            <input type="hidden" class="rating" data-filled="rating-icon ri-star rating-rated" data-empty="rating-icon ri-star-empty" data-fractions="2" data-readonly value="@cocktail.Rating" /> @cocktail.Rating / 5
+                                                                        </div>
+                                                                        <p class="rating-text font600 text-muted font-12 letter-spacing-2">44 reviews</p>
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+                                                            <p>@cocktail.Information</p>
+                                                        </figcaption>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </a>
+
+                                        </figure>
+                                        <!-- One result item start -->
+                                    }
+                                }
+
+
+                            </div>
+
+                            <div class="pager-wrappper mt-40">
+
+                                <div class="pager-innner">
+
+                                    <div class="row align-items-center text-center text-lg-left">
+
+                                        <div class="col-12 col-lg-5">
+                                            Showing reslut 1 to 15 from 248
+                                        </div>
+
+                                        <div class="col-12 col-lg-7">
+                                            <nav class="float-lg-right mt-10 mt-lg-0">
+                                                <ul class="pagination justify-content-center justify-content-lg-left">
+                                                    <li>
+                                                        <a href="#" aria-label="Previous">
+                                                            <span aria-hidden="true">&laquo;</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="active"><a href="#">1</a></li>
+                                                    <li><a href="#">2</a></li>
+                                                    <li><a href="#">3</a></li>
+                                                    <li><span>...</span></li>
+                                                    <li><a href="#">11</a></li>
+                                                    <li><a href="#">12</a></li>
+                                                    <li><a href="#">13</a></li>
+                                                    <li>
+                                                        <a href="#" aria-label="Next">
+                                                            <span aria-hidden="true">&raquo;</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </nav>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+

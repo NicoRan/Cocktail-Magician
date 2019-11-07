@@ -1,0 +1,38 @@
+﻿@model SearchModel
+
+<form asp-controller="Search" asp-action="Search" method="get">
+    <div class="from-inner">
+        <div class="row shrink-auto-sm gap-1">
+            <div class="col-12 col-auto">
+                <div class="col-inner">
+                    <div class="row cols-2 cols-md-2 gap-2">
+                        <div class="col-4">
+                            <div class="col-inner">
+                                <div class="form-group">
+                                    <label>Search Type</label>
+                                    <select asp-for="@Model.Type" class="chosen-the-basic form-control form-control-sm" placeholder="Select one" tabindex="2">
+                                        <option></option>
+                                        <option value="All">All</option>
+                                        <option value="Bars">Bars</option>
+                                        <option value="Cocktails">Cocktails</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-8-max">
+                            <div class="form-group">
+                                <label>Enter keyword</label>
+                                <input asp-for="@Model.Criteria" type="text" asp-route-criteria="criteria" class="form-control form-readonly-control" placeholder="Search:">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-shrink">
+                <div class="col-inner">
+                    <button type="submit" class="btn btn-primary btn-block"><i class="ion-android-search"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
