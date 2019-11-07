@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Cocktail_Magician.Models
+namespace Cocktail_Magician.Areas.BarMagician.Models
 {
     public class CocktailViewModel
     {

@@ -9,9 +9,11 @@ using Cocktail_Magician_DB;
 using Cocktail_Magician_DB.Models;
 using Cocktail_Magician_Services.Contracts;
 using Cocktail_Magician.Models;
+using Cocktail_Magician.Areas.BarMagician.Models;
 
-namespace Cocktail_Magician.Controllers
+namespace Cocktail_Magician.Areas.BarMagician.Controllers
 {
+    [Area("BarMagician")]
     public class CocktailsController : Controller
     {
         private readonly ICocktailManager _cocktailManager;
@@ -22,7 +24,6 @@ namespace Cocktail_Magician.Controllers
             _cocktailManager = cocktailManager;
             _ingredientManager = ingredientManager;
         }
-
         // GET: Cocktails
         //public async Task<IActionResult> Index()
         //{
@@ -48,6 +49,7 @@ namespace Cocktail_Magician.Controllers
         //}
 
         // GET: Cocktails/Create
+        [HttpGet]
         public async Task<IActionResult> Create()
         {
             var createCocktail = new CreateCocktailViewModel();
@@ -63,6 +65,7 @@ namespace Cocktail_Magician.Controllers
         // POST: Cocktails/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateCocktailViewModel cocktailToCreate)
@@ -71,7 +74,9 @@ namespace Cocktail_Magician.Controllers
             {
                 var cocktailToAdd = new Cocktail()
                 {
-                    Name = cocktailToCreate.Cocktail.Name
+                    Name = cocktailToCreate.Cocktail.Name,
+                    Information = cocktailToCreate.Cocktail.Information,
+                    Picture = cocktailToCreate.Cocktail.Picture
                 };
                 await _cocktailManager.CreateCocktail(cocktailToAdd, cocktailToCreate.Cocktail.Ingredients);
                 return RedirectToAction("Index", "Home");

@@ -9,9 +9,11 @@ using Cocktail_Magician_DB;
 using Cocktail_Magician_DB.Models;
 using Cocktail_Magician_Services.Contracts;
 using Cocktail_Magician.Models;
+using Cocktail_Magician.Areas.BarMagician.Models;
 
-namespace Cocktail_Magician.Controllers
+namespace Cocktail_Magician.Areas.BarMagician.Controllers
 {
+    [Area("BarMagician")]
     public class BarsController : Controller
     {
         private readonly IBarManager _barManager;
@@ -66,7 +68,7 @@ namespace Cocktail_Magician.Controllers
                 await _barManager.CreateBar(bar);
                 return RedirectToAction("Index", "Home");
             }
-            
+
             return View(barView);
         }
 

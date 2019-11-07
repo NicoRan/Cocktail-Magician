@@ -9,6 +9,7 @@ using Cocktail_Magician_Services.Contracts;
 using Cocktail_Magician.Areas.Identity.Pages.Account;
 using Microsoft.AspNetCore.Identity;
 using Cocktail_Magician_DB.Models;
+using Cocktail_Magician.Areas.BarMagician.Models;
 
 namespace Cocktail_Magician.Controllers
 {

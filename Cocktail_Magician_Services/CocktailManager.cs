@@ -23,10 +23,7 @@ namespace Cocktail_Magician_Services
 
         public async Task<Cocktail> CreateCocktail(Cocktail cocktail, List<string> ingredients)
         {
-            var cocktailToAdd = new Cocktail
-            {
-                Name = cocktail.Name,
-            };
+            var cocktailToAdd = cocktail;
             cocktailToAdd.CocktailIngredient = new List<CocktailIngredient>();
             foreach (var ingredient in ingredients)
             {

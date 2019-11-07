@@ -19,4 +19,11 @@
     <ProjectReference Include="..\Cocktail_Magician_Services\Cocktail_Magician_Services.csproj" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Folder Include="Areas\BarCrower\Controllers\" />
+    <Folder Include="Areas\BarCrower\Models\" />
+    <Folder Include="Areas\BarCrower\Views\" />
+  </ItemGroup>
+
 </Project>

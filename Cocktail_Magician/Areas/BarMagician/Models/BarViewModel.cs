@@ -1,7 +1,7 @@
 ﻿using Cocktail_Magician_DB.Models;
 using System.ComponentModel.DataAnnotations;
 
-namespace Cocktail_Magician.Models
+namespace Cocktail_Magician.Areas.BarMagician.Models
 {
     public class BarViewModel
     {

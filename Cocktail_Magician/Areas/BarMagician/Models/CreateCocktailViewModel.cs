@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Cocktail_Magician.Models
+namespace Cocktail_Magician.Areas.BarMagician.Models
 {
     public class CreateCocktailViewModel
     {

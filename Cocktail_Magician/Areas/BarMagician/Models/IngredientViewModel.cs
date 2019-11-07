@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Cocktail_Magician.Models
+namespace Cocktail_Magician.Areas.BarMagician.Models
 {
     public class IngredientViewModel
     {
