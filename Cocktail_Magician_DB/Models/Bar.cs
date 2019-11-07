@@ -23,8 +23,8 @@ namespace Cocktail_Magician_DB.Models
         }
         public string BarId { get; set; }
         [Required(ErrorMessage = "A name is required!")]
-        [MinLength(3, ErrorMessage = "Name should be between 3 and 35 symbols!")]
-        [MaxLength(35, ErrorMessage = "Name should be between 3 and 35 symbols!")]
+        [MinLength(3, ErrorMessage = "Name should be between 3 and 35 symbols!"),
+            MaxLength(35, ErrorMessage = "Name should be between 3 and 35 symbols!")]
         public string Name { get; set; }
         [MinLength(5, ErrorMessage = "Address should at least 5 symbols!")]
         public string Address { get; set; }

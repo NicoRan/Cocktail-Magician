@@ -15,19 +15,26 @@ namespace Cocktail_Magician.Controllers
     public class HomeController : Controller
     {
         private readonly IBarManager _barManager;
+        private readonly ICocktailManager _cocktailManager;
         private readonly UserManager<User> _userManager;
 
-        public HomeController(IBarManager barManager, UserManager<User> userManager)
+        public HomeController(ICocktailManager cocktailManager, IBarManager barManager, UserManager<User> userManager)
         {
+            _cocktailManager = cocktailManager;
             _barManager = barManager;
             _userManager = userManager;
         }
         public async Task<IActionResult> Index()
         {
-            var topBars = await this._barManager.GetTopRatedBars();
+            var topBars = await _barManager.GetTopRatedBars();
             var topBarsViewModel = topBars.Select(bar => new BarViewModel(bar))
                 .ToList();
-            return View(topBarsViewModel);
+            var topCocktails = await _cocktailManager.GetTopRatedCocktails();
+            var topCocktailsViewModel = topCocktails.Select(cocktail => new CocktailViewModel(cocktail)).ToList();
+            var topRatedHomePage = new TopRatedHomePageViewModel();
+            topRatedHomePage.TopBars = topBarsViewModel;
+            topRatedHomePage.TopCocktails = topCocktailsViewModel;
+            return View(topRatedHomePage);
         }
 
         public IActionResult Privacy()

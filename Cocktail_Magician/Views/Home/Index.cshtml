@@ -1,84 +1,31 @@
-﻿@model IEnumerable<BarViewModel>
+﻿@model TopRatedHomePageViewModel
 <!--Top Cocktails start-->
 <div class="section-title">
     <h2><span><span>Top</span> Cocktails</span></h2>
 </div>
 <div class="row cols-1 cols-sm-2 cols-lg-4 gap-2 mb-20">
-    <!--One Cocktail start-->
-    <div class="col">
-        <figure class="destination-grid-item-01">
-            <a href="#">
-                <div class="image">
-                    <img src="images/image-destination/01.jpg" alt="image" />
-                </div>
-                <figcaption class="content">
-                    <h5>Long Island Iced Tea</h5>
+    @foreach (var cocktail in Model.TopCocktails)
+    {
+        <div class="col">
+            <figure class="destination-grid-item-01">
+                <a href="#">
+                    <div class="image">
+                        <img src="@cocktail.Picture" alt="image" />
+                    </div>
+                    <figcaption class="content">
+                        <h5>@cocktail.Name</h5>
 
-                    <div class="rating-item rating-sm rating-inline clearfix">
-                        <div class="rating-icons">
-                            <input type="hidden" class="rating" data-filled="rating-icon ri-star rating-rated" data-empty="rating-icon ri-star-empty" data-fractions="2" data-readonly value="4.9" /> 4.9
+                        <div class="rating-item rating-sm rating-inline clearfix">
+                            <div class="rating-icons">
+                                <input type="hidden" class="rating" data-filled="rating-icon ri-star rating-rated" data-empty="rating-icon ri-star-empty" data-fractions="2" data-readonly value="@cocktail.Rating" /> @cocktail.Rating
+                            </div>
+                            <p class="rating-text font600 text-muted font-12 letter-spacing-1"></p>
                         </div>
-                        <p class="rating-text font600 text-muted font-12 letter-spacing-1"></p>
-                    </div>
-                </figcaption>
-            </a>
-        </figure>
-    </div>
-    <!--One Cocktail end-->
-    <div class="col">
-        <figure class="destination-grid-item-01">
-            <a href="#">
-                <div class="image">
-                    <img src="images/image-destination/02.jpg" alt="image" />
-                </div>
-                <figcaption class="content">
-                    <h5>Mojito</h5>
-                    <div class="rating-item rating-sm rating-inline clearfix">
-                        <div class="rating-icons">
-                            <input type="hidden" class="rating" data-filled="rating-icon ri-star rating-rated" data-empty="rating-icon ri-star-empty" data-fractions="2" data-readonly value="4.6" /> 4.6
-                        </div>
-                        <p class="rating-text font600 text-muted font-12 letter-spacing-1"></p>
-                    </div>
-                </figcaption>
-            </a>
-        </figure>
-    </div>
-    <div class="col">
-        <figure class="destination-grid-item-01">
-            <a href="#">
-                <div class="image">
-                    <img src="images/image-destination/03.jpg" alt="image" />
-                </div>
-                <figcaption class="content">
-                    <h5>Cosmopolitan</h5>
-                    <div class="rating-item rating-sm rating-inline clearfix">
-                        <div class="rating-icons">
-                            <input type="hidden" class="rating" data-filled="rating-icon ri-star rating-rated" data-empty="rating-icon ri-star-empty" data-fractions="2" data-readonly value="4.1" /> 4.1
-                        </div>
-                        <p class="rating-text font600 text-muted font-12 letter-spacing-1"></p>
-                    </div>
-                </figcaption>
-            </a>
-        </figure>
-    </div>
-    <div class="col">
-        <figure class="destination-grid-item-01">
-            <a href="#">
-                <div class="image">
-                    <img src="images/image-destination/04.jpg" alt="image" />
-                </div>
-                <figcaption class="content">
-                    <h5>Zombie</h5>
-                    <div class="rating-item rating-sm rating-inline clearfix">
-                        <div class="rating-icons">
-                            <input type="hidden" class="rating" data-filled="rating-icon ri-star rating-rated" data-empty="rating-icon ri-star-empty" data-fractions="2" data-readonly value="2.7" /> 2.7
-                        </div>
-                        <p class="rating-text font600 text-muted font-12 letter-spacing-1"></p>
-                    </div>
-                </figcaption>
-            </a>
-        </figure>
-    </div>
+                    </figcaption>
+                </a>
+            </figure>
+        </div>
+    }
 </div>
 <!--Top Cocktails end-->
 
@@ -90,7 +37,7 @@
 </div>
 <div class="row equal-height cols-1 cols-sm-2 cols-lg-3 gap-20 mb-30">
     @*<partial name="_TopRatedBars" />*@
-    @foreach (var bar in Model)
+    @foreach (var bar in Model.TopBars)
     {
         <div class="col">
             <figure class="tour-grid-item-01">

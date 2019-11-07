@@ -20,6 +20,10 @@ namespace Cocktail_Magician_DB.Models
         [MinLength(3, ErrorMessage = "Name should be between 3 and 35 symbols!"),
             MaxLength(35, ErrorMessage = "Name should be between 3 and 35 symbols!")]
         public string Name { get; set; }
+        [MinLength(5, ErrorMessage = "Information should be atleast 5 symbols!")]
+        public string Information { get; set; }
+        public double Rating { get; set; }
+        public string Picture { get; set; }
         public bool IsDeleted { get; set; }
 
         public ICollection<BarCocktail> BarCocktails { get; set; }

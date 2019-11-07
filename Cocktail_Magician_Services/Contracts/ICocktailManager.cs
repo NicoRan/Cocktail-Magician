@@ -7,5 +7,6 @@ namespace Cocktail_Magician_Services.Contracts
     public interface ICocktailManager
     {
         Task<Cocktail> CreateCocktail(Cocktail cocktail, List<string> ingredient);
+        Task<List<Cocktail>> GetTopRatedCocktails();
     }
 }

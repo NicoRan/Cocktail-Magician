@@ -1,9 +1,6 @@
 ﻿using Cocktail_Magician_DB.Models;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Cocktail_Magician.Models
 {
@@ -17,6 +14,9 @@ namespace Cocktail_Magician.Models
         {
             CocktailId = cocktail.Id;
             Name = cocktail.Name;
+            Information = cocktail.Information;
+            Picture = cocktail.Picture;
+            Rating = cocktail.Rating;
             Ingredients = new List<string>();
         }
 
@@ -25,6 +25,11 @@ namespace Cocktail_Magician.Models
         [MinLength(3, ErrorMessage = "Name should be between 3 and 35 symbols!"),
             MaxLength(35, ErrorMessage = "Name should be between 3 and 35 symbols!")]
         public string Name { get; set; }
+        [MinLength(5, ErrorMessage = "Information should be atleast 5 symbols!")]
+        public string Information { get; set; }
+        [DisplayFormat(DataFormatString = "{0:0,0}")]
+        public string Picture { get; set; }
+        public double Rating { get; set; }
         [Required(ErrorMessage = "At least one ingredient is required!")]
         public List<string> Ingredients { get; set; }
     }

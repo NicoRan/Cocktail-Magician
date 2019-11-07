@@ -98,11 +98,17 @@ namespace Cocktail_Magician_DB.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Information");
+
                     b.Property<bool>("IsDeleted");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(35);
+
+                    b.Property<string>("Picture");
+
+                    b.Property<double>("Rating");
 
                     b.HasKey("Id");
 

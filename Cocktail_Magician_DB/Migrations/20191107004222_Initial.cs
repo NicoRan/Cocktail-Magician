@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Cocktail_Magician_DB.Migrations
 {
-    public partial class init : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -40,7 +40,8 @@ namespace Cocktail_Magician_DB.Migrations
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false)
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    Picture = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -54,8 +55,10 @@ namespace Cocktail_Magician_DB.Migrations
                     BarId = table.Column<string>(nullable: false),
                     Name = table.Column<string>(maxLength: 35, nullable: false),
                     Address = table.Column<string>(nullable: false),
+                    Information = table.Column<string>(nullable: true),
                     Rating = table.Column<double>(nullable: false),
                     Picture = table.Column<string>(nullable: true),
+                    MapDirections = table.Column<string>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
@@ -69,6 +72,9 @@ namespace Cocktail_Magician_DB.Migrations
                 {
                     Id = table.Column<string>(nullable: false),
                     Name = table.Column<string>(maxLength: 35, nullable: false),
+                    Information = table.Column<string>(nullable: true),
+                    Rating = table.Column<double>(nullable: false),
+                    Picture = table.Column<string>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>

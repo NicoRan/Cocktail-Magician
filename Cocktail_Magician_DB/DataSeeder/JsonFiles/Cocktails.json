@@ -2,26 +2,21 @@
   {
     "name": "Long Island Iced Tea",
     "rating": 4.9,
-    "ingredients": {
-      "name": "White Rum"
-    },
-    {
-      "name": "Vodka"
-    },
-    {
-      "name": "Gin"
-    },
-    {
-      "name": "Tequila"
-    },
-    {
-      "name": "Triple Sec"
-    },
-    {
-      "name": "Lemon juice"
-    },
-    {
-      "name": "Coca-Cola"
-    }
+    "picture": "http://shake-that.com/wp-content/uploads/2015/07/Long-Island-Iced-Tea-780x780.jpg",
+  },
+  {
+    "name": "Mojito",
+    "rating": 4.6,
+    "picture": "https://www.artofdrink.com/wp-content/uploads/2010/08/how-to-make-a-mojito-recipe-720x720.jpg",
+  },
+  {
+    "name": "Cosmopolitan",
+    "rating": 4.1,
+    "picture": "https://i.pinimg.com/originals/8a/d1/ce/8ad1ce0325e2cdf936b95797b03b83eb.jpg",
+  },
+  {
+    "name": "Zombie",
+    "rating": 2.7,
+    "picture": "https://cdn.liquor.com/wp-content/uploads/2016/06/15161058/zombie-720x720-recipe.jpg",
   }
 ]

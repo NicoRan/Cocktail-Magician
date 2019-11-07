@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cocktail_Magician_DB.Migrations
 {
     [DbContext(typeof(CMContext))]
-    [Migration("20191104193502_Added_Map_Directions")]
-    partial class Added_Map_Directions
+    [Migration("20191107004222_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -100,11 +100,17 @@ namespace Cocktail_Magician_DB.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Information");
+
                     b.Property<bool>("IsDeleted");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(35);
+
+                    b.Property<string>("Picture");
+
+                    b.Property<double>("Rating");
 
                     b.HasKey("Id");
 

@@ -1,8 +1,10 @@
 ﻿using Cocktail_Magician_DB;
 using Cocktail_Magician_DB.Models;
 using Cocktail_Magician_Services.Contracts;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -39,6 +41,16 @@ namespace Cocktail_Magician_Services
             await _context.SaveChangesAsync();
 
             return cocktailToAdd;
+        }
+
+        public async Task<List<Cocktail>> GetTopRatedCocktails()
+        {
+            var cocktails = await _context.Cocktails
+                .OrderByDescending(cocktail => cocktail.Rating)
+                .ThenBy(cocktail => cocktail.Name)
+                .Take(4)
+                .ToListAsync();
+            return cocktails;
         }
     }
 }

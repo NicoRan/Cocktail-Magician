@@ -77,6 +77,7 @@ namespace Cocktail_Magician
             app.UpdateDatabase();
             DataSeeder.SeedBars(context);
             DataSeeder.SeedIngredients(context);
+            DataSeeder.SeedCocktails(context);
 
             if (env.IsDevelopment())
             {
