@@ -10,11 +10,11 @@ namespace Cocktail_Magician.Areas.BarMagician.Models
     {
         public IngredientViewModel(Ingredient ingredient)
         {
-            IngredientId = ingredient.IngredientId;
+            Id = ingredient.IngredientId;
             Name = ingredient.Name;
         }
 
-        public string IngredientId { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
     }
 }
