@@ -21,7 +21,7 @@ namespace Cocktail_Magician_Services
 
         public async Task<Bar> CreateBar(Bar barToCreate)
         {
-            var barToAdd = new Bar();
+            Bar barToAdd;
             try
             {
                 barToAdd = barToCreate;

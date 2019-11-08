@@ -92,6 +92,7 @@
                                                         <ul>
                                                             <li><a asp-area="BarMagician" asp-controller="Bars" asp-action="Create">Create Bar</a></li>
                                                             <li><a asp-area="BarMagician" asp-controller="Cocktails" asp-action="Create">Create Cocktail</a></li>
+                                                            <li><a href="#">Create Ingredients</a></li>
                                                         </ul>
                                                     </li>
                                                 }
@@ -436,11 +437,12 @@
             crossorigin="anonymous"
             integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o">
     </script>
+    <partial name="_ValidationScriptsPartial" />
     <script type="text/javascript" src="~/js/jquery-2.2.4.min.js"></script>
     <script type="text/javascript" src="~/js/plugins.js"></script>
     <script type="text/javascript" src="~/js/custom-core.js"></script>
 
     @RenderSection("Scripts", required: false)
-    <partial name="_ValidationScriptsPartial" />
+
 </body>
 </html>

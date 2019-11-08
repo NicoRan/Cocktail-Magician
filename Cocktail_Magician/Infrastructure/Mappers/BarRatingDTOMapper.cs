@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Cocktail_Magician_Services.Mappers
+namespace Cocktail_Magician.Infrastructure.Mappers
 {
     public static class BarRatingDTOMapper
     {
