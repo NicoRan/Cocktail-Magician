@@ -21,10 +21,16 @@ namespace Cocktail_Magician_Services
             _cocktailManager = cocktailManager;
         }
 
-        public List<Bar> SearchBars(string criteria)
+        public List<Bar> SearchBarsByName(string criteria)
         {
             var listOfBars = _context.Bars;
             var result = listOfBars.Where(bar => bar.Name.Contains(criteria)).ToList();
+            return result.OrderBy(r => r.Name).ToList();
+        }
+        public List<Bar> SearchBarsByAddress(string criteria)
+        {
+            var listOfBars = _context.Bars;
+            var result = listOfBars.Where(bar => bar.Address.Contains(criteria)).ToList();
             return result.OrderBy(r => r.Name).ToList();
         }
 

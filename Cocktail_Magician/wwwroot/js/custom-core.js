@@ -350,17 +350,14 @@ jQuery(function($) {
 	});
 	
 	$("#star_range").ionRangeSlider({
-		type: "double",
+		type: "single",
 		grid: false,
-		from: 1,
-		to: 2,
 		values: [
 			"<i class='ri-star'></i>", 
 			"<i class='ri-star'></i> <i class='ri-star'></i>",
 			"<i class='ri-star'></i> <i class='ri-star'></i> <i class='ri-star'></i>", 
-			"<i class='ri-star'></i> <i class='ri-star'></i> <i class='ri-star'></i> <i class='ri-star'></i>",
-			"<i class='ri-star'></i> <i class='ri-star'></i> <i class='ri-star'></i> <i class='ri-star'></i> <i class='ri-star'></i>" 
-		]
+			"<i class='ri-star'></i> <i class='ri-star'></i> <i class='ri-star'></i> <i class='ri-star'></i>"
+        ]
 	});
 	
 	 

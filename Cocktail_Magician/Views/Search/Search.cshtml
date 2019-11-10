@@ -1,7 +1,7 @@
 ﻿@model SearchResultViewModel
 @{
     ViewData["Title"] = "Index";
-    Layout = "_Layout";
+    Layout = "_CustomSearchLayout";
 }
 
 <div class="container sticky-kit">
@@ -11,13 +11,52 @@
         <div class="col-12 col-lg-4">
 
             <aside class="sidebar-wrapper pv">
-                <form>
+                <form asp-controller="Search" asp-action="Search" method="get">
+                    <div class="secondary-search-box mb-30">
+
+                        <h4 class="">Search</h4>
+
+                        <div class="row">
+
+                            <div class="col-12">
+                                <div class="col-inner">
+                                    <div class="form-group">
+                                        <label>Search Type</label>
+                                        <select asp-for="@Model.Type" select class="chosen-the-basic form-control form-control-sm" placeholder="Select one" tabindex="2" required>
+                                            <option></option>
+                                            <option value="All">All</option>
+                                            <option value="Bars">Bars</option>
+                                            <option value="Cocktails">Cocktails</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="col-inner">
+                                    <div class="form-group">
+                                        <label>Enter keyword</label>
+                                        <input asp-for="@Model.Criteria" type="text" asp-route-criteria="criteria" class="form-control form-readonly-control" placeholder="Search:">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="col-inner ph-20 pv-15">
+                                    <button type="submit" class="btn btn-primary btn-block"><i class="ion-android-search"></i> Search</button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
                     <div class="sidebar-box">
 
-                        <div class="box-title"><h5>Star Slider</h5></div>
+                        <div class="box-title"><h5>Above this rating</h5></div>
 
                         <div class="box-content">
-                            <input id="star_range" />
+                            <input id="star_range"  asp-for="@Model.StarsRange" />
                         </div>
 
                     </div>
@@ -29,75 +68,24 @@
                         <div class="box-content">
 
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="filerStartPoint-01" name="filerStartPoint" checked>
-                                <label class="custom-control-label" for="filerStartPoint-01">Berlin <span class="text-muted font-sm">(854)</span></label>
-                            </div>
-
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="filerStartPoint-02" name="filerStartPoint">
-                                <label class="custom-control-label" for="filerStartPoint-02">Paris <span class="checkbox-count">(25)</span></label>
-                            </div>
-
-                            <div id="filerStartPointShowHide" class="collapse">
-
-                                <div class="collapse-inner">
-
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="filerStartPoint-06" name="filerStartPoint">
-                                        <label class="custom-control-label" for="filerStartPoint-06">Toulouse <span class="checkbox-count">(3)</span></label>
-                                    </div>
-
+                                <div class="form-group">
+                                    <input type="checkbox" asp-for="@Model.Filter["name"]" class="custom-control-input" id="filerStartPoint-01">
+                                    <label class="custom-control-label" for="filerStartPoint-01">Name</label>
+                                </div>
                                 </div>
 
-                            </div>
-
-                            <div class="clear mb-10"></div>
-
-                            <button class="btn btn-toggle btn-text-inherit text-primary text-uppercase font10 letter-spacing-2 font600 collapsed collapsed-on padding-0" type="button" data-toggle="collapse" data-target="#filerStartPointShowHide">Show more (+)</button>
-                            <button class="btn btn-toggle btn-text-inherit text-uppercase font10 letter-spacing-2 font600 collapsed collapsed-off padding-0" type="button" data-toggle="collapse" data-target="#filerStartPointShowHide">Show less (-)</button>
-
-                        </div>
-
-                    </div>
-
-                    <div class="sidebar-box">
-
-                        <div class="box-title"><h5>Cocktails</h5></div>
-
-                        <div class="box-content">
-
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="filerEndPoint-01" name="filerEndPoint" checked>
-                                <label class="custom-control-label" for="filerEndPoint-01">Berlin <span class="text-muted font-sm">(854)</span></label>
-                            </div>
-
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="filerEndPoint-02" name="filerEndPoint">
-                                <label class="custom-control-label" for="filerEndPoint-02">Paris <span class="checkbox-count">(25)</span></label>
-                            </div>
-
-                            <div id="filerStartPointShowHide" class="collapse">
-
-                                <div class="collapse-inner">
-
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="filerEndPoint-06" name="filerEndPoint" />
-                                        <label class="custom-control-label" for="filerEndPoint-06">Toulouse <span class="checkbox-count">(3)</span></label>
+                                <div class="custom-control custom-checkbox">
+                                    <div class="form-group">
+                                        <input type="checkbox" asp-for="@Model.Filter["address"]" class="custom-control-input" id="filerStartPoint-02">
+                                        <label class="custom-control-label" for="filerStartPoint-02">Address</label>
                                     </div>
-
                                 </div>
 
+                                <div class="clear mb-10"></div>
+
                             </div>
-                            <div class="clear mb-10"></div>
-
-                            <button class="btn btn-toggle btn-text-inherit text-primary text-uppercase font10 letter-spacing-2 font600 collapsed collapsed-on padding-0" type="button" data-toggle="collapse" data-target="#filerStartPointShowHide">Show more (+)</button>
-                            <button class="btn btn-toggle btn-text-inherit text-uppercase font10 letter-spacing-2 font600 collapsed collapsed-off padding-0" type="button" data-toggle="collapse" data-target="#filerStartPointShowHide">Show less (-)</button>
-
-
-                        </div>
 
                     </div>
-
 
                     <div class="sidebar-box">
 

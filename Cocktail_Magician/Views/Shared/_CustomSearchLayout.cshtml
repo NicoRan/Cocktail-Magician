@@ -132,9 +132,6 @@
                                                         </li>
                                                     </ul>
                                                 </li>
-                                                <li>
-                                                    <a asp-area="" asp-controller="Search" asp-action="Search">Search</a>
-                                                </li>
                                                 <li><a href="contact-us.html">Contact us</a></li>
 
                                             </ul>
@@ -162,9 +159,6 @@
             <div class="hero-inner">
                 <div class="container">
                     <h1 class="text-danger">Co<span class="font200">cktail <span class="font700">Ma</span>gician </span></h1>
-                    <div class="search-form-main">
-                        @await Html.PartialAsync("_SearchBarPartial", new SearchResultViewModel())
-                    </div>
                 </div>
             </div>
         </div>
