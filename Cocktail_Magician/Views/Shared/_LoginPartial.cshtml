@@ -2,27 +2,41 @@
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
 
-        @if (SignInManager.IsSignedIn(User))
-        {
-            <li class="d-none d-sm-block">
-                <button class="nav-link btn btn-link linea-icon-software-font-size">HELLO, @User.Identity.Name!</button>
+@if (SignInManager.IsSignedIn(User))
+{
+    <nav class="main-nav-menu main-menu-nav navbar-arrow">
+        <ul class="main-nav">
+
+            <li>
+                <a>HELLO, @User.Identity.Name!</a>
+                <ul>
+                    <li>
+                        Profile
+                    </li>
+                    <li>
+                        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                            <button type="submit" class="nav-link btn btn-link linea-icon-software-font-size">LOGOUT </button>
+                        </form>
+                    </li>
+
+                </ul>
             </li>
-            <li class="d-none d-sm-block">
-                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                    <button type="submit" class="nav-link btn btn-link linea-icon-software-font-size">LOGOUT </button>
-                </form>
+            <li>
+                <img class="image-circle" src="https://trello-avatars.s3.amazonaws.com/580bbaca9a0e3c5b33a7e1baf1c38a43/170.png" style="height:40px; width:40px" />
             </li>
-        }
-        else
-        {
-            <li class="d-none d-sm-block">
-                <a href="#loginFormTabInModal-login" data-toggle="modal" data-target="#loginFormTabInModal" data-backdrop="static" data-keyboard="false" class="mr-5">
-                    <span class="icon-font"><i class="icon-login"></i></span> LOGIN
-                </a>
-            </li>
-            <li class="d-none d-sm-block">
-                <a href="#loginFormTabInModal-register" data-toggle="modal" data-target="#loginFormTabInModal" data-backdrop="static" data-keyboard="false">
-                    <span class="icon-font"><i class="icon-user-follow"></i></span> REGISTER
-                </a>
-            </li>
-        }
+        </ul>
+    </nav>
+}
+else
+{
+    <li class="d-none d-sm-block">
+        <a href="#loginFormTabInModal-login" data-toggle="modal" data-target="#loginFormTabInModal" data-backdrop="static" data-keyboard="false" class="mr-5">
+            <span class="icon-font"><i class="icon-login"></i></span> LOGIN
+        </a>
+    </li>
+    <li class="d-none d-sm-block">
+        <a href="#loginFormTabInModal-register" data-toggle="modal" data-target="#loginFormTabInModal" data-backdrop="static" data-keyboard="false">
+            <span class="icon-font"><i class="icon-user-follow"></i></span> REGISTER
+        </a>
+    </li>
+}
