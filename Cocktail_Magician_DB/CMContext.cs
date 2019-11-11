@@ -23,6 +23,8 @@ namespace Cocktail_Magician_DB
         //public DbSet<Comment> Comments { get; set; }
         public DbSet<Ingredient> Ingredients { get; set; }
         public DbSet<BarCocktail> BarCocktails { get; set; }
+        public DbSet<BarRating> BarRatings { get; set; }
+        public DbSet<BarComment> BarComments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

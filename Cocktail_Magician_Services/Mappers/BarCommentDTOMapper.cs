@@ -19,7 +19,16 @@ namespace Cocktail_Magician_Services.Mappers
             };
             return barCommentDTO;
         }
-
+        public static BarComment ToCommentEntity(this BarReviewDTO barCommentDTO)
+        {
+            var barComment = new BarComment
+            {
+                UserId = barCommentDTO.UserId,
+                BarId = barCommentDTO.BarId,
+                Comment = barCommentDTO.Comment
+            };
+            return barComment;
+        }
         public static ICollection<BarCommentDTO> ToDTO(this ICollection<BarComment> barComments)
         {
             var newCollection = barComments.Select(c => c.ToDTO()).ToList();

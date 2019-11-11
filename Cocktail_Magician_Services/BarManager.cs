@@ -1,6 +1,8 @@
 ﻿using Cocktail_Magician_DB;
 using Cocktail_Magician_DB.Models;
 using Cocktail_Magician_Services.Contracts;
+using Cocktail_Magician_Services.DTO;
+using Cocktail_Magician_Services.Mappers;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -66,6 +68,28 @@ namespace Cocktail_Magician_Services
                 .Take(6)
                 .ToListAsync();
             return bars;
+        }
+
+        public async Task<BarReviewDTO> CreateBarReviewAsync(BarReviewDTO barReviewDTO)
+        {
+            if (barReviewDTO.Grade != 0)
+            {
+                var barRating = barReviewDTO.ToRatingEntity();
+
+                await _context.BarRatings.AddAsync(barRating);
+                await _context.SaveChangesAsync();
+
+            }
+
+            if (barReviewDTO.Comment != null)
+            {
+                var barComment = barReviewDTO.ToCommentEntity();
+
+                await _context.BarComments.AddAsync(barComment);
+                await _context.SaveChangesAsync();
+            }
+
+            return barReviewDTO;
         }
     }
 }
