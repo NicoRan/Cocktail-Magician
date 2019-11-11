@@ -9,9 +9,9 @@ namespace Cocktail_Magician_Services.Mappers
 {
     public static class CocktailCommentDTOMapper
     {
-        public static CocktailCommentDTO ToDTO(this CocktailComment cocktailComment)
+        public static CocktailComment ToCommentEntity(this CocktailReviewDTO cocktailComment)
         {
-            var cocktailCommentDTO = new CocktailCommentDTO
+            var cocktailCommentDTO = new CocktailComment
             {
                 UserId = cocktailComment.UserId,
                 CocktailId = cocktailComment.CocktailId,
@@ -20,11 +20,11 @@ namespace Cocktail_Magician_Services.Mappers
             return cocktailCommentDTO;
         }
 
-        public static ICollection<CocktailCommentDTO> ToDTO(this ICollection<CocktailComment> cocktailComments)
-        {
-            var newCollection = cocktailComments.Select(c => c.ToDTO()).ToList();
-            return newCollection;
-        }
+        //public static ICollection<CocktailCommentDTO> ToDTO(this ICollection<CocktailComment> cocktailComments)
+        //{
+        //    var newCollection = cocktailComments.Select(c => c.ToDTO()).ToList();
+        //    return newCollection;
+        //}
 
     }
 }

@@ -20,6 +20,18 @@ namespace Cocktail_Magician_Services.Mappers
             return cocktailRatingDTO;
         }
 
+        public static CocktailRating ToRatingEntity(this CocktailReviewDTO barRatingDTO)
+        {
+            var barRating = new CocktailRating
+            {
+                UserId = barRatingDTO.UserId,
+                CocktailId = barRatingDTO.CocktailId,
+                Grade = barRatingDTO.Grade
+            };
+            return barRating;
+        }
+
+
         public static ICollection<CocktailRatingDTO> ToDTO(this ICollection<CocktailRating> cocktailRatings)
         {
             var newCollection = cocktailRatings.Select(c => c.ToDTO()).ToList();

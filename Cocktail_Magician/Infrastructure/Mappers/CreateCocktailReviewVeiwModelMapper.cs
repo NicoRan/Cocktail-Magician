@@ -13,7 +13,7 @@ namespace Cocktail_Magician.Infrastructure.Mappers
         {
             var cocktailCommentDTO = new CocktailReviewDTO
             {
-                BarId = createReviewViewModel.Id,
+                CocktailId = createReviewViewModel.Id,
                 UserId = createReviewViewModel.UserId,
                 Comment = createReviewViewModel.Comment,
                 Grade = createReviewViewModel.Rate

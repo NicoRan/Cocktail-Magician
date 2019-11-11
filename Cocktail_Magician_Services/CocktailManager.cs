@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Cocktail_Magician_Services.Mappers;
 
 namespace Cocktail_Magician_Services
 {
@@ -49,6 +50,29 @@ namespace Cocktail_Magician_Services
                 .Take(4)
                 .ToListAsync();
             return cocktails;
+        }
+
+        public async Task<CocktailReviewDTO> CreateCocktailReviewAsync(CocktailReviewDTO cocktailReviewDTO)
+        {
+            if (cocktailReviewDTO.Grade != 0)
+            {
+            var cocktailRating = cocktailReviewDTO.ToRatingEntity();
+
+            await _context.CocktailRatings.AddAsync(cocktailRating);
+            await _context.SaveChangesAsync();
+            }
+
+            //TODO cocktailCommentadd
+            if (cocktailReviewDTO.Comment != null)
+            {
+            var cocktailComment = cocktailReviewDTO.ToCommentEntity();
+
+            await _context.CocktailComments.AddAsync(cocktailComment);
+            await _context.SaveChangesAsync();
+            }
+
+            return cocktailReviewDTO;
+
         }
     }
 }
