@@ -22,11 +22,8 @@
                                     <input asp-for="@Model.Cocktail.Name" class="form-control" placeholder="Input:" />
                                     <span asp-validation-for="@Model.Cocktail.Name" class="text-danger"></span>
                                 </div>
-                                <div class="form-group">
-                                    <label>Information</label>
-                                    <input asp-for="@Model.Cocktail.Information" class="form-control" placeholder="Input:" />
-                                    <span asp-validation-for="@Model.Cocktail.Information" class="text-danger"></span>
-                                </div>
+                            </div>
+                            <div class="col-6 col-md-5">
                                 <div class="form-group">
                                     <label>Picture</label>
                                     <input asp-for="@Model.Cocktail.Picture" class="form-control" placeholder="Input:" />
@@ -68,9 +65,8 @@
                         <ul class="border-top mt-20 pt-15">
 
                             <li class="clearfix"><i class="elegent-icon-check_alt2 text-success"></i> For ingredients you can pick more than one</li>
-                            <li class="clearfix border-top font700 text-uppercase"></li>
                             <li class="clearfix"><i class="elegent-icon-check_alt2 text-success"></i> For picture you can add a link from the web</li>
-                            <li class="clearfix border-top font700 text-uppercase"></li>
+                            <li class="clearfix"><i class="elegent-icon-check_alt2 text-success"></i> If you cannot find the ingredient you want, go to Manage->Create Ingredient</li>
                         </ul>
                     </div>
                     <div class="box-bottom bg-light">

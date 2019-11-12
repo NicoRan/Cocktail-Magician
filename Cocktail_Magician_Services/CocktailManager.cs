@@ -35,7 +35,7 @@ namespace Cocktail_Magician_Services
                     cocktailToAdd.CocktailIngredient.Add(new CocktailIngredient() { Cocktail = cocktail, Ingredient = findIngredient });
                 }
             }
-
+            cocktailToAdd.Information = CocktailsRecipe(ingredients);
             await _context.Cocktails.AddAsync(cocktailToAdd);
             await _context.SaveChangesAsync();
 
@@ -79,6 +79,12 @@ namespace Cocktail_Magician_Services
             var cocktail = await _context.Cocktails.Where(c => !c.IsDeleted).FirstOrDefaultAsync(c => c.Id == id);
 
             return cocktail;
+        }
+
+        private string CocktailsRecipe(List<string> ingredients)
+        {
+            var result = String.Join(", ", ingredients.ToArray());
+            return result;
         }
     }
 }

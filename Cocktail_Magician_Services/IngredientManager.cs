@@ -20,8 +20,15 @@ namespace Cocktail_Magician_Services
         }
         public async Task<Ingredient> AddIngredientAsync(Ingredient ingredient)
         {
-            await _context.Ingredients.AddAsync(ingredient);
-            await _context.SaveChangesAsync();
+            if (!CheckIfIngredientExist(ingredient.Name))
+            {
+                await _context.Ingredients.AddAsync(ingredient);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                throw new ArgumentException("Ingredient already exists!");
+            }
             return ingredient;
         }
 
@@ -49,7 +56,7 @@ namespace Cocktail_Magician_Services
         public async Task<ICollection<Ingredient>> GetIngredientsAsync()
         {
            var allIngredients = await _context.Ingredients.ToListAsync();
-            return allIngredients;
+            return allIngredients.OrderBy(i => i.Name).ToList();
         }
 
         private bool CheckIfIngredientExist(string name)

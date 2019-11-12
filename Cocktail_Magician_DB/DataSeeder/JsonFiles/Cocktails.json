@@ -3,6 +3,7 @@
     "name": "Long Island Iced Tea",
     "rating": 4.9,
     "picture": "http://shake-that.com/wp-content/uploads/2015/07/Long-Island-Iced-Tea-780x780.jpg",
+    "information": "White Rum, Lime juice, Vodka, Gin, Tequila, Coca-Cola, Triple Sec, Gomme Syrop",
     "ingredients": [
       {
         "id": "one",
@@ -42,6 +43,7 @@
     "name": "Mojito",
     "rating": 4.6,
     "picture": "https://www.artofdrink.com/wp-content/uploads/2010/08/how-to-make-a-mojito-recipe-720x720.jpg",
+    "information": "White Rum, Lime juice, Mint leaves, Soda water, Sugar",
     "ingredients": [
       {
         "id": "one",
@@ -69,6 +71,7 @@
     "name": "Cosmopolitan",
     "rating": 4.1,
     "picture": "https://i.pinimg.com/originals/8a/d1/ce/8ad1ce0325e2cdf936b95797b03b83eb.jpg",
+    "information": "Lime juice, Cranberry juice, Cointreau, Vodka Citron",
     "ingredients": [
       {
         "id": "one",
@@ -92,6 +95,7 @@
     "name": "Zombie",
     "rating": 2.7,
     "picture": "https://cdn.liquor.com/wp-content/uploads/2016/06/15161058/zombie-720x720-recipe.jpg",
+    "information": "151-proof Rum, Golden Rum, White Rum, Apricot Brandy, Dark Rum, Lime juice, Pineapple juice",
     "ingredients": [
       {
         "id": "one",
@@ -127,6 +131,7 @@
     "name": "White Russian",
     "rating": 3.5,
     "picture": "https://www.thelittlepine.com/wp-content/uploads/2019/07/Keto-White-Russian-1.jpg",
+    "information": "Coffee liqueur, Vodka, Fresh cream",
     "ingredients": [
       {
         "id": "one",
@@ -146,6 +151,7 @@
     "name": "Bellini",
     "rating": 3.8,
     "picture": "https://cdn.liquor.com/wp-content/uploads/2012/06/12153016/Bellini-newest.jpg",
+    "information": "White peaches, Peach purée, Prosecco",
     "ingredients": [
       {
         "id": "one",
@@ -165,6 +171,7 @@
     "name": "Bloody Mary",
     "rating": 4.9,
     "picture": "https://cdn.liquor.com/wp-content/uploads/2017/09/01105541/classic-bloody-mary-720x720-recipe.jpg",
+    "information": "Worcestershire Sauce, Pepper, Lemon juice, Vodka, Salt, Tomato juice, Tabasco",
     "ingredients": [
       {
         "id": "one",
@@ -200,6 +207,7 @@
     "name": "Negroni",
     "rating": 5.0,
     "picture": "https://cdn.liquor.com/wp-content/uploads/2018/05/08110806/negroni-720x720-recipe.jpg",
+    "information": "Gin, Campari, Sweet red Vermouth",
     "ingredients": [
       {
         "id": "one",

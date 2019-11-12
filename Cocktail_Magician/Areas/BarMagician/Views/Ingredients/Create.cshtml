@@ -1,0 +1,62 @@
+﻿@model IngredientViewModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="container pt-30">
+        <div class="row gap-20 gap-lg-40">
+            <div class="col-12 col-lg-7">
+                <div class="content-wrapper">
+                    <div class="form-draft-payment">
+
+                        <!-- Creating Ingredient Form start -->
+                        <form asp-action="Create" method="post">
+                            <h4 class="heading-title"><span>Create Cocktail</span></h4>
+                            <div class="row gap-15 mb-15">
+                                <div class="w-100 d-block d-md-none"></div>
+                                <div class="col-6 col-md-5">
+                                    <div class="form-group">
+                                        <label>Name</label>
+                                        <input asp-for="@Model.Name" class="form-control" placeholder="Input:" />
+                                        <span asp-validation-for="@Model.Name" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="mv-40">
+                            <div class="row mt-20">
+                                <div class="col-sm-8 col-md-6">
+                                    <button type="submit" class="btn btn-primary">Submit Now</button>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- Creating Ingredient Form end -->
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-5">
+                <!-- Side Ingredient instruction start -->
+                <aside class="sticky-kit sidebar-wrapper no-border">
+                    <div class="booking-box">
+                        <div class="box-heading"><h3 class="h6 text-white text-uppercase">Creating Cocktail Instructions</h3></div>
+                        <div class="box-content">
+                            <ul class="border-top mt-20 pt-15">
+
+                                <li class="clearfix"><i class="elegent-icon-check_alt2 text-success"></i> Ingredient name should be between 3 and 15 characters!</li>
+                                <li class="clearfix border-top font700 text-uppercase"></li>
+                            </ul>
+                        </div>
+                        <div class="box-bottom bg-light">
+                            <h6 class="font-sm">We are the best site for a night out in Sofia</h6>
+                            <p class="font-sm">Our custom tour program, direct call <span class="text-primary">+66857887444</span>.</p>
+                        </div>
+                    </div>
+                </aside>
+                <!-- Side Ingredient instruction end -->
+            </div>
+        </div>
+    </div>
+
