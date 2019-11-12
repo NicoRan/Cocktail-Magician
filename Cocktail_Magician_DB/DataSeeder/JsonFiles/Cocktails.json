@@ -4,22 +4,99 @@
     "rating": 4.9,
     "picture": "http://shake-that.com/wp-content/uploads/2015/07/Long-Island-Iced-Tea-780x780.jpg",
     "ingredients": [
-      "White Rum"
+      {
+        "id": "one",
+        "name": "White Rum"
+      },
+      {
+        "id": "two",
+        "name": "Lime juice"
+      },
+      {
+        "id": "three",
+        "name": "Vodka"
+      },
+      {
+        "id": "four",
+        "name": "Gin"
+      },
+      {
+        "id": "five",
+        "name": "Tequila"
+      },
+      {
+        "id": "six",
+        "name": "Coca-Cola"
+      },
+      {
+        "id": "six",
+        "name": "Triple Sec"
+      }
     ]
   },
   {
     "name": "Mojito",
     "rating": 4.6,
     "picture": "https://www.artofdrink.com/wp-content/uploads/2010/08/how-to-make-a-mojito-recipe-720x720.jpg",
+    "ingredients": [
+      {
+        "id": "one",
+        "name": "White Rum"
+      },
+      {
+        "id": "two",
+        "name": "Lime juice"
+      },
+      {
+        "id": "three",
+        "name": "Mint leaves"
+      },
+      {
+        "id": "four",
+        "name": "Soda water"
+      },
+      {
+        "id": "five",
+        "name": "Sugar"
+      }
+    ]
   },
   {
     "name": "Cosmopolitan",
     "rating": 4.1,
     "picture": "https://i.pinimg.com/originals/8a/d1/ce/8ad1ce0325e2cdf936b95797b03b83eb.jpg",
+    "ingredients": [
+      {
+        "id": "one",
+        "name": "White Rum"
+      },
+      {
+        "id": "two",
+        "name": "Cranberry juice"
+      },
+      {
+        "id": "three",
+        "name": "Lime juice"
+      },
+      {
+        "id": "four",
+        "name": "Vodka"
+      }
+    ]
   },
   {
     "name": "Zombie",
     "rating": 2.7,
     "picture": "https://cdn.liquor.com/wp-content/uploads/2016/06/15161058/zombie-720x720-recipe.jpg",
+    "ingredients": [
+      {
+        "id": "one",
+        "name": "White Rum"
+      },
+      {
+        "id": "two",
+        "name": "Lime juice"
+      }
+    ]
   }
 ]

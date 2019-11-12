@@ -46,8 +46,22 @@ namespace Cocktail_Magician_DB.DataSeeder
                     Name = cocktail.Name,
                     Rating = cocktail.Rating,
                     Information = cocktail.Information,
-                    Picture = cocktail.Picture
+                    Picture = cocktail.Picture,
+                    CocktailIngredient = new List<CocktailIngredient>()
                 };
+
+                foreach (var item in cocktail.Ingredients)
+                {
+                    var ingredient = context.Ingredients.SingleOrDefault(i => i.Name == item.Name);
+                    if (ingredient != null)
+                    {
+                        cocktailToAdd.CocktailIngredient.Add(new CocktailIngredient
+                        {
+                            Cocktail = cocktailToAdd,
+                            Ingredient = ingredient
+                        });
+                    }
+                }
 
                 context.Cocktails.Add(cocktailToAdd);
                 context.SaveChanges();
