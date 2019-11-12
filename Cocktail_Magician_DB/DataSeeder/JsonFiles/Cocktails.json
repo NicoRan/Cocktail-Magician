@@ -31,6 +31,10 @@
       {
         "id": "six",
         "name": "Triple Sec"
+      },
+      {
+        "id": "seven",
+        "name": "Gomme Syrop"
       }
     ]
   },
@@ -68,7 +72,7 @@
     "ingredients": [
       {
         "id": "one",
-        "name": "White Rum"
+        "name": "Lime juice"
       },
       {
         "id": "two",
@@ -76,11 +80,11 @@
       },
       {
         "id": "three",
-        "name": "Lime juice"
+        "name": "Cointreau"
       },
       {
         "id": "four",
-        "name": "Vodka"
+        "name": "Vodka Citron"
       }
     ]
   },
@@ -91,11 +95,123 @@
     "ingredients": [
       {
         "id": "one",
-        "name": "White Rum"
+        "name": "151-proof Rum"
       },
       {
         "id": "two",
+        "name": "Golden Rum"
+      },
+      {
+        "id": "three",
+        "name": "White Rum"
+      },
+      {
+        "id": "four",
+        "name": "Apricot Brandy"
+      },
+      {
+        "id": "five",
+        "name": "Dark Rum"
+      },
+      {
+        "id": "six",
         "name": "Lime juice"
+      },
+      {
+        "id": "seven",
+        "name": "Pineapple juice"
+      }
+    ]
+  },
+  {
+    "name": "White Russian",
+    "rating": 3.5,
+    "picture": "https://www.thelittlepine.com/wp-content/uploads/2019/07/Keto-White-Russian-1.jpg",
+    "ingredients": [
+      {
+        "id": "one",
+        "name": "Coffee liqueur"
+      },
+      {
+        "id": "two",
+        "name": "Vodka"
+      },
+      {
+        "id": "three",
+        "name": "Fresh cream"
+      }
+    ]
+  },
+  {
+    "name": "Bellini",
+    "rating": 3.8,
+    "picture": "https://cdn.liquor.com/wp-content/uploads/2012/06/12153016/Bellini-newest.jpg",
+    "ingredients": [
+      {
+        "id": "one",
+        "name": "White peaches"
+      },
+      {
+        "id": "two",
+        "name": "Peach purée"
+      },
+      {
+        "id": "three",
+        "name": "Prosecco"
+      }
+    ]
+  },
+  {
+    "name": "Bloody Mary",
+    "rating": 4.9,
+    "picture": "https://cdn.liquor.com/wp-content/uploads/2017/09/01105541/classic-bloody-mary-720x720-recipe.jpg",
+    "ingredients": [
+      {
+        "id": "one",
+        "name": "Worcestershire Sauce"
+      },
+      {
+        "id": "two",
+        "name": "Pepper"
+      },
+      {
+        "id": "three",
+        "name": "Lemon juice"
+      },
+      {
+        "id": "four",
+        "name": "Vodka"
+      },
+      {
+        "id": "five",
+        "name": "Salt"
+      },
+      {
+        "id": "six",
+        "name": "Tomato juice"
+      },
+      {
+        "id": "seven",
+        "name": "Tabasco"
+      }
+    ]
+  },
+  {
+    "name": "Negroni",
+    "rating": 5.0,
+    "picture": "https://cdn.liquor.com/wp-content/uploads/2018/05/08110806/negroni-720x720-recipe.jpg",
+    "ingredients": [
+      {
+        "id": "one",
+        "name": "Gin"
+      },
+      {
+        "id": "two",
+        "name": "Campari"
+      },
+      {
+        "id": "three",
+        "name": "Sweet red Vermouth"
       }
     ]
   }

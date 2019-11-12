@@ -24,8 +24,31 @@ namespace Cocktail_Magician_DB.DataSeeder
 
             foreach (var bar in listBars)
             {
-                context.Bars.Add(new Bar(bar.Name, bar.Address, bar.Rating, bar.Information, bar.Picture, bar.MapDirections));
+                var barToAdd = new Bar()
+                {
+                    Name = bar.Name,
+                    Address = bar.Address,
+                    Rating = bar.Rating,
+                    Information = bar.Information,
+                    Picture = bar.Picture,
+                    MapDirections = bar.MapDirections,
+                    BarCocktails = new List<BarCocktail>()
+                };
 
+                foreach (var item in bar.Cocktails)
+                {
+                    var cocktail = context.Cocktails.SingleOrDefault(c => c.Name == item.Name);
+                    if (cocktail != null)
+                    {
+                        barToAdd.BarCocktails.Add(new BarCocktail
+                        {
+                            Bar = barToAdd,
+                            Cocktail = cocktail
+                        });
+                    }
+                }
+
+                context.Bars.Add(barToAdd);
                 context.SaveChanges();
             }
         }

@@ -5,7 +5,25 @@
     "rating": 4.6,
     "information": "If you ever had the chance to visit Sofia, there is no way you haven't visited the cocktail bar Sputnik. It is situated across the well-known Zaimov park. The cocktail culture in Bulgaria is in its early stages of development and the opening of the bar was a major event two years ago. The interior of the bar is mesmerizing and it has often been compared to some of the most famous bars in Europe. The cocktails are inspired by 4 mystical places in Bulgaria and you can definitely hear the stories behind them from the bartenders at Sputnik. I would say - experience Sputnik.",
     "picture": "https://www.capital.bg/shimg/oo_2615067.jpg",
-    "MapDirections": "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11729.010077967581!2d23.3421303!3d42.6983736!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x7b915a0cb16fd6e9!2sSputnik%20Cocktail%20Bar!5e0!3m2!1sen!2sbg!4v1572896167418!5m2!1sen!2sbg"
+    "MapDirections": "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11729.010077967581!2d23.3421303!3d42.6983736!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x7b915a0cb16fd6e9!2sSputnik%20Cocktail%20Bar!5e0!3m2!1sen!2sbg!4v1572896167418!5m2!1sen!2sbg",
+    "Cocktails": [
+      {
+        "id": "one",
+        "name": "Bloody Mary"
+      },
+      {
+        "id": "two",
+        "name": "Zombie"
+      },
+      {
+        "id": "three",
+        "name": "Mojito"
+      },
+      {
+        "id": "four",
+        "name": "Negroni"
+      }
+    ]
   },
   {
     "name": "5L Speakeasy bar",
@@ -13,7 +31,21 @@
     "rating": 4.7,
     "information": "5L is a modern Speakeasy! We have a secret door and we serve great drinks, derived from our passion and experience as mixologists and professionals!",
     "picture": "https://goguide.bg/upload/places/inner/1545062232Kultura.jpg",
-    "MapDirections": "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11730.290009342843!2d23.3302304!3d42.6915971!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xa47c4905443bcd32!2s5L%20Speakeasy%20bar!5e0!3m2!1sen!2sbg!4v1572894145587!5m2!1sen!2sbg"
+    "MapDirections": "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11730.290009342843!2d23.3302304!3d42.6915971!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xa47c4905443bcd32!2s5L%20Speakeasy%20bar!5e0!3m2!1sen!2sbg!4v1572894145587!5m2!1sen!2sbg",
+    "Cocktails": [
+      {
+        "id": "one",
+        "name": "Zombie"
+      },
+      {
+        "id": "two",
+        "name": "White Russian"
+      },
+      {
+        "id": "three",
+        "name": "Negroni"
+      }
+    ]
   },
   {
     "name": "Kathrine Cocktail - Bar",
@@ -21,7 +53,21 @@
     "rating": 4.4,
     "information": "Намираме се на Площад ”Славейков” 7а: ул.bГраф Игнатиев, срещу Шадравана ( м/у ул.\"Раковски\" и ул. \"Солунска\", в  безистена между Оптиката и Ессо ), Работно време: 9.00-02.00ч. от понеделник до неделя  Коктейл-бар Катерина отваря врати за Вас вече повече от 26 години! РЕЗЕРВАЦИЯ И ИНФОРМАЦИЯ на тел.0889 208 209. Заповядайте в Cocktail Bar Katerina!",
     "picture": "https://www.austinchronicle.com/binary/41ae/food_feature1-1.jpg",
-    "MapDirections": "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11730.187039158234!2d23.3247564!3d42.6921423!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xdf00e22df808e645!2sKathrine%20Cocktail%20-%20Bar!5e0!3m2!1sen!2sbg!4v1572897529543!5m2!1sen!2sbg"
+    "MapDirections": "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11730.187039158234!2d23.3247564!3d42.6921423!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xdf00e22df808e645!2sKathrine%20Cocktail%20-%20Bar!5e0!3m2!1sen!2sbg!4v1572897529543!5m2!1sen!2sbg",
+    "Cocktails": [
+      {
+        "id": "one",
+        "name": "Mojito"
+      },
+      {
+        "id": "two",
+        "name": "Bloody Mary"
+      },
+      {
+        "id": "three",
+        "name": "Negroni"
+      }
+    ]
   },
   {
     "name": "The Cocktail Bar",
@@ -29,7 +75,25 @@
     "rating": 4.4,
     "information": "В The Cocktail Bar имаме страст към коктейлите. В менюто ни ще откриете селекция от напитки, който ще задоволят всеки вкус и настроение. Коктейли ни са създадени, използвайки единствено най-качествените алкохоли и ликьори, само пресни плодове, свежи билки и подправки, домашни сиропи и специални битери. Гордеем се с нашите напитки, и работим усърдно за да сме сигурни, че всеки коктейл ще има перфектен баланс. Барманите ни обичат да търсят и експериментират с нови и вече съществуващи продукти, така че ако не откриете нещо което да ви подхожда, попитайте и те с радост ще приемат предизвикателството.",
     "picture": "https://natasticbulgaria.files.wordpress.com/2015/05/the-cocktail-bar-sofia.jpg",
-    "MapDirections": "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11730.173327347722!2d23.3224268!3d42.6922149!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x5589294d55b7767b!2sThe%20Cocktail%20Bar!5e0!3m2!1sen!2sbg!4v1572897612648!5m2!1sen!2sbg"
+    "MapDirections": "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11730.173327347722!2d23.3224268!3d42.6922149!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x5589294d55b7767b!2sThe%20Cocktail%20Bar!5e0!3m2!1sen!2sbg!4v1572897612648!5m2!1sen!2sbg",
+    "Cocktails": [
+      {
+        "id": "one",
+        "name": "Long Island Iced Tea"
+      },
+      {
+        "id": "two",
+        "name": "Mojito"
+      },
+      {
+        "id": "three",
+        "name": "Bellini"
+      },
+      {
+        "id": "four",
+        "name": "Negroni"
+      }
+    ]
   },
   {
     "name": "65 Fireflies",
@@ -37,7 +101,41 @@
     "rating": 4.6,
     "information": "Central Sofia is a wonderfully hectic mixture of old houses and taller buildings, and I ca not help it but envy a little bit those lucky people who have their own small yards to enjoy in summer. 65 Svetulki comes to the rescue of some of us who are not as lucky to have a private garden, and those who are sometimes too lazy to go to the park… It is situated at the further end of a central Sofia street – I would say the not-so-popular end. In spite of that, 65 Svetulki (svetulki means fireflies, 65 comes from the number of the street) is rapidly becoming a favorite destination for locals, so it is definitely wise to reserve a table before coming.",
     "picture": "https://media-cdn.tripadvisor.com/media/photo-s/11/b4/ff/a9/all-the-sitting-you-may.jpg",
-    "MapDirections": "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11729.974655076316!2d23.3153493!3d42.6932668!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x7c4040838f29b32b!2s65%20Fireflies!5e0!3m2!1sen!2sbg!4v1572897749327!5m2!1sen!2sbg"
+    "MapDirections": "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11729.974655076316!2d23.3153493!3d42.6932668!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x7c4040838f29b32b!2s65%20Fireflies!5e0!3m2!1sen!2sbg!4v1572897749327!5m2!1sen!2sbg",
+    "Cocktails": [
+      {
+        "id": "one",
+        "name": "Long Island Iced Tea"
+      },
+      {
+        "id": "two",
+        "name": "Mojito"
+      },
+      {
+        "id": "three",
+        "name": "Cosmopolitan"
+      },
+      {
+        "id": "four",
+        "name": "Zombie"
+      },
+      {
+        "id": "five",
+        "name": "White Russian"
+      },
+      {
+        "id": "six",
+        "name": "Bellini"
+      },
+      {
+        "id": "seven",
+        "name": "Bloody Mary"
+      },
+      {
+        "id": "eight",
+        "name": "Negroni"
+      }
+    ]
   },
   {
     "name": "By the Way",
@@ -45,7 +143,33 @@
     "rating": 4.5,
     "information": "By The Way opened in 2001 in the heart of Sofia. Ever since we are serving both quality interpretations of classic cocktails and quality food. The bar is a favourite place for locals - either for the morning coffee with croissant or the casual evening gathering with friends. ",
     "picture": "http://mysofiaapartments.com/wp-content/uploads/2015/11/By-the-way.jpg",
-    "MapDirections": "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11731.252347703312!2d23.3226597!3d42.6865015!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xaa516a9056ecaa2d!2sBy%20the%20Way!5e0!3m2!1sen!2sbg!4v1572897968640!5m2!1sen!2sbg"
+    "MapDirections": "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11731.252347703312!2d23.3226597!3d42.6865015!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xaa516a9056ecaa2d!2sBy%20the%20Way!5e0!3m2!1sen!2sbg!4v1572897968640!5m2!1sen!2sbg",
+    "Cocktails": [
+      {
+        "id": "one",
+        "name": "Bellini"
+      },
+      {
+        "id": "two",
+        "name": "Cosmopolitan"
+      },
+      {
+        "id": "three",
+        "name": "Long Island Iced Tea"
+      },
+      {
+        "id": "four",
+        "name": "Zombie"
+      },
+      {
+        "id": "five",
+        "name": "White Russian"
+      },
+      {
+        "id": "six",
+        "name": "Negroni"
+      }
+    ]
   },
   {
     "name": "CAGE urban bar",
@@ -53,7 +177,17 @@
     "rating": 4.2,
     "information": "Cage urban bar is a diamond in the heart of the city with abundance of extraordinary variations of alcohol beverages and special craft cocktails. Opened in December 2017, inspired by Milan’s bar atmosphere, created to make ordinary city boredom go way. We are open every day since early morning to serve you the best coffee and fresh juice for a fresh start of the working day! Best afterwork place to chat with friends or meet now one with a good cocktail, quality music,  and friendly stuff! Come inside “The Cage”.",
     "picture": "https://goguide.bg/upload/ckfinder/images/_MG_8845.JPG",
-    "MapDirections": "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11729.039185881613!2d23.3113766!3d42.6982195!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x33f69c49ef6ecdb5!2sCAGE%20urban%20bar!5e0!3m2!1sen!2sbg!4v1572898054832!5m2!1sen!2sbg"
+    "MapDirections": "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11729.039185881613!2d23.3113766!3d42.6982195!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x33f69c49ef6ecdb5!2sCAGE%20urban%20bar!5e0!3m2!1sen!2sbg!4v1572898054832!5m2!1sen!2sbg",
+    "Cocktails": [
+      {
+        "id": "one",
+        "name": "Bellini"
+      },
+      {
+        "id": "two",
+        "name": "Negroni"
+      }
+    ]
   },
   {
     "name": "Bar White",
@@ -61,7 +195,21 @@
     "rating": 4.2,
     "information": "Изключително място, както със своя дизайн, така и с разнообразното си меню! Стилът ни е модерен, изчистен и със своя индивидуалност. Барът е чудесно място за частни партита, специални събития или среща с приятели.",
     "picture": "https://goguide.bg/upload/ckfinder/images/15(18).jpg",
-    "MapDirections": "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11727.222564830287!2d23.298976!3d42.707836!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x4c7e371989c7e770!2sBar%20White!5e0!3m2!1sen!2sbg!4v1572898177298!5m2!1sen!2sbg"
+    "MapDirections": "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11727.222564830287!2d23.298976!3d42.707836!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x4c7e371989c7e770!2sBar%20White!5e0!3m2!1sen!2sbg!4v1572898177298!5m2!1sen!2sbg",
+    "Cocktails": [
+      {
+        "id": "one",
+        "name": "Cosmopolitan"
+      },
+      {
+        "id": "two",
+        "name": "Zombie"
+      },
+      {
+        "id": "three",
+        "name": "Negroni"
+      }
+    ]
   },
   {
     "name": "One More Bar",
@@ -69,7 +217,29 @@
     "rating": 4.4,
     "information": "One More Bar is famous for its hospitality and creatively curated cocktails. The bar is the first to serve organic and vegan cocktails on the market.",
     "picture": "https://otg.imgix.net/assets/grid/sofia/center/one-more-bar/One-More-Bar-02.jpg?auto=format%2Ccompress&crop=focalpoint&fit=min&fm=jpg&fp-x=0.5&fp-y=0.5&ixlib=php-1.1.0&q=80&w=1200&s=adc807e6ec6d289b797327e31335d369",
-    "MapDirections": "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11730.110660734328!2d23.3308364!3d42.6925467!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xa73c799f7d81d466!2sOne%20More%20Bar!5e0!3m2!1sen!2sbg!4v1572898361190!5m2!1sen!2sbg"
+    "MapDirections": "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11730.110660734328!2d23.3308364!3d42.6925467!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xa73c799f7d81d466!2sOne%20More%20Bar!5e0!3m2!1sen!2sbg!4v1572898361190!5m2!1sen!2sbg",
+    "Cocktails": [
+      {
+        "id": "one",
+        "name": "Cosmopolitan"
+      },
+      {
+        "id": "two",
+        "name": "White Russian"
+      },
+      {
+        "id": "three",
+        "name": "Bellini"
+      },
+      {
+        "id": "four",
+        "name": "Bloody Mary"
+      },
+      {
+        "id": "five",
+        "name": "Negroni"
+      }
+    ]
   },
   {
     "name": "Bar Escobar",
@@ -77,6 +247,24 @@
     "rating": 4.1,
     "information": "Take a dip into the pleasant twilight of 3 Vasil Levski BLVD and you'll find yourself inside the tidy and welcoming Rum Bar Escobar. Massive walnut wood tables and handmade lamps casting a soft yellow light from the above, you realize you are just in the right mood for a delicious rum, an exotic cocktail, or some other favorite bevvy. All cocktails are made from fresh fruits.",
     "picture": "http://www.programata.bg/img/gallery/gallery_42837.jpg",
-    "MapDirections": "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11731.296254679995!2d23.3220769!3d42.686269!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x1ce24ebd5dea3c28!2sBar%20Escobar!5e0!3m2!1sen!2sbg!4v1572898421392!5m2!1sen!2sbg"
+    "MapDirections": "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11731.296254679995!2d23.3220769!3d42.686269!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x1ce24ebd5dea3c28!2sBar%20Escobar!5e0!3m2!1sen!2sbg!4v1572898421392!5m2!1sen!2sbg",
+    "Cocktails": [
+      {
+        "id": "one",
+        "name": "Cosmopolitan"
+      },
+      {
+        "id": "two",
+        "name": "White Russian"
+      },
+      {
+        "id": "three",
+        "name": "Bloody Mary"
+      },
+      {
+        "id": "four",
+        "name": "Negroni"
+      }
+    ]
   }
 ]

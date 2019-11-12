@@ -73,9 +73,9 @@ namespace Cocktail_Magician
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, CMContext context)
         {
             app.UpdateDatabase();
-            DataSeeder.SeedBars(context);
             DataSeeder.SeedIngredients(context);
             DataSeeder.SeedCocktails(context);
+            DataSeeder.SeedBars(context);
 
             if (env.IsDevelopment())
             {
