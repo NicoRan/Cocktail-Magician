@@ -76,9 +76,20 @@ namespace Cocktail_Magician_Services
 
         public async Task<Cocktail> GetCocktail(string id)
         {
-            var cocktail = await _context.Cocktails.Where(c => !c.IsDeleted).FirstOrDefaultAsync(c => c.Id == id);
+            var cocktail = await _context.Cocktails.Include(c => c.Ingredients).Where(c => !c.IsDeleted).FirstOrDefaultAsync(c => c.Id == id);
 
             return cocktail;
+        }
+
+        public async Task RemoveCocktail(string id)
+        {
+            var cocktailToRemove = await GetCocktail(id);
+            if(cocktailToRemove != null)
+            {
+                cocktailToRemove.IsDeleted = true;
+                _context.Cocktails.Update(cocktailToRemove);
+                await _context.SaveChangesAsync();
+            }
         }
 
         private string CocktailsRecipe(List<string> ingredients)

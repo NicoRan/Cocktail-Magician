@@ -48,13 +48,16 @@
                    
                     <div class="mb-20"></div>
                     <div id="detail-content-sticky-nav-06" class="fullwidth-horizon-sticky-section">
-                        <div class="row mt-25">
-                            <div class="col-12 col-md-8 col-lg-9 offset-md-4 offset-lg-3">
-                                <div class="col-inner">
-                                    <a href="#" class="btn btn-primary btn-wide">Leave a comment</a>
+                        @if (User.IsInRole("Administrator"))
+                        {
+                            <div class="row mt-25">
+                                <div class="col-12 col-md-8 col-lg-9 offset-md-4 offset-lg-3">
+                                    <div class="col-inner">
+                                        <a asp-area="BarMagician" asp-controller="Cocktails" asp-action="Delete" asp-route-id="@Model.CocktailId" method="get" class="btn btn-primary btn-wide"><i class="elegent-icon-error-oct_alt"></i>  Delete Cocktail</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        }
                         <div class="mb-50"></div>
                     </div>
                     <div id="detail-content-sticky-nav-07" class="fullwidth-horizon-sticky-section">

@@ -10,6 +10,7 @@ using Cocktail_Magician_DB.Models;
 using Cocktail_Magician_Services.Contracts;
 using Cocktail_Magician.Models;
 using Cocktail_Magician.Areas.BarMagician.Models;
+using Cocktail_Magician.Infrastructure.Mappers;
 
 namespace Cocktail_Magician.Areas.BarMagician.Controllers
 {
@@ -136,33 +137,41 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
         //}
 
         // GET: Cocktails/Delete/5
-        //public async Task<IActionResult> Delete(string id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
+        [HttpGet]
+        public async Task<IActionResult> Delete(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-        //    var cocktail = await _context.Cocktails
-        //        .FirstOrDefaultAsync(m => m.Id == id);
-        //    if (cocktail == null)
-        //    {
-        //        return NotFound();
-        //    }
+            var cocktail = await _cocktailManager.GetCocktail(id);
+            if (cocktail == null)
+            {
+                return NotFound();
+            }
+            var cocktailToDelete = CocktailViewModelMapper.MapCocktailViewModel(cocktail);
 
-        //    return View(cocktail);
-        //}
+            return View(cocktailToDelete);
+        }
 
         // POST: Cocktails/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> DeleteConfirmed(string id)
-        //{
-        //    var cocktail = await _context.Cocktails.FindAsync(id);
-        //    _context.Cocktails.Remove(cocktail);
-        //    await _context.SaveChangesAsync();
-        //    return RedirectToAction(nameof(Index));
-        //}
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(string id)
+        {
+            var cocktail = await _cocktailManager.GetCocktail(id);
+            if (cocktail != null)
+            {
+                await _cocktailManager.RemoveCocktail(cocktail.Id);
+            }
+            else
+            {
+                return NotFound();
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
 
         //private bool CocktailExists(string id)
         //{

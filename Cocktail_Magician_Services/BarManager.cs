@@ -51,8 +51,8 @@ namespace Cocktail_Magician_Services
         {
             Bar barToRemove = await GetBar(id);
             barToRemove.IsDeleted = true;
-            this._context.Bars.Update(barToRemove);
-            await this._context.SaveChangesAsync();
+            _context.Bars.Update(barToRemove);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<Bar> GetBar(string id)
