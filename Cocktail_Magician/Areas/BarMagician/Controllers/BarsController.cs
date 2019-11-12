@@ -128,33 +128,41 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
         //}
 
         // GET: Bars/Delete/5
-        //public async Task<IActionResult> Delete(string id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
+        [HttpGet]
+        public async Task<IActionResult> Delete(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-        //    var bar = await _context.Bars
-        //        .FirstOrDefaultAsync(m => m.BarId == id);
-        //    if (bar == null)
-        //    {
-        //        return NotFound();
-        //    }
+            var bar = await _barManager.GetBar(id);
+            if (bar == null)
+            {
+                return NotFound();
+            }
+            var barToDelete = BarViewModelMapper.MapBarViewModel(bar);
 
-        //    return View(bar);
-        //}
+            return View(barToDelete);
+        }
 
         // POST: Bars/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> DeleteConfirmed(string id)
-        //{
-        //    var bar = await _context.Bars.FindAsync(id);
-        //    _context.Bars.Remove(bar);
-        //    await _context.SaveChangesAsync();
-        //    return RedirectToAction(nameof(Index));
-        //}
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(string id)
+        {
+            var bar = await _barManager.GetBar(id);
+            if(bar != null)
+            {
+                await _barManager.RemoveBar(bar.BarId);
+            }
+            else
+            {
+                return NotFound();
+            }
+            
+            return RedirectToAction("Index", "Home");
+        }
 
         //private bool BarExists(string id)
         //{
