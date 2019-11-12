@@ -10,6 +10,7 @@ using Cocktail_Magician_DB.Models;
 using Cocktail_Magician_Services.Contracts;
 using Cocktail_Magician.Areas.BarMagician.Models;
 using Microsoft.AspNetCore.Authorization;
+using Cocktail_Magician.Infrastructure.Mappers;
 
 namespace Cocktail_Magician.Areas.BarMagician.Controllers
 {
@@ -25,21 +26,21 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
 
 
         // GET: Bars/Details/5
-        public async Task<IActionResult> Details(string id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+        //public async Task<IActionResult> Details(string id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var bar = await _barManager.GetBar(id);
-            if (bar == null)
-            {
-                return NotFound();
-            }
-            var barViewModel = new BarViewModel(bar);
-            return View(barViewModel);
-        }
+        //    var bar = await _barManager.GetBar(id);
+        //    if (bar == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    var barViewModel = BarViewModelMapper.MapBarViewModel(bar);
+        //    return View(barViewModel);
+        //}
 
         // GET: Bars/Create
         [HttpGet]

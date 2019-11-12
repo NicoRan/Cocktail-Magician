@@ -1,7 +1,8 @@
-﻿@model Cocktail_Magician.Areas.BarMagician.Models.BarViewModel
+﻿@model Cocktail_Magician.Areas.BarMagician.Models.CocktailViewModel
 
 @{
-    Layout = "_Layout";
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>Details</h1>
@@ -12,7 +13,7 @@
         <div class="slick-carousel-inner">
             <div class="slick-hero-alt-02">
                 <div class="slick-item">
-                    <div class="image"><img src="@Model.Picture" alt="Images" /></div>
+                    <div class="image"><img src="@Model.Picture" alt="Images" style="max-height:600px; width:auto" /></div>
                 </div>
             </div>
         </div>
@@ -25,9 +26,7 @@
                         <h3>@Model.Name</h3>
 
                         <div class="d-flex flex-column flex-sm-row align-items-sm-center mb-20">
-                            <div class="mr-15 font-lg">
-                                <i class="elegent-icon-pin_alt text-warning"></i> @Model.Address
-                            </div>
+                            
                             <div>
                                 <div class="rating-item rating-inline">
                                     <div class="rating-icons">
@@ -43,18 +42,14 @@
                         <h5 class="mt-30">Cocktails offered</h5>
                         <!-- Make a foreach loop to get all cocktails the bar offers start -->
                         <ul class="list-icon-data-attr font-ionicons">
-                            @foreach (var cocktail in Model.Cocktails)
-                            {
-                            <li data-content="&#xf383"> @Html.ActionLink(cocktail.Name, "Details", "Cocktails", new { id = cocktail.CocktailId }, null) </li>
-                            }
+                            <li data-content="&#xf383"><a href="#">Bar 1</a></li>
+                            <li data-content="&#xf383"><a href="#">Bar 2</a></li>
+                            <li data-content="&#xf383"><a href="#">Bar 3</a></li>
+                            <li data-content="&#xf383"><a href="#">Bar 4</a></li>
                         </ul>
                         <!-- Make a foreach loop to get all cocktails the bar offers end -->
                     </div>
-                    <div class="mb-50"></div>
-                    <div id="detail-content-sticky-nav-03" class="fullwidth-horizon-sticky-section">
-                        <h4 class="heading-title">Map</h4>
-                        <iframe src="@Model.Map" width="750" height="600" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
-                    </div>
+                   
                     <div class="mb-20"></div>
                     <div id="detail-content-sticky-nav-06" class="fullwidth-horizon-sticky-section">
                         <div class="row mt-25">

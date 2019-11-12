@@ -72,7 +72,13 @@ namespace Cocktail_Magician_Services
             }
 
             return cocktailReviewDTO;
+        }
 
+        public async Task<Cocktail> GetCocktail(string id)
+        {
+            var cocktail = await _context.Cocktails.Where(c => !c.IsDeleted).FirstOrDefaultAsync(c => c.Id == id);
+
+            return cocktail;
         }
     }
 }

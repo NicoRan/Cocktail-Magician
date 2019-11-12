@@ -9,22 +9,22 @@ using Cocktail_Magician_DB;
 using Cocktail_Magician_DB.Models;
 using Cocktail_Magician_Services.Contracts;
 using Cocktail_Magician.Areas.BarMagician.Models;
-using Cocktail_Magician.Infrastructure.Mappers;
 
 namespace Cocktail_Magician.Areas.BarCrower.Controllers
 {
     [Area("BarCrower")]
-    public class BarsController : Controller
+    public class CocktailsController : Controller
     {
-        private readonly IBarManager _barManager;
+        private readonly CMContext _context;
+        private readonly ICocktailManager _cocktailManager;
 
-        public BarsController(IBarManager barManager)
+        public CocktailsController(ICocktailManager cocktailManager, CMContext context)
         {
-            _barManager = barManager;
+            _context = context;
+            _cocktailManager = cocktailManager;
         }
 
-
-        // GET: BarCrower/Bars/Details/5
+        // GET: BarCrower/Cocktails/Details/5
         public async Task<IActionResult> Details(string id)
         {
             if (id == null)
@@ -32,13 +32,14 @@ namespace Cocktail_Magician.Areas.BarCrower.Controllers
                 return NotFound();
             }
 
-            var bar = await _barManager.GetBar(id);
-            if (bar == null)
+            var cocktail = await _cocktailManager.GetCocktail(id);
+            if (cocktail == null)
             {
                 return NotFound();
             }
-            var barViewModel = BarViewModelMapper.MapBarViewModel(bar);
-            return View(barViewModel);
+
+            var cocktailViewModel = new CocktailViewModel(cocktail);
+            return View(cocktailViewModel);
         }
     }
 }

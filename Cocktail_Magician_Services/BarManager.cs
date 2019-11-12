@@ -15,10 +15,12 @@ namespace Cocktail_Magician_Services
     public class BarManager : IBarManager
     {
         private readonly CMContext _context;
+        private readonly ICocktailManager _cocktailManager;
 
-        public BarManager(CMContext context)
+        public BarManager(CMContext context, ICocktailManager cocktailManager)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
+            _cocktailManager = cocktailManager ?? throw new ArgumentNullException(nameof(context));
         }
 
         public async Task<Bar> CreateBar(Bar barToCreate)
@@ -56,7 +58,7 @@ namespace Cocktail_Magician_Services
         public async Task<Bar> GetBar(string id)
         {
             var bar = await _context.Bars.Where(b => !b.IsDeleted).FirstOrDefaultAsync(b => b.BarId == id);
-
+            bar.Cocktails = await GetBarsOfferedCocktails(bar.BarId);
             return bar;
         }
 
@@ -90,6 +92,21 @@ namespace Cocktail_Magician_Services
             }
 
             return barReviewDTO;
+        }
+
+        public async Task<List<Cocktail>> GetBarsOfferedCocktails(string barId)
+        {
+            var listOfCocktails = new List<Cocktail>();
+            var result = await _context.BarCocktails.ToListAsync();
+            foreach (var item in result)
+            {
+                if (item.BarId == barId)
+                {
+                    var cocktail = await _cocktailManager.GetCocktail(item.CocktailId);
+                    listOfCocktails.Add(cocktail);
+                }
+            }
+            return listOfCocktails;
         }
     }
 }

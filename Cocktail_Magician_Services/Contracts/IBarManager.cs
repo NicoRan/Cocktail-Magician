@@ -10,5 +10,6 @@ namespace Cocktail_Magician_Services.Contracts
         Task RemoveBar(string id);
         Task<Bar> GetBar(string id);
         Task<List<Bar>> GetTopRatedBars();
+        Task<List<Cocktail>> GetBarsOfferedCocktails(string barId);
     }
 }

@@ -8,5 +8,6 @@ namespace Cocktail_Magician_Services.Contracts
     {
         Task<Cocktail> CreateCocktail(Cocktail cocktail, List<string> ingredient);
         Task<List<Cocktail>> GetTopRatedCocktails();
+        Task<Cocktail> GetCocktail(string id);
     }
 }
