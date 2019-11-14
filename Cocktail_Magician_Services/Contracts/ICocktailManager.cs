@@ -10,5 +10,6 @@ namespace Cocktail_Magician_Services.Contracts
         Task<List<Cocktail>> GetTopRatedCocktails();
         Task<Cocktail> GetCocktail(string id);
         Task RemoveCocktail(string id);
+        Task<DTO.CocktailReviewDTO> CreateCocktailReviewAsync(DTO.CocktailReviewDTO cocktailReviewDTO);
     }
 }

@@ -10,6 +10,10 @@ using Cocktail_Magician_DB.Models;
 using Cocktail_Magician_Services.Contracts;
 using Cocktail_Magician.Areas.BarMagician.Models;
 using Cocktail_Magician.Infrastructure.Mappers;
+using Cocktail_Magician.Areas.BarCrower.Models;
+using Cocktail_Magician_Services.DTO;
+using System.Security.Claims;
+using Cocktail_Magician.Models;
 
 namespace Cocktail_Magician.Areas.BarCrower.Controllers
 {
@@ -39,6 +43,27 @@ namespace Cocktail_Magician.Areas.BarCrower.Controllers
             }
             var barViewModel = BarViewModelMapper.MapBarViewModel(bar);
             return View(barViewModel);
+        }
+
+        [HttpGet]
+        public IActionResult Review(string id)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Review(CreateReviewViewModel reviewViewModel)
+        {
+            var user = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            reviewViewModel.UserId = user;
+            var barReview = reviewViewModel.ToBarDTO();
+            //barReview.UserId = user;
+            if (ModelState.IsValid)
+            {
+                await _barManager.CreateBarReviewAsync(barReview);
+                return RedirectToAction("Index", "Home");
+            }
+            return View();
         }
     }
 }

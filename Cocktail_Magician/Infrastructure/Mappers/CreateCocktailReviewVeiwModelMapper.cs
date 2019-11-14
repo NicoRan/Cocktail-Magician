@@ -9,7 +9,7 @@ namespace Cocktail_Magician.Infrastructure.Mappers
 {
     public static class CreateCocktailReviewVeiwModelMapper
     {
-        public static CocktailReviewDTO ToDTO(this CreateReviewViewModel createReviewViewModel)
+        public static CocktailReviewDTO ToCocktailDTO(this CreateReviewViewModel createReviewViewModel)
         {
             var cocktailCommentDTO = new CocktailReviewDTO
             {

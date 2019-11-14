@@ -9,6 +9,11 @@ using Cocktail_Magician_DB;
 using Cocktail_Magician_DB.Models;
 using Cocktail_Magician_Services.Contracts;
 using Cocktail_Magician.Areas.BarMagician.Models;
+using Cocktail_Magician.Areas.BarCrower.Models;
+using System.Security.Claims;
+using Cocktail_Magician.Infrastructure.Mappers;
+using Cocktail_Magician_Services.DTO;
+using Cocktail_Magician.Models;
 
 namespace Cocktail_Magician.Areas.BarCrower.Controllers
 {
@@ -41,5 +46,26 @@ namespace Cocktail_Magician.Areas.BarCrower.Controllers
             var cocktailViewModel = new CocktailViewModel(cocktail);
             return View(cocktailViewModel);
         }
+        public IActionResult Review()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Review(CreateReviewViewModel reviewVeiwModel)
+        {
+            var user = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            reviewVeiwModel.UserId = user;
+            var cocktailReview = reviewVeiwModel.ToCocktailDTO();
+
+            if (ModelState.IsValid)
+            {
+                await _cocktailManager.CreateCocktailReviewAsync(cocktailReview);
+                return RedirectToAction("Index", "Home");
+            }
+            return View();
+        }
+
+
     }
 }
