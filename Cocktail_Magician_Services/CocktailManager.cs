@@ -92,6 +92,12 @@ namespace Cocktail_Magician_Services
             }
         }
 
+        public async Task<List<Cocktail>> GetAllCocktailsAsync()
+        {
+            var listCocktails = await _context.Cocktails.Include(cocktail => cocktail.Ingredients).Where(cocktail => !cocktail.IsDeleted).ToListAsync();
+            return listCocktails;
+        }
+
         private string CocktailsRecipe(List<string> ingredients)
         {
             var result = String.Join(", ", ingredients.ToArray());

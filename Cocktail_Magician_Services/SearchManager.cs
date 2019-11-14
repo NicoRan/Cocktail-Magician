@@ -11,33 +11,31 @@ namespace Cocktail_Magician_Services
 {
     public class SearchManager : ISearchManager
     {
-        private readonly CMContext _context;
         private readonly IBarManager _barManager;
         private readonly ICocktailManager _cocktailManager;
-        public SearchManager(CMContext context, IBarManager barManager, ICocktailManager cocktailManager)
+        public SearchManager(IBarManager barManager, ICocktailManager cocktailManager)
         {
-            _context = context;
             _barManager = barManager;
             _cocktailManager = cocktailManager;
         }
 
-        public List<Bar> SearchBarsByName(string criteria)
+        public async Task<List<Bar>> SearchBarsByName(string criteria)
         {
-            var listOfBars = _context.Bars;
-            var result = listOfBars.Where(bar => bar.Name.Contains(criteria)).ToList();
+            var listOfBars = await _barManager.GetAllBarsAsync();
+            var result = listOfBars.Where(bar => bar.Name.Contains(criteria, StringComparison.CurrentCultureIgnoreCase)).ToList();
             return result.OrderBy(r => r.Name).ToList();
         }
-        public List<Bar> SearchBarsByAddress(string criteria)
+        public async Task<List<Bar>> SearchBarsByAddress(string criteria)
         {
-            var listOfBars = _context.Bars;
-            var result = listOfBars.Where(bar => bar.Address.Contains(criteria)).ToList();
+            var listOfBars = await _barManager.GetAllBarsAsync();
+            var result = listOfBars.Where(bar => bar.Address.Contains(criteria, StringComparison.CurrentCultureIgnoreCase)).ToList();
             return result.OrderBy(r => r.Name).ToList();
         }
 
-        public List<Cocktail> SearchCocktails(string criteria)
+        public async Task<List<Cocktail>> SearchCocktails(string criteria)
         {
-            var listOfCocktails = _context.Cocktails;
-            var result = listOfCocktails.Where(cocktail => cocktail.Name.Contains(criteria)).ToList();
+            var listOfCocktails = await _cocktailManager.GetAllCocktailsAsync();
+            var result = listOfCocktails.Where(cocktail => cocktail.Name.Contains(criteria, StringComparison.CurrentCultureIgnoreCase)).ToList();
             return result.OrderBy(r => r.Name).ToList();
         }
     }

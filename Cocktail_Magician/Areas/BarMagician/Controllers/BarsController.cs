@@ -58,14 +58,8 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
         [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Create(BarViewModel barView)
         {
-            var bar = new Bar()
-            {
-                Name = barView.Name,
-                Address = barView.Address,
-                Information = barView.Information,
-                Picture = barView.Picture,
-                MapDirections = barView.Map
-            };
+            var bar = BarViewModelMapper.MapBar(barView);
+
             if (ModelState.IsValid)
             {
 

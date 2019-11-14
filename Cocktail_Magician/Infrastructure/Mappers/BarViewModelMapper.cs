@@ -31,5 +31,19 @@ namespace Cocktail_Magician.Infrastructure.Mappers
             barViewModel.Rating = bar.Rating;
             return barViewModel;
         }
+
+        public static Bar MapBar(this BarViewModel barViewModel)
+        {
+            var bar = new Bar()
+            {
+                Address = barViewModel.Address,
+                BarId = barViewModel.BarId,
+                Information = barViewModel.Information,
+                MapDirections = barViewModel.Map,
+                Name = barViewModel.Name,
+                Picture = barViewModel.Picture
+            };
+            return bar;
+        }
     }
 }

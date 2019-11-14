@@ -25,17 +25,9 @@ namespace Cocktail_Magician_Services
 
         public async Task<Bar> CreateBar(Bar barToCreate)
         {
-            Bar barToAdd;
-            try
-            {
-                barToAdd = barToCreate;
-            }
-            catch
-            {
-                throw new ArgumentException("Wrong parameters are passed!");
-            }
+            var barToAdd = barToCreate;
 
-            var barToFind = _context.Bars.SingleOrDefault(bar => bar.Name == barToAdd.Name && bar.Address == barToAdd.Address);
+            var barToFind = _context.Bars.SingleOrDefault(bar => bar.Name == barToAdd.Name && bar.Address == barToAdd.Address && !bar.IsDeleted);
 
             if (barToFind != null)
             {
@@ -65,6 +57,7 @@ namespace Cocktail_Magician_Services
         public async Task<List<Bar>> GetTopRatedBars()
         {
             var bars = await _context.Bars
+                .Where(bar => !bar.IsDeleted)
                 .OrderByDescending(bar => bar.Rating)
                 .ThenBy(bar => bar.Name)
                 .Take(6)
@@ -97,16 +90,19 @@ namespace Cocktail_Magician_Services
         public async Task<List<Cocktail>> GetBarsOfferedCocktails(string barId)
         {
             var listOfCocktails = new List<Cocktail>();
-            var result = await _context.BarCocktails.ToListAsync();
+            var result = await _context.BarCocktails.Where(r => r.BarId == barId && !r.Bar.IsDeleted).ToListAsync();
             foreach (var item in result)
             {
-                if (item.BarId == barId)
-                {
-                    var cocktail = await _cocktailManager.GetCocktail(item.CocktailId);
-                    listOfCocktails.Add(cocktail);
-                }
+                var cocktail = await _cocktailManager.GetCocktail(item.CocktailId);
+                listOfCocktails.Add(cocktail);
             }
             return listOfCocktails;
+        }
+
+        public async Task<List<Bar>> GetAllBarsAsync()
+        {
+            var listOfBars = await _context.Bars.Include(b => b.Cocktails).Where(b => !b.IsDeleted).ToListAsync();
+            return listOfBars;
         }
     }
 }
