@@ -31,7 +31,6 @@ namespace Cocktail_Magician_Services
             var result = listOfBars.Where(bar => bar.Address.Contains(criteria, StringComparison.CurrentCultureIgnoreCase)).ToList();
             return result.OrderBy(r => r.Name).ToList();
         }
-
         public async Task<List<Cocktail>> SearchCocktails(string criteria)
         {
             var listOfCocktails = await _cocktailManager.GetAllCocktailsAsync();
