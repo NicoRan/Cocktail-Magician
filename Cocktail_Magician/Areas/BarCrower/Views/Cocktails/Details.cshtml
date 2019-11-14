@@ -58,6 +58,16 @@
                                 </div>
                             </div>
                         }
+                        @if (User.IsInRole("Member"))
+                        {
+                            <div class="row mt-25">
+                                <div class="col-12 col-md-8 col-lg-9 offset-md-4 offset-lg-3">
+                                    <div class="col-inner">
+                                        <a asp-area="BarCrower" asp-controller="Cocktails" asp-action="Review" asp-route-id="@Model.CocktailId" method="get" class="btn btn-primary btn-wide"><i class="elegent-icon-error-oct_alt"></i>  Give Review</a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
                         <div class="mb-50"></div>
                     </div>
                     <div id="detail-content-sticky-nav-07" class="fullwidth-horizon-sticky-section">

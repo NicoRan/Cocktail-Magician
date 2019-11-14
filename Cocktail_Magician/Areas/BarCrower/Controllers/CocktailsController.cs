@@ -14,6 +14,7 @@ using System.Security.Claims;
 using Cocktail_Magician.Infrastructure.Mappers;
 using Cocktail_Magician_Services.DTO;
 using Cocktail_Magician.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Cocktail_Magician.Areas.BarCrower.Controllers
 {
@@ -46,12 +47,14 @@ namespace Cocktail_Magician.Areas.BarCrower.Controllers
             var cocktailViewModel = new CocktailViewModel(cocktail);
             return View(cocktailViewModel);
         }
+        [Authorize(Roles = "Member")]
         public IActionResult Review()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = "Member")]
         public async Task<IActionResult> Review(CreateReviewViewModel reviewVeiwModel)
         {
             var user = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
