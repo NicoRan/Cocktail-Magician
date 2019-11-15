@@ -1,6 +1,8 @@
 @using Microsoft.AspNetCore.Identity
+@using Cocktail_Magician_Services.Contracts
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
+@inject IAdditionalUserManager AdditionalUserManager
 
 @if (SignInManager.IsSignedIn(User))
 {
@@ -8,10 +10,10 @@
         <ul class="main-nav">
 
             <li>
-                <a>HELLO, @User.Identity.Name!</a>
+                <a href="#">HELLO, @User.Identity.Name!</a>
                 <ul>
                     <li>
-                        Profile
+                        <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Profile</a>
                     </li>
                     <li>
                         <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
@@ -22,7 +24,7 @@
                 </ul>
             </li>
             <li>
-                <img class="image-circle" src="https://trello-avatars.s3.amazonaws.com/580bbaca9a0e3c5b33a7e1baf1c38a43/170.png" style="height:40px; width:40px" />
+                <img class="image-circle" src="@AdditionalUserManager.GetUsersPicture(User.FindFirstValue(ClaimTypes.NameIdentifier))" style="height:40px; width:40px" />
             </li>
         </ul>
     </nav>

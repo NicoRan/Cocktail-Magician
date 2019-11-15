@@ -56,8 +56,8 @@ namespace Cocktail_Magician.Controllers
             }
             if(stars > 1)
             {
-                filteredResults.Bars = filteredResults.Bars != null ? filteredResults.Bars.Where(b => b.Rating >= stars).ToList() : null;
-                filteredResults.Cocktails = filteredResults.Cocktails != null ? filteredResults.Cocktails.Where(c => c.Rating >= stars).ToList() : null;
+                filteredResults.Bars = filteredResults.Bars.Where(b => b.Rating >= stars).ToList();
+                filteredResults.Cocktails = filteredResults.Cocktails.Where(b => b.Rating >= stars).ToList();
             }
             return View(filteredResults);
         }

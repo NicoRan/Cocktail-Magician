@@ -8,6 +8,7 @@ using Cocktail_Magician_DB.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Cocktail_Magician.Areas.Identity.Pages.Account
 {
@@ -16,6 +17,7 @@ namespace Cocktail_Magician.Areas.Identity.Pages.Account
     {
         private readonly UserManager<User> _userManager;
 
+        
         public ResetPasswordModel(UserManager<User> userManager)
         {
             _userManager = userManager;

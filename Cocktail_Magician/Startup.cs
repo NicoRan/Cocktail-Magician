@@ -67,6 +67,7 @@ namespace Cocktail_Magician
             services.AddScoped<ICocktailManager, CocktailManager>();
             services.AddScoped<IIngredientManager, IngredientManager>();
             services.AddScoped<ISearchManager, SearchManager>();
+            services.AddScoped<IAdditionalUserManager, AdditionalUserManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

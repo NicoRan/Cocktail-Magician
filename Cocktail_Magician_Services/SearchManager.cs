@@ -22,20 +22,18 @@ namespace Cocktail_Magician_Services
         public async Task<List<Bar>> SearchBarsByName(string criteria)
         {
             var listOfBars = await _barManager.GetAllBarsAsync();
-            var result = listOfBars.Where(bar => bar.Name.Contains(criteria, StringComparison.CurrentCultureIgnoreCase)).ToList();
-            return result.OrderBy(r => r.Name).ToList();
+            return listOfBars.Where(bar => bar.Name.Contains(criteria, StringComparison.CurrentCultureIgnoreCase)).OrderBy(r => r.Name).ToList();
         }
         public async Task<List<Bar>> SearchBarsByAddress(string criteria)
         {
-            var listOfBars = await _barManager.GetAllBarsAsync();
-            var result = listOfBars.Where(bar => bar.Address.Contains(criteria, StringComparison.CurrentCultureIgnoreCase)).ToList();
-            return result.OrderBy(r => r.Name).ToList();
+            var address = await _barManager.GetAllBarsAsync();
+            return address.Where(bar => bar.Address.Contains(criteria, StringComparison.CurrentCultureIgnoreCase))
+                .OrderBy(r => r.Name).ToList(); ;
         }
         public async Task<List<Cocktail>> SearchCocktails(string criteria)
         {
             var listOfCocktails = await _cocktailManager.GetAllCocktailsAsync();
-            var result = listOfCocktails.Where(cocktail => cocktail.Name.Contains(criteria, StringComparison.CurrentCultureIgnoreCase)).ToList();
-            return result.OrderBy(r => r.Name).ToList();
+            return listOfCocktails.Where(cocktail => cocktail.Name.Contains(criteria, StringComparison.CurrentCultureIgnoreCase)).OrderBy(r => r.Name).ToList();
         }
     }
 }

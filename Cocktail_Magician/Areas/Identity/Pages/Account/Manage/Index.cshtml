@@ -3,44 +3,131 @@
 @{
     ViewData["Title"] = "Profile";
     ViewData["ActivePage"] = ManageNavPages.Index;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h4>@ViewData["Title"]</h4>
 <partial name="_StatusMessage" for="StatusMessage" />
-<div class="row">
-    <div class="col-md-6">
-        <form id="profile-form" method="post">
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Username"></label>
-                <input asp-for="Username" class="form-control" disabled />
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.Email"></label>
-                @if (Model.IsEmailConfirmed)
-                {
-                    <div class="input-group">
-                        <input asp-for="Input.Email" class="form-control" />
-                        <span class="input-group-addon" aria-hidden="true"><span class="glyphicon glyphicon-ok text-success"></span></span>
+<div class="row gap-20 gap-lg-40">
+    <div class="col-12 col-lg-3">
+        <aside class="sticky-kit sidebar-wrapper">
+            <div class="bashboard-nav-box">
+                <div class="box-heading"><h3 class="h6 text-white text-uppercase">You're logged-in as:</h3></div>
+                <div class="box-content">
+                    <div class="dashboard-avatar mb-10">
+                        <div class="image">
+                            <img src="@Model.Input.Picture" alt="Image" />
+                        </div>
+                        <div class="content">
+                            <h6>@User.Identity.Name</h6>
+                        </div>
                     </div>
-                }
-                else
-                {
-                    <input asp-for="Input.Email" class="form-control" />
-                    <button id="email-verification" type="submit" asp-page-handler="SendVerificationEmail" class="btn btn-link">Send verification email</button>
-                }
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    <nav class="menu-vertical-01 mt-20">
+                        <ul>
+                            <li class="active"><a href="#">Dashboard</a></li>
+                            <li><a href="#">My Comments</a></li>
+                            <li><a href="#">My Likes</a></li>
+                            <li>
+                                <a href="#loginFormTabInModal-reset" data-toggle="modal" data-target="#loginFormTabInModal" data-backdrop="static" data-keyboard="false" class="shrink-auto">Change Password</a>
+                            </li>
+                            <li>
+                                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                    <button type="submit" class="btn btn-outline-danger">LOGOUT </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </nav>
+                    <p class="font-sm mt-20">Your last logged-in: <span class="text-primary font700">4 hours ago</span></p>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Input.PhoneNumber"></label>
-                <input asp-for="Input.PhoneNumber" class="form-control" />
-                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+        </aside>
+    </div>
+    <div class="col-12 col-lg-9">
+        <div class="content-wrapper">
+            <div class="form-draft-payment">
+                <h3 class="heading-title"><span>My <span class="font200"> profile</span></span></h3>
+                <div class="clear"></div>
+                <form id="profile-form" method="post">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="row gap-30">
+                        <div class="col-6 col-sm-5 col-md-4 col-lg-4 order-lg-last">
+                            <div class="avatar-upload">
+                                <img class="profile-pic d-block" src="@Model.Input.Picture" alt="avatar" />
+                                <input asp-for="Input.Picture" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-12 col-lg-8">
+                            <div class="col-inner">
+                                <div class="row gap-20">
+                                    <div class="col-12 col-sm-6">
+                                        <div class="form-group mb-0">
+                                            <label>Username</label>
+                                            <input asp-for="Username" class="form-control" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <div class="form-group mb-0">
+                                            <label>Email</label>
+                                            @if (Model.IsEmailConfirmed)
+                                            {
+                                                <div class="input-group">
+                                                    <input asp-for="Input.Email" class="form-control" />
+                                                    <span class="input-group-addon" aria-hidden="true"><span class="glyphicon glyphicon-ok text-success"></span></span>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <input asp-for="Input.Email" class="form-control" />
+                                                <button id="email-verification" type="submit" asp-page-handler="SendVerificationEmail" class="btn btn-link">Send verification email</button>
+                                            }
+                                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                        <div class="form-group mb-0">
+                                            <label>Phone Number</label>
+                                            <input asp-for="Input.PhoneNumber" class="form-control" />
+                                            <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr class="mt-40 mb-40" />
+                            </div>
+                        </div>
+                    </div>
+                    <button id="update-profile-button" type="submit" class="btn btn-primary">Save Changes</button>
+                </form>
             </div>
-            <button id="update-profile-button" type="submit" class="btn btn-primary">Save</button>
-        </form>
+        </div>
     </div>
 </div>
+<!-- Modal for change password start -->
+<div class="modal fade modal-with-tabs form-login-modal" id="loginFormTabInModal" aria-labelledby="modalWIthTabsLabel" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
 
+        <div class="modal-content shadow-lg">
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="loginFormTabInModal-reset">
+                    <div class="form-login">
+
+                        <div class="form-header">
+                            <h4>Welcome Back to SiteName</h4>
+                            <p>Sign in to your account to continue using SiteName</p>
+                        </div>
+
+                        <div class="form-body">
+                            @await Html.PartialAsync("_ChangePasswordPartial", new ChangePasswordModel())
+                        </div>
+                        <div class="text-center pb-20">
+                            <button type="button" class="close" data-dismiss="modal" aria-labelledby="Close">
+                                <span aria-hidden="true"><i class="far fa-times-circle"></i></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal for change password start -->
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }

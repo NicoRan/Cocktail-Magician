@@ -56,20 +56,20 @@ namespace Cocktail_Magician_Services
         {
             if (cocktailReviewDTO.Grade != 0)
             {
-            var cocktailRating = cocktailReviewDTO.ToRatingEntity();
+                var cocktailRating = cocktailReviewDTO.ToRatingEntity();
 
-            await _context.CocktailRatings.AddAsync(cocktailRating);
-            await _context.SaveChangesAsync();
+                await _context.CocktailRatings.AddAsync(cocktailRating);
             }
 
             //TODO cocktailCommentadd
             if (cocktailReviewDTO.Comment != null)
             {
-            var cocktailComment = cocktailReviewDTO.ToCommentEntity();
+                var cocktailComment = cocktailReviewDTO.ToCommentEntity();
 
-            await _context.CocktailComments.AddAsync(cocktailComment);
-            await _context.SaveChangesAsync();
+                await _context.CocktailComments.AddAsync(cocktailComment);
             }
+
+            await _context.SaveChangesAsync();
 
             return cocktailReviewDTO;
         }
@@ -84,7 +84,7 @@ namespace Cocktail_Magician_Services
         public async Task RemoveCocktail(string id)
         {
             var cocktailToRemove = await GetCocktail(id);
-            if(cocktailToRemove != null)
+            if (cocktailToRemove != null)
             {
                 cocktailToRemove.IsDeleted = true;
                 _context.Cocktails.Update(cocktailToRemove);
@@ -94,8 +94,7 @@ namespace Cocktail_Magician_Services
 
         public async Task<List<Cocktail>> GetAllCocktailsAsync()
         {
-            var listCocktails = await _context.Cocktails.Include(cocktail => cocktail.Ingredients).Where(cocktail => !cocktail.IsDeleted).ToListAsync();
-            return listCocktails;
+            return await _context.Cocktails.Include(cocktail => cocktail.Ingredients).Where(cocktail => !cocktail.IsDeleted).ToListAsync(); ;
         }
 
         private string CocktailsRecipe(List<string> ingredients)

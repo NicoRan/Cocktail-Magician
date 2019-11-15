@@ -7,6 +7,7 @@ using Cocktail_Magician_DB.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 namespace Cocktail_Magician.Areas.Identity.Pages.Account.Manage
 {
@@ -15,7 +16,11 @@ namespace Cocktail_Magician.Areas.Identity.Pages.Account.Manage
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly ILogger<ChangePasswordModel> _logger;
+        public ChangePasswordModel()
+        {
 
+        }
+        [ActivatorUtilitiesConstructor]
         public ChangePasswordModel(
             UserManager<User> userManager,
             SignInManager<User> signInManager,
@@ -95,7 +100,7 @@ namespace Cocktail_Magician.Areas.Identity.Pages.Account.Manage
             _logger.LogInformation("User changed their password successfully.");
             StatusMessage = "Your password has been changed.";
 
-            return RedirectToPage();
+            return RedirectToPage("/Account/Manage/Index");
         }
     }
 }
