@@ -6,7 +6,7 @@ namespace Cocktail_Magician_DB.Models
 {
     public class BarRating
     {
-        public int Grade { get; set; }
+        public double Grade { get; set; }
 
         public string UserId { get; set; }
         public User User { get; set; }

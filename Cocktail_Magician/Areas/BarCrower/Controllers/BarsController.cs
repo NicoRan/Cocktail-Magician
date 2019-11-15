@@ -57,10 +57,7 @@ namespace Cocktail_Magician.Areas.BarCrower.Controllers
         [Authorize(Roles = "Member")]
         public async Task<IActionResult> Review(CreateReviewViewModel reviewViewModel)
         {
-            var user = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            reviewViewModel.UserId = user;
             var barReview = reviewViewModel.ToBarDTO();
-            //barReview.UserId = user;
             if (ModelState.IsValid)
             {
                 await _barManager.CreateBarReviewAsync(barReview);

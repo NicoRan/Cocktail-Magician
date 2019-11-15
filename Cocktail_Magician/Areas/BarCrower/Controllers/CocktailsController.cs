@@ -54,11 +54,11 @@ namespace Cocktail_Magician.Areas.BarCrower.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         [Authorize(Roles = "Member")]
         public async Task<IActionResult> Review(CreateReviewViewModel reviewVeiwModel)
         {
-            var user = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            reviewVeiwModel.UserId = user;
+            
             var cocktailReview = reviewVeiwModel.ToCocktailDTO();
 
             if (ModelState.IsValid)
@@ -68,7 +68,5 @@ namespace Cocktail_Magician.Areas.BarCrower.Controllers
             }
             return View();
         }
-
-
     }
 }
