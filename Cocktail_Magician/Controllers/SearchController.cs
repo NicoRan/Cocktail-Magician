@@ -56,9 +56,32 @@ namespace Cocktail_Magician.Controllers
             }
             if(stars > 1)
             {
-                filteredResults.Bars = filteredResults.Bars.Where(b => b.Rating >= stars).ToList();
-                filteredResults.Cocktails = filteredResults.Cocktails.Where(b => b.Rating >= stars).ToList();
+                filteredResults.Bars = filteredResults.Bars != null ? filteredResults.Bars.Where(b => b.Rating >= stars).ToList() : null;
+                filteredResults.Cocktails = filteredResults.Cocktails != null ? filteredResults.Cocktails.Where(b => b.Rating >= stars).ToList() : null;
             }
+            if(model.SortOptions != null)
+            {
+                switch (model.SortOptions)
+                {
+                    case "sort-by-1":
+                        filteredResults.Bars = filteredResults.Bars != null ? filteredResults.Bars.OrderBy(b => b.Name).ToList() : null;
+                        filteredResults.Cocktails = filteredResults.Cocktails != null ? filteredResults.Cocktails.OrderBy(b => b.Name).ToList() : null;
+                        break;
+                    case "sort-by-2":
+                        filteredResults.Bars = filteredResults.Bars != null ? filteredResults.Bars.OrderByDescending(b => b.Name).ToList() : null;
+                        filteredResults.Cocktails = filteredResults.Cocktails != null ? filteredResults.Cocktails.OrderByDescending(b => b.Name).ToList() : null;
+                        break;
+                    case "sort-by-3":
+                        filteredResults.Bars = filteredResults.Bars != null ? filteredResults.Bars.OrderByDescending(b => b.Rating).ToList() : null;
+                        filteredResults.Cocktails = filteredResults.Cocktails != null ? filteredResults.Cocktails.OrderByDescending(b => b.Rating).ToList() : null;
+                        break;
+                    case "sort-by-4":
+                        filteredResults.Bars = filteredResults.Bars != null ? filteredResults.Bars.OrderBy(b => b.Rating).ToList() : null;
+                        filteredResults.Cocktails = filteredResults.Cocktails != null ? filteredResults.Cocktails.OrderBy(b => b.Rating).ToList() : null;
+                        break;
+                }
+            }
+            
             return View(filteredResults);
         }
 

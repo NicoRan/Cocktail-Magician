@@ -34,19 +34,23 @@
                 {
                     <div class="col">
                         <article class="post-grid-01">
-                            <div class="image">
-                                <img src="@bar.Picture" alt="images" style="height:250px;width:auto;" />
-                            </div>
-                            <div class="content">
-                                <div class="rating-item rating-inline">
-                                    <div class="rating-icons">
-                                        <input type="hidden" class="rating" data-filled="rating-icon ri-star rating-rated" data-empty="rating-icon ri-star-empty" data-fractions="2" data-readonly value="@bar.Rating" />
+                            <figure class="destination-grid-item-01">
+                                <a asp-area="BarCrower" asp-controller="Bars" asp-action="Details" asp-route-Id="@bar.BarId" class="h6">
+                                    <div class="image">
+                                        <img src="@bar.Picture" alt="images" style="height:250px;width:auto;" />
                                     </div>
-                                    <p class="rating-text font600 text-muted font-12 letter-spacing-1"><span class="text-dark mr-3">@bar.Rating / 5</span></p>
-                                </div>
-                                <h4>@bar.Name</h4>
-                                <a asp-area="BarCrower" asp-controller="Bars" asp-action="Details" asp-route-Id="@bar.BarId" class="h6">Go to Bar <i class="elegent-icon-arrow_right"></i></a>
-                            </div>
+                                    <div class="content">
+                                        <div class="rating-item rating-inline">
+                                            <div class="rating-icons">
+                                                <input type="hidden" class="rating" data-filled="rating-icon ri-star rating-rated" data-empty="rating-icon ri-star-empty" data-fractions="2" data-readonly value="@bar.Rating" />
+                                            </div>
+                                            <p class="rating-text font600 text-muted font-12 letter-spacing-1"><span class="text-dark mr-3">@bar.Rating / 5</span></p>
+                                        </div>
+                                        <h4>@bar.Name</h4>
+                                        Go to Bar <i class="elegent-icon-arrow_right"></i>
+                                    </div>
+                                </a>
+                            </figure>
                         </article>
                     </div>
                 }

@@ -4,74 +4,78 @@
     ViewData["Title"] = "CocktailCatalog";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-    <div class="row gap-20 gap-lg-40">
-        <div class="col-12 col-lg-12">
-            <div class="content-wrapper">
-                <div class="section-title border-bottom w-100">
-                    <div class="d-flex flex-column flex-sm-row align-items-lg-end">
-                        <div>
-                            <h2><span><span>Our</span> Cocktails</span></h2>
-                        </div>
-                        <div class="ml-sm-auto">
-                            <div class="sort-box mt-10 mt-sm-0">
-                                <div class="d-flex align-items-center sort-item">
-                                    <label class="sort-label d-none d-sm-flex">Category:</label>
-                                    <div class="sort-form">
-                                        <select class="chosen-the-basic form-control" tabindex="2">
-                                            <option value="sort-by-1">A - Z</option>
-                                            <option value="sort-by-2">Z - A</option>
-                                            <option value="sort-by-3">From top rated</option>
-                                            <option value="sort-by-4">From loest rated</option>
-                                        </select>
-                                    </div>
+<div class="row gap-20 gap-lg-40">
+    <div class="col-12 col-lg-12">
+        <div class="content-wrapper">
+            <div class="section-title border-bottom w-100">
+                <div class="d-flex flex-column flex-sm-row align-items-lg-end">
+                    <div>
+                        <h2><span><span>Our</span> Cocktails</span></h2>
+                    </div>
+                    <div class="ml-sm-auto">
+                        <div class="sort-box mt-10 mt-sm-0">
+                            <div class="d-flex align-items-center sort-item">
+                                <label class="sort-label d-none d-sm-flex">Category:</label>
+                                <div class="sort-form">
+                                    <select class="chosen-the-basic form-control" tabindex="2">
+                                        <option value="sort-by-1">A - Z</option>
+                                        <option value="sort-by-2">Z - A</option>
+                                        <option value="sort-by-3">From top rated</option>
+                                        <option value="sort-by-4">From loest rated</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row equal-height cols-1 cols-sm-2 cols-lg-3 gap-20 mt-50">
-                    @foreach (var cocktail in Model)
-                    {
-                        <div class="col">
-                            <article class="post-grid-01">
-                                <div class="image">
-                                    <img src="@cocktail.Picture" alt="images" style="height:350px;width:auto;" />
-                                </div>
-                                <div class="content">
-                                    <div class="rating-item rating-inline">
-                                        <div class="rating-icons">
-                                            <input type="hidden" class="rating" data-filled="rating-icon ri-star rating-rated" data-empty="rating-icon ri-star-empty" data-fractions="2" data-readonly value="@cocktail.Rating" />
-                                        </div>
-                                        <p class="rating-text font600 text-muted font-12 letter-spacing-1"><span class="text-dark mr-3">@cocktail.Rating / 5</span></p>
-                                    </div>
-                                    <h4>@cocktail.Name</h4>
-                                    <a asp-area="BarCrower" asp-controller="Cocktails" asp-action="Details" asp-route-Id="@cocktail.CocktailId" class="h6">Go to Cocktail <i class="elegent-icon-arrow_right"></i></a>
-                                </div>
-                            </article>
-                        </div>
-                    }
-                </div>
-                <nav class="pager-wrappper mt-50">
-                    <ul class="pagination justify-content-center mb-0 pb-0">
-                        <li>
-                            <a href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li class="active"><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><span>...</span></li>
-                        <li><a href="#">11</a></li>
-                        <li><a href="#">12</a></li>
-                        <li><a href="#">13</a></li>
-                        <li>
-                            <a href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
             </div>
+            <div class="row cols-1 cols-sm-2 cols-lg-4 gap-2 mb-20">
+                @foreach (var cocktail in Model)
+                {
+                    <div class="col">
+                        <article class="post-grid-01">
+                            <figure class="destination-grid-item-01">
+                                <a asp-area="BarCrower" asp-controller="Cocktails" asp-action="Details" asp-route-Id="@cocktail.CocktailId" class="h6">
+                                    <div class="image">
+                                        <img src="@cocktail.Picture" alt="images" />
+                                    </div>
+                                    <div class="content">
+                                        <div class="rating-item rating-inline">
+                                            <div class="rating-icons">
+                                                <input type="hidden" class="rating" data-filled="rating-icon ri-star rating-rated" data-empty="rating-icon ri-star-empty" data-fractions="2" data-readonly value="@cocktail.Rating" />
+                                            </div>
+                                            <p class="rating-text font600 text-muted font-12 letter-spacing-1"><span class="text-dark mr-3">@cocktail.Rating / 5</span></p>
+                                        </div>
+                                        <h4>@cocktail.Name</h4>
+                                        Go to Cocktail <i class="elegent-icon-arrow_right"></i>
+                                    </div>
+                                </a>
+                            </figure>
+                        </article>
+                    </div>
+                }
+            </div>
+            <nav class="pager-wrappper mt-50">
+                <ul class="pagination justify-content-center mb-0 pb-0">
+                    <li>
+                        <a href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="active"><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><span>...</span></li>
+                    <li><a href="#">11</a></li>
+                    <li><a href="#">12</a></li>
+                    <li><a href="#">13</a></li>
+                    <li>
+                        <a href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </div>
+</div>
