@@ -23,12 +23,12 @@ namespace Cocktail_Magician.Controllers
         {
             var topBars = await _barManager.GetTopRatedBars();
 
-            var topBarsViewModel = topBars.Select(bar => BarViewModelMapper.MapBarViewModel(bar))
+            var topBarsViewModel = topBars.Select(bar => BarViewModelMapper.MapTopBarViewModel(bar))
                 .ToList();
 
             var topCocktails = await _cocktailManager.GetTopRatedCocktails();
 
-            var topCocktailsViewModel = topCocktails.Select(cocktail => CocktailViewModelMapper.MapCocktailViewModel(cocktail)).ToList();
+            var topCocktailsViewModel = topCocktails.Select(cocktail => CocktailViewModelMapper.MapTopCocktailViewModel(cocktail)).ToList();
 
             var topRatedHomePage = new TopRatedHomePageViewModel();
             topRatedHomePage.TopBars = topBarsViewModel;
