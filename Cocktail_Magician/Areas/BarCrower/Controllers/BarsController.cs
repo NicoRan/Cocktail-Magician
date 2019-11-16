@@ -32,19 +32,26 @@ namespace Cocktail_Magician.Areas.BarCrower.Controllers
         // GET: BarCrower/Bars/Details/5
         public async Task<IActionResult> Details(string id)
         {
-            if (id == null)
+            if (!ModelState.IsValid)
             {
-                return NotFound();
+                ModelState.AddModelError(string.Empty, "Invalid review parameters!");
             }
-
-            var bar = await _barManager.GetBar(id);
-            if (bar == null)
+            try
             {
-                return NotFound();
+                var bar = await _barManager.GetBar(id);
+                var barViewModel = BarViewModelMapper.MapBarViewModel(bar);
+                return View(barViewModel);
             }
-            var barViewModel = BarViewModelMapper.MapBarViewModel(bar);
-            return View(barViewModel);
+            catch (NullReferenceException)
+            {
+                return RedirectToAction("Error", "Home", new ErrorViewModel { ErrorCode = "404"});
+            }
+            catch (InvalidOperationException ex)
+            {
+                return RedirectToAction("Home/Error", ex.Message);
+            }
         }
+    
 
         [HttpGet]
         [Authorize(Roles = "Member")]

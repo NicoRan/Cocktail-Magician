@@ -24,24 +24,6 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
             _barManager = barManager;
         }
 
-
-        // GET: Bars/Details/5
-        //public async Task<IActionResult> Details(string id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var bar = await _barManager.GetBar(id);
-        //    if (bar == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    var barViewModel = BarViewModelMapper.MapBarViewModel(bar);
-        //    return View(barViewModel);
-        //}
-
         // GET: Bars/Create
         [HttpGet]
         [Authorize(Roles = "Administrator")]
@@ -62,7 +44,6 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
 
             if (ModelState.IsValid)
             {
-
                 await _barManager.CreateBar(bar);
                 return RedirectToAction("Index", "Home");
             }

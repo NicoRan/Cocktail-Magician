@@ -15,12 +15,10 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
     [Area("BarMagician")]
     public class IngredientsController : Controller
     {
-        private readonly CMContext _context;
         private readonly IIngredientManager _ingredientManager;
 
-        public IngredientsController(CMContext context, IIngredientManager ingredientManager)
+        public IngredientsController(IIngredientManager ingredientManager)
         {
-            _context = context;
             _ingredientManager = ingredientManager;
         }
 

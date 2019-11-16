@@ -21,32 +21,36 @@ namespace Cocktail_Magician.Areas.BarCrower.Controllers
     [Area("BarCrower")]
     public class CocktailsController : Controller
     {
-        private readonly CMContext _context;
         private readonly ICocktailManager _cocktailManager;
 
-        public CocktailsController(ICocktailManager cocktailManager, CMContext context)
+        public CocktailsController(ICocktailManager cocktailManager)
         {
-            _context = context;
             _cocktailManager = cocktailManager;
         }
 
         // GET: BarCrower/Cocktails/Details/5
         public async Task<IActionResult> Details(string id)
         {
-            if (id == null)
+            if (!ModelState.IsValid)
             {
-                return NotFound();
+                ModelState.AddModelError(string.Empty, "Invalid review parameters!");
             }
-
-            var cocktail = await _cocktailManager.GetCocktail(id);
-            if (cocktail == null)
+            try
             {
-                return NotFound();
+                var cocktail = await _cocktailManager.GetCocktail(id);
+                var cocktailViewModel = new CocktailViewModel(cocktail);
+                return View(cocktailViewModel);
             }
-
-            var cocktailViewModel = new CocktailViewModel(cocktail);
-            return View(cocktailViewModel);
+            catch (NullReferenceException)
+            {
+                return RedirectToAction("Error", "Home", new ErrorViewModel { ErrorCode = "404" });
+            }
+            catch (InvalidOperationException ex)
+            {
+                return RedirectToAction("Home/Error", ex.Message);
+            }
         }
+
         [Authorize(Roles = "Member")]
         public IActionResult Review()
         {

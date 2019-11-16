@@ -4,219 +4,215 @@
     Layout = "_CustomSearchLayout";
 }
 <form asp-controller="Search" asp-action="Search" method="get">
-    <div class="container sticky-kit">
-        <div class="row equal-height gap-30 gap-lg-40">
-            <div class="col-12 col-lg-4">
-                <aside class="sidebar-wrapper pv">
-
-                    <div class="secondary-search-box mb-30">
-                        <h4 class="">Search</h4>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="col-inner">
-                                    <div class="form-group">
-                                        <label>Search Type</label>
-                                        <select asp-for="@Model.Type" select class="chosen-the-basic form-control form-control-sm" placeholder="Select one" tabindex="2" required>
-                                            <option></option>
-                                            <option value="All">All</option>
-                                            <option value="Bars">Bars</option>
-                                            <option value="Cocktails">Cocktails</option>
+    <div class="row equal-height gap-30 gap-lg-40">
+        <div class="col-12 col-lg-4">
+            <aside class="sticky-kit sidebar-wrapper">
+                <div class="secondary-search-box mb-30">
+                    <h4 class="">Search</h4>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="col-inner">
+                                <div class="form-group">
+                                    <label>Search Type</label>
+                                    <select asp-for="@Model.Type" select class="chosen-the-basic form-control form-control-sm" placeholder="Select one" tabindex="2" required>
+                                        <option></option>
+                                        <option value="All">All</option>
+                                        <option value="Bars">Bars</option>
+                                        <option value="Cocktails">Cocktails</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="col-inner">
+                                <div class="form-group">
+                                    <label>Enter keyword</label>
+                                    <input asp-for="@Model.Criteria" type="text" asp-route-criteria="criteria" class="form-control form-readonly-control" placeholder="Search:">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="col-inner ph-20 pv-15">
+                                <button type="submit" class="btn btn-primary btn-block"><i class="ion-android-search"></i> Search</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-box">
+                    <div class="box-title"><h5>Above this rating</h5></div>
+                    <div class="box-content">
+                        <input id="star_range" asp-for="@Model.StarsRange" />
+                    </div>
+                </div>
+                <div class="sidebar-box">
+                    <div class="box-title"><h5>Bars</h5></div>
+                    <div class="box-content">
+                        <div class="custom-control custom-checkbox">
+                            <div class="form-group">
+                                <input type="checkbox" asp-for="@Model.Filter["name"]" class="custom-control-input" id="filerStartPoint-01">
+                                <label class="custom-control-label" for="filerStartPoint-01">Name</label>
+                            </div>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <div class="form-group">
+                                <input type="checkbox" asp-for="@Model.Filter["address"]" class="custom-control-input" id="filerStartPoint-02">
+                                <label class="custom-control-label" for="filerStartPoint-02">Address</label>
+                            </div>
+                        </div>
+                        <div class="clear mb-10"></div>
+                    </div>
+                </div>
+                <div class="sidebar-box">
+                    <div class="box-title"><h5>Filter Text</h5></div>
+                    <div class="box-content">
+                        <p>Park fat she nor does play deal our. Procured sex material his offering humanity laughing moderate can. Unreserved had she nay dissimilar admiration interested.</p>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+            </aside>
+        </div>
+        <div class="col-12 col-lg-8">
+            <div class="content-wrapper pv">
+                <div class="d-flex justify-content-between flex-row align-items-center sort-group page-result-01">
+                    <div class="sort-box">
+                        <div class="d-flex align-items-center sort-item">
+                            <label class="sort-label d-none d-sm-flex">Sort by:</label>
+                            <div class="sort-form">
+                                <div class="row">
+                                    <div class="col-3 gap-10 col-sm-6">
+                                        <select asp-for="SortOptions" class="chosen-the-basic form-control" tabindex="2">
+                                            <option value="sort-by-1">Name: A to Z</option>
+                                            <option value="sort-by-2">Name: Z to A</option>
+                                            <option value="sort-by-3">Top Rated First</option>
+                                            <option value="sort-by-4">Top Rated Last</option>
                                         </select>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="col-inner">
-                                    <div class="form-group">
-                                        <label>Enter keyword</label>
-                                        <input asp-for="@Model.Criteria" type="text" asp-route-criteria="criteria" class="form-control form-readonly-control" placeholder="Search:">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="col-inner ph-20 pv-15">
-                                    <button type="submit" class="btn btn-primary btn-block"><i class="ion-android-search"></i> Search</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="sidebar-box">
-                        <div class="box-title"><h5>Above this rating</h5></div>
-                        <div class="box-content">
-                            <input id="star_range" asp-for="@Model.StarsRange" />
-                        </div>
-                    </div>
-                    <div class="sidebar-box">
-                        <div class="box-title"><h5>Bars</h5></div>
-                        <div class="box-content">
-                            <div class="custom-control custom-checkbox">
-                                <div class="form-group">
-                                    <input type="checkbox" asp-for="@Model.Filter["name"]" class="custom-control-input" id="filerStartPoint-01">
-                                    <label class="custom-control-label" for="filerStartPoint-01">Name</label>
-                                </div>
-                            </div>
-                            <div class="custom-control custom-checkbox">
-                                <div class="form-group">
-                                    <input type="checkbox" asp-for="@Model.Filter["address"]" class="custom-control-input" id="filerStartPoint-02">
-                                    <label class="custom-control-label" for="filerStartPoint-02">Address</label>
-                                </div>
-                            </div>
-                            <div class="clear mb-10"></div>
-                        </div>
-                    </div>
-                    <div class="sidebar-box">
-                        <div class="box-title"><h5>Filter Text</h5></div>
-                        <div class="box-content">
-                            <p>Park fat she nor does play deal our. Procured sex material his offering humanity laughing moderate can. Unreserved had she nay dissimilar admiration interested.</p>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
-
-                </aside>
-            </div>
-            <div class="col-12 col-lg-8">
-                <div class="content-wrapper pv">
-                    <div class="d-flex justify-content-between flex-row align-items-center sort-group page-result-01">
-                        <div class="sort-box">
-                            <div class="d-flex align-items-center sort-item">
-                                <label class="sort-label d-none d-sm-flex">Sort by:</label>
-                                <div class="sort-form">
-                                    <div class="row">
-                                        <div class="col-3 gap-10 col-sm-6">
-                                            <select asp-for="SortOptions" class="chosen-the-basic form-control" tabindex="2">
-                                                <option value="sort-by-1">Name: A to Z</option>
-                                                <option value="sort-by-2">Name: Z to A</option>
-                                                <option value="sort-by-3">Top Rated First</option>
-                                                <option value="sort-by-4">Top Rated Last</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-3 col-sm-6">
-                                            <button type="submit" class="btn btn-primary">Sort</button>
-                                        </div>
+                                    <div class="col-3 col-sm-6">
+                                        <button type="submit" class="btn btn-primary">Sort</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="sort-box">
-                            <div class="d-flex align-items-center sort-item">
-                                <label class="sort-label d-none d-sm-flex">View as:</label>
-                                <ul class="sort-nav">
-                                    <li><a href="#"><i class="fas fa-th"></i></a></li>
-                                    <li><a href="#" class="active"><i class="fas fa-th-list"></i></a></li>
-                                </ul>
-                            </div>
+                    </div>
+                    <div class="sort-box">
+                        <div class="d-flex align-items-center sort-item">
+                            <label class="sort-label d-none d-sm-flex">View as:</label>
+                            <ul class="sort-nav">
+                                <li><a href="#"><i class="fas fa-th"></i></a></li>
+                                <li><a href="#" class="active"><i class="fas fa-th-list"></i></a></li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="tour-long-item-wrapper-01">
-                        @if (Model.Bars != null)
-                        {
-                            @foreach (var bar in Model.Bars)
-                            {
-                                <!-- One result item start -->
-                                <figure class="tour-long-item-01">
-                                    <a asp-area="BarCrower" asp-controller="Bars" asp-action="Details" asp-route-id="@bar.BarId">
-                                        <div class="d-flex flex-column flex-sm-row align-items-xl-center">
-                                            <div>
-                                                <div class="image">
-                                                    <img src="@bar.Picture" alt="images" />
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <figcaption class="content">
-                                                    <h5>@bar.Name</h5>
-                                                    <ul class="item-meta">
-                                                        <li>
-                                                            <i class="elegent-icon-pin_alt text-warning"></i> @bar.Address
-                                                        </li>
-                                                        <li>
-                                                            <div class="rating-item rating-sm rating-inline clearfix">
-                                                                <div class="rating-icons">
-                                                                    <input type="hidden" class="rating" data-filled="rating-icon ri-star rating-rated" data-empty="rating-icon ri-star-empty" data-fractions="2" data-readonly value="@bar.Rating" /> @bar.Rating / 5
-                                                                </div>
-                                                                @*<p class="rating-text font600 text-muted font-12 letter-spacing-2">44 reviews</p>*@
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                    <p class="overflow-hidden" style="white-space: nowrap;width: 400px; overflow: hidden;text-overflow: ellipsis;">@bar.Information</p>
-                                                </figcaption>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </figure>
-                                <!-- One result item start -->
-                            }
-                        }
-                        @if (Model.Cocktails != null)
-                        {
-                            @foreach (var cocktail in Model.Cocktails)
-                            {
-                                <!-- One result item start -->
-                                <figure class="tour-long-item-01">
-                                    <a asp-area="BarCrower" asp-controller="Cocktails" asp-action="Details" asp-route-id="@cocktail.CocktailId">
-                                        <div class="d-flex flex-column flex-sm-row align-items-xl-center">
-                                            <div>
-                                                <div class="image">
-                                                    <img src="@cocktail.Picture" alt="images" />
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <figcaption class="content">
-                                                    <h5>@cocktail.Name</h5>
-                                                    <ul class="item-meta">
-                                                        <li>
-                                                            <div class="rating-item rating-sm rating-inline clearfix">
-                                                                <div class="rating-icons">
-                                                                    <input type="hidden" class="rating" data-filled="rating-icon ri-star rating-rated" data-empty="rating-icon ri-star-empty" data-fractions="2" data-readonly value="@cocktail.Rating" /> @cocktail.Rating / 5
-                                                                </div>
-                                                                <p class="rating-text font600 text-muted font-12 letter-spacing-2">44 reviews</p>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                    <p>@cocktail.Information</p>
-                                                </figcaption>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </figure>
-                                <!-- One result item start -->
-                            }
-                        }
-                    </div>
-                    <!-- Pagination view start -->
-                    <div class="pager-wrappper mt-40">
-                        <div class="pager-innner">
-                            <div class="row align-items-center text-center text-lg-left">
-                                <div class="col-12 col-lg-5">
-                                    Showing reslut 1 to 15 from 248
-                                </div>
-                                <div class="col-12 col-lg-7">
-                                    <nav class="float-lg-right mt-10 mt-lg-0">
-                                        <ul class="pagination justify-content-center justify-content-lg-left">
-                                            <li>
-                                                <a href="#" aria-label="Previous">
-                                                    <span aria-hidden="true">&laquo;</span>
-                                                </a>
-                                            </li>
-                                            <li class="active"><a href="#">1</a></li>
-                                            <li><a href="#">2</a></li>
-                                            <li><a href="#">3</a></li>
-                                            <li><span>...</span></li>
-                                            <li><a href="#">11</a></li>
-                                            <li><a href="#">12</a></li>
-                                            <li><a href="#">13</a></li>
-                                            <li>
-                                                <a href="#" aria-label="Next">
-                                                    <span aria-hidden="true">&raquo;</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Pagination view end -->
                 </div>
+                <div class="tour-long-item-wrapper-01">
+                    @if (Model.Bars != null)
+                    {
+                        @foreach (var bar in Model.Bars)
+                        {
+                            <!-- One result item start -->
+                            <figure class="tour-long-item-01">
+                                <a asp-area="BarCrower" asp-controller="Bars" asp-action="Details" asp-route-id="@bar.BarId">
+                                    <div class="d-flex flex-column flex-sm-row align-items-xl-center">
+                                        <div>
+                                            <div class="image">
+                                                <img src="@bar.Picture" alt="images" />
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <figcaption class="content">
+                                                <h5>@bar.Name</h5>
+                                                <ul class="item-meta">
+                                                    <li>
+                                                        <i class="elegent-icon-pin_alt text-warning"></i> @bar.Address
+                                                    </li>
+                                                    <li>
+                                                        <div class="rating-item rating-sm rating-inline clearfix">
+                                                            <div class="rating-icons">
+                                                                <input type="hidden" class="rating" data-filled="rating-icon ri-star rating-rated" data-empty="rating-icon ri-star-empty" data-fractions="2" data-readonly value="@bar.Rating" /> @bar.Rating / 5
+                                                            </div>
+                                                            @*<p class="rating-text font600 text-muted font-12 letter-spacing-2">44 reviews</p>*@
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                                <p class="overflow-hidden" style="white-space: nowrap;width: 400px; overflow: hidden;text-overflow: ellipsis;">@bar.Information</p>
+                                            </figcaption>
+                                        </div>
+                                    </div>
+                                </a>
+                            </figure>
+                            <!-- One result item start -->
+                        }
+                    }
+                    @if (Model.Cocktails != null)
+                    {
+                        @foreach (var cocktail in Model.Cocktails)
+                        {
+                            <!-- One result item start -->
+                            <figure class="tour-long-item-01">
+                                <a asp-area="BarCrower" asp-controller="Cocktails" asp-action="Details" asp-route-id="@cocktail.CocktailId">
+                                    <div class="d-flex flex-column flex-sm-row align-items-xl-center">
+                                        <div>
+                                            <div class="image">
+                                                <img src="@cocktail.Picture" alt="images" />
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <figcaption class="content">
+                                                <h5>@cocktail.Name</h5>
+                                                <ul class="item-meta">
+                                                    <li>
+                                                        <div class="rating-item rating-sm rating-inline clearfix">
+                                                            <div class="rating-icons">
+                                                                <input type="hidden" class="rating" data-filled="rating-icon ri-star rating-rated" data-empty="rating-icon ri-star-empty" data-fractions="2" data-readonly value="@cocktail.Rating" /> @cocktail.Rating / 5
+                                                            </div>
+                                                            <p class="rating-text font600 text-muted font-12 letter-spacing-2">44 reviews</p>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                                <p>@cocktail.Information</p>
+                                            </figcaption>
+                                        </div>
+                                    </div>
+                                </a>
+                            </figure>
+                            <!-- One result item start -->
+                        }
+                    }
+                </div>
+                <!-- Pagination view start -->
+                <div class="pager-wrappper mt-40">
+                    <div class="pager-innner">
+                        <div class="row align-items-center text-center text-lg-left">
+                            <div class="col-12 col-lg-5">
+                                Showing reslut 1 to 15 from 248
+                            </div>
+                            <div class="col-12 col-lg-7">
+                                <nav class="float-lg-right mt-10 mt-lg-0">
+                                    <ul class="pagination justify-content-center justify-content-lg-left">
+                                        <li>
+                                            <a href="#" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+                                        <li class="active"><a href="#">1</a></li>
+                                        <li><a href="#">2</a></li>
+                                        <li><a href="#">3</a></li>
+                                        <li><span>...</span></li>
+                                        <li><a href="#">11</a></li>
+                                        <li><a href="#">12</a></li>
+                                        <li><a href="#">13</a></li>
+                                        <li>
+                                            <a href="#" aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Pagination view end -->
             </div>
         </div>
     </div>

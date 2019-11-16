@@ -49,9 +49,16 @@ namespace Cocktail_Magician_Services
 
         public async Task<Bar> GetBar(string id)
         {
-            var bar = await _context.Bars.Where(b => !b.IsDeleted).FirstOrDefaultAsync(b => b.BarId == id);
-            bar.Cocktails = await GetBarsOfferedCocktails(bar.BarId);
-            return bar;
+            try
+            {
+                var bar = await _context.Bars.Where(b => !b.IsDeleted).FirstOrDefaultAsync(b => b.BarId == id);
+                bar.Cocktails = await GetBarsOfferedCocktails(bar.BarId);
+                return bar;
+            }
+            catch (InvalidOperationException)
+            {
+                throw new Exception();
+            }
         }
 
         public async Task<List<Bar>> GetTopRatedBars()
