@@ -34,7 +34,7 @@ namespace Cocktail_Magician.Areas.BarCrower.Controllers
         {
             if (!ModelState.IsValid)
             {
-                ModelState.AddModelError(string.Empty, "Invalid review parameters!");
+                ModelState.AddModelError(string.Empty, "Invalid bar parameters!");
             }
             try
             {
@@ -42,16 +42,16 @@ namespace Cocktail_Magician.Areas.BarCrower.Controllers
                 var barViewModel = BarViewModelMapper.MapBarViewModel(bar);
                 return View(barViewModel);
             }
-            catch (NullReferenceException)
+            catch (Exception ex)
             {
-                return RedirectToAction("Error", "Home", new ErrorViewModel { ErrorCode = "404"});
-            }
-            catch (InvalidOperationException ex)
-            {
-                return RedirectToAction("Home/Error", ex.Message);
+                return RedirectToAction("Error", "Home", new ErrorViewModel
+                {
+                    ErrorCode = "404",
+                    ErrorMessage = ex.Message
+                });
             }
         }
-    
+
 
         [HttpGet]
         [Authorize(Roles = "Member")]

@@ -3,58 +3,68 @@
     ViewData["Title"] = "Error";
     Layout = "_CustomSearchLayout";
 }
-<div class="error-404-wrapper">
-    <h1 class="text-primary">@Model.ErrorCode</h1>
-    <h3>Sorry, the page could not be found</h3>
-    <p class="lead">The page you are looking does not exist - <a href="#">report ?</a></p>
-    <div class="mb-40"></div>
-    <h6>You Search For What You Are Looking For</h6>
-    <div class="row justify-content-center gap-30">
-        <div class="col-12 col-sm-8 col-md-7 col-lg-4">
-            <form class="quick-form-box">
-                <div class="input-group">
-                    <input type="email" class="form-control" placeholder="Email address">
-                    <div class="input-group-append">
-                        <button class="btn btn-primary" type="button"><i class="fas fa-search"></i></button>
+    <div class="error-404-wrapper">
+        <h1 class="text-primary">@Model.ErrorCode</h1>
+
+        @if (Model.ErrorCode == "404")
+        {
+            <h3>Sorry, the page could not be found</h3>
+            <p class="lead">@Model.ErrorMessage - <a href="#">report ?</a></p>
+        }
+        @if (Model.ErrorCode == "500")
+        {
+            <h3>Sorry, internal server error</h3>
+            <p class="lead">@Model.ErrorMessage - <a href="#">report ?</a></p>
+        }
+
+        <div class="mb-40"></div>
+        <h6>You Search For What You Are Looking For</h6>
+        <div class="row justify-content-center gap-30">
+            <div class="col-12 col-sm-8 col-md-7 col-lg-4">
+                <form class="quick-form-box">
+                    <div class="input-group">
+                        <input type="email" class="form-control" placeholder="Email address">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button"><i class="fas fa-search"></i></button>
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
-    </div>
-    <div class="mb-25"></div>
-    <h3>Or</h3>
-    <p class="lead">Here are some helpful links</p>
-    <div class="row justify-content-center gap-10">
-        <div class="col-8 col-md-6 col-lg-5">
-            <div class="col-inner">
-                <div class="row justify-content-center gap-10">
-                    <div class="col-12 col-sm-4 col-md-6 col-lg-4">
-                        <div class="error-menu text-left">
-                            <i class="fas fa-arrow-right text-muted mr-10 font12"></i> <a asp-controller="Home" asp-action="Index">Home</a>
+        <div class="mb-25"></div>
+        <h3>Or</h3>
+        <p class="lead">Here are some helpful links</p>
+        <div class="row justify-content-center gap-10">
+            <div class="col-8 col-md-6 col-lg-5">
+                <div class="col-inner">
+                    <div class="row justify-content-center gap-10">
+                        <div class="col-12 col-sm-4 col-md-6 col-lg-4">
+                            <div class="error-menu text-left">
+                                <i class="fas fa-arrow-right text-muted mr-10 font12"></i> <a asp-controller="Home" asp-action="Index">Home</a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-12 col-sm-4 col-md-6 col-lg-4">
-                        <div class="error-menu text-left">
-                            <i class="fas fa-arrow-right text-muted mr-10 font12"></i> <a asp-controller="Home" asp-action="BarCatalog">All Bars</a>
+                        <div class="col-12 col-sm-4 col-md-6 col-lg-4">
+                            <div class="error-menu text-left">
+                                <i class="fas fa-arrow-right text-muted mr-10 font12"></i> <a asp-controller="Home" asp-action="BarCatalog">All Bars</a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-12 col-sm-4 col-md-6 col-lg-4">
-                        <div class="error-menu text-left">
-                            <i class="fas fa-arrow-right text-muted mr-10 font12"></i> <a asp-controller="Home" asp-action="CocktailCatalog">All Cocktails</a>
+                        <div class="col-12 col-sm-4 col-md-6 col-lg-4">
+                            <div class="error-menu text-left">
+                                <i class="fas fa-arrow-right text-muted mr-10 font12"></i> <a asp-controller="Home" asp-action="CocktailCatalog">All Cocktails</a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-12 col-sm-4 col-md-6 col-lg-4">
-                        <div class="error-menu text-left">
-                            <i class="fas fa-arrow-right text-muted mr-10 font12"></i> <a href="#">About us</a>
+                        <div class="col-12 col-sm-4 col-md-6 col-lg-4">
+                            <div class="error-menu text-left">
+                                <i class="fas fa-arrow-right text-muted mr-10 font12"></i> <a href="#">About us</a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-12 col-sm-4 col-md-6 col-lg-4">
-                        <div class="error-menu text-left">
-                            <i class="fas fa-arrow-right text-muted mr-10 font12"></i> <a href="#">Contact Us</a>
+                        <div class="col-12 col-sm-4 col-md-6 col-lg-4">
+                            <div class="error-menu text-left">
+                                <i class="fas fa-arrow-right text-muted mr-10 font12"></i> <a href="#">Contact Us</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>

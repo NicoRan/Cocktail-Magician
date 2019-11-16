@@ -11,6 +11,7 @@ using Cocktail_Magician_Services.Contracts;
 using Cocktail_Magician.Areas.BarMagician.Models;
 using Microsoft.AspNetCore.Authorization;
 using Cocktail_Magician.Infrastructure.Mappers;
+using Cocktail_Magician.Models;
 
 namespace Cocktail_Magician.Areas.BarMagician.Controllers
 {
@@ -40,15 +41,32 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
         [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Create(BarViewModel barView)
         {
-            var bar = BarViewModelMapper.MapBar(barView);
-
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
+                ModelState.AddModelError(string.Empty, "Invalid bar parameters!");
+                return View(barView);
+            }
+            try
+            {
+                var bar = BarViewModelMapper.MapBar(barView);
                 await _barManager.CreateBar(bar);
                 return RedirectToAction("Index", "Home");
             }
-
-            return View(barView);
+            catch (InvalidOperationException ex)
+            {
+                return RedirectToAction("Error", "Home", new ErrorViewModel
+                {
+                    ErrorCode = "500",
+                    ErrorMessage = ex.Message
+                });
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Error", "Home", new ErrorViewModel
+                {
+                    ErrorCode = "500"
+                });
+            }
         }
 
         //// GET: Bars/Edit/5

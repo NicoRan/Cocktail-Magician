@@ -25,6 +25,12 @@ namespace Cocktail_Magician_Services
 
         public async Task<Cocktail> CreateCocktail(Cocktail cocktail, List<string> ingredients)
         {
+            var cocktailToFind = _context.Cocktails.SingleOrDefault(c => c.Name == cocktail.Name);
+            if (cocktailToFind != null)
+            {
+                throw new InvalidOperationException("Cocktail already exists in the database");
+            }
+
             var cocktailToAdd = cocktail;
             cocktailToAdd.CocktailIngredient = new List<CocktailIngredient>();
             foreach (var ingredient in ingredients)
@@ -89,13 +95,18 @@ namespace Cocktail_Magician_Services
 
         public async Task RemoveCocktail(string id)
         {
-            var cocktailToRemove = await GetCocktail(id);
-            if (cocktailToRemove != null)
+            try
             {
+                var cocktailToRemove = await GetCocktail(id);
                 cocktailToRemove.IsDeleted = true;
                 _context.Cocktails.Update(cocktailToRemove);
                 await _context.SaveChangesAsync();
             }
+            catch
+            {
+                throw new Exception("Cocktail to remove not found!");
+            }
+
         }
 
         public async Task<List<Cocktail>> GetAllCocktailsAsync()

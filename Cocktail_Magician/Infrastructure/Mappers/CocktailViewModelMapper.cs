@@ -26,5 +26,15 @@ namespace Cocktail_Magician.Infrastructure.Mappers
             }
             return cocktailViewModel;
         }
+
+        public static Cocktail MapCocktail(this CocktailViewModel cocktailView)
+        {
+            var cocktail = new Cocktail()
+            {
+                
+            };
+
+            return cocktail;
+        }
     }
 }

@@ -10,15 +10,6 @@ namespace Cocktail_Magician.Areas.BarMagician.Models
         {
 
         }
-        public CocktailViewModel(Cocktail cocktail)
-        {
-            CocktailId = cocktail.Id;
-            Name = cocktail.Name;
-            Information = cocktail.Information;
-            Picture = cocktail.Picture;
-            Rating = cocktail.Rating;
-            Ingredients = new List<string>();
-        }
 
         public string CocktailId { get; set; }
         [Required(ErrorMessage = "A name is required!")]

@@ -71,7 +71,13 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateCocktailViewModel cocktailToCreate)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError(string.Empty, "Invalid bar parameters!");
+                return View(cocktailToCreate);
+            }
+
+            try
             {
                 var cocktailToAdd = new Cocktail()
                 {
@@ -82,7 +88,14 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
                 await _cocktailManager.CreateCocktail(cocktailToAdd, cocktailToCreate.Cocktail.Ingredients);
                 return RedirectToAction("Index", "Home");
             }
-            return View(cocktailToCreate);
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home", new ErrorViewModel
+                {
+                    ErrorCode = "500",
+                    ErrorMessage = ex.Message
+                });
+            }
         }
 
         // GET: Cocktails/Edit/5
@@ -140,19 +153,20 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(string id)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
+                var cocktail = await _cocktailManager.GetCocktail(id);
+                var cocktailToDelete = CocktailViewModelMapper.MapCocktailViewModel(cocktail);
+                return View(cocktailToDelete);
             }
-
-            var cocktail = await _cocktailManager.GetCocktail(id);
-            if (cocktail == null)
+            catch (Exception ex)
             {
-                return NotFound();
+                return RedirectToAction("Error", "Home", new ErrorViewModel()
+                {
+                    ErrorCode = "404",
+                    ErrorMessage = ex.Message
+                });
             }
-            var cocktailToDelete = CocktailViewModelMapper.MapCocktailViewModel(cocktail);
-
-            return View(cocktailToDelete);
         }
 
         // POST: Cocktails/Delete/5
@@ -160,22 +174,20 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var cocktail = await _cocktailManager.GetCocktail(id);
-            if (cocktail != null)
+            try
             {
+                var cocktail = await _cocktailManager.GetCocktail(id);
                 await _cocktailManager.RemoveCocktail(cocktail.Id);
+                return RedirectToAction("Index", "Home");
             }
-            else
+            catch (Exception ex)
             {
-                return NotFound();
+                return RedirectToAction("Error", "Home", new ErrorViewModel()
+                {
+                    ErrorCode = "404",
+                    ErrorMessage = ex.Message
+                });
             }
-
-            return RedirectToAction("Index", "Home");
         }
-
-        //private bool CocktailExists(string id)
-        //{
-        //    return _context.Cocktails.Any(e => e.Id == id);
-        //}
     }
 }
