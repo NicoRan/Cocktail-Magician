@@ -1,10 +1,4 @@
-﻿using Cocktail_Magician_DB.Models;
-using Microsoft.AspNetCore.Identity;
-using System.Security.Claims;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Cocktail_Magician_DB;
 using System.Linq;
 using Cocktail_Magician_Services.Contracts;

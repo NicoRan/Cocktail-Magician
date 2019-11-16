@@ -1,5 +1,3 @@
-using System;
-
 namespace Cocktail_Magician.Models
 {
     public class ErrorViewModel

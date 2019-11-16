@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace Cocktail_Magician_DB.Models
 {
@@ -25,7 +23,6 @@ namespace Cocktail_Magician_DB.Models
         public double Rating { get; set; }
         public string Picture { get; set; }
         public bool IsDeleted { get; set; }
-
         public ICollection<Ingredient> Ingredients { get; set; }
         public ICollection<BarCocktail> BarCocktails { get; set; }
         public ICollection<CocktailIngredient> CocktailIngredient { get; set; }

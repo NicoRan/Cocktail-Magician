@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Cocktail_Magician.Areas.BarMagician.Models;
 using Cocktail_Magician.Infrastructure.Mappers;
 using Cocktail_Magician.Models;
 using Cocktail_Magician_DB.Models;
@@ -81,7 +79,6 @@ namespace Cocktail_Magician.Controllers
                         break;
                 }
             }
-            
             return View(filteredResults);
         }
 

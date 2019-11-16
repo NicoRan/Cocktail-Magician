@@ -15,7 +15,8 @@ namespace Cocktail_Magician_Services.Mappers
             {
                 Id = user.Id,
                 Name = user.UserName,
-                Email = user.Email
+                Email = user.Email,
+                Picture = user.Picture
             };
             return userDTO;
         }

@@ -1,9 +1,6 @@
 ﻿using Cocktail_Magician.Areas.BarMagician.Models;
 using Cocktail_Magician_DB.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Cocktail_Magician.Infrastructure.Mappers
 {

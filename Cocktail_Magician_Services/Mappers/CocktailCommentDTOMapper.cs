@@ -1,9 +1,5 @@
 ﻿using Cocktail_Magician_DB.Models;
 using Cocktail_Magician_Services.DTO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Cocktail_Magician_Services.Mappers
 {
@@ -25,6 +21,5 @@ namespace Cocktail_Magician_Services.Mappers
         //    var newCollection = cocktailComments.Select(c => c.ToDTO()).ToList();
         //    return newCollection;
         //}
-
     }
 }

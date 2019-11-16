@@ -1,5 +1,4 @@
-﻿using Cocktail_Magician_DB.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Cocktail_Magician.Areas.BarMagician.Models
@@ -9,16 +8,6 @@ namespace Cocktail_Magician.Areas.BarMagician.Models
         public BarViewModel()
         {
 
-        }
-        public BarViewModel(Bar bar)
-        {
-            BarId = bar.BarId;
-            Name = bar.Name;
-            Address = bar.Address;
-            Rating = bar.Rating;
-            Information = bar.Information;
-            Picture = bar.Picture;
-            Map = bar.MapDirections;
         }
         public string BarId { get; set; }
         [Required(ErrorMessage = "A name is required!")]

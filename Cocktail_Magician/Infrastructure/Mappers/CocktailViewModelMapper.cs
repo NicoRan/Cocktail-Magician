@@ -1,9 +1,6 @@
 ﻿using Cocktail_Magician.Areas.BarMagician.Models;
 using Cocktail_Magician_DB.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Cocktail_Magician.Infrastructure.Mappers
 {
@@ -31,7 +28,11 @@ namespace Cocktail_Magician.Infrastructure.Mappers
         {
             var cocktail = new Cocktail()
             {
-                
+                Id = cocktailView.CocktailId,
+                Information = cocktailView.Information,
+                Name = cocktailView.Name,
+                Picture = cocktailView.Picture,
+                Rating = cocktailView.Rating
             };
 
             return cocktail;

@@ -1,9 +1,7 @@
 ﻿using Cocktail_Magician_DB.Models;
 using Cocktail_Magician_Services.DTO;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Cocktail_Magician_Services.Mappers
 {
@@ -19,7 +17,6 @@ namespace Cocktail_Magician_Services.Mappers
             };
             return barRatingDTO;
         }
-
         public static BarRating ToRatingEntity(this BarReviewDTO barRatingDTO)
         {
             var barRating = new BarRating
@@ -30,14 +27,10 @@ namespace Cocktail_Magician_Services.Mappers
             };
             return barRating;
         }
-        
-
         public static ICollection<BarRatingDTO> ToDTO(this ICollection<BarRating> barRatings)
         {
             var newCollection = barRatings.Select(c => c.ToDTO()).ToList();
             return newCollection;
         }
-
-
     }
 }

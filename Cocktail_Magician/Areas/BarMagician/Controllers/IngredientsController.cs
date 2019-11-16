@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using Cocktail_Magician_DB;
 using Cocktail_Magician_DB.Models;
 using Cocktail_Magician_Services.Contracts;
 using Cocktail_Magician.Areas.BarMagician.Models;
+using Microsoft.AspNetCore.Authorization;
+using System;
+using Cocktail_Magician.Models;
 
 namespace Cocktail_Magician.Areas.BarMagician.Controllers
 {
@@ -23,6 +20,7 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
         }
 
         // GET: BarMagician/Ingredients/Create
+        [Authorize(Roles = "Administrator")]
         public IActionResult Create()
         {
             return View();
@@ -33,70 +31,32 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Create(IngredientViewModel ingredientToCreate)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var ingredient= new Ingredient
+                ModelState.AddModelError(string.Empty, "Invalid bar parameters!");
+                return View(ingredientToCreate);
+            }
+            try
+            {
+                var ingredient = new Ingredient
                 {
                     Name = ingredientToCreate.Name
                 };
                 await _ingredientManager.AddIngredientAsync(ingredient);
                 return RedirectToAction("Index", "Home");
             }
-            return View(ingredientToCreate);
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home", new ErrorViewModel
+                {
+                    ErrorCode = "500",
+                    ErrorMessage = ex.Message
+                });
+            }
         }
-
-        // GET: BarMagician/Ingredients/Edit/5
-        //public async Task<IActionResult> Edit(string id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var ingredient = await _context.Ingredients.FindAsync(id);
-        //    if (ingredient == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return View(ingredient);
-        //}
-
-        // POST: BarMagician/Ingredients/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(string id, [Bind("IngredientId,Name")] Ingredient ingredient)
-        //{
-        //    if (id != ingredient.IngredientId)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            _context.Update(ingredient);
-        //            await _context.SaveChangesAsync();
-        //        }
-        //        catch (DbUpdateConcurrencyException)
-        //        {
-        //            if (!IngredientExists(ingredient.IngredientId))
-        //            {
-        //                return NotFound();
-        //            }
-        //            else
-        //            {
-        //                throw;
-        //            }
-        //        }
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(ingredient);
-        //}
 
         // GET: BarMagician/Ingredients/Delete/5
         //public async Task<IActionResult> Delete(string id)
@@ -105,14 +65,12 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
         //    {
         //        return NotFound();
         //    }
-
         //    var ingredient = await _context.Ingredients
         //        .FirstOrDefaultAsync(m => m.IngredientId == id);
         //    if (ingredient == null)
         //    {
         //        return NotFound();
         //    }
-
         //    return View(ingredient);
         //}
 
@@ -125,11 +83,6 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
         //    _context.Ingredients.Remove(ingredient);
         //    await _context.SaveChangesAsync();
         //    return RedirectToAction(nameof(Index));
-        //}
-
-        //private bool IngredientExists(string id)
-        //{
-        //    return _context.Ingredients.Any(e => e.IngredientId == id);
         //}
     }
 }

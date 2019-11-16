@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using Cocktail_Magician_DB;
-using Cocktail_Magician_DB.Models;
 using Cocktail_Magician_Services.Contracts;
 using Cocktail_Magician.Areas.BarMagician.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -19,7 +13,6 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
     public class BarsController : Controller
     {
         private readonly IBarManager _barManager;
-
         public BarsController(IBarManager barManager)
         {
             _barManager = barManager;
@@ -52,20 +45,9 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
                 await _barManager.CreateBar(bar);
                 return RedirectToAction("Index", "Home");
             }
-            catch (InvalidOperationException ex)
+            catch (Exception ex)
             {
-                return RedirectToAction("Error", "Home", new ErrorViewModel
-                {
-                    ErrorCode = "500",
-                    ErrorMessage = ex.Message
-                });
-            }
-            catch (Exception)
-            {
-                return RedirectToAction("Error", "Home", new ErrorViewModel
-                {
-                    ErrorCode = "500"
-                });
+                return RedirecToActionError("500", ex.Message);
             }
         }
 
@@ -124,19 +106,16 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(string id)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
+                var bar = await _barManager.GetBar(id);
+                var barToDelete = BarViewModelMapper.MapBarViewModel(bar);
+                return View(barToDelete);
             }
-
-            var bar = await _barManager.GetBar(id);
-            if (bar == null)
+            catch (Exception ex)
             {
-                return NotFound();
+                return RedirecToActionError("404", ex.Message);
             }
-            var barToDelete = BarViewModelMapper.MapBarViewModel(bar);
-
-            return View(barToDelete);
         }
 
         // POST: Bars/Delete/5
@@ -144,22 +123,24 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var bar = await _barManager.GetBar(id);
-            if(bar != null)
+            try
             {
+                var bar = await _barManager.GetBar(id);
                 await _barManager.RemoveBar(bar.BarId);
+                return RedirectToAction("Index", "Home");
             }
-            else
+            catch (Exception ex)
             {
-                return NotFound();
+                return RedirecToActionError("404", ex.Message);
             }
-            
-            return RedirectToAction("Index", "Home");
         }
-
-        //private bool BarExists(string id)
-        //{
-        //    return _context.Bars.Any(e => e.BarId == id);
-        //}
+        private IActionResult RedirecToActionError(string errorCode, string errorMessage)
+        {
+            return RedirectToAction("Error", "Home", new ErrorViewModel
+            {
+                ErrorCode = errorCode,
+                ErrorMessage = errorMessage
+            });
+        }
     }
 }

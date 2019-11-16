@@ -1,18 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using Cocktail_Magician_DB;
-using Cocktail_Magician_DB.Models;
 using Cocktail_Magician_Services.Contracts;
-using Cocktail_Magician.Areas.BarMagician.Models;
 using Cocktail_Magician.Infrastructure.Mappers;
-using Cocktail_Magician.Areas.BarCrower.Models;
-using Cocktail_Magician_Services.DTO;
-using System.Security.Claims;
 using Cocktail_Magician.Models;
 using Microsoft.AspNetCore.Authorization;
 
@@ -27,7 +17,6 @@ namespace Cocktail_Magician.Areas.BarCrower.Controllers
         {
             _barManager = barManager;
         }
-
 
         // GET: BarCrower/Bars/Details/5
         public async Task<IActionResult> Details(string id)
@@ -44,11 +33,7 @@ namespace Cocktail_Magician.Areas.BarCrower.Controllers
             }
             catch (Exception ex)
             {
-                return RedirectToAction("Error", "Home", new ErrorViewModel
-                {
-                    ErrorCode = "404",
-                    ErrorMessage = ex.Message
-                });
+                return RedirecToActionError("404", ex.Message);
             }
         }
 
@@ -71,6 +56,15 @@ namespace Cocktail_Magician.Areas.BarCrower.Controllers
                 return RedirectToAction("Index", "Home");
             }
             return View();
+        }
+
+        private IActionResult RedirecToActionError(string errorCode, string errorMessage)
+        {
+            return RedirectToAction("Error", "Home", new ErrorViewModel
+            {
+                ErrorCode = errorCode,
+                ErrorMessage = errorMessage
+            });
         }
     }
 }

@@ -1,18 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using Cocktail_Magician_DB;
-using Cocktail_Magician_DB.Models;
 using Cocktail_Magician_Services.Contracts;
-using Cocktail_Magician.Areas.BarMagician.Models;
-using Cocktail_Magician.Areas.BarCrower.Models;
-using System.Security.Claims;
 using Cocktail_Magician.Infrastructure.Mappers;
-using Cocktail_Magician_Services.DTO;
 using Cocktail_Magician.Models;
 using Microsoft.AspNetCore.Authorization;
 
@@ -33,7 +23,7 @@ namespace Cocktail_Magician.Areas.BarCrower.Controllers
         {
             if (!ModelState.IsValid)
             {
-                ModelState.AddModelError(string.Empty, "Invalid review parameters!");
+                ModelState.AddModelError(string.Empty, "Invalid cocktail parameters!");
             }
             try
             {
@@ -43,11 +33,7 @@ namespace Cocktail_Magician.Areas.BarCrower.Controllers
             }
             catch (Exception ex)
             {
-                return RedirectToAction("Error", "Home", new ErrorViewModel 
-                { 
-                    ErrorCode = "404",
-                    ErrorMessage = ex.Message
-                });
+                return RedirecToActionError("404", ex.Message);
             }
         }
 
@@ -71,6 +57,15 @@ namespace Cocktail_Magician.Areas.BarCrower.Controllers
                 return RedirectToAction("Index", "Home");
             }
             return View();
+        }
+
+        private IActionResult RedirecToActionError(string errorCode, string errorMessage)
+        {
+            return RedirectToAction("Error", "Home", new ErrorViewModel
+            {
+                ErrorCode = errorCode,
+                ErrorMessage = errorMessage
+            });
         }
     }
 }

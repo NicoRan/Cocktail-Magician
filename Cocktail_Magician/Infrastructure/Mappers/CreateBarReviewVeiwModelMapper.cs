@@ -1,9 +1,5 @@
 ﻿using Cocktail_Magician.Models;
 using Cocktail_Magician_Services.DTO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Cocktail_Magician.Infrastructure.Mappers
 {
@@ -26,6 +22,5 @@ namespace Cocktail_Magician.Infrastructure.Mappers
         //    var newCollection = createReviewViewModels.Select(c => c.ToDTO()).ToList();
         //    return newCollection;
         //}
-
     }
 }

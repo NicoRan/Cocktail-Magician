@@ -1,9 +1,6 @@
 ﻿using Cocktail_Magician_DB.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Cocktail_Magician_DB.Configurations
 {
@@ -23,7 +20,6 @@ namespace Cocktail_Magician_DB.Configurations
                 .HasOne(ci => ci.Ingredient)
                 .WithMany(i => i.CocktailIngredient)
                 .HasForeignKey(fk => fk.IngredientId);
-
         }
     }
 }

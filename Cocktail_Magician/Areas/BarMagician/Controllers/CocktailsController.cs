@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using Cocktail_Magician_DB;
 using Cocktail_Magician_DB.Models;
 using Cocktail_Magician_Services.Contracts;
 using Cocktail_Magician.Models;
@@ -76,25 +72,15 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
                 ModelState.AddModelError(string.Empty, "Invalid bar parameters!");
                 return View(cocktailToCreate);
             }
-
             try
             {
-                var cocktailToAdd = new Cocktail()
-                {
-                    Name = cocktailToCreate.Cocktail.Name,
-                    Information = cocktailToCreate.Cocktail.Information,
-                    Picture = cocktailToCreate.Cocktail.Picture
-                };
+                var cocktailToAdd = CocktailViewModelMapper.MapCocktail(cocktailToCreate.Cocktail);
                 await _cocktailManager.CreateCocktail(cocktailToAdd, cocktailToCreate.Cocktail.Ingredients);
                 return RedirectToAction("Index", "Home");
             }
             catch (Exception ex)
             {
-                return RedirectToAction("Error", "Home", new ErrorViewModel
-                {
-                    ErrorCode = "500",
-                    ErrorMessage = ex.Message
-                });
+                return RedirecToActionError("500", ex.Message);
             }
         }
 
@@ -161,11 +147,7 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
             }
             catch (Exception ex)
             {
-                return RedirectToAction("Error", "Home", new ErrorViewModel()
-                {
-                    ErrorCode = "404",
-                    ErrorMessage = ex.Message
-                });
+                return RedirecToActionError("404", ex.Message);
             }
         }
 
@@ -182,12 +164,17 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
             }
             catch (Exception ex)
             {
-                return RedirectToAction("Error", "Home", new ErrorViewModel()
-                {
-                    ErrorCode = "404",
-                    ErrorMessage = ex.Message
-                });
+                return RedirecToActionError("404", ex.Message);
             }
+        }
+
+        private IActionResult RedirecToActionError(string errorCode, string errorMessage)
+        {
+            return RedirectToAction("Error", "Home", new ErrorViewModel
+            {
+                ErrorCode = errorCode,
+                ErrorMessage = errorMessage
+            });
         }
     }
 }

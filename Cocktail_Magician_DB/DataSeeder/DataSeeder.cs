@@ -1,9 +1,7 @@
 ﻿using Cocktail_Magician_DB.DataSeeder.IOSeed;
 using Cocktail_Magician_DB.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Cocktail_Magician_DB.DataSeeder
 {

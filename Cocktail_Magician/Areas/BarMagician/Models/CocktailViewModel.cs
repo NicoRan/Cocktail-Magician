@@ -1,5 +1,4 @@
-﻿using Cocktail_Magician_DB.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Cocktail_Magician.Areas.BarMagician.Models
