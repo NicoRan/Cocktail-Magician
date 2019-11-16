@@ -66,6 +66,18 @@ namespace Cocktail_Magician.Controllers
             return View();
         }
 
+        public async Task<IActionResult> AboutUs()
+        {
+            var totalbars = await _barManager.GetAllBarsAsync();
+            var totalCocktails = await _cocktailManager.GetAllCocktailsAsync();
+            var aboutUs = new AboutUsViewModel() 
+            { 
+                TotalBars = totalbars.Count(),
+                TotalCocktails = totalCocktails.Count()
+            };
+            return View(aboutUs);
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error(ErrorViewModel error)
         {

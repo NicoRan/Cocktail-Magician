@@ -134,13 +134,10 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
                 return RedirecToActionError("404", ex.Message);
             }
         }
-        private IActionResult RedirecToActionError(string errorCode, string errorMessage)
+        private IActionResult RedirecToActionError(string errorCode, string errorMessage) => RedirectToAction("Error", "Home", new ErrorViewModel
         {
-            return RedirectToAction("Error", "Home", new ErrorViewModel
-            {
-                ErrorCode = errorCode,
-                ErrorMessage = errorMessage
-            });
-        }
+            ErrorCode = errorCode,
+            ErrorMessage = errorMessage
+        });
     }
 }

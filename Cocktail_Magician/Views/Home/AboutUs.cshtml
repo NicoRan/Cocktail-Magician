@@ -1,0 +1,132 @@
+﻿@model AboutUsViewModel
+
+@{
+    ViewData["Title"] = "AboutUs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="section-title text-center w-100">
+    <h2><span><span>About</span> us</span></h2>
+    <p>We are on the Art & Cocktails since 2001</p>
+</div>
+
+<div class="two-column-css">
+
+    <p>By in no ecstatic wondered disposal my speaking. Direct wholly valley or uneasy it at really. Sir wish like said dull and need make. Sportsman one bed departure rapturous situation disposing his. Off say yet ample ten ought hence. Depending in newspaper an september do existence strangers. Total great saw water had mirth happy new.</p>
+
+    <p>Warmly little before cousin sussex entire men set. Blessing it ladyship on sensible judgment settling outweigh. Worse linen an of civil jokes leave offer. Parties all clothes removal cheered calling prudent her. And residence for met the estimable disposing. Mean if he they been no hold mr. Is at much do made took held help. Latter person am secure of estate genius at.</p>
+
+    <p>Lose eyes get fat shew. Winter can indeed letter oppose way change tended now. So is improve my charmed picture exposed adapted demands. Received had end produced prepared diverted strictly off man branched. Known ye money so large decay voice there to. Preserved be mr cordially incommode as an. He doors quick child an point at. Had share vexed front least style off why him.</p>
+
+</div>
+
+<div class="mb-100"></div>
+
+<div class="row justify-content-center">
+
+    <div class="col-12 col-lg-11 col-xl-10">
+
+        <div class="counting-wrapper justify-content-center">
+
+            <div class="bg-image overlay-relative" style="background-image:url('images/image-bg/44.jpg');">
+
+                <div class="overlay-holder overlay-white opacity-8"></div>
+
+                <div class="row equal-height cols-1 cols-sm-3 cols-md-3 gap-30 justify-content-center">
+
+                    <div class="col justify-content-center">
+
+                        <div class="item-counting">
+                            <div class="counting-inner">
+                                <div class="counting-number">
+                                    <span class="counter" data-decimal-delimiter="," data-thousand-delimiter="," data-value="@Model.TotalBars"></span>
+                                </div>
+                                <span class="counting-label">Total Bars</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col">
+
+                        <div class="item-counting">
+                            <div class="counting-inner">
+                                <div class="counting-number">
+                                    <span class="counter" data-decimal-delimiter="," data-thousand-delimiter="," data-value="@Model.TotalCocktails"></span>
+                                </div>
+                                <span class="counting-label">Total Cocktails</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="mb-100"></div>
+
+<div class="section-title text-center w-100">
+    <h2><span><span>Our</span> teams</span></h2>
+    <p>People who control making Art & Cocktails run</p>
+</div>
+
+<div class="row equal-height cols-2 cols-sm-3 cols-lg-4 gap-30 mb-40 justify-content-center">
+
+    <div class="col">
+
+        <figure class="user-grid">
+
+            <div class="image">
+                <img src="~/images/image-man/01.gif" alt="Team" class="img-circle" />
+            </div>
+
+            <figcaption class="content">
+
+                <h6 class="text-uppercase">Yordan Gospodinov</h6>
+                <p>CEO</p>
+                <ul class="social">
+                    <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                    <li><a href="#"><i class="fab fa-google-plus"></i></a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                </ul>
+
+            </figcaption>
+
+        </figure>
+
+    </div>
+
+    <div class="col">
+
+        <figure class="user-grid">
+
+            <div class="image">
+                <img src="~/images/image-man/02.jpg" alt="Team" class="img-circle" />
+            </div>
+
+            <figcaption class="content">
+
+                <h6 class="text-uppercase">Nikola Rangelov</h6>
+                <p>CEO</p>
+                <ul class="social">
+                    <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                    <li><a href="#"><i class="fab fa-google-plus"></i></a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                </ul>
+
+            </figcaption>
+
+        </figure>
+
+    </div>
+
+</div>

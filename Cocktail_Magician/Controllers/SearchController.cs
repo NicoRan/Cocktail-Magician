@@ -84,7 +84,6 @@ namespace Cocktail_Magician.Controllers
 
         private async Task<SearchResultViewModel> SearchByTypeAndCriteria(SearchResultViewModel model)
         {
-            //After Implementing Mappers, this will be simplified
             var resultsBars = new List<Bar>();
             var resultsCocktails = new List<Cocktail>();
             var resultsView = new SearchResultViewModel();

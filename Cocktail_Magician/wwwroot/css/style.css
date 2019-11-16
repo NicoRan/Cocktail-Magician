@@ -2559,6 +2559,7 @@ a.destination-grid-item-02 {
 .counting-wrapper {
     border: 2px solid #FF5454;
     padding: 5px;
+    text-align: center;
 }
 
 .counting-wrapper .bg-image {
@@ -2573,6 +2574,7 @@ a.destination-grid-item-02 {
 
 .item-counting .counting-inner {
     display: inline-block;
+    text-align: center;
 }
 
 .item-counting .counting-number {

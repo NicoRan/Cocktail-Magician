@@ -8,19 +8,19 @@
 {
     <nav class="main-nav-menu main-menu-nav navbar-arrow">
         <ul class="main-nav">
-
             <li>
                 <a href="#">HELLO, @User.Identity.Name!</a>
                 <ul>
                     <li>
-                        <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Profile</a>
+                        <form>
+                            <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage" class="col-3 col-md-7 btn btn-outline-success">Profile</a>
+                        </form>
                     </li>
                     <li>
                         <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                            <button type="submit" class="btn btn-outline-danger">LOGOUT </button>
+                            <button type="submit" class="col-3 col-md-7 btn btn-outline-danger">LOGOUT </button>
                         </form>
                     </li>
-
                 </ul>
             </li>
             <li>

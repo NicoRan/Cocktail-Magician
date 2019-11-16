@@ -27,6 +27,7 @@ namespace Cocktail_Magician_DB.Models
         public string Address { get; set; }
         [MinLength(5, ErrorMessage = "Information should be atleast 5 symbols!")]
         public string Information { get; set; }
+        [DisplayFormat(DataFormatString = "{0:0,0}")]
         public double Rating { get; set; }
         public string Picture { get; set; }
         public string MapDirections { get; set; }

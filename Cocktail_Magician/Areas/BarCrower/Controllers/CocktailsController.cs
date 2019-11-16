@@ -59,13 +59,10 @@ namespace Cocktail_Magician.Areas.BarCrower.Controllers
             return View();
         }
 
-        private IActionResult RedirecToActionError(string errorCode, string errorMessage)
+        private IActionResult RedirecToActionError(string errorCode, string errorMessage) => RedirectToAction("Error", "Home", new ErrorViewModel
         {
-            return RedirectToAction("Error", "Home", new ErrorViewModel
-            {
-                ErrorCode = errorCode,
-                ErrorMessage = errorMessage
-            });
-        }
+            ErrorCode = errorCode,
+            ErrorMessage = errorMessage
+        });
     }
 }

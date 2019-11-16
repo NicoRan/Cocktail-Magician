@@ -50,11 +50,7 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
             }
             catch (Exception ex)
             {
-                return RedirectToAction("Error", "Home", new ErrorViewModel
-                {
-                    ErrorCode = "500",
-                    ErrorMessage = ex.Message
-                });
+                return RedirecToActionError("500", ex.Message);
             }
         }
 
@@ -84,5 +80,11 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
         //    await _context.SaveChangesAsync();
         //    return RedirectToAction(nameof(Index));
         //}
+
+        private IActionResult RedirecToActionError(string errorCode, string errorMessage) => RedirectToAction("Error", "Home", new ErrorViewModel
+        {
+            ErrorCode = errorCode,
+            ErrorMessage = errorMessage
+        });
     }
 }
