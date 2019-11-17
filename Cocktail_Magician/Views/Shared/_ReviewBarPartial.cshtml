@@ -1,17 +1,10 @@
 ﻿@model CreateReviewViewModel
 
-@{
-    ViewData["Title"] = "Review";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
-<h4>Bar Review</h4>
-<hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-area="BarCrower" asp-controller="Bars" asp-action="Review" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
+            <input asp-for="Id" value="@Model.Id" hidden />
             <input asp-for="UserId" value="@User.FindFirstValue(ClaimTypes.NameIdentifier)" hidden />
 
             <div class="form-group">
@@ -34,18 +27,10 @@
                 <br />
                 <br />
                 <label asp-for="Comment" class="control-label">Message </label>
-                <textarea asp-for="Comment" class="form-control" rows="8" maxlength="500"></textarea>
+                <textarea asp-for="Comment" rows="8" cols="100" maxlength="500"></textarea>
                 <span asp-validation-for="Comment" class="text-danger"></span>
             </div>
                 <input type="submit" value="Create" class="btn btn-primary" />
         </form>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

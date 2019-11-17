@@ -5,11 +5,11 @@ $(document).ready(() => {
         console.log(event);
         let divHolder = document.getElementById('review-show');
         console.log(divHolder);
-        if (divHolder.style.visibility === 'hidden') {
-            divHolder.style.visibility = "visible";
+        if (divHolder.style.display === 'none') {
+            divHolder.style.display = "initial";
         }
         else {
-            divHolder.style.visibility = "hidden";
+            divHolder.style.display = "none";
         }
     });
 });

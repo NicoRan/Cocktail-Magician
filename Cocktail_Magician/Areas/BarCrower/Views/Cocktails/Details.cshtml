@@ -63,13 +63,12 @@
                             <div class="row mt-25">
                                 <div class="col-12 col-md-8 col-lg-9 offset-md-4 offset-lg-3">
                                     <div class="col-inner">
-                                        @*<a asp-area="BarCrower" asp-controller="Cocktails" asp-action="Review" asp-route-id="@Model.CocktailId" method="get" class="btn btn-primary btn-wide">  Review Cocktail</a>*@
-                                        <input type="button" class="btn btn-primary" id="show-hide-review" value="Review Cocktail" />
-                                    </div>
-                                    <div id="review-show" style="width: 300px; position: fixed; top: 25%; right:20% ;visibility:hidden; height: 370px;">
-                                        <partial name="_ReviewPartial" model="new CreateReviewViewModel { Id=Model.CocktailId }">
+                                        <button id="show-hide-review" class="btn btn-primary btn-wide"> Review Cocktail</button>
                                     </div>
                                 </div>
+                            </div>
+                            <div id="review-show" style="display: none;">
+                                <partial name="_ReviewCocktailPartial" , model="new CreateReviewViewModel() { Id = @Model.CocktailId }" />
                             </div>
                         }
                         <div class="mb-50"></div>

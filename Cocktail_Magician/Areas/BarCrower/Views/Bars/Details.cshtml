@@ -45,7 +45,7 @@
                         <ul class="list-icon-data-attr font-ionicons">
                             @foreach (var cocktail in Model.Cocktails)
                             {
-                            <li data-content="&#xf383"> @Html.ActionLink(cocktail.Name, "Details", "Cocktails", new { id = cocktail.CocktailId }, null) </li>
+                                <li data-content="&#xf383"> @Html.ActionLink(cocktail.Name, "Details", "Cocktails", new { id = cocktail.CocktailId }, null) </li>
                             }
                         </ul>
                         <!-- Make a foreach loop to get all cocktails the bar offers end -->
@@ -72,13 +72,18 @@
                             <div class="row mt-25">
                                 <div class="col-12 col-md-8 col-lg-9 offset-md-4 offset-lg-3">
                                     <div class="col-inner">
-                                        <a asp-area="BarCrower" asp-controller="Bars" asp-action="Review" asp-route-id="@Model.BarId" method="get" class="btn btn-primary btn-wide"> Review Bar</a>
+                                        <button id="show-hide-review" class="btn btn-primary btn-wide"> Review Bar</button>
                                     </div>
                                 </div>
+                            </div>
+                            <div id="review-show" style="display: none;">
+                                <partial name="_ReviewBarPartial" , model="new CreateReviewViewModel() { Id = @Model.BarId }" />
                             </div>
                         }
                         <div class="mb-50"></div>
                     </div>
+                    
+                    <!-- List of Reviews start -->
                     <div id="detail-content-sticky-nav-07" class="fullwidth-horizon-sticky-section">
                         <h4 class="heading-title">Reviews</h4>
                         <ul class="review-list">
@@ -204,6 +209,7 @@
                             </li>
                         </ul>
                     </div>
+                    <!-- List of Reviews end -->
                 </div>
             </div>
         </div>

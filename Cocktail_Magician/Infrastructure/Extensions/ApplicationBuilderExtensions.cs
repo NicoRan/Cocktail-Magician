@@ -53,7 +53,8 @@ namespace Cocktail_Magician.Infrastructure.Extensions
                         adminUser = new User
                         {
                             UserName = "admin",
-                            Email = "admin@admin.com"
+                            Email = "admin@admin.com",
+                            Picture = "https://image.shutterstock.com/image-vector/funny-cartoon-character-angry-boss-600w-472250914.jpg"
                         };
 
                         // By default it takes minimum 6 symbols

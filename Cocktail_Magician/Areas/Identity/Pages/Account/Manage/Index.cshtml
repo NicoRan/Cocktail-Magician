@@ -14,7 +14,14 @@
                 <div class="box-content">
                     <div class="dashboard-avatar mb-10">
                         <div class="image">
-                            <img src="@Model.Input.Picture" alt="Image" />
+                            @if (Model.Input.Picture == null)
+                            {
+                                <img src="~/images/image-man/EmptyProfilePicture.png" alt="Image" />
+                            }
+                            else
+                            {
+                                <img src="@Model.Input.Picture" alt="Image" />
+                            }
                         </div>
                         <div class="content">
                             <h6>@User.Identity.Name</h6>
@@ -50,7 +57,14 @@
                     <div class="row gap-30">
                         <div class="col-6 col-sm-5 col-md-4 col-lg-4 order-lg-last">
                             <div class="avatar-upload">
-                                <img class="profile-pic d-block" src="@Model.Input.Picture" alt="avatar" />
+                                @if (Model.Input.Picture == null)
+                                {
+                                    <img class="profile-pic d-block" src="~/images/image-man/EmptyProfilePicture.png" alt="avatar" />
+                                }
+                                else
+                                {
+                                    <img class="profile-pic d-block" src="@Model.Input.Picture" alt="avatar" />
+                                }
                                 <input asp-for="Input.Picture" class="form-control" />
                             </div>
                         </div>
