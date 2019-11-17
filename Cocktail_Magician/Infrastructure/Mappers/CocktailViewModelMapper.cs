@@ -1,5 +1,6 @@
 ﻿using Cocktail_Magician.Areas.BarMagician.Models;
 using Cocktail_Magician_DB.Models;
+using Microsoft.EntityFrameworkCore.Internal;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -16,7 +17,7 @@ namespace Cocktail_Magician.Infrastructure.Mappers
                 Ingredients = new List<string>(),
                 Name = cocktail.Name,
                 Picture = cocktail.Picture,
-                Rating = cocktail.Rating
+                Rating = cocktail.CocktailRatings.Any(c => c.CocktailId == cocktail.Id) ? cocktail.CocktailRatings.Average(c => c.Grade) : 0
             };
             foreach (var ingredient in cocktail.Ingredients)
             {
