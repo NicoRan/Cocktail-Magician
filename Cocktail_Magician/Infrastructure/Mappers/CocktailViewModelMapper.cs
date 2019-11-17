@@ -1,6 +1,7 @@
 ﻿using Cocktail_Magician.Areas.BarMagician.Models;
 using Cocktail_Magician_DB.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Cocktail_Magician.Infrastructure.Mappers
 {
@@ -32,7 +33,7 @@ namespace Cocktail_Magician.Infrastructure.Mappers
                 Information = cocktail.Information,
                 Name = cocktail.Name,
                 Picture = cocktail.Picture,
-                Rating = cocktail.Rating
+                Rating = cocktail.CocktailRatings.Any(c => c.CocktailId == cocktail.Id) ? cocktail.CocktailRatings.Average(c => c.Grade) : 0
             };
             return cocktailViewModel;
         }

@@ -15,7 +15,8 @@ namespace Cocktail_Magician_Services.Mappers
                 Name = cocktail.Name,
                 Information = cocktail.Information,
                 Picture = cocktail.Picture,
-                IsDeleted = cocktail.IsDeleted
+                IsDeleted = cocktail.IsDeleted,
+                
             };
             return cocktailDTO;
         }

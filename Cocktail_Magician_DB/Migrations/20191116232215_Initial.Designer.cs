@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cocktail_Magician_DB.Migrations
 {
     [DbContext(typeof(CMContext))]
-    [Migration("20191112141737_Changed_BarCocktail_Table_WithICollections")]
-    partial class Changed_BarCocktail_Table_WithICollections
+    [Migration("20191116232215_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -86,7 +86,9 @@ namespace Cocktail_Magician_DB.Migrations
 
                     b.Property<string>("BarId");
 
-                    b.Property<int>("Grade");
+                    b.Property<decimal>("Grade")
+                        .HasConversion(new ValueConverter<decimal, decimal>(v => default(decimal), v => default(decimal), new ConverterMappingHints(precision: 38, scale: 17)))
+                        .HasColumnType("numeric(18, 2)");
 
                     b.HasKey("UserId", "BarId");
 
@@ -159,7 +161,9 @@ namespace Cocktail_Magician_DB.Migrations
 
                     b.Property<string>("CocktailId");
 
-                    b.Property<int>("Grade");
+                    b.Property<decimal>("Grade")
+                        .HasConversion(new ValueConverter<decimal, decimal>(v => default(decimal), v => default(decimal), new ConverterMappingHints(precision: 38, scale: 17)))
+                        .HasColumnType("numeric(18, 2)");
 
                     b.HasKey("UserId", "CocktailId");
 

@@ -50,6 +50,7 @@ namespace Cocktail_Magician_Services
         public async Task<List<Cocktail>> GetTopRatedCocktails()
         {
             var cocktails = await _context.Cocktails
+                .Include(c=>c.CocktailRatings)
                 .OrderByDescending(cocktail => cocktail.Rating)
                 .ThenBy(cocktail => cocktail.Name)
                 .Take(4)
@@ -83,7 +84,11 @@ namespace Cocktail_Magician_Services
         {
             try
             {
-                var cocktail = await _context.Cocktails.Include(c => c.Ingredients).Where(c => !c.IsDeleted).FirstOrDefaultAsync(c => c.Id == id);
+                var cocktail = await _context.Cocktails
+                    .Include(c => c.Ingredients)
+                    .Include(c=>c.CocktailRatings)
+                    .Where(c => !c.IsDeleted)
+                    .FirstOrDefaultAsync(c => c.Id == id);
                 return cocktail;
             }
             catch (InvalidOperationException)
@@ -109,7 +114,11 @@ namespace Cocktail_Magician_Services
 
         public async Task<List<Cocktail>> GetAllCocktailsAsync()
         {
-            return await _context.Cocktails.Include(cocktail => cocktail.Ingredients).Where(cocktail => !cocktail.IsDeleted).ToListAsync(); ;
+            return await _context.Cocktails
+                .Include(cocktail => cocktail.Ingredients)
+                .Include(c=>c.CocktailRatings)
+                .Where(cocktail => !cocktail.IsDeleted)
+                .ToListAsync(); ;
         }
 
         private string CocktailsRecipe(List<string> ingredients)

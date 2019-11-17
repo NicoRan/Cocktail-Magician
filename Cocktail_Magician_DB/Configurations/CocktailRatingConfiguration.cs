@@ -23,6 +23,7 @@ namespace Cocktail_Magician_DB.Configurations
 
             builder
                 .Property(cr => cr.Grade)
+                .HasColumnType("numeric(18, 2)")
                 .IsRequired();
         }
     }

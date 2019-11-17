@@ -50,7 +50,10 @@ namespace Cocktail_Magician_Services
         {
             try
             {
-                var bar = await _context.Bars.Where(b => !b.IsDeleted).FirstOrDefaultAsync(b => b.BarId == id);
+                var bar = await _context.Bars
+                    .Include(b=>b.BarRatings)
+                    .Where(b => !b.IsDeleted)
+                    .FirstOrDefaultAsync(b => b.BarId == id);
                 bar.Cocktails = await GetBarsOfferedCocktails(bar.BarId);
                 return bar;
             }
@@ -63,6 +66,7 @@ namespace Cocktail_Magician_Services
         public async Task<List<Bar>> GetTopRatedBars()
         {
             var bars = await _context.Bars
+                .Include(b=>b.BarRatings)
                 .Where(bar => !bar.IsDeleted)
                 .OrderByDescending(bar => bar.Rating)
                 .ThenBy(bar => bar.Name)
@@ -107,7 +111,11 @@ namespace Cocktail_Magician_Services
 
         public async Task<List<Bar>> GetAllBarsAsync()
         {
-            var listOfBars = await _context.Bars.Include(b => b.Cocktails).Where(b => !b.IsDeleted).ToListAsync();
+            var listOfBars = await _context.Bars
+                .Include(b => b.Cocktails)
+                .Include(c=>c.BarRatings)
+                .Where(b => !b.IsDeleted)
+                .ToListAsync();
             return listOfBars;
         }
     }
