@@ -25,10 +25,14 @@ namespace Cocktail_Magician.Controllers
 
             var topBarsViewModel = topBars.Select(bar => BarViewModelMapper.MapTopBarViewModel(bar))
                 .ToList();
+            await FillingReviews(topBarsViewModel);
 
             var topCocktails = await _cocktailManager.GetTopRatedCocktails();
 
             var topCocktailsViewModel = topCocktails.Select(cocktail => CocktailViewModelMapper.MapTopCocktailViewModel(cocktail)).ToList();
+
+            await FillingReviews(topCocktailsViewModel);
+
 
             var topRatedHomePage = new TopRatedHomePageViewModel();
             topRatedHomePage.TopBars = topBarsViewModel;
@@ -36,6 +40,8 @@ namespace Cocktail_Magician.Controllers
 
             return View(topRatedHomePage);
         }
+
+
 
         public async Task<IActionResult> BarCatalog()
         {
@@ -70,8 +76,8 @@ namespace Cocktail_Magician.Controllers
         {
             var totalbars = await _barManager.GetAllBarsAsync();
             var totalCocktails = await _cocktailManager.GetAllCocktailsAsync();
-            var aboutUs = new AboutUsViewModel() 
-            { 
+            var aboutUs = new AboutUsViewModel()
+            {
                 TotalBars = totalbars.Count(),
                 TotalCocktails = totalCocktails.Count()
             };
@@ -82,6 +88,29 @@ namespace Cocktail_Magician.Controllers
         public IActionResult Error(ErrorViewModel error)
         {
             return View(error);
+        }
+
+
+        private async Task FillingReviews(List<BarViewModel> topBarsViewModel)
+        {
+            foreach (var bar in topBarsViewModel)
+            {
+                var newCollection = (await _barManager.GetAllReviewsByBarID(bar.BarId)).ToVM();
+
+
+                bar.ReviewViewModels = newCollection;
+            }
+        }
+
+        private async Task FillingReviews(List<CocktailViewModel> viewModel)
+        {
+            foreach (var cocktail in viewModel)
+            {
+                var newCollection = (await _cocktailManager.GetAllReviewsByCocktailID(cocktail.CocktailId)).ToVM();
+
+
+                cocktail.ReviewViewModels = newCollection;
+            }
         }
     }
 }

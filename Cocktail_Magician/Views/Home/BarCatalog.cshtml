@@ -30,7 +30,7 @@
                 </div>
             </div>
             <div class="row equal-height cols-1 cols-sm-2 cols-lg-3 gap-20 mt-50">
-                @foreach (var bar in Model)
+                @foreach (var bar in Model.OrderByDescending(b=>b.Rating))
                 {
                     <div class="col">
                         <article class="post-grid-01">

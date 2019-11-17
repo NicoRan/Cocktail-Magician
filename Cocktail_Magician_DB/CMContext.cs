@@ -20,13 +20,10 @@ namespace Cocktail_Magician_DB
         public DbSet<Bar> Bars { get; set; }
         public DbSet<Cocktail> Cocktails { get; set; }
         public DbSet<CocktailIngredient> CocktailIngredients { get; set; }
-        //public DbSet<Comment> Comments { get; set; }
         public DbSet<Ingredient> Ingredients { get; set; }
         public DbSet<BarCocktail> BarCocktails { get; set; }
-        public DbSet<BarRating> BarRatings { get; set; }
-        public DbSet<BarComment> BarComments { get; set; }
-        public DbSet<CocktailRating> CocktailRatings { get; set; }
-        public DbSet<CocktailComment> CocktailComments { get; set; }
+        public DbSet<BarReview> BarReviews { get; set; }
+        public DbSet<CocktailReview> CocktailReviews { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -36,10 +33,9 @@ namespace Cocktail_Magician_DB
             builder.ApplyConfiguration(new BarCocktailConfigurations());
             builder.ApplyConfiguration(new CocktailIngredientConfigurations());
             builder.ApplyConfiguration(new IngredientConfigurations());
-            builder.ApplyConfiguration(new BarCommentConfiguration());
-            builder.ApplyConfiguration(new BarRatingConfigurations());
-            builder.ApplyConfiguration(new CocktailCommentConfigurations());
-            builder.ApplyConfiguration(new CocktailRatingConfiguration());
+            builder.ApplyConfiguration(new BarReviewConfigurations());
+            builder.ApplyConfiguration(new CocktailReviewConfigurations());
+
 
             base.OnModelCreating(builder);
         }

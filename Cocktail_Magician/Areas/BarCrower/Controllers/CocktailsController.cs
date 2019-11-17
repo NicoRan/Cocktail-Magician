@@ -29,6 +29,8 @@ namespace Cocktail_Magician.Areas.BarCrower.Controllers
             {
                 var cocktail = await _cocktailManager.GetCocktail(id);
                 var cocktailViewModel = CocktailViewModelMapper.MapCocktailViewModel(cocktail);
+                cocktailViewModel.ReviewViewModels = (await _cocktailManager.GetAllReviewsByCocktailID(id)).ToVM();
+
                 return View(cocktailViewModel);
             }
             catch (Exception ex)

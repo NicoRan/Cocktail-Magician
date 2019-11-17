@@ -51,7 +51,7 @@ namespace Cocktail_Magician_Services
             try
             {
                 var bar = await _context.Bars
-                    .Include(b=>b.BarRatings)
+                    .Include(b => b.BarReviews)
                     .Where(b => !b.IsDeleted)
                     .FirstOrDefaultAsync(b => b.BarId == id);
                 bar.Cocktails = await GetBarsOfferedCocktails(bar.BarId);
@@ -66,7 +66,7 @@ namespace Cocktail_Magician_Services
         public async Task<List<Bar>> GetTopRatedBars()
         {
             var bars = await _context.Bars
-                .Include(b=>b.BarRatings)
+                .Include(b => b.BarReviews)
                 .Where(bar => !bar.IsDeleted)
                 .OrderByDescending(bar => bar.Rating)
                 .ThenBy(bar => bar.Name)
@@ -75,24 +75,17 @@ namespace Cocktail_Magician_Services
             return bars;
         }
 
-        public async Task<BarReviewDTO> CreateBarReviewAsync(BarReviewDTO barReviewDTO)
+        public async Task<BarReviewDTO> Create  BarReviewAsync(BarReviewDTO barReviewDTO)
         {
             if (barReviewDTO.Grade != 0)
             {
-                var barRating = barReviewDTO.ToRatingEntity();
+                var barReview = barReviewDTO.ToEntity();
 
-                await _context.BarRatings.AddAsync(barRating);
+                await _context.BarReviews.AddAsync(barReview);
                 await _context.SaveChangesAsync();
 
             }
-
-            if (barReviewDTO.Comment != null)
-            {
-                var barComment = barReviewDTO.ToCommentEntity();
-
-                await _context.BarComments.AddAsync(barComment);
-                await _context.SaveChangesAsync();
-            }
+            await _context.SaveChangesAsync();
 
             return barReviewDTO;
         }
@@ -113,10 +106,17 @@ namespace Cocktail_Magician_Services
         {
             var listOfBars = await _context.Bars
                 .Include(b => b.Cocktails)
-                .Include(c=>c.BarRatings)
+                .Include(c => c.BarReviews)
                 .Where(b => !b.IsDeleted)
                 .ToListAsync();
             return listOfBars;
+        }
+
+        public async Task<ICollection<BarReviewDTO>> GetAllReviewsByBarID(string barId)
+        {
+            var reviews = await _context.BarReviews.Where(br => br.BarId == barId).ToListAsync();
+
+            return reviews.ToDTO();
         }
     }
 }

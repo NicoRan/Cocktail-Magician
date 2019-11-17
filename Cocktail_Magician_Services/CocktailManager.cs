@@ -50,7 +50,7 @@ namespace Cocktail_Magician_Services
         public async Task<List<Cocktail>> GetTopRatedCocktails()
         {
             var cocktails = await _context.Cocktails
-                .Include(c=>c.CocktailRatings)
+                .Include(c=>c.CocktailReviews)
                 .OrderByDescending(cocktail => cocktail.Rating)
                 .ThenBy(cocktail => cocktail.Name)
                 .Take(4)
@@ -62,17 +62,9 @@ namespace Cocktail_Magician_Services
         {
             if (cocktailReviewDTO.Grade != 0)
             {
-                var cocktailRating = cocktailReviewDTO.ToRatingEntity();
+                var cocktailReview = cocktailReviewDTO.ToEntity();
 
-                await _context.CocktailRatings.AddAsync(cocktailRating);
-            }
-
-            //TODO cocktailCommentadd
-            if (cocktailReviewDTO.Comment != null)
-            {
-                var cocktailComment = cocktailReviewDTO.ToCommentEntity();
-
-                await _context.CocktailComments.AddAsync(cocktailComment);
+                await _context.CocktailReviews.AddAsync(cocktailReview);
             }
 
             await _context.SaveChangesAsync();
@@ -86,7 +78,7 @@ namespace Cocktail_Magician_Services
             {
                 var cocktail = await _context.Cocktails
                     .Include(c => c.Ingredients)
-                    .Include(c=>c.CocktailRatings)
+                    .Include(c=>c.CocktailReviews)
                     .Where(c => !c.IsDeleted)
                     .FirstOrDefaultAsync(c => c.Id == id);
                 return cocktail;
@@ -116,9 +108,16 @@ namespace Cocktail_Magician_Services
         {
             return await _context.Cocktails
                 .Include(cocktail => cocktail.Ingredients)
-                .Include(c=>c.CocktailRatings)
+                .Include(c=>c.CocktailReviews)
                 .Where(cocktail => !cocktail.IsDeleted)
                 .ToListAsync(); ;
+        }
+
+        public async Task<ICollection<CocktailReviewDTO>> GetAllReviewsByCocktailID(string cocktailId)
+        {
+            var reviews = await _context.CocktailReviews.Where(c => c.CocktailId == cocktailId).ToListAsync();
+
+            return reviews.ToDTO();
         }
 
         private string CocktailsRecipe(List<string> ingredients)

@@ -4,7 +4,7 @@
     <h2><span><span>Top</span> Cocktails</span></h2>
 </div>
 <div class="row cols-1 cols-sm-2 cols-lg-4 gap-2 mb-20">
-    @foreach (var cocktail in Model.TopCocktails)
+    @foreach (var cocktail in Model.TopCocktails.OrderByDescending(c=>c.Rating))
     {
         <div class="col">
             <figure class="destination-grid-item-01">
@@ -19,7 +19,7 @@
                             <div class="rating-icons">
                                 <input type="hidden" class="rating" data-filled="rating-icon ri-star rating-rated" data-empty="rating-icon ri-star-empty" data-fractions="2" data-readonly value="@cocktail.Rating" /> @cocktail.Rating
                             </div>
-                            <p class="rating-text font600 text-muted font-12 letter-spacing-1"></p>
+                            <p class="rating-text font600 text-muted font-12 letter-spacing-1">@cocktail.ReviewViewModels.Count</p>
                         </div>
                     </figcaption>
                 </a>
@@ -37,7 +37,7 @@
 </div>
 <div class="row equal-height cols-1 cols-sm-2 cols-lg-3 gap-20 mb-30">
     @*<partial name="_TopRatedBars" />*@
-    @foreach (var bar in Model.TopBars)
+    @foreach (var bar in Model.TopBars.OrderByDescending(b=>b.Rating))
     {
         <div class="col">
             <figure class="tour-grid-item-01">
@@ -56,7 +56,7 @@
                                     <div class="rating-icons">
                                         <input type="hidden" class="rating" data-filled="rating-icon ri-star rating-rated" data-empty="rating-icon ri-star-empty" data-fractions="2" data-readonly value="@bar.Rating" /> @bar.Rating
                                     </div>
-                                    <p class="rating-text font600 text-muted font-12 letter-spacing-1">26 reviews</p>
+                                    <p class="rating-text font600 text-muted font-12 letter-spacing-1">@bar.ReviewViewModels.Count reviews</p>
                                 </div>
                             </li>
                         </ul>

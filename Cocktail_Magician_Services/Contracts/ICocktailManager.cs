@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Cocktail_Magician_DB.Models;
+using Cocktail_Magician_Services.DTO;
 
 namespace Cocktail_Magician_Services.Contracts
 {
@@ -12,5 +13,7 @@ namespace Cocktail_Magician_Services.Contracts
         Task RemoveCocktail(string id);
         Task<List<Cocktail>> GetAllCocktailsAsync();
         Task<DTO.CocktailReviewDTO> CreateCocktailReviewAsync(DTO.CocktailReviewDTO cocktailReviewDTO);
+
+        Task<ICollection<CocktailReviewDTO>> GetAllReviewsByCocktailID(string cocktailId);
     }
 }

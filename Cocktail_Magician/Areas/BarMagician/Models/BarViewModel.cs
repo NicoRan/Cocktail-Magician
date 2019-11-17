@@ -23,6 +23,7 @@ namespace Cocktail_Magician.Areas.BarMagician.Models
         public string Information { get; set; }
         public string Picture { get; set; }
         public string Map { get; set; }
+        public ICollection<ReviewViewModel> ReviewViewModels { get; set; }
         public ICollection<CocktailViewModel> Cocktails { get; set; }
     }
 }
