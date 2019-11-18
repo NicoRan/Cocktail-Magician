@@ -7,6 +7,7 @@
         public string Address { get; set; }
         public string Information { get; set; }
         public string Picture { get; set; }
+        public double Rating { get; set; }
         public string MapDirection { get; set; }
         public bool IsDeleted { get; set; }
     }

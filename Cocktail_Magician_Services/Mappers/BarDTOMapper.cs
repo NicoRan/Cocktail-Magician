@@ -16,6 +16,7 @@ namespace Cocktail_Magician_Services.Mappers
                 Information = bar.Information,
                 Address = bar.Address,
                 Picture = bar.Picture,
+                Rating = bar.Rating,
                 MapDirection = bar.MapDirections,
                 IsDeleted = bar.IsDeleted
             };

@@ -17,7 +17,7 @@ namespace Cocktail_Magician.Infrastructure.Mappers
                 Ingredients = new List<string>(),
                 Name = cocktail.Name,
                 Picture = cocktail.Picture,
-                Rating = cocktail.CocktailReviews.Any(c => c.CocktailId == cocktail.Id) ? cocktail.CocktailReviews.Average(c => c.Grade) : 0
+                Rating = cocktail.Rating
             };
             foreach (var ingredient in cocktail.Ingredients)
             {
@@ -34,7 +34,7 @@ namespace Cocktail_Magician.Infrastructure.Mappers
                 Information = cocktail.Information,
                 Name = cocktail.Name,
                 Picture = cocktail.Picture,
-                Rating = cocktail.CocktailReviews.Any(c => c.CocktailId == cocktail.Id) ? cocktail.CocktailReviews.Average(c => c.Grade) : 0
+                Rating = cocktail.Rating
             };
             return cocktailViewModel;
         }
