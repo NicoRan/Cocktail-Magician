@@ -66,6 +66,7 @@ namespace Cocktail_Magician_Services
         public async Task<List<Bar>> GetTopRatedBars()
         {
             var bars = await _context.Bars
+                .Include(b => b.BarReviews)
                 .Where(bar => !bar.IsDeleted)
                 .OrderByDescending(bar => bar.Rating)
                 .ThenBy(bar => bar.Name)
@@ -74,7 +75,7 @@ namespace Cocktail_Magician_Services
             return bars;
         }
 
-        public async Task<BarReviewDTO> CreateBarReviewAsync(BarReviewDTO barReviewDTO)
+        public async Task<BarReviewDTO> Create  BarReviewAsync(BarReviewDTO barReviewDTO)
         {
             if (barReviewDTO.Grade != 0)
             {

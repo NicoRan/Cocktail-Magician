@@ -26,7 +26,7 @@ namespace Cocktail_Magician.Infrastructure.Mappers
             barViewModel.Map = bar.MapDirections;
             barViewModel.Name = bar.Name;
             barViewModel.Picture = bar.Picture;
-            barViewModel.Rating = bar.Rating;
+            barViewModel.Rating = bar.BarReviews.Any(br => br.BarId == bar.BarId) ? bar.BarReviews.Average(br => br.Grade) : 0;
             return barViewModel;
         }
 
@@ -39,7 +39,7 @@ namespace Cocktail_Magician.Infrastructure.Mappers
             barViewModel.Map = bar.MapDirections;
             barViewModel.Name = bar.Name;
             barViewModel.Picture = bar.Picture;
-            barViewModel.Rating = bar.Rating;
+            barViewModel.Rating = bar.BarReviews.Any(br => br.BarId == bar.BarId) ? bar.BarReviews.Average(br => br.Grade) : 0;
             return barViewModel;
         }
 
