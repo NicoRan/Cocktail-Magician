@@ -79,6 +79,7 @@ namespace Cocktail_Magician_Services
                 var cocktail = await _context.Cocktails
                     .Include(c => c.Ingredients)
                     .Include(c => c.CocktailReviews)
+                        .ThenInclude(c=>c.User)
                     .Where(c => !c.IsDeleted)
                     .FirstOrDefaultAsync(c => c.Id == id);
                 return cocktail;
@@ -114,13 +115,14 @@ namespace Cocktail_Magician_Services
             return await _context.Cocktails
                 .Include(cocktail => cocktail.Ingredients)
                 .Include(c => c.CocktailReviews)
+                    .ThenInclude(c => c.User)
                 .Where(cocktail => !cocktail.IsDeleted)
                 .ToListAsync(); ;
         }
 
         public async Task<ICollection<CocktailReviewDTO>> GetAllReviewsByCocktailID(string cocktailId)
         {
-            var reviews = await _context.CocktailReviews.Where(c => c.CocktailId == cocktailId).ToListAsync();
+            var reviews = await _context.CocktailReviews.Include(c => c.User).Where(c => c.CocktailId == cocktailId).ToListAsync();
 
             return reviews.ToDTO();
         }

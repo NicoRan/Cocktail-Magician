@@ -61,6 +61,7 @@ namespace Cocktail_Magician
             services.AddScoped<IIngredientManager, IngredientManager>();
             services.AddScoped<ISearchManager, SearchManager>();
             services.AddScoped<IAdditionalUserManager, AdditionalUserManager>();
+            services.AddHostedService<BackgroundManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -17,7 +17,7 @@ namespace Cocktail_Magician_Services.Mappers
                 Picture = cocktail.Picture,
                 IsDeleted = cocktail.IsDeleted,
                 Rating = cocktail.CocktailReviews.Any(c => c.CocktailId == cocktail.Id) ? cocktail.CocktailReviews.Average(c => c.Grade) : 0,
-                CocktailReviewDTOs = cocktail.CocktailReviews.Select(c => c.ToDTO()).ToList()
+                CocktailReviewDTOs = cocktail.CocktailReviews.ToDTO()
             };
             return cocktailDTO;
         }

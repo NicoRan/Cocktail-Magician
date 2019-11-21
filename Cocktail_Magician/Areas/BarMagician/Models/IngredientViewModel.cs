@@ -5,11 +5,7 @@ namespace Cocktail_Magician.Areas.BarMagician.Models
 {
     public class IngredientViewModel
     {
-        public IngredientViewModel(Ingredient ingredient)
-        {
-            Id = ingredient.IngredientId;
-            Name = ingredient.Name;
-        }
+
         public string Id { get; set; }
         [MinLength(3, ErrorMessage = "Ingredient's name should be between 3 and 15 characters!"),
             MaxLength(15, ErrorMessage = "Ingredient's name should be between 3 and 15 characters!")]

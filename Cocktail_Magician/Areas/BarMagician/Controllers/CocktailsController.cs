@@ -7,6 +7,7 @@ using Cocktail_Magician_Services.Contracts;
 using Cocktail_Magician.Models;
 using Cocktail_Magician.Areas.BarMagician.Models;
 using Cocktail_Magician.Infrastructure.Mappers;
+using System.Linq;
 
 namespace Cocktail_Magician.Areas.BarMagician.Controllers
 {
@@ -67,10 +68,12 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateCocktailViewModel cocktailToCreate)
         {
-            if (!ModelState.IsValid)
+            if (string.IsNullOrWhiteSpace(cocktailToCreate.Cocktail?.Name) 
+                && string.IsNullOrWhiteSpace(cocktailToCreate.Cocktail?.Picture) 
+                && !cocktailToCreate.Cocktail.Ingredients.Any())
             {
                 ModelState.AddModelError(string.Empty, "Invalid bar parameters!");
-                return View(cocktailToCreate);
+                return RedirectToAction("Create");
             }
             try
             {

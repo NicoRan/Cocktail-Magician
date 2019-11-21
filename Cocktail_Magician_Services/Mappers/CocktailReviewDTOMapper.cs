@@ -16,7 +16,8 @@ namespace Cocktail_Magician_Services.Mappers
                 UserId = cocktailReview.UserId,
                 CocktailId = cocktailReview.CocktailId,
                 Grade = cocktailReview.Grade,
-                Comment = cocktailReview.Comment
+                Comment = cocktailReview.Comment,
+                UserName = cocktailReview.User.UserName
             };
             return cocktailReviewDTO;
         }
