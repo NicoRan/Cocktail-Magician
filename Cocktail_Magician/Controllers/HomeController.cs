@@ -6,6 +6,7 @@ using Cocktail_Magician.Models;
 using Cocktail_Magician_Services.Contracts;
 using Cocktail_Magician.Areas.BarMagician.Models;
 using Cocktail_Magician.Infrastructure.Mappers;
+using Cocktail_Magician_Services.Mappers;
 
 namespace Cocktail_Magician.Controllers
 {
@@ -23,20 +24,17 @@ namespace Cocktail_Magician.Controllers
         {
             var topBars = await _barManager.GetTopRatedBars();
 
-            var topBarsViewModel = topBars.Select(bar => BarViewModelMapper.MapTopBarViewModel(bar))
-                .ToList();
-            await FillingReviews(topBarsViewModel);
+            var topBarsViewModel = topBars.ToDTO();
 
             var topCocktails = await _cocktailManager.GetTopRatedCocktails();
 
-            var topCocktailsViewModel = topCocktails.Select(cocktail => CocktailViewModelMapper.MapTopCocktailViewModel(cocktail)).ToList();
+            var topCocktailsViewModel = topCocktails.ToDTO();
 
-            await FillingReviews(topCocktailsViewModel);
 
 
             var topRatedHomePage = new TopRatedHomePageViewModel();
-            topRatedHomePage.TopBars = topBarsViewModel;
-            topRatedHomePage.TopCocktails = topCocktailsViewModel;
+            topRatedHomePage.TopBars = topBarsViewModel.ToVM();
+            topRatedHomePage.TopCocktails = topCocktailsViewModel.ToVM();
 
             return View(topRatedHomePage);
         }
@@ -88,29 +86,6 @@ namespace Cocktail_Magician.Controllers
         public IActionResult Error(ErrorViewModel error)
         {
             return View(error);
-        }
-
-
-        private async Task FillingReviews(List<BarViewModel> topBarsViewModel)
-        {
-            foreach (var bar in topBarsViewModel)
-            {
-                var newCollection = (await _barManager.GetAllReviewsByBarID(bar.BarId)).ToVM();
-
-
-                bar.ReviewViewModels = newCollection;
-            }
-        }
-
-        private async Task FillingReviews(List<CocktailViewModel> viewModel)
-        {
-            foreach (var cocktail in viewModel)
-            {
-                var newCollection = (await _cocktailManager.GetAllReviewsByCocktailID(cocktail.CocktailId)).ToVM();
-
-
-                cocktail.ReviewViewModels = newCollection;
-            }
         }
     }
 }

@@ -5,7 +5,7 @@ namespace Cocktail_Magician.Models
 {
     public class TopRatedHomePageViewModel
     {
-        public List<CocktailViewModel> TopCocktails { get; set; }
-        public List<BarViewModel> TopBars { get; set; }
+        public ICollection<CocktailViewModel> TopCocktails { get; set; }
+        public ICollection<BarViewModel> TopBars { get; set; }
     }
 }

@@ -30,7 +30,7 @@
                 </div>
             </div>
             <div class="row cols-1 cols-sm-2 cols-lg-4 gap-2 mb-20">
-                @foreach (var cocktail in Model)
+                @foreach (var cocktail in Model.OrderByDescending(c=>c.Rating))
                 {
                     <div class="col">
                         <article class="post-grid-01">

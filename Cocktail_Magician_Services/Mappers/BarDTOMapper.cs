@@ -17,8 +17,11 @@ namespace Cocktail_Magician_Services.Mappers
                 Address = bar.Address,
                 Picture = bar.Picture,
                 MapDirection = bar.MapDirections,
-                IsDeleted = bar.IsDeleted
+                IsDeleted = bar.IsDeleted,
+                Rating = bar.BarReviews.Any(br => br.BarId == bar.BarId) ? bar.BarReviews.Average(br => br.Grade) : 0,
             };
+            barDTO.BarReviewDTOs = bar.BarReviews.Select(b => b.ToDTO()).ToList();
+            barDTO.CocktailDTOs = bar.Cocktails.ToDTO();
             return barDTO;
         }
 

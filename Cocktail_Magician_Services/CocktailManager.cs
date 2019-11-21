@@ -49,13 +49,13 @@ namespace Cocktail_Magician_Services
 
         public async Task<List<Cocktail>> GetTopRatedCocktails()
         {
-            var cocktails = await _context.Cocktails
-                .Include(c=>c.CocktailReviews)
-                .OrderByDescending(cocktail => cocktail.Rating)
-                .ThenBy(cocktail => cocktail.Name)
-                .Take(4)
-                .ToListAsync();
-            return cocktails;
+            var allCocktails = await GetAllCocktailsAsync();
+
+            var cocktails = allCocktails
+                .OrderByDescending(c => c.CocktailReviews.Any(ci => ci.CocktailId == c.Id) ? c.CocktailReviews.Average(ci => ci.Grade) : 0)
+                .ThenBy(cocktail => cocktail.Name);
+
+            return cocktails.Take(4).ToList();
         }
 
         public async Task<CocktailReviewDTO> CreateCocktailReviewAsync(CocktailReviewDTO cocktailReviewDTO)
@@ -78,7 +78,7 @@ namespace Cocktail_Magician_Services
             {
                 var cocktail = await _context.Cocktails
                     .Include(c => c.Ingredients)
-                    .Include(c=>c.CocktailReviews)
+                    .Include(c => c.CocktailReviews)
                     .Where(c => !c.IsDeleted)
                     .FirstOrDefaultAsync(c => c.Id == id);
                 return cocktail;
@@ -104,11 +104,16 @@ namespace Cocktail_Magician_Services
             }
         }
 
+        public async Task<bool> IsReviewGiven(string cocktailId, string userId)
+        {
+            return await _context.CocktailReviews.AnyAsync(cr => cr.CocktailId == cocktailId && cr.UserId == userId);
+        }
+
         public async Task<List<Cocktail>> GetAllCocktailsAsync()
         {
             return await _context.Cocktails
                 .Include(cocktail => cocktail.Ingredients)
-                .Include(c=>c.CocktailReviews)
+                .Include(c => c.CocktailReviews)
                 .Where(cocktail => !cocktail.IsDeleted)
                 .ToListAsync(); ;
         }

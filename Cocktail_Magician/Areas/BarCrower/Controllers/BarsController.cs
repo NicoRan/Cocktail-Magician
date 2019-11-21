@@ -5,6 +5,8 @@ using Cocktail_Magician_Services.Contracts;
 using Cocktail_Magician.Infrastructure.Mappers;
 using Cocktail_Magician.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+using Cocktail_Magician_Services.Mappers;
 
 namespace Cocktail_Magician.Areas.BarCrower.Controllers
 {
@@ -27,9 +29,11 @@ namespace Cocktail_Magician.Areas.BarCrower.Controllers
             }
             try
             {
-                var bar = await _barManager.GetBar(id);
-                var barViewModel = BarViewModelMapper.MapBarViewModel(bar);
-                barViewModel.ReviewViewModels = (await _barManager.GetAllReviewsByBarID(bar.BarId)).ToVM();
+                var user = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                var bar = (await _barManager.GetBar(id)).ToDTO();
+                var barViewModel = bar.ToVM();
+                barViewModel.ReviewViewModels = (await _barManager.GetAllReviewsByBarID(bar.Id)).ToVM();
+                barViewModel.IsRated = await _barManager.IsReviewGiven(id, user);
                 return View(barViewModel);
             }
             catch (Exception ex)

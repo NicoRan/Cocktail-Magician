@@ -58,7 +58,7 @@
                                 </div>
                             </div>
                         }
-                        @if (User.IsInRole("Member"))
+                        @if (User.IsInRole("Member") && !Model.IsRated)
                         {
                             <div class="row mt-25">
                                 <div class="col-12 col-md-8 col-lg-9 offset-md-4 offset-lg-3">
@@ -84,7 +84,7 @@
                                     <img src="~/images/image-man/01.gif" alt="image" class="image-circle" />
                                 </div>
                                 <div class="line-125">
-                                    <h6 class="line-125 mb-3">Antony Robert</h6>
+                                    <h6 class="line-125 mb-3">@reviews.UserName</h6>
                                     <div class="rating-item rating-sm">
                                         <div class="rating-icons">
                                             <input type="hidden" class="rating" data-filled="rating-icon ri-star rating-rated" data-empty="rating-icon ri-star-empty" data-fractions="2" data-readonly value="@reviews.Grade" />

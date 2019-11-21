@@ -41,7 +41,7 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
             }
             try
             {
-                var bar = BarViewModelMapper.MapBar(barView);
+                var bar = barView.MapBar();
                 await _barManager.CreateBar(bar);
                 return RedirectToAction("Index", "Home");
             }

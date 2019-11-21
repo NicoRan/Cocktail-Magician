@@ -1,5 +1,6 @@
 ﻿using Cocktail_Magician.Areas.BarMagician.Models;
 using Cocktail_Magician_DB.Models;
+using Cocktail_Magician_Services.DTO;
 using Microsoft.EntityFrameworkCore.Internal;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,7 @@ namespace Cocktail_Magician.Infrastructure.Mappers
             return cocktailViewModel;
         }
 
-        public static CocktailViewModel MapTopCocktailViewModel(this Cocktail cocktail)
+        public static CocktailViewModel ToVM(this CocktailDTO cocktail)
         {
             var cocktailViewModel = new CocktailViewModel()
             {
@@ -34,9 +35,16 @@ namespace Cocktail_Magician.Infrastructure.Mappers
                 Information = cocktail.Information,
                 Name = cocktail.Name,
                 Picture = cocktail.Picture,
-                Rating = cocktail.CocktailReviews.Any(c => c.CocktailId == cocktail.Id) ? cocktail.CocktailReviews.Average(c => c.Grade) : 0
+                Rating = cocktail.Rating,
+                ReviewViewModels = cocktail.CocktailReviewDTOs.ToVM()
             };
             return cocktailViewModel;
+        }
+
+        public static ICollection<CocktailViewModel> ToVM(this ICollection<CocktailDTO> cocktails)
+        {
+            var newCollection = cocktails.Select(c => c.ToVM()).ToList();
+            return newCollection;
         }
 
         public static Cocktail MapCocktail(this CocktailViewModel cocktailView)

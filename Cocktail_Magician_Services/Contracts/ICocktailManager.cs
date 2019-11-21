@@ -15,5 +15,6 @@ namespace Cocktail_Magician_Services.Contracts
         Task<DTO.CocktailReviewDTO> CreateCocktailReviewAsync(DTO.CocktailReviewDTO cocktailReviewDTO);
 
         Task<ICollection<CocktailReviewDTO>> GetAllReviewsByCocktailID(string cocktailId);
+        Task<bool> IsReviewGiven(string cocktailId, string userId);
     }
 }

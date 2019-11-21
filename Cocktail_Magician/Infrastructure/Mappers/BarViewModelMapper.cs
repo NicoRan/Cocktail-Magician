@@ -1,5 +1,6 @@
 ﻿using Cocktail_Magician.Areas.BarMagician.Models;
 using Cocktail_Magician_DB.Models;
+using Cocktail_Magician_Services.DTO;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -26,23 +27,33 @@ namespace Cocktail_Magician.Infrastructure.Mappers
             barViewModel.Map = bar.MapDirections;
             barViewModel.Name = bar.Name;
             barViewModel.Picture = bar.Picture;
+            //TODO GET USERNAME
+            //barViewModel.Username=bar.BarReviews
             barViewModel.Rating = bar.BarReviews.Any(br => br.BarId == bar.BarId) ? bar.BarReviews.Average(br => br.Grade) : 0;
             return barViewModel;
         }
 
-        public static BarViewModel MapTopBarViewModel(this Bar bar)
+        public static BarViewModel ToVM(this BarDTO bar)
         {
             var barViewModel = new BarViewModel();
-            barViewModel.BarId = bar.BarId;
+            barViewModel.BarId = bar.Id;
             barViewModel.Address = bar.Address;
             barViewModel.Information = bar.Information;
-            barViewModel.Map = bar.MapDirections;
+            barViewModel.Map = bar.MapDirection;
             barViewModel.Name = bar.Name;
             barViewModel.Picture = bar.Picture;
-            barViewModel.Rating = bar.BarReviews.Any(br => br.BarId == bar.BarId) ? bar.BarReviews.Average(br => br.Grade) : 0;
+            barViewModel.Rating = bar.Rating;
+            barViewModel.Cocktails = bar.CocktailDTOs.ToVM();
+            barViewModel.ReviewViewModels = bar.BarReviewDTOs.ToVM();
             return barViewModel;
+
         }
 
+        public static ICollection<BarViewModel> ToVM(this ICollection<BarDTO> bar)
+        {
+            var newCollection = bar.Select(b => b.ToVM()).ToList();
+            return newCollection;
+        }
         public static Bar MapBar(this BarViewModel barViewModel)
         {
             var bar = new Bar()
@@ -56,5 +67,7 @@ namespace Cocktail_Magician.Infrastructure.Mappers
             };
             return bar;
         }
+
+
     }
 }

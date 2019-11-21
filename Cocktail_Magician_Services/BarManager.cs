@@ -52,6 +52,7 @@ namespace Cocktail_Magician_Services
             {
                 var bar = await _context.Bars
                     .Include(b => b.BarReviews)
+                        .ThenInclude(br => br.User)
                     .Where(b => !b.IsDeleted)
                     .FirstOrDefaultAsync(b => b.BarId == id);
                 bar.Cocktails = await GetBarsOfferedCocktails(bar.BarId);
@@ -63,19 +64,24 @@ namespace Cocktail_Magician_Services
             }
         }
 
-        public async Task<List<Bar>> GetTopRatedBars()
+        public async Task<bool> IsReviewGiven(string barId, string userId)
         {
-            var bars = await _context.Bars
-                .Include(b => b.BarReviews)
-                .Where(bar => !bar.IsDeleted)
-                .OrderByDescending(bar => bar.Rating)
-                .ThenBy(bar => bar.Name)
-                .Take(6)
-                .ToListAsync();
-            return bars;
+            return await _context.BarReviews.AnyAsync(br => br.BarId == barId && br.UserId == userId);
         }
 
-        public async Task<BarReviewDTO> Create  BarReviewAsync(BarReviewDTO barReviewDTO)
+        public async Task<List<Bar>> GetTopRatedBars()
+        {
+            var allBars = await GetAllBarsAsync();
+
+            var bars = allBars
+                 .OrderByDescending(bar =>
+                    bar.BarReviews.Any(br => br.BarId == bar.BarId) ?       bar.BarReviews.Average(br => br.Grade) : 0)
+                 .ThenBy(bar => bar.Name);
+
+            return bars.Take(6).ToList();
+        }
+
+        public async Task<BarReviewDTO> CreateBarReviewAsync(BarReviewDTO barReviewDTO)
         {
             if (barReviewDTO.Grade != 0)
             {
@@ -107,6 +113,7 @@ namespace Cocktail_Magician_Services
             var listOfBars = await _context.Bars
                 .Include(b => b.Cocktails)
                 .Include(c => c.BarReviews)
+                    .ThenInclude(br => br.User)
                 .Where(b => !b.IsDeleted)
                 .ToListAsync();
             return listOfBars;
@@ -118,5 +125,6 @@ namespace Cocktail_Magician_Services
 
             return reviews.ToDTO();
         }
+
     }
 }
