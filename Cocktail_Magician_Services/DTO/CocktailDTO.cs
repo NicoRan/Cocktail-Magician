@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Cocktail_Magician_Services.DTO
 {
@@ -9,6 +10,7 @@ namespace Cocktail_Magician_Services.DTO
         public string Information { get; set; }
         public string Picture { get; set; }
         public bool IsDeleted { get; set; }
+        [DisplayFormat(DataFormatString = "{0:0,0}")]
         public double Rating { get; set; }
         public ICollection<CocktailReviewDTO> CocktailReviewDTOs { get; set; }
     }

@@ -52,6 +52,20 @@
                             </div>
                         </div>
                         <hr class="mv-40">
+                        @*<div class="row gap-15 mb-15">
+                            <div class="col-6 col-md-12">
+                                <div class="form-group chosen-bg-light">
+                                    <label>Cocktails To Offer</label>
+                                    <select asp-for="@Model.CocktailsToOffer" class="chosen-the-basic chosen-container-multi">
+                                        @foreach (var cocktail in Model.CocktailsThatCanOffer)
+                                        {
+                                            <option value="@cocktail">@cocktail</option>
+                                        }
+                                    </select>
+                                    <span asp-validation-for="@Model" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>*@
                         <div class="row mt-20">
                             <div class="col-sm-8 col-md-6">
                                 <button type="submit" class="btn btn-primary">Submit Now</button>

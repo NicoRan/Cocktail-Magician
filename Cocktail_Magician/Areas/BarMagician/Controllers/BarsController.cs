@@ -41,7 +41,7 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
             }
             try
             {
-                var bar = barView.MapBar();
+                var bar = barView.ToDTO();
                 await _barManager.CreateBar(bar);
                 return RedirectToAction("Index", "Home");
             }
@@ -51,65 +51,60 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
             }
         }
 
-        //// GET: Bars/Edit/5
+        // GET: Bars/Edit/5
+        //[HttpGet]
+        //[Authorize(Roles = "Administrator")]
         //public async Task<IActionResult> Edit(string id)
         //{
-        //    if (id == null)
+        //    try
         //    {
-        //        return NotFound();
+        //        var bar = await _barManager.GetBar(id);
+        //        var cocktails = await _barManager.GetUnOfferedCocktails(id);
+        //        var barViewModel = BarViewModelMapper.MapCreateBarViewModel(bar);
+        //        foreach (var cocktail in cocktails)
+        //        {
+        //            barViewModel.CocktailsThatCanOffer.Add(cocktail);
+        //        }
+        //        return View(barViewModel);
         //    }
-
-        //    var bar = await _context.Bars.FindAsync(id);
-        //    if (bar == null)
+        //    catch (Exception ex)
         //    {
-        //        return NotFound();
+        //        return RedirecToActionError("404", ex.Message);
         //    }
-        //    return View(bar);
         //}
 
-        //// POST: Bars/Edit/5
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Bars/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         //[HttpPost]
         //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(string id, Bar bar)
+        //[Authorize(Roles = "Administrator")]
+        //public async Task<IActionResult> Edit(List<string> cocktailsToOffer, BarViewModel bar)
         //{
-        //    if (id != bar.BarId)
+        //    if (!ModelState.IsValid)
         //    {
-        //        return NotFound();
+        //        ModelState.AddModelError(string.Empty, "Invalid bar parameters!");
+        //        return View(bar);
         //    }
+        //    try
+        //    {
 
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            _context.Update(bar);
-        //            await _context.SaveChangesAsync();
-        //        }
-        //        catch (DbUpdateConcurrencyException)
-        //        {
-        //            if (!BarExists(bar.BarId))
-        //            {
-        //                return NotFound();
-        //            }
-        //            else
-        //            {
-        //                throw;
-        //            }
-        //        }
-        //        return RedirectToAction(nameof(Index));
         //    }
-        //    return View(bar);
+        //    catch(Exception ex)
+        //    {
+        //        return RedirecToActionError("500", ex.Message);
+        //    }
         //}
 
         // GET: Bars/Delete/5
-        [HttpGet]
+        [HttpGet, ActionName("Delete")]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(string id)
         {
             try
             {
                 var bar = await _barManager.GetBar(id);
-                var barToDelete = BarViewModelMapper.MapBarViewModel(bar);
+                var barToDelete = bar.ToVM();
                 return View(barToDelete);
             }
             catch (Exception ex)
@@ -121,12 +116,13 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
         // POST: Bars/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
             try
             {
                 var bar = await _barManager.GetBar(id);
-                await _barManager.RemoveBar(bar.BarId);
+                await _barManager.RemoveBar(bar.Id);
                 return RedirectToAction("Index", "Home");
             }
             catch (Exception ex)

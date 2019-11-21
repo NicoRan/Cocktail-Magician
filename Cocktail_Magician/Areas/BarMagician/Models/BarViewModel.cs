@@ -21,7 +21,8 @@ namespace Cocktail_Magician.Areas.BarMagician.Models
         public string Map { get; set; }
         public bool IsRated { get; set; }
         public string Username { get; set; }
+        public List<string> CocktailsToOffer { get;set; }
         public ICollection<ReviewViewModel> ReviewViewModels { get; set; }
-        public ICollection<CocktailViewModel> Cocktails { get; set; }
+        public ICollection<BarCocktailViewModel> BarCocktailViewModels { get; set; }
     }
 }

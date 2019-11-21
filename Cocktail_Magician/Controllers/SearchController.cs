@@ -5,6 +5,7 @@ using Cocktail_Magician.Infrastructure.Mappers;
 using Cocktail_Magician.Models;
 using Cocktail_Magician_DB.Models;
 using Cocktail_Magician_Services.Contracts;
+using Cocktail_Magician_Services.DTO;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cocktail_Magician.Controllers
@@ -84,28 +85,26 @@ namespace Cocktail_Magician.Controllers
 
         private async Task<SearchResultViewModel> SearchByTypeAndCriteria(SearchResultViewModel model)
         {
-            var resultsBars = new List<Bar>();
-            var resultsCocktails = new List<Cocktail>();
             var resultsView = new SearchResultViewModel();
             if (model.Type == "Bars")
             {
-                resultsBars = await _searchManager.SearchBarsByName(model.Criteria);
-                resultsView.Bars = resultsBars.Select(bar => BarViewModelMapper.MapBarViewModel(bar)).ToList();
+                var resultsBars = await _searchManager.SearchBarsByName(model.Criteria);
+                resultsView.Bars = resultsBars.Select(bar => bar.ToVM()).ToList();
                 return resultsView;
             }
             else if (model.Type == "Cocktails")
             {
-                resultsCocktails = await _searchManager.SearchCocktails(model.Criteria);
-                resultsView.Cocktails = resultsCocktails.Select(cocktail => CocktailViewModelMapper.MapCocktailViewModel(cocktail)).ToList();
+                var resultsCocktails = await _searchManager.SearchCocktails(model.Criteria);
+                resultsView.Cocktails = resultsCocktails.Select(cocktail => cocktail.ToVM()).ToList();
                 return resultsView;
             }
             else if (model.Type == "All")
             {
-                resultsBars = await _searchManager.SearchBarsByName(model.Criteria);
-                resultsView.Bars = resultsBars.Select(bar => BarViewModelMapper.MapBarViewModel(bar)).ToList();
+                var resultsBars = await _searchManager.SearchBarsByName(model.Criteria);
+                resultsView.Bars = resultsBars.Select(bar => bar.ToVM()).ToList();
 
-                resultsCocktails = await _searchManager.SearchCocktails(model.Criteria);
-                resultsView.Cocktails = resultsCocktails.Select(cocktail => CocktailViewModelMapper.MapCocktailViewModel(cocktail)).ToList();
+                var resultsCocktails = await _searchManager.SearchCocktails(model.Criteria);
+                resultsView.Cocktails = resultsCocktails.Select(cocktail => cocktail.ToVM()).ToList();
 
                 return resultsView;
             }
@@ -114,29 +113,26 @@ namespace Cocktail_Magician.Controllers
 
         private async Task<SearchResultViewModel> SearchByTypeAndCriteriaA(SearchResultViewModel model)
         {
-            //After Implementing Mappers, this will be simplified
-            var resultsBars = new List<Bar>();
-            var resultsCocktails = new List<Cocktail>();
             var resultsView = new SearchResultViewModel();
             if (model.Type == "Bars")
             {
-                resultsBars = await _searchManager.SearchBarsByAddress(model.Criteria);
-                resultsView.Bars = resultsBars.Select(bar => BarViewModelMapper.MapBarViewModel(bar)).ToList();
+                var resultsBars = await _searchManager.SearchBarsByAddress(model.Criteria);
+                resultsView.Bars = resultsBars.Select(bar => bar.ToVM()).ToList();
                 return resultsView;
             }
             else if (model.Type == "Cocktails")
             {
-                resultsCocktails = await _searchManager.SearchCocktails(model.Criteria);
-                resultsView.Cocktails = resultsCocktails.Select(cocktail => CocktailViewModelMapper.MapCocktailViewModel(cocktail)).ToList();
+                var resultsCocktails = await _searchManager.SearchCocktails(model.Criteria);
+                resultsView.Cocktails = resultsCocktails.Select(cocktail => cocktail.ToVM()).ToList();
                 return resultsView;
             }
             else if (model.Type == "All")
             {
-                resultsBars = await _searchManager.SearchBarsByAddress(model.Criteria);
-                resultsView.Bars = resultsBars.Select(bar => BarViewModelMapper.MapBarViewModel(bar)).ToList();
+                var resultsBars = await _searchManager.SearchBarsByAddress(model.Criteria);
+                resultsView.Bars = resultsBars.Select(bar => bar.ToVM()).ToList();
 
-                resultsCocktails = await _searchManager.SearchCocktails(model.Criteria);
-                resultsView.Cocktails = resultsCocktails.Select(cocktail => CocktailViewModelMapper.MapCocktailViewModel(cocktail)).ToList();
+                var resultsCocktails = await _searchManager.SearchCocktails(model.Criteria);
+                resultsView.Cocktails = resultsCocktails.Select(cocktail => cocktail.ToVM()).ToList();
 
                 return resultsView;
             }

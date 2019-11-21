@@ -1,11 +1,11 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Cocktail_Magician_DB.Models;
 using Cocktail_Magician_Services.Contracts;
 using Cocktail_Magician.Areas.BarMagician.Models;
 using Microsoft.AspNetCore.Authorization;
 using System;
 using Cocktail_Magician.Models;
+using Cocktail_Magician_Services.DTO;
 
 namespace Cocktail_Magician.Areas.BarMagician.Controllers
 {
@@ -41,7 +41,7 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
             }
             try
             {
-                var ingredient = new Ingredient
+                var ingredient = new IngredientDTO
                 {
                     Name = ingredientToCreate.Name
                 };

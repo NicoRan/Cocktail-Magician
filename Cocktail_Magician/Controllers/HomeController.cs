@@ -24,17 +24,11 @@ namespace Cocktail_Magician.Controllers
         {
             var topBars = await _barManager.GetTopRatedBars();
 
-            var topBarsViewModel = topBars.ToDTO();
-
             var topCocktails = await _cocktailManager.GetTopRatedCocktails();
 
-            var topCocktailsViewModel = topCocktails.ToDTO();
-
-
-
             var topRatedHomePage = new TopRatedHomePageViewModel();
-            topRatedHomePage.TopBars = topBarsViewModel.ToVM();
-            topRatedHomePage.TopCocktails = topCocktailsViewModel.ToVM();
+            topRatedHomePage.TopBars = topBars.ToVM();
+            topRatedHomePage.TopCocktails = topCocktails.ToVM();
 
             return View(topRatedHomePage);
         }
@@ -47,7 +41,7 @@ namespace Cocktail_Magician.Controllers
             var listOfBarsViewModel = new List<BarViewModel>();
             foreach (var bar in listOfBars)
             {
-                var mapToView = BarViewModelMapper.MapBarViewModel(bar);
+                var mapToView = bar.ToVM();
                 listOfBarsViewModel.Add(mapToView);
             }
             return View(listOfBarsViewModel);
@@ -59,7 +53,7 @@ namespace Cocktail_Magician.Controllers
             var listOfCocktailsViewModel = new List<CocktailViewModel>();
             foreach (var cocktail in listOfCocktails)
             {
-                var mapToView = CocktailViewModelMapper.MapCocktailViewModel(cocktail);
+                var mapToView = cocktail.ToVM();
                 listOfCocktailsViewModel.Add(mapToView);
             }
             return View(listOfCocktailsViewModel);

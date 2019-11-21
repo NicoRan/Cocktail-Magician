@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Cocktail_Magician_DB.Models;
 using Cocktail_Magician_Services.Contracts;
 using Cocktail_Magician.Models;
 using Cocktail_Magician.Areas.BarMagician.Models;
 using Cocktail_Magician.Infrastructure.Mappers;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Cocktail_Magician.Areas.BarMagician.Controllers
 {
@@ -66,6 +66,7 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Create(CreateCocktailViewModel cocktailToCreate)
         {
             if (string.IsNullOrWhiteSpace(cocktailToCreate.Cocktail?.Name) 

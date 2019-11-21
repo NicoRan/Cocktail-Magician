@@ -3,39 +3,46 @@
     "name": "Long Island Iced Tea",
     "rating": 4.9,
     "picture": "http://shake-that.com/wp-content/uploads/2015/07/Long-Island-Iced-Tea-780x780.jpg",
-    "information": "White Rum, Lime juice, Vodka, Gin, Tequila, Coca-Cola, Triple Sec, Gomme Syrop",
-    "ingredients": [
+    "CocktailIngredient": [
       {
-        "id": "one",
-        "name": "White Rum"
+        "Ingredient": {
+          "name": "White Rum"
+        }
       },
       {
-        "id": "two",
-        "name": "Lime juice"
+        "Ingredient": {
+          "name": "Lime juice"
+        }
       },
       {
-        "id": "three",
-        "name": "Vodka"
+        "Ingredient": {
+          "name": "Vodka"
+        }
       },
       {
-        "id": "four",
-        "name": "Gin"
+        "Ingredient": {
+          "name": "Gin"
+        }
       },
       {
-        "id": "five",
-        "name": "Tequila"
+        "Ingredient": {
+          "name": "Tequila"
+        }
       },
       {
-        "id": "six",
-        "name": "Coca-Cola"
+        "Ingredient": {
+          "name": "Coca-Cola"
+        }
       },
       {
-        "id": "six",
-        "name": "Triple Sec"
+        "Ingredient": {
+          "name": "Triple Sec"
+        }
       },
       {
-        "id": "seven",
-        "name": "Gomme Syrop"
+        "Ingredient": {
+          "name": "Gomme Syrop"
+        }
       }
     ]
   },
@@ -43,27 +50,31 @@
     "name": "Mojito",
     "rating": 4.6,
     "picture": "https://www.artofdrink.com/wp-content/uploads/2010/08/how-to-make-a-mojito-recipe-720x720.jpg",
-    "information": "White Rum, Lime juice, Mint leaves, Soda water, Sugar",
-    "ingredients": [
+    "CocktailIngredient": [
       {
-        "id": "one",
-        "name": "White Rum"
+        "Ingredient": {
+          "name": "White Rum"
+        }
       },
       {
-        "id": "two",
-        "name": "Lime juice"
+        "Ingredient": {
+          "name": "Lime juice"
+        }
       },
       {
-        "id": "three",
-        "name": "Mint leaves"
+        "Ingredient": {
+          "name": "Mint leaves"
+        }
       },
       {
-        "id": "four",
-        "name": "Soda water"
+        "Ingredient": {
+          "name": "Soda water"
+        }
       },
       {
-        "id": "five",
-        "name": "Sugar"
+        "Ingredient": {
+          "name": "Sugar"
+        }
       }
     ]
   },
@@ -71,23 +82,26 @@
     "name": "Cosmopolitan",
     "rating": 4.1,
     "picture": "https://i.pinimg.com/originals/8a/d1/ce/8ad1ce0325e2cdf936b95797b03b83eb.jpg",
-    "information": "Lime juice, Cranberry juice, Cointreau, Vodka Citron",
-    "ingredients": [
+    "CocktailIngredient": [
       {
-        "id": "one",
-        "name": "Lime juice"
+        "Ingredient": {
+          "name": "Lime juice"
+        }
       },
       {
-        "id": "two",
-        "name": "Cranberry juice"
+        "Ingredient": {
+          "name": "Cranberry juice"
+        }
       },
       {
-        "id": "three",
-        "name": "Cointreau"
+        "Ingredient": {
+          "name": "Cointreau"
+        }
       },
       {
-        "id": "four",
-        "name": "Vodka Citron"
+        "Ingredient": {
+          "name": "Vodka Citron"
+        }
       }
     ]
   },
@@ -95,35 +109,41 @@
     "name": "Zombie",
     "rating": 2.7,
     "picture": "https://cdn.liquor.com/wp-content/uploads/2016/06/15161058/zombie-720x720-recipe.jpg",
-    "information": "151-proof Rum, Golden Rum, White Rum, Apricot Brandy, Dark Rum, Lime juice, Pineapple juice",
-    "ingredients": [
+    "CocktailIngredient": [
       {
-        "id": "one",
-        "name": "151-proof Rum"
+        "Ingredient": {
+          "name": "151-proof Rum"
+        }
       },
       {
-        "id": "two",
-        "name": "Golden Rum"
+        "Ingredient": {
+          "name": "Golden Rum"
+        }
       },
       {
-        "id": "three",
-        "name": "White Rum"
+        "Ingredient": {
+          "name": "White Rum"
+        }
       },
       {
-        "id": "four",
-        "name": "Apricot Brandy"
+        "Ingredient": {
+          "name": "Apricot Brandy"
+        }
       },
       {
-        "id": "five",
-        "name": "Dark Rum"
+        "Ingredient": {
+          "name": "Dark Rum"
+        }
       },
       {
-        "id": "six",
-        "name": "Lime juice"
+        "Ingredient": {
+          "name": "Lime juice"
+        }
       },
       {
-        "id": "seven",
-        "name": "Pineapple juice"
+        "Ingredient": {
+          "name": "Pineapple juice"
+        }
       }
     ]
   },
@@ -131,19 +151,21 @@
     "name": "White Russian",
     "rating": 3.5,
     "picture": "https://www.thelittlepine.com/wp-content/uploads/2019/07/Keto-White-Russian-1.jpg",
-    "information": "Coffee liqueur, Vodka, Fresh cream",
-    "ingredients": [
+    "CocktailIngredient": [
       {
-        "id": "one",
-        "name": "Coffee liqueur"
+        "Ingredient": {
+          "name": "Coffee liqueur"
+        }
       },
       {
-        "id": "two",
-        "name": "Vodka"
+        "Ingredient": {
+          "name": "Vodka"
+        }
       },
       {
-        "id": "three",
-        "name": "Fresh cream"
+        "Ingredient": {
+          "name": "Fresh cream"
+        }
       }
     ]
   },
@@ -151,19 +173,21 @@
     "name": "Bellini",
     "rating": 3.8,
     "picture": "https://cdn.liquor.com/wp-content/uploads/2012/06/12153016/Bellini-newest.jpg",
-    "information": "White peaches, Peach purée, Prosecco",
-    "ingredients": [
+    "CocktailIngredient": [
       {
-        "id": "one",
-        "name": "White peaches"
+        "Ingredient": {
+          "name": "White peaches"
+        }
       },
       {
-        "id": "two",
-        "name": "Peach purée"
+        "Ingredient": {
+          "name": "Peach purée"
+        }
       },
       {
-        "id": "three",
-        "name": "Prosecco"
+        "Ingredient": {
+          "name": "Prosecco"
+        }
       }
     ]
   },
@@ -171,35 +195,41 @@
     "name": "Bloody Mary",
     "rating": 4.9,
     "picture": "https://cdn.liquor.com/wp-content/uploads/2017/09/01105541/classic-bloody-mary-720x720-recipe.jpg",
-    "information": "Worcestershire Sauce, Pepper, Lemon juice, Vodka, Salt, Tomato juice, Tabasco",
-    "ingredients": [
+    "CocktailIngredient": [
       {
-        "id": "one",
-        "name": "Worcestershire Sauce"
+        "Ingredient": {
+          "name": "Worcestershire Sauce"
+        }
       },
       {
-        "id": "two",
-        "name": "Pepper"
+        "Ingredient": {
+          "name": "Pepper"
+        }
       },
       {
-        "id": "three",
-        "name": "Lemon juice"
+        "Ingredient": {
+          "name": "Lemon juice"
+        }
       },
       {
-        "id": "four",
-        "name": "Vodka"
+        "Ingredient": {
+          "name": "Vodka"
+        }
       },
       {
-        "id": "five",
-        "name": "Salt"
+        "Ingredient": {
+          "name": "Salt"
+        }
       },
       {
-        "id": "six",
-        "name": "Tomato juice"
+        "Ingredient": {
+          "name": "Tomato juice"
+        }
       },
       {
-        "id": "seven",
-        "name": "Tabasco"
+        "Ingredient": {
+          "name": "Tabasco"
+        }
       }
     ]
   },
@@ -207,19 +237,21 @@
     "name": "Negroni",
     "rating": 5.0,
     "picture": "https://cdn.liquor.com/wp-content/uploads/2018/05/08110806/negroni-720x720-recipe.jpg",
-    "information": "Gin, Campari, Sweet red Vermouth",
-    "ingredients": [
+    "CocktailIngredient": [
       {
-        "id": "one",
-        "name": "Gin"
+        "Ingredient": {
+          "name": "Gin"
+        }
       },
       {
-        "id": "two",
-        "name": "Campari"
+        "Ingredient": {
+          "name": "Campari"
+        }
       },
       {
-        "id": "three",
-        "name": "Sweet red Vermouth"
+        "Ingredient": {
+          "name": "Sweet red Vermouth"
+        }
       }
     ]
   }

@@ -2,6 +2,7 @@
 using Cocktail_Magician_DB.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace Cocktail_Magician_DB.DataSeeder
 {
@@ -33,9 +34,9 @@ namespace Cocktail_Magician_DB.DataSeeder
                     BarCocktails = new List<BarCocktail>()
                 };
 
-                foreach (var item in bar.Cocktails)
+                foreach (var item in bar.BarCocktails)
                 {
-                    var cocktail = context.Cocktails.SingleOrDefault(c => c.Name == item.Name);
+                    var cocktail = context.Cocktails.SingleOrDefault(c => c.Name == item.Cocktail.Name);
                     if (cocktail != null)
                     {
                         barToAdd.BarCocktails.Add(new BarCocktail
@@ -66,14 +67,12 @@ namespace Cocktail_Magician_DB.DataSeeder
                 {
                     Name = cocktail.Name,
                     Rating = cocktail.Rating,
-                    Information = cocktail.Information,
                     Picture = cocktail.Picture,
                     CocktailIngredient = new List<CocktailIngredient>()
                 };
-
-                foreach (var item in cocktail.Ingredients)
+                foreach (var item in cocktail.CocktailIngredient)
                 {
-                    var ingredient = context.Ingredients.SingleOrDefault(i => i.Name == item.Name);
+                    var ingredient = context.Ingredients.SingleOrDefault(i => i.Name == item.Ingredient.Name);
                     if (ingredient != null)
                     {
                         cocktailToAdd.CocktailIngredient.Add(new CocktailIngredient
@@ -83,6 +82,12 @@ namespace Cocktail_Magician_DB.DataSeeder
                         });
                     }
                 }
+                StringBuilder cocktailInfo = new StringBuilder();
+                foreach (var item in cocktail.CocktailIngredient)
+                {
+                    cocktailInfo.Append(item.Ingredient.Name + ", ");
+                }
+                cocktailToAdd.Information = cocktailInfo.ToString();
 
                 context.Cocktails.Add(cocktailToAdd);
                 context.SaveChanges();

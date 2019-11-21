@@ -10,7 +10,7 @@ namespace Cocktail_Magician.Infrastructure.Mappers
 {
     public static class ReviewViewModelMapper
     {
-        public static ReviewViewModel ToVM(this BarReviewDTO barReviewDTO)
+        public static ReviewViewModel ToBarReviewVM(this BarReviewDTO barReviewDTO)
         {
             var vm = new ReviewViewModel
             {
@@ -22,9 +22,23 @@ namespace Cocktail_Magician.Infrastructure.Mappers
             };
 
             return vm;
-        } 
+        }
 
-        public static ReviewViewModel ToVM(this CocktailReviewDTO cocktailReviewDTO)
+        public static BarReviewDTO ToBarReviewDTO(this ReviewViewModel barReviewView)
+        {
+            var vm = new BarReviewDTO
+            {
+                BarId = barReviewView.Id,
+                UserId = barReviewView.UserId,
+                Comment = barReviewView.Comment,
+                Grade = barReviewView.Grade,
+                UserName = barReviewView.UserName
+            };
+
+            return vm;
+        }
+
+        public static ReviewViewModel ToCocktailReviewVM(this CocktailReviewDTO cocktailReviewDTO)
         {
             var vm = new ReviewViewModel
             {
@@ -37,16 +51,40 @@ namespace Cocktail_Magician.Infrastructure.Mappers
             return vm;
         }
 
-
-        public static ICollection<ReviewViewModel> ToVM(this ICollection<BarReviewDTO> barReviewDTOs)
+        public static CocktailReviewDTO ToCocktailReviewDTO(this ReviewViewModel cocktailReviewView)
         {
-            var newCollection = barReviewDTOs.Select(br => br.ToVM()).ToList();
+            var vm = new CocktailReviewDTO
+            {
+                CocktailId = cocktailReviewView.Id,
+                UserId = cocktailReviewView.UserId,
+                Grade = cocktailReviewView.Grade,
+                Comment = cocktailReviewView.Comment,
+                UserName = cocktailReviewView.UserName
+            };
+            return vm;
+        }
+
+        public static ICollection<ReviewViewModel> ToBarReviewVM(this ICollection<BarReviewDTO> barReviewDTOs)
+        {
+            var newCollection = barReviewDTOs.Select(br => br.ToBarReviewVM()).ToList();
             return newCollection;
         }
 
-        public static ICollection<ReviewViewModel> ToVM(this ICollection<CocktailReviewDTO> cocktailReviewDTOs)
+        public static ICollection<BarReviewDTO> ToBarReviewDTO(this ICollection<ReviewViewModel> barReview)
         {
-            var newColleciton = cocktailReviewDTOs.Select(c => c.ToVM()).ToList();
+            var newCollection = barReview.Select(br => br.ToBarReviewDTO()).ToList();
+            return newCollection;
+        }
+
+        public static ICollection<ReviewViewModel> ToCocktailReviewVM(this ICollection<CocktailReviewDTO> cocktailReviewDTOs)
+        {
+            var newColleciton = cocktailReviewDTOs.Select(c => c.ToCocktailReviewVM()).ToList();
+            return newColleciton;
+        }
+
+        public static ICollection<CocktailReviewDTO> ToCocktailReviewDTO(this ICollection<ReviewViewModel> cocktailReview)
+        {
+            var newColleciton = cocktailReview.Select(c => c.ToCocktailReviewDTO()).ToList();
             return newColleciton;
         }
     }

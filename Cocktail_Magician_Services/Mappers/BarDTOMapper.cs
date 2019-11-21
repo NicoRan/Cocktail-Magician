@@ -18,11 +18,29 @@ namespace Cocktail_Magician_Services.Mappers
                 Picture = bar.Picture,
                 MapDirection = bar.MapDirections,
                 IsDeleted = bar.IsDeleted,
-                Rating = bar.BarReviews.Any(br => br.BarId == bar.BarId) ? bar.BarReviews.Average(br => br.Grade) : 0,
+                Rating = bar.BarReviews.Any(br => br.BarId == bar.BarId) ? bar.BarReviews.Average(br => br.Grade) : 0
             };
             barDTO.BarReviewDTOs = bar.BarReviews.Select(b => b.ToDTO()).ToList();
-            barDTO.CocktailDTOs = bar.Cocktails.ToDTO();
+            barDTO.BarCocktailDTOs = bar.BarCocktails.Select(b => b.ToDTO()).ToList();
             return barDTO;
+        }
+
+        public static Bar ToBar(this BarDTO barDTO)
+        {
+            var bar = new Bar
+            {
+                BarId = barDTO.Id,
+                Address = barDTO.Address,
+                Information = barDTO.Information,
+                MapDirections = barDTO.MapDirection,
+                IsDeleted = barDTO.IsDeleted,
+                Name = barDTO.Name,
+                Picture = barDTO.Picture,
+                Rating = barDTO.BarReviewDTOs.Any(br => br.BarId == barDTO.Id) ? barDTO.BarReviewDTOs.Average(br => br.Grade) : 0
+            };
+            bar.BarReviews = barDTO.BarReviewDTOs.Select(b => b.ToEntity()).ToList();
+            bar.BarCocktails = barDTO.BarCocktailDTOs.Select(b => b.ToEntity()).ToList();
+            return bar;
         }
 
         public static ICollection<BarDTO> ToDTO(this ICollection<Bar> bars)

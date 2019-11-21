@@ -4,5 +4,7 @@
     {
         public string BarId { get; set; }
         public string CocktailId { get; set; }
+        public string CocktailName { get; set; }
+
     }
 }

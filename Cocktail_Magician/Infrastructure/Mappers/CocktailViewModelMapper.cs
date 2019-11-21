@@ -21,10 +21,10 @@ namespace Cocktail_Magician.Infrastructure.Mappers
                 Rating = cocktail.CocktailReviews.Any(c => c.CocktailId == cocktail.Id) ? cocktail.CocktailReviews.Average(c => c.Grade) : 0
                 
             };
-            foreach (var ingredient in cocktail.Ingredients)
-            {
-                cocktailViewModel.Ingredients.Add(ingredient.Name);
-            }
+            //foreach (var ingredient in cocktail.Ingredients)
+            //{
+            //    cocktailViewModel.Ingredients.Add(ingredient.Name);
+            //}
             return cocktailViewModel;
         }
 
@@ -37,7 +37,21 @@ namespace Cocktail_Magician.Infrastructure.Mappers
                 Name = cocktail.Name,
                 Picture = cocktail.Picture,
                 Rating = cocktail.Rating,
-                ReviewViewModels = cocktail.CocktailReviewDTOs.ToVM()
+                ReviewViewModels = cocktail.CocktailReviewDTOs.ToCocktailReviewVM()
+            };
+            return cocktailViewModel;
+        }
+
+        public static CocktailDTO ToDTO(this CocktailViewModel cocktailView)
+        {
+            var cocktailViewModel = new CocktailDTO()
+            {
+                Id = cocktailView.CocktailId,
+                Information = cocktailView.Information,
+                Name = cocktailView.Name,
+                Picture = cocktailView.Picture,
+                Rating = cocktailView.Rating,
+                CocktailReviewDTOs = cocktailView.ReviewViewModels.ToCocktailReviewDTO()
             };
             return cocktailViewModel;
         }

@@ -47,12 +47,12 @@ namespace Cocktail_Magician_Services
             return cocktailToAdd;
         }
 
-        public async Task<List<Cocktail>> GetTopRatedCocktails()
+        public async Task<ICollection<CocktailDTO>> GetTopRatedCocktails()
         {
             var allCocktails = await GetAllCocktailsAsync();
 
             var cocktails = allCocktails
-                .OrderByDescending(c => c.CocktailReviews.Any(ci => ci.CocktailId == c.Id) ? c.CocktailReviews.Average(ci => ci.Grade) : 0)
+                .OrderByDescending(c => c.CocktailReviewDTOs.Any(ci => ci.CocktailId == c.Id) ? c.CocktailReviewDTOs.Average(ci => ci.Grade) : 0)
                 .ThenBy(cocktail => cocktail.Name);
 
             return cocktails.Take(4).ToList();
@@ -77,7 +77,7 @@ namespace Cocktail_Magician_Services
             try
             {
                 var cocktail = await _context.Cocktails
-                    .Include(c => c.Ingredients)
+                    .Include(c => c.CocktailIngredient)
                     .Include(c => c.CocktailReviews)
                         .ThenInclude(c=>c.User)
                     .Where(c => !c.IsDeleted)
@@ -87,6 +87,18 @@ namespace Cocktail_Magician_Services
             catch (InvalidOperationException)
             {
                 throw new Exception();
+            }
+        }
+
+        public async Task<Cocktail> GetCocktailByName(string name)
+        {
+            try
+            {
+                return await _context.Cocktails.FirstOrDefaultAsync(cocktail => cocktail.Name == name);
+            }
+            catch (Exception)
+            {
+                throw new Exception("Cocktail not foun!");
             }
         }
 
@@ -110,14 +122,15 @@ namespace Cocktail_Magician_Services
             return await _context.CocktailReviews.AnyAsync(cr => cr.CocktailId == cocktailId && cr.UserId == userId);
         }
 
-        public async Task<List<Cocktail>> GetAllCocktailsAsync()
+        public async Task<ICollection<CocktailDTO>> GetAllCocktailsAsync()
         {
-            return await _context.Cocktails
-                .Include(cocktail => cocktail.Ingredients)
+            var listCocktails = await _context.Cocktails
+                .Include(cocktail => cocktail.CocktailIngredient)
                 .Include(c => c.CocktailReviews)
                     .ThenInclude(c => c.User)
                 .Where(cocktail => !cocktail.IsDeleted)
-                .ToListAsync(); ;
+                .ToListAsync();
+            return listCocktails.ToDTO();
         }
 
         public async Task<ICollection<CocktailReviewDTO>> GetAllReviewsByCocktailID(string cocktailId)

@@ -1,6 +1,7 @@
 ﻿
 
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Cocktail_Magician_Services.DTO
 {
@@ -13,8 +14,9 @@ namespace Cocktail_Magician_Services.DTO
         public string Picture { get; set; }
         public string MapDirection { get; set; }
         public bool IsDeleted { get; set; }
+        [DisplayFormat(DataFormatString = "{0:0,0}")]
         public double Rating { get; set; }
-        public ICollection<CocktailDTO> CocktailDTOs { get; set; }
+        public ICollection<BarCocktailDTO> BarCocktailDTOs { get; set; }
         public ICollection<BarReviewDTO> BarReviewDTOs { get; set; }
     }
 }

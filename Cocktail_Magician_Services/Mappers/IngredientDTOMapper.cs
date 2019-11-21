@@ -17,6 +17,16 @@ namespace Cocktail_Magician_Services.Mappers
             return ingredientDTO;
         }
 
+        public static Ingredient ToEntity(this IngredientDTO ingredientDTO)
+        {
+            var ingredient = new Ingredient
+            {
+                IngredientId = ingredientDTO.Id,
+                Name = ingredientDTO.Name
+            };
+            return ingredient;
+        }
+
         public static ICollection<IngredientDTO> ToDTO(this ICollection<Ingredient> ingredients)
         {
             var newCollection = ingredients.Select(c =>c.ToDTO()).ToList();

@@ -1,5 +1,4 @@
 ﻿using Cocktail_Magician_DB;
-using Cocktail_Magician_DB.Models;
 using Cocktail_Magician_Services.Contracts;
 using Cocktail_Magician_Services.DTO;
 using Cocktail_Magician_Services.Mappers;
@@ -14,17 +13,15 @@ namespace Cocktail_Magician_Services
     public class BarManager : IBarManager
     {
         private readonly CMContext _context;
-        private readonly ICocktailManager _cocktailManager;
 
-        public BarManager(CMContext context, ICocktailManager cocktailManager)
+        public BarManager(CMContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
-            _cocktailManager = cocktailManager ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task<Bar> CreateBar(Bar barToCreate)
+        public async Task CreateBar(BarDTO barToCreate)
         {
-            var barToAdd = barToCreate;
+            var barToAdd = barToCreate.ToBar();
 
             var barToFind = _context.Bars.SingleOrDefault(bar => bar.Name == barToAdd.Name && bar.Address == barToAdd.Address && !bar.IsDeleted);
 
@@ -35,28 +32,37 @@ namespace Cocktail_Magician_Services
 
             await _context.Bars.AddAsync(barToAdd);
             await _context.SaveChangesAsync();
-            return barToAdd;
         }
+
+        //public async Task EditBar(Bar bar, List<string> cocktailsToOffer)
+        //{
+        //    foreach (var cocktail in cocktailsToOffer)
+        //    {
+        //        bar.BarCocktails.Add(new BarCocktailDTO)
+        //    }
+        //}
 
         public async Task RemoveBar(string id)
         {
-            Bar barToRemove = await GetBar(id);
+            var barToRemove = await GetBar(id);
             barToRemove.IsDeleted = true;
-            _context.Bars.Update(barToRemove);
+            _context.Bars.Update(barToRemove.ToBar());
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Bar> GetBar(string id)
+        public async Task<BarDTO> GetBar(string id)
         {
             try
             {
                 var bar = await _context.Bars
+                    .Include(b => b.BarCocktails)
+                        .ThenInclude(b => b.Cocktail)
                     .Include(b => b.BarReviews)
                         .ThenInclude(br => br.User)
                     .Where(b => !b.IsDeleted)
                     .FirstOrDefaultAsync(b => b.BarId == id);
-                bar.Cocktails = await GetBarsOfferedCocktails(bar.BarId);
-                return bar;
+
+                return bar.ToDTO();
             }
             catch (Exception)
             {
@@ -69,15 +75,19 @@ namespace Cocktail_Magician_Services
             return await _context.BarReviews.AnyAsync(br => br.BarId == barId && br.UserId == userId);
         }
 
-        public async Task<List<Bar>> GetTopRatedBars()
+        //UNECESSARY REFACTORED METHOD
+        public async Task<ICollection<BarDTO>> GetTopRatedBars()
         {
+            //Why, Nikki, calculate the rating when in database you have a property holding the average rating of the bar and why not just update it in some other method???
+            
             var allBars = await GetAllBarsAsync();
-
+            
             var bars = allBars
                  .OrderByDescending(bar =>
-                    bar.BarReviews.Any(br => br.BarId == bar.BarId) ?       bar.BarReviews.Average(br => br.Grade) : 0)
+                    bar.BarReviewDTOs.Any(br => br.BarId == bar.Id) ? bar.BarReviewDTOs.Average(br => br.Grade) : 0)
                  .ThenBy(bar => bar.Name);
-
+            //Why the above is faster then this:
+            //var topRatedv = await _context.Bars.OrderByDescending(tr => tr.Rating).ThenBy(b => b.Name).Take(6).ToListAsync();
             return bars.Take(6).ToList();
         }
 
@@ -96,27 +106,16 @@ namespace Cocktail_Magician_Services
             return barReviewDTO;
         }
 
-        public async Task<List<Cocktail>> GetBarsOfferedCocktails(string barId)
-        {
-            var listOfCocktails = new List<Cocktail>();
-            var result = await _context.BarCocktails.Where(r => r.BarId == barId && !r.Bar.IsDeleted).ToListAsync();
-            foreach (var item in result)
-            {
-                var cocktail = await _cocktailManager.GetCocktail(item.CocktailId);
-                listOfCocktails.Add(cocktail);
-            }
-            return listOfCocktails;
-        }
-
-        public async Task<List<Bar>> GetAllBarsAsync()
+        public async Task<ICollection<BarDTO>> GetAllBarsAsync()
         {
             var listOfBars = await _context.Bars
-                .Include(b => b.Cocktails)
+                .Include(b => b.BarCocktails)
+                    .ThenInclude(b => b.Cocktail)
                 .Include(c => c.BarReviews)
                     .ThenInclude(br => br.User)
                 .Where(b => !b.IsDeleted)
                 .ToListAsync();
-            return listOfBars;
+            return listOfBars.ToDTO();
         }
 
         public async Task<ICollection<BarReviewDTO>> GetAllReviewsByBarID(string barId)
@@ -125,6 +124,5 @@ namespace Cocktail_Magician_Services
 
             return reviews.ToDTO();
         }
-
     }
 }

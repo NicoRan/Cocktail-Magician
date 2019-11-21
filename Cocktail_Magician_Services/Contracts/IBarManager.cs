@@ -7,13 +7,12 @@ namespace Cocktail_Magician_Services.Contracts
 {
     public interface IBarManager
     {
-        Task<Bar> CreateBar(Bar bar);
+        Task CreateBar(BarDTO barToCreate);
         Task RemoveBar(string id);
-        Task<Bar> GetBar(string id);
-        Task<List<Bar>> GetTopRatedBars();
-        Task<List<Cocktail>> GetBarsOfferedCocktails(string barId);
+        Task<BarDTO> GetBar(string id);
+        Task<ICollection<BarDTO>> GetTopRatedBars();
         Task<BarReviewDTO> CreateBarReviewAsync(BarReviewDTO barReviewDTO);
-        Task<List<Bar>> GetAllBarsAsync();
+        Task<ICollection<BarDTO>> GetAllBarsAsync();
         Task<ICollection<BarReviewDTO>> GetAllReviewsByBarID(string barId);
         Task<bool> IsReviewGiven(string barId, string userId);
     }

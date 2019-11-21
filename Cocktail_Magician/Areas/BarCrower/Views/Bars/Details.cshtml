@@ -43,9 +43,9 @@
                         <h5 class="mt-30">Cocktails offered</h5>
                         <!-- Make a foreach loop to get all cocktails the bar offers start -->
                         <ul class="list-icon-data-attr font-ionicons">
-                            @foreach (var cocktail in Model.Cocktails)
+                            @foreach (var cocktail in Model.BarCocktailViewModels)
                             {
-                                <li data-content="&#xf383"> @Html.ActionLink(cocktail.Name, "Details", "Cocktails", new { id = cocktail.CocktailId }, null) </li>
+                                <li data-content="&#xf383"> @Html.ActionLink(cocktail.CocktailName, "Details", "Cocktails", new { id = cocktail.CocktailId }, null) </li>
                             }
                         </ul>
                         <!-- Make a foreach loop to get all cocktails the bar offers end -->
@@ -62,7 +62,10 @@
                             <div class="row mt-25">
                                 <div class="col-12 col-md-8 col-lg-9 offset-md-4 offset-lg-3">
                                     <div class="col-inner">
-                                        <a asp-area="BarMagician" asp-controller="Bars" asp-action="Delete" asp-route-id="@Model.BarId" method="get" class="btn btn-primary btn-wide"><i class="elegent-icon-error-oct_alt"></i>  Delete Bar</a>
+                                        <a asp-area="BarMagician" asp-controller="Bars" asp-action="Delete" asp-route-id="@Model.BarId" class="btn btn-primary btn-wide"><i class="elegent-icon-error-oct_alt"></i>  Delete Bar</a>
+                                    </div>
+                                    <div class="col-inner">
+                                        <a asp-area="BarMagician" asp-controller="Bars" asp-action="Edit" asp-route-id="@Model.BarId" method="get" class="btn btn-success btn-wide"><i class="elegent-icon-error-oct_alt"></i>  Edit Bar</a>
                                     </div>
                                 </div>
                             </div>

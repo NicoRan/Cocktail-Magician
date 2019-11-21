@@ -1,5 +1,6 @@
 ﻿using Cocktail_Magician_DB.Models;
 using Cocktail_Magician_Services.Contracts;
+using Cocktail_Magician_Services.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,18 +18,18 @@ namespace Cocktail_Magician_Services
             _cocktailManager = cocktailManager;
         }
 
-        public async Task<List<Bar>> SearchBarsByName(string criteria)
+        public async Task<ICollection<BarDTO>> SearchBarsByName(string criteria)
         {
             var listOfBars = await _barManager.GetAllBarsAsync();
             return listOfBars.Where(bar => bar.Name.Contains(criteria, StringComparison.CurrentCultureIgnoreCase)).OrderBy(r => r.Name).ToList();
         }
-        public async Task<List<Bar>> SearchBarsByAddress(string criteria)
+        public async Task<ICollection<BarDTO>> SearchBarsByAddress(string criteria)
         {
             var address = await _barManager.GetAllBarsAsync();
             return address.Where(bar => bar.Address.Contains(criteria, StringComparison.CurrentCultureIgnoreCase))
                 .OrderBy(r => r.Name).ToList(); ;
         }
-        public async Task<List<Cocktail>> SearchCocktails(string criteria)
+        public async Task<ICollection<CocktailDTO>> SearchCocktails(string criteria)
         {
             var listOfCocktails = await _cocktailManager.GetAllCocktailsAsync();
             return listOfCocktails.Where(cocktail => cocktail.Name.Contains(criteria, StringComparison.CurrentCultureIgnoreCase)).OrderBy(r => r.Name).ToList();
