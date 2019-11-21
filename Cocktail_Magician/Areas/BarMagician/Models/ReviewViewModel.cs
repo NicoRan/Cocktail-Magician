@@ -12,6 +12,7 @@ namespace Cocktail_Magician.Areas.BarMagician.Models
         public DateTime CreatedOn { get; set; }
         public string Id { get; set; }
         public string UserId { get; set; }
+        public string UserPicture { get; set; }
         public string Comment { get; set; }
         public double Grade { get; set; }
     }

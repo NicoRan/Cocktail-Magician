@@ -17,7 +17,8 @@ namespace Cocktail_Magician_Services.Mappers
                 BarId = barReview.BarId,
                 Comment = barReview.Comment,
                 Grade = barReview.Grade,
-                UserName = barReview.User.UserName
+                UserName = barReview.User.UserName,
+                UserPicture = barReview.User.Picture
             };
             return barReviewDTO;
         }
@@ -29,7 +30,8 @@ namespace Cocktail_Magician_Services.Mappers
                 UserId = barReviewDTO.UserId,
                 BarId = barReviewDTO.BarId,
                 Grade = barReviewDTO.Grade,
-                Comment = barReviewDTO.Comment
+                Comment = barReviewDTO.Comment,
+                CreatedOn = barReviewDTO.DateCreated
             };
             return barReview;
         }

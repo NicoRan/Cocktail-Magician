@@ -1,5 +1,6 @@
 ﻿using Cocktail_Magician_DB.DataSeeder.IOSeed;
 using Cocktail_Magician_DB.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -82,12 +83,13 @@ namespace Cocktail_Magician_DB.DataSeeder
                         });
                     }
                 }
-                StringBuilder cocktailInfo = new StringBuilder();
+                var cocktailInfo = new List<string>();
                 foreach (var item in cocktail.CocktailIngredient)
                 {
-                    cocktailInfo.Append(item.Ingredient.Name + ", ");
+                    cocktailInfo.Add(item.Ingredient.Name);
                 }
-                cocktailToAdd.Information = cocktailInfo.ToString();
+                var cocktailRecipe = String.Join(',', cocktailInfo);
+                cocktailToAdd.Information = cocktailRecipe;
 
                 context.Cocktails.Add(cocktailToAdd);
                 context.SaveChanges();
