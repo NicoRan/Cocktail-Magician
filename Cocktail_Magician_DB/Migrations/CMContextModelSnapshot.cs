@@ -147,15 +147,11 @@ namespace Cocktail_Magician_DB.Migrations
                     b.Property<string>("IngredientId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("CocktailId");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(35);
 
                     b.HasKey("IngredientId");
-
-                    b.HasIndex("CocktailId");
 
                     b.HasIndex("Name")
                         .IsUnique();
@@ -380,13 +376,6 @@ namespace Cocktail_Magician_DB.Migrations
                         .WithMany("CocktailReviews")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Cocktail_Magician_DB.Models.Ingredient", b =>
-                {
-                    b.HasOne("Cocktail_Magician_DB.Models.Cocktail")
-                        .WithMany("Ingredients")
-                        .HasForeignKey("CocktailId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

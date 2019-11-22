@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cocktail_Magician_DB.Migrations
 {
     [DbContext(typeof(CMContext))]
-    [Migration("20191117190045_second")]
-    partial class second
+    [Migration("20191121220102_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -91,8 +91,6 @@ namespace Cocktail_Magician_DB.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("BarId");
-
                     b.Property<string>("Information");
 
                     b.Property<bool>("IsDeleted");
@@ -106,8 +104,6 @@ namespace Cocktail_Magician_DB.Migrations
                     b.Property<double>("Rating");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BarId");
 
                     b.HasIndex("Name")
                         .IsUnique();
@@ -153,15 +149,11 @@ namespace Cocktail_Magician_DB.Migrations
                     b.Property<string>("IngredientId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("CocktailId");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(35);
 
                     b.HasKey("IngredientId");
-
-                    b.HasIndex("CocktailId");
 
                     b.HasIndex("Name")
                         .IsUnique();
@@ -362,13 +354,6 @@ namespace Cocktail_Magician_DB.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Cocktail_Magician_DB.Models.Cocktail", b =>
-                {
-                    b.HasOne("Cocktail_Magician_DB.Models.Bar")
-                        .WithMany("Cocktails")
-                        .HasForeignKey("BarId");
-                });
-
             modelBuilder.Entity("Cocktail_Magician_DB.Models.CocktailIngredient", b =>
                 {
                     b.HasOne("Cocktail_Magician_DB.Models.Cocktail", "Cocktail")
@@ -393,13 +378,6 @@ namespace Cocktail_Magician_DB.Migrations
                         .WithMany("CocktailReviews")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Cocktail_Magician_DB.Models.Ingredient", b =>
-                {
-                    b.HasOne("Cocktail_Magician_DB.Models.Cocktail")
-                        .WithMany("Ingredients")
-                        .HasForeignKey("CocktailId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
