@@ -104,7 +104,7 @@
                     </div>
                 </div>
                 <div class="tour-long-item-wrapper-01">
-                    @if (Model.Bars != null)
+                    @if (Model.Bars.Count() != 0)
                     {
                         @foreach (var bar in Model.Bars)
                         {
@@ -142,7 +142,11 @@
                             <!-- One result item start -->
                         }
                     }
-                    @if (Model.Cocktails != null)
+                    else
+                    {
+                        <p>No results found for Bar</p>
+                    }
+                    @if (Model.Cocktails.Count() != 0)
                     {
                         @foreach (var cocktail in Model.Cocktails)
                         {
@@ -176,6 +180,10 @@
                             </figure>
                             <!-- One result item start -->
                         }
+                    }
+                    else
+                    {
+                        <p>No results found for Cocktails</p>
                     }
                 </div>
                 <!-- Pagination view start -->

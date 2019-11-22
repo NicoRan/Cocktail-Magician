@@ -78,7 +78,7 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
             }
             try
             {
-                var cocktailToAdd = CocktailViewModelMapper.MapCocktail(cocktailToCreate.Cocktail);
+                var cocktailToAdd = cocktailToCreate.Cocktail.ToDTO();
                 await _cocktailManager.CreateCocktail(cocktailToAdd, cocktailToCreate.Cocktail.Ingredients);
                 return RedirectToAction("Index", "Home");
             }
@@ -146,7 +146,7 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
             try
             {
                 var cocktail = await _cocktailManager.GetCocktail(id);
-                var cocktailToDelete = CocktailViewModelMapper.MapCocktailViewModel(cocktail);
+                var cocktailToDelete = cocktail.ToVM();
                 return View(cocktailToDelete);
             }
             catch (Exception ex)

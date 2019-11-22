@@ -12,7 +12,8 @@ namespace Cocktail_Magician.Infrastructure.Mappers
                 BarId = createReviewViewModel.Id,
                 UserId = createReviewViewModel.UserId,
                 Comment = createReviewViewModel.Comment,
-                Grade = createReviewViewModel.Rate
+                Grade = createReviewViewModel.Rate,
+                DateCreated = createReviewViewModel.DateCreated
             };
             return barCommentDTO;
         }

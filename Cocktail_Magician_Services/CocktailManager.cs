@@ -22,7 +22,7 @@ namespace Cocktail_Magician_Services
             _ingredientManager = ingredientManager;
         }
 
-        public async Task<Cocktail> CreateCocktail(Cocktail cocktail, List<string> ingredients)
+        public async Task CreateCocktail(CocktailDTO cocktail, List<string> ingredients)
         {
             var cocktailToFind = _context.Cocktails.SingleOrDefault(c => c.Name == cocktail.Name);
             if (cocktailToFind != null)
@@ -30,21 +30,19 @@ namespace Cocktail_Magician_Services
                 throw new InvalidOperationException("Cocktail already exists in the database");
             }
 
-            var cocktailToAdd = cocktail;
+            var cocktailToAdd = cocktail.ToEntity();
             cocktailToAdd.CocktailIngredient = new List<CocktailIngredient>();
             foreach (var ingredient in ingredients)
             {
                 var findIngredient = await _ingredientManager.FindIngredientByNameAsync(ingredient);
                 if (findIngredient != null)
                 {
-                    cocktailToAdd.CocktailIngredient.Add(new CocktailIngredient() { Cocktail = cocktail, Ingredient = findIngredient });
+                    cocktailToAdd.CocktailIngredient.Add(new CocktailIngredient() { Cocktail = cocktailToAdd, Ingredient = findIngredient });
                 }
             }
             cocktailToAdd.Information = CocktailsRecipe(ingredients);
             await _context.Cocktails.AddAsync(cocktailToAdd);
             await _context.SaveChangesAsync();
-
-            return cocktailToAdd;
         }
 
         public async Task<ICollection<CocktailDTO>> GetTopRatedCocktails()
@@ -72,7 +70,7 @@ namespace Cocktail_Magician_Services
             return cocktailReviewDTO;
         }
 
-        public async Task<Cocktail> GetCocktail(string id)
+        public async Task<CocktailDTO> GetCocktail(string id)
         {
             try
             {
@@ -82,7 +80,7 @@ namespace Cocktail_Magician_Services
                         .ThenInclude(c=>c.User)
                     .Where(c => !c.IsDeleted)
                     .FirstOrDefaultAsync(c => c.Id == id);
-                return cocktail;
+                return cocktail.ToDTO();
             }
             catch (InvalidOperationException)
             {
@@ -90,11 +88,12 @@ namespace Cocktail_Magician_Services
             }
         }
 
-        public async Task<Cocktail> GetCocktailByName(string name)
+        public async Task<CocktailDTO> GetCocktailByName(string name)
         {
             try
             {
-                return await _context.Cocktails.FirstOrDefaultAsync(cocktail => cocktail.Name == name);
+                var result = await _context.Cocktails.FirstOrDefaultAsync(cocktail => cocktail.Name == name);
+                return result.ToDTO();
             }
             catch (Exception)
             {
@@ -108,7 +107,7 @@ namespace Cocktail_Magician_Services
             {
                 var cocktailToRemove = await GetCocktail(id);
                 cocktailToRemove.IsDeleted = true;
-                _context.Cocktails.Update(cocktailToRemove);
+                _context.Cocktails.Update(cocktailToRemove.ToEntity());
                 await _context.SaveChangesAsync();
             }
             catch

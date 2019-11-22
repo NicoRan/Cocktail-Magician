@@ -55,7 +55,6 @@ namespace Cocktail_Magician.Areas.BarCrower.Controllers
         public async Task<IActionResult> Review(CreateReviewViewModel reviewViewModel)
         {
             var barReview = reviewViewModel.ToBarDTO();
-            barReview.DateCreated = DateTime.Now.Date;
             if (ModelState.IsValid)
             {
                 await _barManager.CreateBarReviewAsync(barReview);

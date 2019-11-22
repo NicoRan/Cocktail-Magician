@@ -1,11 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Cocktail_Magician.Infrastructure.Mappers;
 using Cocktail_Magician.Models;
-using Cocktail_Magician_DB.Models;
 using Cocktail_Magician_Services.Contracts;
-using Cocktail_Magician_Services.DTO;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cocktail_Magician.Controllers

@@ -30,7 +30,7 @@ namespace Cocktail_Magician.Areas.BarCrower.Controllers
             {
                 var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
                 var cocktail = await _cocktailManager.GetCocktail(id);
-                var cocktailViewModel = CocktailViewModelMapper.MapCocktailViewModel(cocktail);
+                var cocktailViewModel = cocktail.ToVM();
                 cocktailViewModel.ReviewViewModels = (await _cocktailManager.GetAllReviewsByCocktailID(id)).ToCocktailReviewVM();
                 cocktailViewModel.IsRated = await _cocktailManager.IsReviewGiven(id, userId);
                 return View(cocktailViewModel);

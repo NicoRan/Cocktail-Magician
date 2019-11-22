@@ -41,5 +41,10 @@ namespace Cocktail_Magician_Services.Mappers
             return newCollection;
         }
 
+        public static ICollection<CocktailReview> ToEntity(this ICollection<CocktailReviewDTO> barRatings)
+        {
+            var newCollection = barRatings.Select(c => c.ToEntity()).ToList();
+            return newCollection;
+        }
     }
 }
