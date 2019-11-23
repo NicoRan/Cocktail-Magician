@@ -18,7 +18,7 @@ namespace Cocktail_Magician_Services.Mappers
                 Picture = bar.Picture,
                 MapDirection = bar.MapDirections,
                 IsDeleted = bar.IsDeleted,
-                Rating = bar.BarReviews.Any(br => br.BarId == bar.BarId) ? bar.BarReviews.Average(br => br.Grade) : 0
+                Rating = bar.Rating
             };
             barDTO.BarReviewDTOs = bar.BarReviews.Select(b => b.ToDTO()).ToList();
             barDTO.BarCocktailDTOs = bar.BarCocktails.Select(b => b.ToDTO()).ToList();
@@ -36,7 +36,7 @@ namespace Cocktail_Magician_Services.Mappers
                 IsDeleted = barDTO.IsDeleted,
                 Name = barDTO.Name,
                 Picture = barDTO.Picture,
-                Rating = barDTO.BarReviewDTOs.Any(br => br.BarId == barDTO.Id) ? barDTO.BarReviewDTOs.Average(br => br.Grade) : 0
+                Rating = barDTO.Rating
             };
             bar.BarReviews = barDTO.BarReviewDTOs.Select(b => b.ToEntity()).ToList();
             bar.BarCocktails = barDTO.BarCocktailDTOs.Select(b => b.ToEntity()).ToList();

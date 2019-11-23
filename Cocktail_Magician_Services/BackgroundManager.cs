@@ -23,7 +23,7 @@ namespace Cocktail_Magician_Services
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            var timer = new Timer(DeleteUnusedIngredients,null,TimeSpan.FromMinutes(10), TimeSpan.FromMinutes(10));
+            var timer = new Timer(DeleteUnusedIngredients,null,TimeSpan.FromMinutes(300), TimeSpan.FromMinutes(300));
 
             return Task.CompletedTask;
         }

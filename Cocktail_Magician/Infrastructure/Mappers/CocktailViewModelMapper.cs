@@ -46,12 +46,12 @@ namespace Cocktail_Magician.Infrastructure.Mappers
         {
             var cocktailViewModel = new CocktailDTO()
             {
-                Id = cocktailView.CocktailId,
-                Information = cocktailView.Information,
+                //Id = cocktailView.CocktailId,
+                //Information = cocktailView.Information,
                 Name = cocktailView.Name,
                 Picture = cocktailView.Picture,
                 Rating = cocktailView.Rating,
-                CocktailReviewDTOs = cocktailView.ReviewViewModels.ToCocktailReviewDTO()
+                CocktailReviewDTOs = cocktailView.ReviewViewModels?.ToCocktailReviewDTO()
             };
             return cocktailViewModel;
         }

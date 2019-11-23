@@ -16,7 +16,7 @@ namespace Cocktail_Magician_Services.Mappers
                 Information = cocktail.Information,
                 Picture = cocktail.Picture,
                 IsDeleted = cocktail.IsDeleted,
-                Rating = cocktail.CocktailReviews.Any(c => c.CocktailId == cocktail.Id) ? cocktail.CocktailReviews.Average(c => c.Grade) : 0,
+                Rating = cocktail.Rating,
                 CocktailReviewDTOs = cocktail.CocktailReviews.ToDTO()
             };
             return cocktailDTO;
@@ -31,8 +31,18 @@ namespace Cocktail_Magician_Services.Mappers
                 Information = cocktailDTO.Information,
                 Picture = cocktailDTO.Picture,
                 IsDeleted = cocktailDTO.IsDeleted,
-                Rating = cocktailDTO.CocktailReviewDTOs.Any(c => c.CocktailId == cocktailDTO.Id) ? cocktailDTO.CocktailReviewDTOs.Average(c => c.Grade) : 0,
-                CocktailReviews = cocktailDTO.CocktailReviewDTOs.ToEntity()
+                CocktailReviews = cocktailDTO.CocktailReviewDTOs?.ToEntity()
+            };
+            return cocktail;
+        }
+        public static Cocktail ToCreateEntity(this CocktailDTO cocktailDTO)
+        {
+            var cocktail = new Cocktail
+            {
+                Name = cocktailDTO.Name,
+                Picture = cocktailDTO.Picture,
+                IsDeleted = cocktailDTO.IsDeleted,
+                CocktailReviews = cocktailDTO.CocktailReviewDTOs?.ToEntity()
             };
             return cocktail;
         }

@@ -104,86 +104,106 @@
                     </div>
                 </div>
                 <div class="tour-long-item-wrapper-01">
-                    @if (Model.Bars.Count() != 0)
+                    @if (Model.Bars != null)
                     {
-                        @foreach (var bar in Model.Bars)
+                        if (Model.Bars.Count() != 0)
                         {
-                            <!-- One result item start -->
-                            <figure class="tour-long-item-01">
-                                <a asp-area="BarCrower" asp-controller="Bars" asp-action="Details" asp-route-id="@bar.BarId">
-                                    <div class="d-flex flex-column flex-sm-row align-items-xl-center">
-                                        <div>
-                                            <div class="image">
-                                                <img src="@bar.Picture" alt="images" />
+                            @foreach (var bar in Model.Bars)
+                            {
+                                <!-- One result item start -->
+                                <figure class="tour-long-item-01">
+                                    <a asp-area="BarCrower" asp-controller="Bars" asp-action="Details" asp-route-id="@bar.BarId">
+                                        <div class="d-flex flex-column flex-sm-row align-items-xl-center">
+                                            <div>
+                                                <div class="image">
+                                                    <img src="@bar.Picture" alt="images" />
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <figcaption class="content">
+                                                    <h5>@bar.Name</h5>
+                                                    <ul class="item-meta">
+                                                        <li>
+                                                            <i class="elegent-icon-pin_alt text-warning"></i> @bar.Address
+                                                        </li>
+                                                        <li>
+                                                            <div class="rating-item rating-sm rating-inline clearfix">
+                                                                <div class="rating-icons">
+                                                                    <input type="hidden" class="rating" data-filled="rating-icon ri-star rating-rated" data-empty="rating-icon ri-star-empty" data-fractions="2" data-readonly value="@bar.Rating" /> @bar.Rating / 5
+                                                                </div>
+                                                                @*<p class="rating-text font600 text-muted font-12 letter-spacing-2">44 reviews</p>*@
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                    <p class="overflow-hidden" style="white-space: nowrap;width: 400px; overflow: hidden;text-overflow: ellipsis;">@bar.Information</p>
+                                                </figcaption>
                                             </div>
                                         </div>
-                                        <div>
-                                            <figcaption class="content">
-                                                <h5>@bar.Name</h5>
-                                                <ul class="item-meta">
-                                                    <li>
-                                                        <i class="elegent-icon-pin_alt text-warning"></i> @bar.Address
-                                                    </li>
-                                                    <li>
-                                                        <div class="rating-item rating-sm rating-inline clearfix">
-                                                            <div class="rating-icons">
-                                                                <input type="hidden" class="rating" data-filled="rating-icon ri-star rating-rated" data-empty="rating-icon ri-star-empty" data-fractions="2" data-readonly value="@bar.Rating" /> @bar.Rating / 5
-                                                            </div>
-                                                            @*<p class="rating-text font600 text-muted font-12 letter-spacing-2">44 reviews</p>*@
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                                <p class="overflow-hidden" style="white-space: nowrap;width: 400px; overflow: hidden;text-overflow: ellipsis;">@bar.Information</p>
-                                            </figcaption>
-                                        </div>
-                                    </div>
-                                </a>
-                            </figure>
-                            <!-- One result item start -->
+                                    </a>
+                                </figure>
+                                <!-- One result item start -->
+                            }
+                        }
+                        else
+                        {
+                            <p> No results found for Bar </p>
                         }
                     }
                     else
                     {
-                        <p>No results found for Bar</p>
-                    }
-                    @if (Model.Cocktails.Count() != 0)
-                    {
-                        @foreach (var cocktail in Model.Cocktails)
+                        @if (Model.Criteria != null)
                         {
-                            <!-- One result item start -->
-                            <figure class="tour-long-item-01">
-                                <a asp-area="BarCrower" asp-controller="Cocktails" asp-action="Details" asp-route-id="@cocktail.CocktailId">
-                                    <div class="d-flex flex-column flex-sm-row align-items-xl-center">
-                                        <div>
-                                            <div class="image">
-                                                <img src="@cocktail.Picture" alt="images" />
+                            <p>No results found for Cocktail</p>
+                        }
+                    }
+                    @if (Model.Cocktails != null)
+                    {
+                        if (Model.Cocktails.Count() != 0)
+                        {
+                            @foreach (var cocktail in Model.Cocktails)
+                            {
+                                <!-- One result item start -->
+                                <figure class="tour-long-item-01">
+                                    <a asp-area="BarCrower" asp-controller="Cocktails" asp-action="Details" asp-route-id="@cocktail.CocktailId">
+                                        <div class="d-flex flex-column flex-sm-row align-items-xl-center">
+                                            <div>
+                                                <div class="image">
+                                                    <img src="@cocktail.Picture" alt="images" />
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <figcaption class="content">
+                                                    <h5>@cocktail.Name</h5>
+                                                    <ul class="item-meta">
+                                                        <li>
+                                                            <div class="rating-item rating-sm rating-inline clearfix">
+                                                                <div class="rating-icons">
+                                                                    <input type="hidden" class="rating" data-filled="rating-icon ri-star rating-rated" data-empty="rating-icon ri-star-empty" data-fractions="2" data-readonly value="@cocktail.Rating" /> @cocktail.Rating / 5
+                                                                </div>
+                                                                @*<p class="rating-text font600 text-muted font-12 letter-spacing-2">44 reviews</p>*@
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                    <p>@cocktail.Information</p>
+                                                </figcaption>
                                             </div>
                                         </div>
-                                        <div>
-                                            <figcaption class="content">
-                                                <h5>@cocktail.Name</h5>
-                                                <ul class="item-meta">
-                                                    <li>
-                                                        <div class="rating-item rating-sm rating-inline clearfix">
-                                                            <div class="rating-icons">
-                                                                <input type="hidden" class="rating" data-filled="rating-icon ri-star rating-rated" data-empty="rating-icon ri-star-empty" data-fractions="2" data-readonly value="@cocktail.Rating" /> @cocktail.Rating / 5
-                                                            </div>
-                                                            @*<p class="rating-text font600 text-muted font-12 letter-spacing-2">44 reviews</p>*@
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                                <p>@cocktail.Information</p>
-                                            </figcaption>
-                                        </div>
-                                    </div>
-                                </a>
-                            </figure>
-                            <!-- One result item start -->
+                                    </a>
+                                </figure>
+                                <!-- One result item start -->
+                            }
+                        }
+                        else
+                        {
+                            <p>No results found for Cocktail</p>
                         }
                     }
                     else
                     {
-                        <p>No results found for Cocktails</p>
+                        if (Model.Criteria != null)
+                        {
+                            <p>No results found for Bar</p>
+                        }
                     }
                 </div>
                 <!-- Pagination view start -->
