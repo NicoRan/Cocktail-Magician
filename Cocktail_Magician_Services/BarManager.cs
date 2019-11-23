@@ -14,10 +14,12 @@ namespace Cocktail_Magician_Services
     public class BarManager : IBarManager
     {
         private readonly CMContext _context;
+        private readonly ICocktailManager _cocktailManager;
 
-        public BarManager(CMContext context)
+        public BarManager(CMContext context, ICocktailManager cocktailManager)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
+            _cocktailManager = cocktailManager ?? throw new ArgumentNullException(nameof(cocktailManager));
         }
 
         public async Task CreateBar(BarDTO barToCreate)
@@ -32,6 +34,31 @@ namespace Cocktail_Magician_Services
             }
 
             await _context.Bars.AddAsync(barToAdd);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task EditBar(BarDTO bar, ICollection<string> cocktailsToOffer)
+        {
+            var barToUpdate = new BarDTO();
+            barToUpdate.Address = bar.Address;
+            barToUpdate.Information = bar.Information;
+            barToUpdate.MapDirection = bar.MapDirection;
+            barToUpdate.Name = bar.Name;
+            barToUpdate.Picture = bar.Picture;
+            if (cocktailsToOffer.Count() > 0)
+            {
+                foreach (var cocktail in cocktailsToOffer)
+                {
+                    var cocktailToAdd = await _cocktailManager.GetCocktailByName(cocktail);
+                    barToUpdate.BarCocktailDTOs.Add(new BarCocktailDTO
+                    {
+                        BarId = barToUpdate.Id,
+                        CocktailId = cocktailToAdd.Id
+                    });
+                }
+            }
+            var barToEntity = barToUpdate.ToBar();
+            _context.Bars.Update(barToEntity);
             await _context.SaveChangesAsync();
         }
 

@@ -6,6 +6,8 @@ using Cocktail_Magician.Areas.BarMagician.Models;
 using Microsoft.AspNetCore.Authorization;
 using Cocktail_Magician.Infrastructure.Mappers;
 using Cocktail_Magician.Models;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace Cocktail_Magician.Areas.BarMagician.Controllers
 {
@@ -13,9 +15,11 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
     public class BarsController : Controller
     {
         private readonly IBarManager _barManager;
-        public BarsController(IBarManager barManager)
+        private readonly ICocktailManager _cocktailManager;
+        public BarsController(IBarManager barManager, ICocktailManager cocktailManager)
         {
             _barManager = barManager;
+            _cocktailManager = cocktailManager;
         }
 
         // GET: Bars/Create
@@ -52,49 +56,57 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
         }
 
         // GET: Bars/Edit/5
-        //[HttpGet]
-        //[Authorize(Roles = "Administrator")]
-        //public async Task<IActionResult> Edit(string id)
-        //{
-        //    try
-        //    {
-        //        var bar = await _barManager.GetBar(id);
-        //        var cocktails = await _barManager.GetUnOfferedCocktails(id);
-        //        var barViewModel = BarViewModelMapper.MapCreateBarViewModel(bar);
-        //        foreach (var cocktail in cocktails)
-        //        {
-        //            barViewModel.CocktailsThatCanOffer.Add(cocktail);
-        //        }
-        //        return View(barViewModel);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return RedirecToActionError("404", ex.Message);
-        //    }
-        //}
+        [HttpGet]
+        [Authorize(Roles = "Administrator")]
+        public async Task<IActionResult> Edit(string id)
+        {
+            try
+            {
+                var bar = await _barManager.GetBar(id);
+                var barViewModel = bar.ToVM();
+                var createBarViewModel = new CreateBarViewModel();
+                createBarViewModel.Bar = barViewModel;
+                var allCocktails = await _cocktailManager.GetAllCocktailsAsync();
+                var allCocktailsVM = allCocktails.ToVM();
+                foreach (var cocktail in allCocktailsVM)
+                {
+                    if(!barViewModel.BarCocktailViewModels.Any(bc => bc.CocktailId == cocktail.CocktailId))
+                    {
+                        createBarViewModel.CocktailsThatCanOffer.Add(cocktail);
+                    }
+                }
+
+                return View(createBarViewModel);
+            }
+            catch (Exception ex)
+            {
+                return RedirecToActionError("404", ex.Message);
+            }
+        }
 
         // POST: Bars/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //[Authorize(Roles = "Administrator")]
-        //public async Task<IActionResult> Edit(List<string> cocktailsToOffer, BarViewModel bar)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        ModelState.AddModelError(string.Empty, "Invalid bar parameters!");
-        //        return View(bar);
-        //    }
-        //    try
-        //    {
-
-        //    }
-        //    catch(Exception ex)
-        //    {
-        //        return RedirecToActionError("500", ex.Message);
-        //    }
-        //}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
+        public async Task<IActionResult> Edit(List<string> cocktailsToOffer, BarViewModel bar)
+        {
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError(string.Empty, "Invalid bar parameters!");
+                return View(bar);
+            }
+            try
+            {
+                await _barManager.EditBar(bar.ToDTO(), cocktailsToOffer);
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception ex)
+            {
+                return RedirecToActionError("500", ex.Message);
+            }
+        }
 
         // GET: Bars/Delete/5
         [HttpGet, ActionName("Delete")]

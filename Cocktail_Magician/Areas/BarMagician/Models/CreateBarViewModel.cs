@@ -8,11 +8,11 @@ namespace Cocktail_Magician.Areas.BarMagician.Models
 {
     public class CreateBarViewModel
     {
-        //public CreateBarViewModel()
-        //{
-        //    Bar = new BarViewModel();
-        //    CocktailsThatCanOffer = new List<CocktailViewModel>();
-        //}
+        public CreateBarViewModel()
+        {
+            Bar = new BarViewModel();
+            CocktailsThatCanOffer = new List<CocktailViewModel>();
+        }
         public BarViewModel Bar { get; set; }
         public List<CocktailViewModel> CocktailsThatCanOffer { get; set; }
         public List<CocktailViewModel> CocktailsToOffer { get; set; }

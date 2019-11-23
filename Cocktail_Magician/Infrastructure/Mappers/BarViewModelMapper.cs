@@ -20,7 +20,6 @@ namespace Cocktail_Magician.Infrastructure.Mappers
             barViewModel.BarCocktailViewModels = bar.BarCocktailDTOs.ToVM();
             barViewModel.ReviewViewModels = bar.BarReviewDTOs.ToBarReviewVM();
             return barViewModel;
-
         }
 
         public static BarDTO ToDTO(this BarViewModel barView)
@@ -36,7 +35,6 @@ namespace Cocktail_Magician.Infrastructure.Mappers
             barDTO.BarCocktailDTOs = barView.BarCocktailViewModels != null ? barView.BarCocktailViewModels.ToDTO() : new List<BarCocktailDTO>();
             barDTO.BarReviewDTOs = barView.ReviewViewModels != null ? barView.ReviewViewModels.ToBarReviewDTO() : new List<BarReviewDTO>();
             return barDTO;
-
         }
 
         public static ICollection<BarViewModel> ToVM(this ICollection<BarDTO> bar)

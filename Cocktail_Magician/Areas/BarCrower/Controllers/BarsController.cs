@@ -6,7 +6,6 @@ using Cocktail_Magician.Infrastructure.Mappers;
 using Cocktail_Magician.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
-using Cocktail_Magician_Services.Mappers;
 
 namespace Cocktail_Magician.Areas.BarCrower.Controllers
 {

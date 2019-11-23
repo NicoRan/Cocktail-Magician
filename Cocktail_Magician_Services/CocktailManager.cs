@@ -110,8 +110,9 @@ namespace Cocktail_Magician_Services
         {
             try
             {
-                var result = await _context.Cocktails.FirstOrDefaultAsync(cocktail => cocktail.Name == name);
-                return result.ToDTO();
+                var result = await _context.Cocktails.Include(c => c.CocktailReviews).FirstOrDefaultAsync(cocktail => cocktail.Name == name);
+                var resultDTO = result.ToDTO();
+                return resultDTO;
             }
             catch (Exception)
             {

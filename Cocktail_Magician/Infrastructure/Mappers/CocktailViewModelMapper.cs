@@ -9,25 +9,6 @@ namespace Cocktail_Magician.Infrastructure.Mappers
 {
     public static class CocktailViewModelMapper
     {
-        public static CocktailViewModel MapCocktailViewModel(this Cocktail cocktail)
-        {
-            var cocktailViewModel = new CocktailViewModel()
-            {
-                CocktailId = cocktail.Id,
-                Information = cocktail.Information,
-                Ingredients = new List<string>(),
-                Name = cocktail.Name,
-                Picture = cocktail.Picture,
-                Rating = cocktail.CocktailReviews.Any(c => c.CocktailId == cocktail.Id) ? cocktail.CocktailReviews.Average(c => c.Grade) : 0
-                
-            };
-            //foreach (var ingredient in cocktail.Ingredients)
-            //{
-            //    cocktailViewModel.Ingredients.Add(ingredient.Name);
-            //}
-            return cocktailViewModel;
-        }
-
         public static CocktailViewModel ToVM(this CocktailDTO cocktail)
         {
             var cocktailViewModel = new CocktailViewModel()
@@ -62,18 +43,10 @@ namespace Cocktail_Magician.Infrastructure.Mappers
             return newCollection;
         }
 
-        public static Cocktail MapCocktail(this CocktailViewModel cocktailView)
+        public static ICollection<CocktailDTO> ToDTO(this ICollection<CocktailViewModel> cocktails)
         {
-            var cocktail = new Cocktail()
-            {
-                Id = cocktailView.CocktailId,
-                Information = cocktailView.Information,
-                Name = cocktailView.Name,
-                Picture = cocktailView.Picture,
-                Rating = cocktailView.Rating
-            };
-
-            return cocktail;
+            var newCollection = cocktails.Select(c => c.ToDTO()).ToList();
+            return newCollection;
         }
     }
 }
