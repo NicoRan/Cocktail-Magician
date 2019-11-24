@@ -37,7 +37,7 @@ namespace Cocktail_Magician.Areas.BarCrower.Controllers
             }
             catch (Exception ex)
             {
-                return RedirecToActionError("404", ex.Message);
+                return RedirectToAction("ErrorAction", "Error", new { errorCode = "404", errorMessage = ex.Message });
             }
         }
 
@@ -62,11 +62,5 @@ namespace Cocktail_Magician.Areas.BarCrower.Controllers
             }
             return View();
         }
-
-        private IActionResult RedirecToActionError(string errorCode, string errorMessage) => RedirectToAction("Error", "Home", new ErrorViewModel
-        {
-            ErrorCode = errorCode,
-            ErrorMessage = errorMessage
-        });
     }
 }

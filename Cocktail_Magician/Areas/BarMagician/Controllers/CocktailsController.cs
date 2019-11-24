@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Cocktail_Magician_Services.Contracts;
-using Cocktail_Magician.Models;
 using Cocktail_Magician.Areas.BarMagician.Models;
 using Cocktail_Magician.Infrastructure.Mappers;
 using System.Linq;
@@ -22,29 +21,6 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
             _cocktailManager = cocktailManager;
             _ingredientManager = ingredientManager;
         }
-        // GET: Cocktails
-        //public async Task<IActionResult> Index()
-        //{
-        //    return View(await _context.Cocktails.ToListAsync());
-        //}
-
-        // GET: Cocktails/Details/5
-        //public async Task<IActionResult> Details(string id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var cocktail = await _context.Cocktails
-        //        .FirstOrDefaultAsync(m => m.Id == id);
-        //    if (cocktail == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(cocktail);
-        //}
 
         // GET: Cocktails/Create
         [HttpGet]
@@ -84,7 +60,7 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
             }
             catch (Exception ex)
             {
-                return RedirecToActionError("500", ex.Message);
+                return RedirectToAction("ErrorAction", "Error", new { errorCode = "500", errorMessage = ex.Message });
             }
         }
 
@@ -151,7 +127,7 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
             }
             catch (Exception ex)
             {
-                return RedirecToActionError("404", ex.Message);
+                return RedirectToAction("ErrorAction", "Error", new { errorCode = "404", errorMessage = ex.Message });
             }
         }
 
@@ -168,14 +144,8 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
             }
             catch (Exception ex)
             {
-                return RedirecToActionError("404", ex.Message);
+                return RedirectToAction("ErrorAction", "Error", new { errorCode = "404", errorMessage = ex.Message });
             }
         }
-
-        private IActionResult RedirecToActionError(string errorCode, string errorMessage) => RedirectToAction("Error", "Home", new ErrorViewModel
-        {
-            ErrorCode = errorCode,
-            ErrorMessage = errorMessage
-        });
     }
 }

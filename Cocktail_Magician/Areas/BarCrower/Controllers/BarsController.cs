@@ -36,7 +36,7 @@ namespace Cocktail_Magician.Areas.BarCrower.Controllers
             }
             catch (Exception ex)
             {
-                return RedirecToActionError("404", ex.Message);
+                return RedirectToAction("ErrorAction", "Error", new { errorCode = "404", errorMessage = ex.Message});
             }
         }
 
@@ -52,19 +52,20 @@ namespace Cocktail_Magician.Areas.BarCrower.Controllers
         [Authorize(Roles = "Member")]
         public async Task<IActionResult> Review(CreateReviewViewModel reviewViewModel)
         {
-            var barReview = reviewViewModel.ToBarDTO();
             if (ModelState.IsValid)
             {
-                await _barManager.CreateBarReviewAsync(barReview);
-                return RedirectToAction("Index", "Home");
+                try
+                {
+                    var barReview = reviewViewModel.ToBarDTO();
+                    await _barManager.CreateBarReviewAsync(barReview);
+                    return RedirectToAction("Index", "Home");
+                }
+                catch(Exception ex)
+                {
+                    return RedirectToAction("ErrorAction", "Error", new { errorCode = "404", errorMessage = ex.Message });
+                }
             }
             return View();
         }
-
-        private IActionResult RedirecToActionError(string errorCode, string errorMessage) => RedirectToAction("Error", "Home", new ErrorViewModel
-            {
-                ErrorCode = errorCode,
-                ErrorMessage = errorMessage
-            });
     }
 }

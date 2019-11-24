@@ -82,7 +82,7 @@ namespace Cocktail_Magician_Services
                 .Where(c => c.CocktailId == cocktailId)
                 .Average(cr => cr.Grade);
             var cocktail = _context.Cocktails.Find(cocktailId);
-            cocktail.Rating = rating;
+            cocktail.Rating = Math.Round(rating, 1);
 
             _context.Cocktails.Update(cocktail);
             await _context.SaveChangesAsync();
@@ -143,12 +143,9 @@ namespace Cocktail_Magician_Services
         public async Task<ICollection<CocktailDTO>> GetAllCocktailsAsync()
         {
             var listCocktails = await _context.Cocktails
-                .Include(cocktail => cocktail.CocktailIngredient)
-                .Include(c => c.CocktailReviews)
-                    .ThenInclude(c => c.User)
                 .Where(cocktail => !cocktail.IsDeleted)
                 .ToListAsync();
-            return listCocktails.ToDTO();
+            return listCocktails.ToCatalogDTO();
         }
 
         public async Task<ICollection<CocktailReviewDTO>> GetAllReviewsByCocktailID(string cocktailId)

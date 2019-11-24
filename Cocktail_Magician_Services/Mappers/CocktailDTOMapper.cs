@@ -22,6 +22,20 @@ namespace Cocktail_Magician_Services.Mappers
             return cocktailDTO;
         }
 
+        public static CocktailDTO ToCatalogDTO(this Cocktail cocktail)
+        {
+            var cocktailDTO = new CocktailDTO
+            {
+                Id = cocktail.Id,
+                Name = cocktail.Name,
+                Information = cocktail.Information,
+                Picture = cocktail.Picture,
+                IsDeleted = cocktail.IsDeleted,
+                Rating = cocktail.Rating
+            };
+            return cocktailDTO;
+        }
+
         public static Cocktail ToEntity(this CocktailDTO cocktailDTO)
         {
             var cocktail = new Cocktail
@@ -50,6 +64,12 @@ namespace Cocktail_Magician_Services.Mappers
         public static ICollection<CocktailDTO> ToDTO(this ICollection<Cocktail> cocktails)
         {
             var newCollection = cocktails.Select(c => c.ToDTO()).ToList();
+            return newCollection;
+        }
+
+        public static ICollection<CocktailDTO> ToCatalogDTO(this ICollection<Cocktail> cocktails)
+        {
+            var newCollection = cocktails.Select(c => c.ToCatalogDTO()).ToList();
             return newCollection;
         }
 

@@ -4,7 +4,6 @@ using Cocktail_Magician_Services.Contracts;
 using Cocktail_Magician.Areas.BarMagician.Models;
 using Microsoft.AspNetCore.Authorization;
 using System;
-using Cocktail_Magician.Models;
 using Cocktail_Magician_Services.DTO;
 
 namespace Cocktail_Magician.Areas.BarMagician.Controllers
@@ -50,7 +49,7 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
             }
             catch (Exception ex)
             {
-                return RedirecToActionError("500", ex.Message);
+                return RedirectToAction("ErrorAction", "Error", new { errorCode = "500", errorMessage = ex.Message });
             }
         }
 
@@ -80,11 +79,5 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
         //    await _context.SaveChangesAsync();
         //    return RedirectToAction(nameof(Index));
         //}
-
-        private IActionResult RedirecToActionError(string errorCode, string errorMessage) => RedirectToAction("Error", "Home", new ErrorViewModel
-        {
-            ErrorCode = errorCode,
-            ErrorMessage = errorMessage
-        });
     }
 }

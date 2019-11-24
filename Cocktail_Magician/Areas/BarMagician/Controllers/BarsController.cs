@@ -5,7 +5,6 @@ using Cocktail_Magician_Services.Contracts;
 using Cocktail_Magician.Areas.BarMagician.Models;
 using Microsoft.AspNetCore.Authorization;
 using Cocktail_Magician.Infrastructure.Mappers;
-using Cocktail_Magician.Models;
 using System.Linq;
 using System.Collections.Generic;
 
@@ -51,7 +50,7 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
             }
             catch (Exception ex)
             {
-                return RedirecToActionError("500", ex.Message);
+                return RedirectToAction("ErrorAction", "Error", new { errorCode = "500", errorMessage = ex.Message });
             }
         }
 
@@ -60,8 +59,8 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
         [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(string id)
         {
-            //try
-            //{
+            try
+            {
                 var bar = await _barManager.GetBarForEditAsync(id);
                 var barViewModel = bar.ToVMforEdit();
                 var createBarViewModel = new CreateBarViewModel();
@@ -77,11 +76,11 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
                 }
 
                 return View(createBarViewModel);
-            //}
-            //catch (Exception ex)
-            //{
-            //    return RedirecToActionError("404", ex.Message);
-            //}
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("ErrorAction", "Error", new { errorCode = "404", errorMessage = ex.Message });
+            }
         }
 
         // POST: Bars/Edit/5
@@ -97,15 +96,15 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
                 ModelState.AddModelError(string.Empty, "Invalid bar parameters!");
                 return View(bar);
             }
-            //try
-            //{
+            try
+            {
                 await _barManager.EditBar(bar.ToDTO(), cocktailsToOffer);
                 return RedirectToAction("Index", "Home");
-            //}
-            //catch (Exception ex)
-            //{
-            //    return RedirecToActionError("500", ex.Message);
-            //}
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("ErrorAction", "Error", new { errorCode = "500", errorMessage = ex.Message });
+            }
         }
 
         // GET: Bars/Delete/5
@@ -121,7 +120,7 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
             }
             catch (Exception ex)
             {
-                return RedirecToActionError("404", ex.Message);
+                return RedirectToAction("ErrorAction", "Error", new { errorCode = "404", errorMessage = ex.Message });
             }
         }
 
@@ -138,13 +137,8 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
             }
             catch (Exception ex)
             {
-                return RedirecToActionError("404", ex.Message);
+                return RedirectToAction("ErrorAction", "Error", new { errorCode = "404", errorMessage = ex.Message });
             }
         }
-        private IActionResult RedirecToActionError(string errorCode, string errorMessage) => RedirectToAction("Error", "Home", new ErrorViewModel
-        {
-            ErrorCode = errorCode,
-            ErrorMessage = errorMessage
-        });
     }
 }

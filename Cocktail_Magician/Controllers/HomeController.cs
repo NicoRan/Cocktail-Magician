@@ -49,13 +49,7 @@ namespace Cocktail_Magician.Controllers
         public async Task<IActionResult> CocktailCatalog()
         {
             var listOfCocktails = await _cocktailManager.GetAllCocktailsAsync();
-            var listOfCocktailsViewModel = new List<CocktailViewModel>();
-            foreach (var cocktail in listOfCocktails)
-            {
-                var mapToView = cocktail.ToVM();
-                listOfCocktailsViewModel.Add(mapToView);
-            }
-            return View(listOfCocktailsViewModel);
+            return View(listOfCocktails.ToCatalogVM());
         }
 
         public IActionResult Privacy()

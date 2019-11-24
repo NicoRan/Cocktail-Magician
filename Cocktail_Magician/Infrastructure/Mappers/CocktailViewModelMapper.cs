@@ -23,6 +23,19 @@ namespace Cocktail_Magician.Infrastructure.Mappers
             return cocktailViewModel;
         }
 
+        public static CocktailViewModel ToCatalogVM(this CocktailDTO cocktail)
+        {
+            var cocktailViewModel = new CocktailViewModel()
+            {
+                CocktailId = cocktail.Id,
+                Information = cocktail.Information,
+                Name = cocktail.Name,
+                Picture = cocktail.Picture,
+                Rating = cocktail.Rating
+            };
+            return cocktailViewModel;
+        }
+
         public static CocktailDTO ToDTO(this CocktailViewModel cocktailView)
         {
             var cocktailViewModel = new CocktailDTO()
@@ -40,6 +53,12 @@ namespace Cocktail_Magician.Infrastructure.Mappers
         public static ICollection<CocktailViewModel> ToVM(this ICollection<CocktailDTO> cocktails)
         {
             var newCollection = cocktails.Select(c => c.ToVM()).ToList();
+            return newCollection;
+        }
+
+        public static ICollection<CocktailViewModel> ToCatalogVM(this ICollection<CocktailDTO> cocktails)
+        {
+            var newCollection = cocktails.Select(c => c.ToCatalogVM()).ToList();
             return newCollection;
         }
 
