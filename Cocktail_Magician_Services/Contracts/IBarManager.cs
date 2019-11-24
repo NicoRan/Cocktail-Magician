@@ -7,7 +7,7 @@ namespace Cocktail_Magician_Services.Contracts
     public interface IBarManager
     {
         Task CreateBar(BarDTO barToCreate);
-        Task EditBar(BarDTO bar, ICollection<string> cocktailsToOffer);
+        Task EditBar(BarDTO bar, ICollection<string> cocktailsToOffer, ICollection<string> cocktailsToRemove);
         Task RemoveBar(string id);
         Task<BarDTO> GetBar(string id);
         Task<BarDTO> GetBarForEditAsync(string id);

@@ -37,7 +37,7 @@ namespace Cocktail_Magician_Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task EditBar(BarDTO bar, ICollection<string> cocktailsToOffer)
+        public async Task EditBar(BarDTO bar, ICollection<string> cocktailsToOffer, ICollection<string> cocktailsToRemove)
         {
             var barToUpdate = _context.Bars.Include(b => b.BarCocktails).Include(b => b.BarReviews).FirstOrDefault(b => b.BarId == bar.Id);
             barToUpdate.Address = bar.Address;
@@ -45,8 +45,24 @@ namespace Cocktail_Magician_Services
             barToUpdate.MapDirections = bar.MapDirection;
             barToUpdate.Name = bar.Name;
             barToUpdate.Picture = bar.Picture;
-            
-            if (cocktailsToOffer.Count() > 0)
+            if (cocktailsToOffer.Count() > 0 && cocktailsToRemove.Count() > 0)
+            {
+                foreach (var cocktail in cocktailsToRemove)
+                {
+                    var cocktailToRemove = await _cocktailManager.GetCocktailByName(cocktail);
+                    _context.BarCocktails.Remove(barToUpdate.BarCocktails.FirstOrDefault(bc => bc.BarId == barToUpdate.BarId && bc.CocktailId == cocktailToRemove.Id));
+                }
+                foreach (var cocktail in cocktailsToOffer)
+                {
+                    var cocktailToAdd = await _cocktailManager.GetCocktailByName(cocktail);
+                    barToUpdate.BarCocktails.Add(new BarCocktail()
+                    {
+                        Bar = barToUpdate,
+                        Cocktail = cocktailToAdd.ToEntity()
+                    });
+                }
+            }
+            else if (cocktailsToOffer.Count() > 0 && cocktailsToRemove.Count() == 0)
             {
                 foreach (var cocktail in cocktailsToOffer)
                 {
@@ -56,6 +72,15 @@ namespace Cocktail_Magician_Services
                         Bar = barToUpdate,
                         Cocktail = cocktailToAdd.ToEntity()
                     });
+                }
+            }
+            else if (cocktailsToOffer.Count() == 0 && cocktailsToRemove.Count() > 0)
+            {
+                foreach (var cocktail in cocktailsToRemove)
+                {
+                    var cocktailToRemove = await _cocktailManager.GetCocktailByName(cocktail);
+
+                    _context.BarCocktails.Remove(barToUpdate.BarCocktails.FirstOrDefault(bc => bc.BarId == barToUpdate.BarId && bc.CocktailId == cocktailToRemove.Id));
                 }
             }
 

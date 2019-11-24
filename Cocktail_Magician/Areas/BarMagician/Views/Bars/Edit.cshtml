@@ -13,9 +13,9 @@
 
                     <!-- Creating Bar Form start -->
                     <form asp-action="Edit" method="post">
-                        <input asp-for="@Model.Bar.BarId" class="form-control" hidden/>
-                        <input asp-for="@Model.Bar.BarCocktailViewModels" class="form-control" hidden/>
-                        <input asp-for="@Model.Bar.Rating" class="form-control" hidden/>
+                        <input asp-for="@Model.Bar.BarId" class="form-control" hidden />
+                        <input asp-for="@Model.Bar.BarCocktailViewModels" class="form-control" hidden />
+                        <input asp-for="@Model.Bar.Rating" class="form-control" hidden />
                         <h4 class="heading-title"><span>Create Bar</span></h4>
                         <div class="row gap-15 mb-15">
                             <div class="w-100 d-block d-md-none"></div>
@@ -52,6 +52,21 @@
                                     <label>Map</label>
                                     <input asp-for="@Model.Bar.Map" class="form-control" />
                                     <span asp-validation-for="@Model.Bar.Map" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="mv-40">
+                        <div class="row gap-15 mb-15">
+                            <div class="col-6 col-md-12">
+                                <div class="form-group chosen-bg-light">
+                                    <label>Cocktails To Remove</label>
+                                    <select asp-for="@Model.CocktailsToRemove" class="chosen-the-basic chosen-container-multi">
+                                        @foreach (var cocktail in Model.Bar.BarCocktailViewModels)
+                                        {
+                                            <option value="@cocktail.CocktailName">@cocktail.CocktailName</option>
+                                        }
+                                    </select>
+                                    <span asp-validation-for="@Model.CocktailsToRemove" class="text-danger"></span>
                                 </div>
                             </div>
                         </div>

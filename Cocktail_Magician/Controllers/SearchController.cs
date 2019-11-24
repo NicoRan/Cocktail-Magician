@@ -41,7 +41,7 @@ namespace Cocktail_Magician.Controllers
                 }
                 if(model.Filter["address"] == true)
                 {
-                    results = await SearchByTypeAndCriteriaA(model);
+                    results = await SearchByTypeAndCriteriaAddress(model);
                     filteredResults.Bars = results.Bars;
                     filteredResults.Cocktails = results.Cocktails;
                 }
@@ -108,7 +108,7 @@ namespace Cocktail_Magician.Controllers
             return resultsView;
         }
 
-        private async Task<SearchResultViewModel> SearchByTypeAndCriteriaA(SearchResultViewModel model)
+        private async Task<SearchResultViewModel> SearchByTypeAndCriteriaAddress(SearchResultViewModel model)
         {
             var resultsView = new SearchResultViewModel();
             if (model.Type == "Bars")

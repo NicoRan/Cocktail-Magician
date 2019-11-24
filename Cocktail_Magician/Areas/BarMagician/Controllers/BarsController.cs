@@ -66,7 +66,7 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
                 var createBarViewModel = new CreateBarViewModel();
                 createBarViewModel.Bar = barViewModel;
                 var allCocktails = await _cocktailManager.GetAllCocktailsAsync();
-                var allCocktailsVM = allCocktails.ToVM();
+                var allCocktailsVM = allCocktails.ToCatalogVM();
                 foreach (var cocktail in allCocktailsVM)
                 {
                     if(!barViewModel.BarCocktailViewModels.Any(bc => bc.CocktailId == cocktail.CocktailId))
@@ -89,7 +89,7 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator")]
-        public async Task<IActionResult> Edit(List<string> cocktailsToOffer, BarViewModel bar)
+        public async Task<IActionResult> Edit(List<string> cocktailsToOffer, List<string> cocktailsToRemove, BarViewModel bar)
         {
             if (!ModelState.IsValid)
             {
@@ -98,7 +98,7 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
             }
             try
             {
-                await _barManager.EditBar(bar.ToDTO(), cocktailsToOffer);
+                await _barManager.EditBar(bar.ToDTO(), cocktailsToOffer, cocktailsToRemove);
                 return RedirectToAction("Index", "Home");
             }
             catch (Exception ex)

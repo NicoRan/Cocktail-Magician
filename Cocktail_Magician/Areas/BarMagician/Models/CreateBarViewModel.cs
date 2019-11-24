@@ -15,6 +15,7 @@ namespace Cocktail_Magician.Areas.BarMagician.Models
         }
         public BarViewModel Bar { get; set; }
         public List<CocktailViewModel> CocktailsThatCanOffer { get; set; }
-        public List<CocktailViewModel> CocktailsToOffer { get; set; }
+        public List<string> CocktailsToOffer { get; set; }
+        public List<string> CocktailsToRemove { get; set; }
     }
 }
