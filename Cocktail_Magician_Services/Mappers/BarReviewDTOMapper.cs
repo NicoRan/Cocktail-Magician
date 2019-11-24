@@ -18,7 +18,8 @@ namespace Cocktail_Magician_Services.Mappers
                 Comment = barReview.Comment,
                 Grade = barReview.Grade,
                 UserName = barReview.User.UserName,
-                UserPicture = barReview.User.Picture
+                UserPicture = barReview.User.Picture,
+                DateCreated = barReview.CreatedOn
             };
             return barReviewDTO;
         }

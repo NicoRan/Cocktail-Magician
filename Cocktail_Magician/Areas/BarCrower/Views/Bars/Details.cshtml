@@ -104,7 +104,7 @@
                                                     <input type="hidden" class="rating" data-filled="rating-icon ri-star rating-rated" data-empty="rating-icon ri-star-empty" data-fractions="2" data-readonly value="@reviews.Grade" /> @reviews.Grade / 5
                                                 </div>
                                             </div>
-                                            <span class="text-muted font-sm font600">@reviews.CreatedOn</span>
+                                            <span class="text-muted font-sm font600">@reviews.CreatedOn.ToString("MMM dd, yyyy")</span>
                                         </div>
                                     </div>
                                     <div class="review-content">
@@ -115,7 +115,7 @@
                                 </li>
                             }
 
-                            <li>
+                            @*<li>
                                 <!-- Check if can make pagination work -->
                                 <nav>
                                     <ul class="pagination mb-0">
@@ -138,7 +138,7 @@
                                         </li>
                                     </ul>
                                 </nav>
-                            </li>
+                            </li>*@
                         </ul>
                     </div>
                     <!-- List of Reviews end -->

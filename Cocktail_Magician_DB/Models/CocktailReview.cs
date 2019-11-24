@@ -12,5 +12,6 @@ namespace Cocktail_Magician_DB.Models
         public User User { get; set; }
         public string CocktailId { get; set; }
         public Cocktail Cocktail { get; set; }
+        public DateTime CreatedOn { get; set; }
     }
 }

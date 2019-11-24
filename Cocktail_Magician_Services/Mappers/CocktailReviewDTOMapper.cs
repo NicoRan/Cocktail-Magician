@@ -17,7 +17,9 @@ namespace Cocktail_Magician_Services.Mappers
                 CocktailId = cocktailReview.CocktailId,
                 Grade = cocktailReview.Grade,
                 Comment = cocktailReview.Comment,
-                UserName = cocktailReview.User.UserName
+                UserName = cocktailReview.User.UserName,
+                UserPicture = cocktailReview.User.Picture,
+                CreatedOn = cocktailReview.CreatedOn
             };
             return cocktailReviewDTO;
         }
@@ -30,20 +32,21 @@ namespace Cocktail_Magician_Services.Mappers
                 CocktailId = cocktailReviewDTO.CocktailId,
                 Grade = cocktailReviewDTO.Grade,
                 Comment = cocktailReviewDTO.Comment,
+                CreatedOn = cocktailReviewDTO.CreatedOn
             };
             return cocktailReview;
         }
 
 
-        public static ICollection<CocktailReviewDTO> ToDTO(this ICollection<CocktailReview> barRatings)
+        public static ICollection<CocktailReviewDTO> ToDTO(this ICollection<CocktailReview> cocktailReviews)
         {
-            var newCollection = barRatings.Select(c => c.ToDTO()).ToList();
+            var newCollection = cocktailReviews.Select(c => c.ToDTO()).ToList();
             return newCollection;
         }
 
-        public static ICollection<CocktailReview> ToEntity(this ICollection<CocktailReviewDTO> barRatings)
+        public static ICollection<CocktailReview> ToEntity(this ICollection<CocktailReviewDTO> cocktailReviewsDTO)
         {
-            var newCollection = barRatings.Select(c => c.ToEntity()).ToList();
+            var newCollection = cocktailReviewsDTO.Select(c => c.ToEntity()).ToList();
             return newCollection;
         }
     }

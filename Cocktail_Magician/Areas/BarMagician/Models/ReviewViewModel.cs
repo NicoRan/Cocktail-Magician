@@ -9,6 +9,7 @@ namespace Cocktail_Magician.Areas.BarMagician.Models
     public class ReviewViewModel
     {
         public string UserName { get; set; }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime CreatedOn { get; set; }
         public string Id { get; set; }
         public string UserId { get; set; }

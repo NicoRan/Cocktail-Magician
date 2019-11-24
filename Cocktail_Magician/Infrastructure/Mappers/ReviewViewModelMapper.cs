@@ -20,7 +20,7 @@ namespace Cocktail_Magician.Infrastructure.Mappers
                 CreatedOn = barReviewDTO.DateCreated,
                 Grade = barReviewDTO.Grade,
                 UserName = barReviewDTO.UserName,
-                UserPicture = barReviewDTO.UserPicture
+                UserPicture = barReviewDTO.UserPicture,
             };
 
             return vm;
@@ -35,7 +35,8 @@ namespace Cocktail_Magician.Infrastructure.Mappers
                 Comment = barReviewView.Comment,
                 Grade = barReviewView.Grade,
                 UserName = barReviewView.UserName,
-                UserPicture = barReviewView.UserPicture
+                UserPicture = barReviewView.UserPicture,
+                DateCreated = barReviewView.CreatedOn
             };
 
             return vm;
@@ -50,7 +51,8 @@ namespace Cocktail_Magician.Infrastructure.Mappers
                 Grade = cocktailReviewDTO.Grade,
                 Comment = cocktailReviewDTO.Comment,
                 UserName = cocktailReviewDTO.UserName,
-                UserPicture = cocktailReviewDTO.UserPicture
+                UserPicture = cocktailReviewDTO.UserPicture,
+                CreatedOn = cocktailReviewDTO.CreatedOn
             };
             return vm;
         }
@@ -64,7 +66,8 @@ namespace Cocktail_Magician.Infrastructure.Mappers
                 Grade = cocktailReviewView.Grade,
                 Comment = cocktailReviewView.Comment,
                 UserName = cocktailReviewView.UserName,
-                UserPicture = cocktailReviewView.UserPicture
+                UserPicture = cocktailReviewView.UserPicture,
+                CreatedOn = cocktailReviewView.CreatedOn
             };
             return vm;
         }

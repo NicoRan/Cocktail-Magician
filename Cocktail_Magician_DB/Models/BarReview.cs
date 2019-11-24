@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Cocktail_Magician_DB.Models
@@ -12,6 +13,7 @@ namespace Cocktail_Magician_DB.Models
         public User User { get; set; }
         public string BarId { get; set; }
         public Bar Bar { get; set; }
+        [DataType(DataType.Date)]
         public DateTime CreatedOn { get; set; }
     }
 }
