@@ -37,6 +37,34 @@ namespace Cocktail_Magician.Infrastructure.Mappers
             return barDTO;
         }
 
+        public static BarViewModel ToVMforEdit(this BarDTO bar)
+        {
+            var barViewModel = new BarViewModel();
+            barViewModel.BarId = bar.Id;
+            barViewModel.Address = bar.Address;
+            barViewModel.Information = bar.Information;
+            barViewModel.Map = bar.MapDirection;
+            barViewModel.Name = bar.Name;
+            barViewModel.Picture = bar.Picture;
+            barViewModel.Rating = bar.Rating;
+            barViewModel.BarCocktailViewModels = bar.BarCocktailDTOs.ToVM();
+            return barViewModel;
+        }
+
+        public static BarDTO ToDTOforEdit(this BarViewModel barView)
+        {
+            var barDTO = new BarDTO();
+            barDTO.Id = barView.BarId;
+            barDTO.Address = barView.Address;
+            barDTO.Information = barView.Information;
+            barDTO.MapDirection = barView.Map;
+            barDTO.Name = barView.Name;
+            barDTO.Picture = barView.Picture;
+            barDTO.Rating = barView.Rating;
+            barDTO.BarCocktailDTOs = new List<BarCocktailDTO>();
+            return barDTO;
+        }
+
         public static ICollection<BarViewModel> ToVM(this ICollection<BarDTO> bar)
         {
             var newCollection = bar.Select(b => b.ToVM()).ToList();

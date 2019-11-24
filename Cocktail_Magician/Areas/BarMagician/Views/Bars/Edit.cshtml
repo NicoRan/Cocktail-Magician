@@ -15,6 +15,7 @@
                     <form asp-action="Edit" method="post">
                         <input asp-for="@Model.Bar.BarId" class="form-control" hidden/>
                         <input asp-for="@Model.Bar.BarCocktailViewModels" class="form-control" hidden/>
+                        <input asp-for="@Model.Bar.Rating" class="form-control" hidden/>
                         <h4 class="heading-title"><span>Create Bar</span></h4>
                         <div class="row gap-15 mb-15">
                             <div class="w-100 d-block d-md-none"></div>
@@ -60,9 +61,16 @@
                                 <div class="form-group chosen-bg-light">
                                     <label>Cocktails To Offer</label>
                                     <select asp-for="@Model.CocktailsToOffer" class="chosen-the-basic chosen-container-multi">
-                                        @foreach (var cocktail in Model.CocktailsThatCanOffer)
+                                        @if (Model.CocktailsThatCanOffer.Count() > 0)
                                         {
-                                            <option value="@cocktail.Name">@cocktail.Name</option>
+                                            @foreach (var cocktail in Model.CocktailsThatCanOffer)
+                                            {
+                                                <option value="@cocktail.Name">@cocktail.Name</option>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <option disabled>No cocktails found</option>
                                         }
                                     </select>
                                     <span asp-validation-for="@Model.CocktailsToOffer" class="text-danger"></span>

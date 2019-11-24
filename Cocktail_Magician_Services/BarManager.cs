@@ -39,36 +39,77 @@ namespace Cocktail_Magician_Services
 
         public async Task EditBar(BarDTO bar, ICollection<string> cocktailsToOffer)
         {
-            var barToUpdate = new BarDTO();
+            var barToUpdate = _context.Bars.Include(b => b.BarCocktails).Include(b => b.BarReviews).FirstOrDefault(b => b.BarId == bar.Id);
             barToUpdate.Address = bar.Address;
             barToUpdate.Information = bar.Information;
-            barToUpdate.MapDirection = bar.MapDirection;
+            barToUpdate.MapDirections = bar.MapDirection;
             barToUpdate.Name = bar.Name;
             barToUpdate.Picture = bar.Picture;
+            
             if (cocktailsToOffer.Count() > 0)
             {
                 foreach (var cocktail in cocktailsToOffer)
                 {
                     var cocktailToAdd = await _cocktailManager.GetCocktailByName(cocktail);
-                    barToUpdate.BarCocktailDTOs.Add(new BarCocktailDTO
+                    barToUpdate.BarCocktails.Add(new BarCocktail()
                     {
-                        BarId = barToUpdate.Id,
-                        CocktailId = cocktailToAdd.Id
+                        Bar = barToUpdate,
+                        Cocktail = cocktailToAdd.ToEntity()
                     });
                 }
             }
-            var barToEntity = barToUpdate.ToBar();
-            _context.Bars.Update(barToEntity);
+
+            _context.Bars.Update(barToUpdate);
             await _context.SaveChangesAsync();
         }
 
         public async Task RemoveBar(string id)
         {
-            var bars = await GetCocktailEntity(id);
+            var bars = await GetBarEntity(id);
             
             bars.IsDeleted = true;
             _context.Bars.Update(bars);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<BarDTO> GetBarForDetails(string id)
+        {
+            try
+            {
+                var bar = await _context.Bars
+                    .AsNoTracking()
+                    .Include(b => b.BarCocktails)
+                        .ThenInclude(b => b.Cocktail)
+                    .Include(b => b.BarReviews)
+                        .ThenInclude(br => br.User)
+                    .Where(b => !b.IsDeleted)
+                    .FirstOrDefaultAsync(b => b.BarId == id);
+
+                return bar.ToDTO();
+            }
+            catch (Exception)
+            {
+                throw new Exception("This bar does not exists!");
+            }
+        }
+
+        public async Task<BarDTO> GetBarForEditAsync(string id)
+        {
+            try
+            {
+                var bar = await _context.Bars
+                    .AsNoTracking()
+                    .Include(b => b.BarCocktails)
+                        .ThenInclude(b => b.Cocktail)
+                    .Where(b => !b.IsDeleted)
+                    .FirstOrDefaultAsync(b => b.BarId == id);
+
+                return bar.ToDTO();
+            }
+            catch (Exception)
+            {
+                throw new Exception("This bar does not exists!");
+            }
         }
 
         public async Task<BarDTO> GetBar(string id)
@@ -76,10 +117,7 @@ namespace Cocktail_Magician_Services
             try
             {
                 var bar = await _context.Bars
-                    .Include(b => b.BarCocktails)
-                        .ThenInclude(b => b.Cocktail)
-                    .Include(b => b.BarReviews)
-                        .ThenInclude(br => br.User)
+                    .AsNoTracking()
                     .Where(b => !b.IsDeleted)
                     .FirstOrDefaultAsync(b => b.BarId == id);
 
@@ -98,18 +136,12 @@ namespace Cocktail_Magician_Services
 
         public async Task<ICollection<BarDTO>> GetTopRatedBars()
         {
-            var topRatedBars = _context.Bars
-                .Include(br => br.BarReviews)
-                    .ThenInclude(br=>br.User)
-                .Include(bc => bc.BarCocktails)
-                    .ThenInclude(c => c.Cocktail)
+            return await _context.Bars
                 .OrderByDescending(b => b.Rating)
                 .ThenBy(b => b.Name)
-                .Where(b=>b.IsDeleted == false)
+                .Where(b => b.IsDeleted == false)
                 .Take(6)
-                .Select(b => b.ToDTO());
-            
-            return await topRatedBars.ToListAsync();
+                .Select(b => b.ToDTO()).ToListAsync();
         }
 
         public async Task<BarReviewDTO> CreateBarReviewAsync(BarReviewDTO barReviewDTO)
@@ -129,26 +161,9 @@ namespace Cocktail_Magician_Services
             return barReviewDTO;
         }
 
-        private async Task UpdateRating(string barId)
-        {
-            var rating = _context.BarReviews
-                .Where(b => b.BarId == barId)
-                .Average(br => br.Grade);
-            
-            var bar = _context.Bars.Find(barId);
-            bar.Rating = rating;
-            _context.Bars.Update(bar);
-
-            await _context.SaveChangesAsync();
-        }
-
         public async Task<ICollection<BarDTO>> GetAllBarsAsync()
         {
             var listOfBars = await _context.Bars
-                .Include(b => b.BarCocktails)
-                    .ThenInclude(b => b.Cocktail)
-                .Include(c => c.BarReviews)
-                    .ThenInclude(br => br.User)
                 .Where(b => !b.IsDeleted)
                 .ToListAsync();
             return listOfBars.ToDTO();
@@ -161,7 +176,26 @@ namespace Cocktail_Magician_Services
             return reviews.ToDTO();
         }
 
-        private async Task<Bar> GetCocktailEntity(string barId)
+        public async Task<ICollection<BarCocktailDTO>> GetAllBarCocktailsByBarId(string id)
+        {
+            var barCocktails = await _context.BarCocktails.AsNoTracking().Include(bc => bc.Cocktail).Where(bc => bc.BarId == id).ToListAsync();
+            return barCocktails.ToDTO();
+        }
+
+        private async Task UpdateRating(string barId)
+        {
+            var rating = _context.BarReviews
+                .Where(b => b.BarId == barId)
+                .Average(br => br.Grade);
+
+            var bar = await GetBarEntity(barId);
+            bar.Rating = Math.Round(rating, 1);
+            _context.Bars.Update(bar);
+
+            await _context.SaveChangesAsync();
+        }
+
+        private async Task<Bar> GetBarEntity(string barId)
         {
             return await _context.Bars.FirstOrDefaultAsync(c => c.BarId == barId);
         }

@@ -6,7 +6,6 @@ using Cocktail_Magician.Models;
 using Cocktail_Magician_Services.Contracts;
 using Cocktail_Magician.Areas.BarMagician.Models;
 using Cocktail_Magician.Infrastructure.Mappers;
-using Cocktail_Magician_Services.Mappers;
 
 namespace Cocktail_Magician.Controllers
 {

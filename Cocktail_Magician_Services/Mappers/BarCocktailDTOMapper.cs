@@ -18,6 +18,18 @@ namespace Cocktail_Magician_Services.Mappers
             return barCocktailDTO;
         }
 
+        public static BarCocktailEditDTO ToEditDTO(this BarCocktail barCocktail)
+        {
+            var barCocktailDTO = new BarCocktailEditDTO
+            {
+                BarId = barCocktail.BarId,
+                Bar = barCocktail.Bar,
+                CocktailId = barCocktail.CocktailId,
+                Cocktail = barCocktail.Cocktail
+            };
+            return barCocktailDTO;
+        }
+
         public static BarCocktail ToEntity(this BarCocktailDTO barCocktail)
         {
             var barCocktailDTO = new BarCocktail
@@ -28,15 +40,25 @@ namespace Cocktail_Magician_Services.Mappers
             return barCocktailDTO;
         }
 
+        public static BarCocktail ToEditEntity(this BarCocktailEditDTO barCocktail)
+        {
+            var barCocktailDTO = new BarCocktail
+            {
+                Bar = barCocktail.Bar,
+                Cocktail = barCocktail.Cocktail
+            };
+            return barCocktailDTO;
+        }
+
         public static ICollection<BarCocktailDTO> ToDTO(this ICollection<BarCocktail> barCocktails)
         {
             var newCollection = barCocktails.Select(c => c.ToDTO()).ToList();
             return newCollection;
         }
 
-        public static ICollection<BarCocktail> ToEntity(this ICollection<BarCocktailDTO> barCocktails)
+        public static ICollection<BarCocktail> ToEditEntity(this ICollection<BarCocktailEditDTO> barCocktails)
         {
-            var newCollection = barCocktails.Select(c => c.ToEntity()).ToList();
+            var newCollection = barCocktails.Select(c => c.ToEditEntity()).ToList();
             return newCollection;
         }
     }

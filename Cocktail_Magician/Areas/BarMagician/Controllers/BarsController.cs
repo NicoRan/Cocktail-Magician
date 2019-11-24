@@ -60,10 +60,10 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
         [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(string id)
         {
-            try
-            {
-                var bar = await _barManager.GetBar(id);
-                var barViewModel = bar.ToVM();
+            //try
+            //{
+                var bar = await _barManager.GetBarForEditAsync(id);
+                var barViewModel = bar.ToVMforEdit();
                 var createBarViewModel = new CreateBarViewModel();
                 createBarViewModel.Bar = barViewModel;
                 var allCocktails = await _cocktailManager.GetAllCocktailsAsync();
@@ -77,11 +77,11 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
                 }
 
                 return View(createBarViewModel);
-            }
-            catch (Exception ex)
-            {
-                return RedirecToActionError("404", ex.Message);
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    return RedirecToActionError("404", ex.Message);
+            //}
         }
 
         // POST: Bars/Edit/5
@@ -97,15 +97,15 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
                 ModelState.AddModelError(string.Empty, "Invalid bar parameters!");
                 return View(bar);
             }
-            try
-            {
+            //try
+            //{
                 await _barManager.EditBar(bar.ToDTO(), cocktailsToOffer);
                 return RedirectToAction("Index", "Home");
-            }
-            catch (Exception ex)
-            {
-                return RedirecToActionError("500", ex.Message);
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    return RedirecToActionError("500", ex.Message);
+            //}
         }
 
         // GET: Bars/Delete/5
@@ -133,8 +133,7 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
         {
             try
             {
-                var bar = await _barManager.GetBar(id);
-                await _barManager.RemoveBar(bar.Id);
+                await _barManager.RemoveBar(id);
                 return RedirectToAction("Index", "Home");
             }
             catch (Exception ex)
