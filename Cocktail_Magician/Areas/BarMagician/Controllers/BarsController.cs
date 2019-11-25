@@ -99,7 +99,7 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
             try
             {
                 await _barManager.EditBar(bar.ToDTO(), cocktailsToOffer, cocktailsToRemove);
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Details", "Bars", new { id = bar.BarId });
             }
             catch (Exception ex)
             {

@@ -19,6 +19,8 @@ namespace Cocktail_Magician.Controllers
             _cocktailManager = cocktailManager;
             _barManager = barManager;
         }
+
+        [ResponseCache(Duration = 10)]
         public async Task<IActionResult> Index()
         {
             var topBars = await _barManager.GetTopRatedBars();
@@ -32,8 +34,7 @@ namespace Cocktail_Magician.Controllers
             return View(topRatedHomePage);
         }
 
-
-
+        [ResponseCache(Duration = 10)]
         public async Task<IActionResult> BarCatalog()
         {
             var listOfBars = await _barManager.GetAllBarsAsync();
@@ -46,6 +47,7 @@ namespace Cocktail_Magician.Controllers
             return View(listOfBarsViewModel);
         }
 
+        [ResponseCache(Duration = 10)]
         public async Task<IActionResult> CocktailCatalog()
         {
             var listOfCocktails = await _cocktailManager.GetAllCocktailsAsync();
@@ -57,6 +59,7 @@ namespace Cocktail_Magician.Controllers
             return View();
         }
 
+        [ResponseCache(Duration = 10)]
         public async Task<IActionResult> AboutUs()
         {
             var totalbars = await _barManager.GetAllBarsAsync();

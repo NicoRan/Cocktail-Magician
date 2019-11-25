@@ -52,15 +52,21 @@ namespace Cocktail_Magician.Areas.BarCrower.Controllers
         [Authorize(Roles = "Member")]
         public async Task<IActionResult> Review(CreateReviewViewModel reviewVeiwModel)
         {
-            
-            var cocktailReview = reviewVeiwModel.ToCocktailDTO();
-
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                await _cocktailManager.CreateCocktailReviewAsync(cocktailReview);
-                return RedirectToAction("Index", "Home");
+                ModelState.AddModelError(string.Empty, "Invalid cocktail parameters!");
+                return View();
             }
-            return View();
+            try
+            {
+                var cocktailReview = reviewVeiwModel.ToCocktailDTO();
+                await _cocktailManager.CreateCocktailReviewAsync(cocktailReview);
+                return RedirectToAction("Details", "Cocktails", new { id = cocktailReview.CocktailId });
+            }
+            catch(Exception ex)
+            {
+                return RedirectToAction("ErrorAction", "Error", new { errorCode = "404", errorMessage = ex.Message });
+            }
         }
     }
 }
