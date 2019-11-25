@@ -37,7 +37,7 @@ namespace Cocktail_Magician_Services
                 var findIngredient = await _ingredientManager.FindIngredientByNameAsync(ingredient);
                 if (findIngredient != null)
                 {
-                    cocktailToAdd.CocktailIngredient.Add(new CocktailIngredient() { Cocktail = cocktailToAdd, Ingredient = findIngredient });
+                    cocktailToAdd.CocktailIngredient.Add(new CocktailIngredient() { Cocktail = cocktailToAdd, Ingredient = findIngredient.ToEntity() });
                 }
             }
             cocktailToAdd.Information = CocktailsRecipe(ingredients);

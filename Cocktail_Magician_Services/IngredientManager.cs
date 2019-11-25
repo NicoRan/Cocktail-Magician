@@ -33,11 +33,26 @@ namespace Cocktail_Magician_Services
             }
         }
 
-        public async Task<Ingredient> FindIngredientByNameAsync(string name)
+        public async Task<IngredientDTO> FindIngredientByNameAsync(string name)
         {
             var ingredientToFind = await _context.Ingredients.FirstOrDefaultAsync(i => i.Name == name);
-            return ingredientToFind;
+            return ingredientToFind.ToDTO();
         }
+
+        public async Task<IngredientDTO> Edit(string ingredientId, string newName)
+        {
+            var ingredients = await _context.Ingredients.FirstOrDefaultAsync(i => i.IngredientId == ingredientId);
+            ingredients.Name = newName;
+            await _context.SaveChangesAsync();
+            return ingredients.ToDTO();
+        }
+
+        public async Task<IngredientDTO> GetIngredientById(string ingredientId)
+        {
+            var ingredient = await _context.Ingredients.FirstOrDefaultAsync(i => i.IngredientId == ingredientId);
+            return ingredient.ToDTO();
+        }
+
 
         //public async Task<Ingredient> ProvideIngredientAsync(string name)
         //{
@@ -54,10 +69,10 @@ namespace Cocktail_Magician_Services
         //    }
         //}
 
-        public async Task<ICollection<Ingredient>> GetIngredientsAsync()
+        public async Task<ICollection<IngredientDTO>> GetIngredientsAsync()
         {
            var allIngredients = await _context.Ingredients.ToListAsync();
-            return allIngredients.OrderBy(i => i.Name).ToList();
+            return allIngredients.OrderBy(i => i.Name).ToList().ToDTO();
         }
 
         private bool CheckIfIngredientExist(string name)

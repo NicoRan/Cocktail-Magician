@@ -8,8 +8,12 @@ namespace Cocktail_Magician_Services.Contracts
     public interface IIngredientManager
     {
         Task AddIngredientAsync(IngredientDTO ingredient);
-        Task<Ingredient> FindIngredientByNameAsync(string name);
+        Task<IngredientDTO> Edit(string ingredientId, string newName);
+        //Task<Ingredient> FindIngredientByNameAsync(string name);
+        Task<IngredientDTO> FindIngredientByNameAsync(string name);
+        Task<IngredientDTO> GetIngredientById(string ingredientId);
+
         //Task<Ingredient> ProvideIngredientAsync(string name);
-        Task<ICollection<Ingredient>> GetIngredientsAsync();
+        Task<ICollection<IngredientDTO>> GetIngredientsAsync();
     }
 }

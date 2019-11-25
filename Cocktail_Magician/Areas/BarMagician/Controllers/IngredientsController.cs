@@ -5,6 +5,7 @@ using Cocktail_Magician.Areas.BarMagician.Models;
 using Microsoft.AspNetCore.Authorization;
 using System;
 using Cocktail_Magician_Services.DTO;
+using Cocktail_Magician.Infrastructure.Mappers;
 
 namespace Cocktail_Magician.Areas.BarMagician.Controllers
 {
@@ -51,6 +52,22 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
             {
                 return RedirectToAction("ErrorAction", "Error", new { errorCode = "500", errorMessage = ex.Message });
             }
+        }
+
+        public async Task<IActionResult> IngredientCatalog()
+        {
+            return View((await _ingredientManager.GetIngredientsAsync()).ToVM());
+        }
+        public async Task<IActionResult> Edit(string Id)
+        {
+            var ingredientDTO = await _ingredientManager.GetIngredientById(Id);
+            return View(ingredientDTO.ToVM());
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(IngredientViewModel ingredientViewModel)
+        {
+            var result =  (await _ingredientManager.Edit(ingredientViewModel.Id,ingredientViewModel.Name)).ToVM();
+            return RedirectToAction("IngredientCatalog", "Ingredients");
         }
 
         // GET: BarMagician/Ingredients/Delete/5
