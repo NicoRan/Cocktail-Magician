@@ -86,22 +86,22 @@ namespace Cocktail_Magician.Controllers
             if (model.Type == "Bars")
             {
                 var resultsBars = await _searchManager.SearchBarsByName(model.Criteria);
-                resultsView.Bars = resultsBars.Select(bar => bar.ToVM()).ToList();
+                resultsView.Bars = resultsBars.Select(bar => bar.ToVMforSearch()).ToList();
                 return resultsView;
             }
             else if (model.Type == "Cocktails")
             {
                 var resultsCocktails = await _searchManager.SearchCocktails(model.Criteria);
-                resultsView.Cocktails = resultsCocktails.Select(cocktail => cocktail.ToVM()).ToList();
+                resultsView.Cocktails = resultsCocktails.Select(cocktail => cocktail.ToCatalogVM()).ToList();
                 return resultsView;
             }
             else if (model.Type == "All")
             {
                 var resultsBars = await _searchManager.SearchBarsByName(model.Criteria);
-                resultsView.Bars = resultsBars.Select(bar => bar.ToVM()).ToList();
+                resultsView.Bars = resultsBars.Select(bar => bar.ToVMforSearch()).ToList();
 
                 var resultsCocktails = await _searchManager.SearchCocktails(model.Criteria);
-                resultsView.Cocktails = resultsCocktails.Select(cocktail => cocktail.ToVM()).ToList();
+                resultsView.Cocktails = resultsCocktails.Select(cocktail => cocktail.ToCatalogVM()).ToList();
 
                 return resultsView;
             }
@@ -114,22 +114,22 @@ namespace Cocktail_Magician.Controllers
             if (model.Type == "Bars")
             {
                 var resultsBars = await _searchManager.SearchBarsByAddress(model.Criteria);
-                resultsView.Bars = resultsBars.Select(bar => bar.ToVM()).ToList();
+                resultsView.Bars = resultsBars.Select(bar => bar.ToVMforSearch()).ToList();
                 return resultsView;
             }
             else if (model.Type == "Cocktails")
             {
                 var resultsCocktails = await _searchManager.SearchCocktails(model.Criteria);
-                resultsView.Cocktails = resultsCocktails.Select(cocktail => cocktail.ToVM()).ToList();
+                resultsView.Cocktails = resultsCocktails.Select(cocktail => cocktail.ToCatalogVM()).ToList();
                 return resultsView;
             }
             else if (model.Type == "All")
             {
                 var resultsBars = await _searchManager.SearchBarsByAddress(model.Criteria);
-                resultsView.Bars = resultsBars.Select(bar => bar.ToVM()).ToList();
+                resultsView.Bars = resultsBars.Select(bar => bar.ToVMforSearch()).ToList();
 
                 var resultsCocktails = await _searchManager.SearchCocktails(model.Criteria);
-                resultsView.Cocktails = resultsCocktails.Select(cocktail => cocktail.ToVM()).ToList();
+                resultsView.Cocktails = resultsCocktails.Select(cocktail => cocktail.ToCatalogVM()).ToList();
 
                 return resultsView;
             }

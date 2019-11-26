@@ -106,6 +106,7 @@
                 <div class="tour-long-item-wrapper-01">
                     @if (Model.Bars != null)
                     {
+                        <h4 class="heading-title"><span>Bars results</span></h4>
                         if (Model.Bars.Count() != 0)
                         {
                             @foreach (var bar in Model.Bars)
@@ -148,6 +149,7 @@
                         {
                             <p> No results found for Bar </p>
                         }
+                        <div class="clear mb-10"></div>
                     }
                     else
                     {
@@ -156,8 +158,10 @@
                             <p>No results found for Cocktail</p>
                         }
                     }
+
                     @if (Model.Cocktails != null)
                     {
+                        <h4 class="heading-title"><span>Cocktails results</span></h4>
                         if (Model.Cocktails.Count() != 0)
                         {
                             @foreach (var cocktail in Model.Cocktails)
