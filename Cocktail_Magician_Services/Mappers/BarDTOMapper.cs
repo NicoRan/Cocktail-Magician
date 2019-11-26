@@ -43,21 +43,6 @@ namespace Cocktail_Magician_Services.Mappers
             return bar;
         }
 
-        public static BarDTO ToDTOforTests(this Bar bar)
-        {
-            var barDTO = new BarDTO
-            {
-                Name = bar.Name,
-                Information = bar.Information,
-                Address = bar.Address,
-                Picture = bar.Picture,
-                MapDirection = bar.MapDirections,
-                IsDeleted = bar.IsDeleted,
-                Rating = bar.Rating
-            };
-            return barDTO;
-        }
-
         public static ICollection<BarDTO> ToDTO(this ICollection<Bar> bars)
         {
             var newCollection = bars.Select(c => c.ToDTO()).ToList();

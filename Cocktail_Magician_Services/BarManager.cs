@@ -15,11 +15,13 @@ namespace Cocktail_Magician_Services
     {
         private readonly CMContext _context;
         private readonly ICocktailManager _cocktailManager;
+        private readonly IBarFactory _barFactory;
 
-        public BarManager(CMContext context, ICocktailManager cocktailManager)
+        public BarManager(CMContext context, ICocktailManager cocktailManager, IBarFactory barFactory)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
             _cocktailManager = cocktailManager ?? throw new ArgumentNullException(nameof(cocktailManager));
+            _barFactory = barFactory ?? throw new ArgumentNullException(nameof(barFactory));
         }
 
         /// <summary>
@@ -29,17 +31,28 @@ namespace Cocktail_Magician_Services
         /// <returns>Task</returns>
         public async Task CreateBar(BarDTO barToCreate)
         {
-            var barToAdd = barToCreate.ToBar();
+            try
+            {
+                var barToAdd = _barFactory.CreateNewBar(barToCreate.Name, barToCreate.Address, barToCreate.Information, barToCreate.Picture, barToCreate.MapDirection);
 
-            var barToFind = _context.Bars.SingleOrDefault(bar => bar.Name == barToAdd.Name && bar.Address == barToAdd.Address && !bar.IsDeleted);
+                var barToFind = _context.Bars.SingleOrDefault(bar => bar.Name == barToAdd.Name && bar.Address == barToAdd.Address && !bar.IsDeleted);
 
-            if (barToFind != null)
+                if (barToFind != null)
+                {
+                    throw new InvalidOperationException("Bar already exists in the database!");
+                }
+                await _context.Bars.AddAsync(barToAdd);
+                await _context.SaveChangesAsync();
+            }
+            catch(InvalidOperationException)
             {
                 throw new InvalidOperationException("Bar already exists in the database!");
             }
-
-            await _context.Bars.AddAsync(barToAdd);
-            await _context.SaveChangesAsync();
+            catch(Exception)
+            {
+                throw new Exception("Wrong parameters for Bar!");
+            }
+            
         }
 
         /// <summary>
@@ -50,7 +63,7 @@ namespace Cocktail_Magician_Services
         /// <returns>BarReviewDTO</returns>
         public async Task<BarReviewDTO> CreateBarReviewAsync(BarReviewDTO barReviewDTO)
         {
-            if (barReviewDTO.Grade != 0)
+            if (barReviewDTO.Grade > 0)
             {
                 var barReview = barReviewDTO.ToEntity();
 
@@ -60,7 +73,7 @@ namespace Cocktail_Magician_Services
                 await UpdateRating(barReviewDTO.BarId);
             }
             else
-                await _context.SaveChangesAsync();
+                throw new InvalidOperationException("Cannot comment a Bar without giving it a rating!");
 
             return barReviewDTO;
         }

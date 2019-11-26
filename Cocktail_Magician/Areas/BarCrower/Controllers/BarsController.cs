@@ -40,7 +40,6 @@ namespace Cocktail_Magician.Areas.BarCrower.Controllers
             }
         }
 
-
         [HttpGet]
         [Authorize(Roles = "Member")]
         public IActionResult Review(string id)
@@ -61,6 +60,10 @@ namespace Cocktail_Magician.Areas.BarCrower.Controllers
                 var barReview = reviewViewModel.ToBarDTO();
                 await _barManager.CreateBarReviewAsync(barReview);
                 return RedirectToAction("Details", "Bars", new { id = barReview.BarId });
+            }
+            catch (InvalidOperationException ex)
+            {
+                return RedirectToAction("ErrorAction", "Error", new { errorCode = "500", errorMessage = ex.Message });
             }
             catch (Exception ex)
             {

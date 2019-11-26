@@ -2,14 +2,11 @@
 using Cocktail_Magician_DB.Models;
 using Cocktail_Magician_Services;
 using Cocktail_Magician_Services.Contracts;
-using Cocktail_Magician_Services.DTO;
 using Cocktail_Magician_Services.Mappers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Cocktail_Magician_Tests.BarManagerTests
@@ -17,11 +14,12 @@ namespace Cocktail_Magician_Tests.BarManagerTests
     [TestClass]
     public class CreateBar_Should
     {
-        [TestMethod]
-        public async Task AddBar_ToDatabase_WhenValidValuesPassed()
+        private Bar barForTest;
+        private Mock<ICocktailManager> cocktailManagerMoq = new Mock<ICocktailManager>();
+        private Mock<IBarFactory> barFactoryMoq = new Mock<IBarFactory>();
+        public CreateBar_Should()
         {
-            var options = TestUtilities.GetOptions(nameof(AddBar_ToDatabase_WhenValidValuesPassed));
-            var barForTest = new Bar()
+            barForTest = new Bar()
             {
                 Address = "Solunska 2",
                 Information = "Information",
@@ -30,12 +28,27 @@ namespace Cocktail_Magician_Tests.BarManagerTests
                 Picture = "Picture",
                 Rating = 4.5d
             };
-            var cocktailManagerMoq = new Mock<ICocktailManager>();
-
-            using(var assertContext = new CMContext(options))
+        }
+        [TestMethod]
+        public async Task AddBar_ToDatabase_WhenValidValuesPassed()
+        {
+            var options = TestUtilities.GetOptions(nameof(AddBar_ToDatabase_WhenValidValuesPassed));
+            var barTest = new Bar()
             {
-                var sut = new BarManager(assertContext, cocktailManagerMoq.Object);
-                await sut.CreateBar(barForTest.ToDTO());
+                Address = "Borisov",
+                Information = "Information",
+                MapDirections = "North",
+                Name = "Bar",
+                Picture = "Picture",
+                Rating = 4.5d
+            };
+
+            barFactoryMoq.Setup(bf => bf.CreateNewBar(barTest.Name, barTest.Address, barTest.Information, barTest.Picture, barTest.MapDirections)).Returns(barTest);
+
+            using (var assertContext = new CMContext(options))
+            {
+                var sut = new BarManager(assertContext, cocktailManagerMoq.Object, barFactoryMoq.Object);
+                await sut.CreateBar(barTest.ToDTO());
 
                 Assert.AreEqual(1, assertContext.Bars.Count());
             }
@@ -45,17 +58,6 @@ namespace Cocktail_Magician_Tests.BarManagerTests
         public async Task ThrowsException_WhenBar_AlreadyInDatabase()
         {
             var options = TestUtilities.GetOptions(nameof(ThrowsException_WhenBar_AlreadyInDatabase));
-            var barForTest = new Bar()
-            {
-                Address = "Solunska 2",
-                Information = "Information",
-                MapDirections = "Go south",
-                Name = "Bar",
-                Picture = "Picture",
-                Rating = 4.5d
-            };
-
-            var cocktailManagerMoq = new Mock<ICocktailManager>();
 
             using (var arrangeContext = new CMContext(options))
             {
@@ -65,8 +67,8 @@ namespace Cocktail_Magician_Tests.BarManagerTests
 
             using (var assertContext = new CMContext(options))
             {
-                var sut = new BarManager(assertContext, cocktailManagerMoq.Object);
-                await Assert.ThrowsExceptionAsync<InvalidOperationException>(() => sut.CreateBar(barForTest.ToDTOforTests()));
+                var sut = new BarManager(assertContext, cocktailManagerMoq.Object, barFactoryMoq.Object);
+                await Assert.ThrowsExceptionAsync<InvalidOperationException>(() => sut.CreateBar(barForTest.ToDTO()));
             }
         }
 
@@ -74,18 +76,7 @@ namespace Cocktail_Magician_Tests.BarManagerTests
         public async Task ShowsCorrectMessage_WhenThrowsException()
         {
             var options = TestUtilities.GetOptions(nameof(ShowsCorrectMessage_WhenThrowsException));
-            var barForTest = new Bar()
-            {
-                Address = "Solunska 2",
-                Information = "Information",
-                MapDirections = "Go south",
-                Name = "Bar",
-                Picture = "Picture",
-                Rating = 4.5d
-            };
             var message = "Bar already exists in the database!";
-
-            var cocktailManagerMoq = new Mock<ICocktailManager>();
 
             using (var arrangeContext = new CMContext(options))
             {
@@ -95,8 +86,8 @@ namespace Cocktail_Magician_Tests.BarManagerTests
 
             using (var assertContext = new CMContext(options))
             {
-                var sut = new BarManager(assertContext, cocktailManagerMoq.Object);
-                var ex = await Assert.ThrowsExceptionAsync<InvalidOperationException>(() => sut.CreateBar(barForTest.ToDTOforTests()));
+                var sut = new BarManager(assertContext, cocktailManagerMoq.Object, barFactoryMoq.Object);
+                var ex = await Assert.ThrowsExceptionAsync<InvalidOperationException>(() => sut.CreateBar(barForTest.ToDTO()));
                 Assert.IsTrue(ex.Message.Contains(message));
             }
         }
