@@ -35,7 +35,7 @@ namespace Cocktail_Magician_Services
 
             if (barToFind != null)
             {
-                throw new InvalidOperationException("Bar already exists in the database");
+                throw new InvalidOperationException("Bar already exists in the database!");
             }
 
             await _context.Bars.AddAsync(barToAdd);
