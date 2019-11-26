@@ -17,8 +17,8 @@ namespace Cocktail_Magician.Areas.BarMagician.Models
         [DisplayFormat(DataFormatString = "{0:0,0}")]
         public double Rating { get; set; }
         [Required(ErrorMessage = "At least one ingredient is required!")]
-
         public ICollection<ReviewViewModel> ReviewViewModels { get; set; }
+        public ICollection<CocktailIngredientsViewModel> CocktailIngredients { get; set; }
         public List<string> Ingredients { get; set; }
     }
 }

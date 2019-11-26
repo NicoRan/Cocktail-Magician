@@ -13,5 +13,6 @@ namespace Cocktail_Magician_Services.DTO
         [DisplayFormat(DataFormatString = "{0:0,0}")]
         public double Rating { get; set; }
         public ICollection<CocktailReviewDTO> CocktailReviewDTOs { get; set; }
+        public ICollection<CocktailIngredientDTO> CocktailIngredientDTOs { get; set; }
     }
 }

@@ -31,7 +31,8 @@ namespace Cocktail_Magician_Services.Mappers
                 Information = cocktail.Information,
                 Picture = cocktail.Picture,
                 IsDeleted = cocktail.IsDeleted,
-                Rating = cocktail.Rating
+                Rating = cocktail.Rating,
+                CocktailIngredientDTOs = cocktail.CocktailIngredient.ToDTO()
             };
             return cocktailDTO;
         }

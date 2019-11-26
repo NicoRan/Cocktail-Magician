@@ -34,6 +34,5 @@ namespace Cocktail_Magician_DB.Models
         public bool IsDeleted { get; set; }
         public ICollection<BarCocktail> BarCocktails { get; set; }
         public ICollection<BarReview> BarReviews { get; set; }
-
     }
 }

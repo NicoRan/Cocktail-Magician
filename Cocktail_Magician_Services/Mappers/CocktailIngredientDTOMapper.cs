@@ -12,7 +12,8 @@ namespace Cocktail_Magician_Services.Mappers
             var cocktailIngredientDTO = new CocktailIngredientDTO
             {
                 CocktailId = cocktailIngredient.CocktailId,
-                IngredientId = cocktailIngredient.IngredientId
+                IngredientId = cocktailIngredient.IngredientId,
+                IngredientName = cocktailIngredient.Ingredient.Name
             };
             return cocktailIngredientDTO;
         }
