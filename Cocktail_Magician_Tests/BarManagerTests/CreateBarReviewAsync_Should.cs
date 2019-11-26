@@ -133,7 +133,7 @@ namespace Cocktail_Magician_Tests.BarManagerTests
 
                 var ex = await Assert.ThrowsExceptionAsync<InvalidOperationException>(() => sut.CreateBarReviewAsync(barReviewTest.ToDTO()));
 
-                Assert.IsTrue(ex.Message.Contains(message));
+                Assert.AreEqual(message, ex.Message);
             }
         }
     }

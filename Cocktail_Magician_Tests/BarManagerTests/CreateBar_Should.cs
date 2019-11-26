@@ -55,6 +55,31 @@ namespace Cocktail_Magician_Tests.BarManagerTests
         }
 
         [TestMethod]
+        public async Task Calls_BarFactory_CreateNewBar_AtLeastOnce_WhenValidValuesArePassed()
+        {
+            var options = TestUtilities.GetOptions(nameof(Calls_BarFactory_CreateNewBar_AtLeastOnce_WhenValidValuesArePassed));
+            var barTest = new Bar()
+            {
+                Address = "Borisov 3",
+                Information = "Information",
+                MapDirections = "North",
+                Name = "Kobrat",
+                Picture = "Picture",
+                Rating = 4.5d
+            };
+
+            barFactoryMoq.Setup(bf => bf.CreateNewBar(barTest.Name, barTest.Address, barTest.Information, barTest.Picture, barTest.MapDirections)).Returns(barTest);
+
+            using (var assertContext = new CMContext(options))
+            {
+                var sut = new BarManager(assertContext, cocktailManagerMoq.Object, barFactoryMoq.Object);
+                await sut.CreateBar(barTest.ToDTO());
+
+                barFactoryMoq.Verify(bf => bf.CreateNewBar(barTest.Name, barTest.Address, barTest.Information, barTest.Picture, barTest.MapDirections), Times.Once);
+            }
+        }
+
+        [TestMethod]
         public async Task ThrowsException_WhenBar_AlreadyInDatabase()
         {
             var options = TestUtilities.GetOptions(nameof(ThrowsException_WhenBar_AlreadyInDatabase));
@@ -88,7 +113,8 @@ namespace Cocktail_Magician_Tests.BarManagerTests
             {
                 var sut = new BarManager(assertContext, cocktailManagerMoq.Object, barFactoryMoq.Object);
                 var ex = await Assert.ThrowsExceptionAsync<InvalidOperationException>(() => sut.CreateBar(barForTest.ToDTO()));
-                Assert.IsTrue(ex.Message.Contains(message));
+
+                Assert.AreEqual(message, ex.Message);
             }
         }
     }

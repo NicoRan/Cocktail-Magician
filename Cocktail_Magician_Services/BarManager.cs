@@ -148,6 +148,8 @@ namespace Cocktail_Magician_Services
             var listOfBars = await _context.Bars
                 .Where(b => !b.IsDeleted)
                 .ToListAsync();
+            if (listOfBars.Count() == 0 || listOfBars == null)
+                throw new NullReferenceException("No bars were found!");
             return listOfBars.ToDTO();
         }
 
