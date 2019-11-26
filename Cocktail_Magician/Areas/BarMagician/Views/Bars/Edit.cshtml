@@ -11,12 +11,12 @@
             <div class="content-wrapper">
                 <div class="form-draft-payment">
 
-                    <!-- Creating Bar Form start -->
+                    <!-- Editing Bar Form start -->
                     <form asp-action="Edit" method="post">
                         <input asp-for="@Model.Bar.BarId" class="form-control" hidden />
                         <input asp-for="@Model.Bar.BarCocktailViewModels" class="form-control" hidden />
                         <input asp-for="@Model.Bar.Rating" class="form-control" hidden />
-                        <h4 class="heading-title"><span>Create Bar</span></h4>
+                        <h4 class="heading-title"><span>Edit Bar: "@Model.Bar.Name"</span></h4>
                         <div class="row gap-15 mb-15">
                             <div class="w-100 d-block d-md-none"></div>
                             <div class="col-6 col-md-5">
@@ -98,7 +98,7 @@
                             </div>
                         </div>
                     </form>
-                    <!-- Creating Bar Form end -->
+                    <!-- Editing Bar Form end -->
 
                 </div>
             </div>
@@ -111,9 +111,8 @@
                     <div class="box-heading"><h3 class="h6 text-white text-uppercase">Creating Bar Instructions</h3></div>
                     <div class="box-content">
                         <ul class="border-top mt-20 pt-15">
-                            <li class="clearfix"><i class="elegent-icon-check_alt2 text-success"></i> For picture you can add a link from the web</li>
-                            <li class="clearfix"><i class="elegent-icon-check_alt2 text-success"></i> Address you can copy from google maps or other GPS app</li>
-                            <li class="clearfix"><i class="elegent-icon-check_alt2 text-success"></i> For the map, go to maps.google.com. Type the location in the search box and click on Share. In the new window chose Embed a map and copy the HTML code.</li>
+                            <li class="clearfix"><i class="elegent-icon-check_alt2 text-success"></i> In the Select Option: "Cocktails To Remove", chose from the list which cocktails you want to REMOVE from the menu.</li>
+                            <li class="clearfix"><i class="elegent-icon-check_alt2 text-success"></i> In the Slecet Option: "Cocktails To Offer", chose from the list which cocktails the bar can ADD to the menu.</li>
                             <li class="clearfix border-top font700 text-uppercase"></li>
                         </ul>
                     </div>
@@ -127,4 +126,3 @@
         </div>
     </div>
 </div>
-

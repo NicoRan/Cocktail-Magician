@@ -62,14 +62,13 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
             try
             {
                 var bar = await _barManager.GetBarForEditAsync(id);
-                var barViewModel = bar.ToVMforEdit();
                 var createBarViewModel = new CreateBarViewModel();
-                createBarViewModel.Bar = barViewModel;
+                createBarViewModel.Bar = bar.ToVMforEdit();
                 var allCocktails = await _cocktailManager.GetAllCocktailsAsync();
                 var allCocktailsVM = allCocktails.ToCatalogVM();
                 foreach (var cocktail in allCocktailsVM)
                 {
-                    if(!barViewModel.BarCocktailViewModels.Any(bc => bc.CocktailId == cocktail.CocktailId))
+                    if (!createBarViewModel.Bar.BarCocktailViewModels.Any(bc => bc.CocktailId == cocktail.CocktailId))
                     {
                         createBarViewModel.CocktailsThatCanOffer.Add(cocktail);
                     }
@@ -99,11 +98,15 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
             try
             {
                 await _barManager.EditBar(bar.ToDTO(), cocktailsToOffer, cocktailsToRemove);
-                return RedirectToAction("Details", "Bars", new { id = bar.BarId });
+                return Redirect("/BarCrower/Bars/Details/" + bar.BarId);
             }
             catch (Exception ex)
             {
-                return RedirectToAction("ErrorAction", "Error", new { errorCode = "500", errorMessage = ex.Message });
+                return RedirectToAction("ErrorAction", "Error", new
+                {
+                    errorCode = "500",
+                    errorMessage = ex.Message
+                });
             }
         }
 

@@ -71,8 +71,8 @@ namespace Cocktail_Magician_Services
 
         public async Task<ICollection<IngredientDTO>> GetIngredientsAsync()
         {
-           var allIngredients = await _context.Ingredients.ToListAsync();
-            return allIngredients.OrderBy(i => i.Name).ToList().ToDTO();
+           var allIngredients = await _context.Ingredients.OrderBy(i => i.Name).ToListAsync();
+            return allIngredients.ToDTO();
         }
 
         private bool CheckIfIngredientExist(string name)

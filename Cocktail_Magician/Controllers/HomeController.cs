@@ -29,7 +29,7 @@ namespace Cocktail_Magician.Controllers
 
             var topRatedHomePage = new TopRatedHomePageViewModel();
             topRatedHomePage.TopBars = topBars.ToVM();
-            topRatedHomePage.TopCocktails = topCocktails.ToVM();
+            topRatedHomePage.TopCocktails = topCocktails.ToCatalogVM();
 
             return View(topRatedHomePage);
         }

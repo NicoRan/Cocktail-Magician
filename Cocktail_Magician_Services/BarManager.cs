@@ -15,11 +15,13 @@ namespace Cocktail_Magician_Services
     {
         private readonly CMContext _context;
         private readonly ICocktailManager _cocktailManager;
+        private readonly IBarFactory _barFactory;
 
-        public BarManager(CMContext context, ICocktailManager cocktailManager)
+        public BarManager(CMContext context, ICocktailManager cocktailManager, IBarFactory barFactory)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
             _cocktailManager = cocktailManager ?? throw new ArgumentNullException(nameof(cocktailManager));
+            _barFactory = barFactory ?? throw new ArgumentNullException(nameof(barFactory));
         }
 
         /// <summary>
@@ -29,17 +31,51 @@ namespace Cocktail_Magician_Services
         /// <returns>Task</returns>
         public async Task CreateBar(BarDTO barToCreate)
         {
-            var barToAdd = barToCreate.ToBar();
-
-            var barToFind = _context.Bars.SingleOrDefault(bar => bar.Name == barToAdd.Name && bar.Address == barToAdd.Address && !bar.IsDeleted);
-
-            if (barToFind != null)
+            try
             {
-                throw new InvalidOperationException("Bar already exists in the database");
-            }
+                var barToAdd = _barFactory.CreateNewBar(barToCreate.Name, barToCreate.Address, barToCreate.Information, barToCreate.Picture, barToCreate.MapDirection);
 
-            await _context.Bars.AddAsync(barToAdd);
-            await _context.SaveChangesAsync();
+                var barToFind = _context.Bars.SingleOrDefault(bar => bar.Name == barToAdd.Name && bar.Address == barToAdd.Address && !bar.IsDeleted);
+
+                if (barToFind != null)
+                {
+                    throw new InvalidOperationException("Bar already exists in the database!");
+                }
+                await _context.Bars.AddAsync(barToAdd);
+                await _context.SaveChangesAsync();
+            }
+            catch(InvalidOperationException)
+            {
+                throw new InvalidOperationException("Bar already exists in the database!");
+            }
+            catch(Exception)
+            {
+                throw new Exception("Wrong parameters for Bar!");
+            }
+            
+        }
+
+        /// <summary>
+        /// This method Adds the new Review to the Database and calls the private method UpdateRating
+        /// </summary>
+        /// <param name="barReviewDTO">BarReviewDTO object with data for the review (UserId, 
+        /// BarId, Rating, Text, DateCreated the review</param>
+        /// <returns>BarReviewDTO</returns>
+        public async Task<BarReviewDTO> CreateBarReviewAsync(BarReviewDTO barReviewDTO)
+        {
+            if (barReviewDTO.Grade > 0)
+            {
+                var barReview = barReviewDTO.ToEntity();
+
+                await _context.BarReviews.AddAsync(barReview);
+                await _context.SaveChangesAsync();
+
+                await UpdateRating(barReviewDTO.BarId);
+            }
+            else
+                throw new InvalidOperationException("Cannot comment a Bar without giving it a rating!");
+
+            return barReviewDTO;
         }
 
         /// <summary>
@@ -53,7 +89,7 @@ namespace Cocktail_Magician_Services
         /// <returns>Task</returns>
         public async Task EditBar(BarDTO bar, ICollection<string> cocktailsToOffer, ICollection<string> cocktailsToRemove)
         {
-            var barToUpdate = _context.Bars.Include(b => b.BarCocktails).Include(b => b.BarReviews).FirstOrDefault(b => b.BarId == bar.Id);
+            var barToUpdate = await _context.Bars.Include(b => b.BarCocktails).FirstOrDefaultAsync(b => b.BarId == bar.Id);
             barToUpdate.Address = bar.Address;
             barToUpdate.Information = bar.Information;
             barToUpdate.MapDirections = bar.MapDirection;
@@ -103,70 +139,16 @@ namespace Cocktail_Magician_Services
         }
 
         /// <summary>
-        /// This method takes id and search for the respected Bar.
-        /// If found modifieds the prperty IsDeleted to true and updates the Database
+        /// This method returns all the Bars from the Database which property IsDeleted = false, with no
+        /// attached Collections
         /// </summary>
-        /// <param name="id">Id of the Bar to be deleted</param>
-        /// <returns>Task</returns>
-        public async Task RemoveBar(string id)
+        /// <returns>List of BarDTO</returns>
+        public async Task<ICollection<BarDTO>> GetAllBarsAsync()
         {
-            var bars = await GetBar(id);
-            
-            bars.IsDeleted = true;
-            _context.Bars.Update(bars.ToBar());
-            await _context.SaveChangesAsync();
-        }
-
-        /// <summary>
-        /// This method finds and return the Bar, after checking if property IsDeleted = false, from the Database with
-        /// all of his Collections to display
-        /// </summary>
-        /// <param name="id">Id of the bar</param>
-        /// <returns>BarDTO</returns>
-        public async Task<BarDTO> GetBarForDetails(string id)
-        {
-            try
-            {
-                var bar = await _context.Bars
-                    .AsNoTracking()
-                    .Include(b => b.BarCocktails)
-                        .ThenInclude(b => b.Cocktail)
-                    .Include(b => b.BarReviews)
-                        .ThenInclude(br => br.User)
-                    .Where(b => !b.IsDeleted)
-                    .FirstOrDefaultAsync(b => b.BarId == id);
-
-                return bar.ToDTO();
-            }
-            catch (Exception)
-            {
-                throw new Exception("This bar does not exists!");
-            }
-        }
-
-        /// <summary>
-        /// This method finds and returns the Bar, after checking if property IsDeleted = false, from the Database with 
-        /// only attached the BarCocktail Collection to be modified also
-        /// </summary>
-        /// <param name="id">Id of the Bar</param>
-        /// <returns>BarDTO</returns>
-        public async Task<BarDTO> GetBarForEditAsync(string id)
-        {
-            try
-            {
-                var bar = await _context.Bars
-                    .AsNoTracking()
-                    .Include(b => b.BarCocktails)
-                        .ThenInclude(b => b.Cocktail)
-                    .Where(b => !b.IsDeleted)
-                    .FirstOrDefaultAsync(b => b.BarId == id);
-
-                return bar.ToDTO();
-            }
-            catch (Exception)
-            {
-                throw new Exception("This bar does not exists!");
-            }
+            var listOfBars = await _context.Bars
+                .Where(b => !b.IsDeleted)
+                .ToListAsync();
+            return listOfBars.ToDTO();
         }
 
         /// <summary>
@@ -193,15 +175,55 @@ namespace Cocktail_Magician_Services
         }
 
         /// <summary>
-        /// This method checks if the User with the given Id has already reviewed the Bar 
-        /// with the given Id.
+        /// This method finds and return the Bar, after checking if property IsDeleted = false, from the Database 
+        /// with all of his Collections to display
         /// </summary>
-        /// <param name="barId">Id of the Bar</param>
-        /// <param name="userId">Id of the User</param>
-        /// <returns>Boolean</returns>
-        public async Task<bool> IsReviewGiven(string barId, string userId)
+        /// <param name="id">Id of the bar</param>
+        /// <returns>BarDTO</returns>
+        public async Task<BarDTO> GetBarForDetails(string id)
         {
-            return await _context.BarReviews.AnyAsync(br => br.BarId == barId && br.UserId == userId);
+            try
+            {
+                var bar = await _context.Bars
+                    .AsNoTracking()
+                    .Include(b => b.BarCocktails)
+                        .ThenInclude(b => b.Cocktail)
+                    .Include(b => b.BarReviews)
+                        .ThenInclude(br => br.User)
+                    .Where(b => !b.IsDeleted)
+                    .FirstOrDefaultAsync(b => b.BarId == id);
+
+                return bar.ToDTO();
+            }
+            catch (Exception)
+            {
+                throw new Exception("This bar does not exists!");
+            }
+        }
+
+        /// <summary>
+        /// This method finds and returns the Bar, after checking if property IsDeleted = false, from the Database 
+        /// with only attached the BarCocktail Collection to be modified also
+        /// </summary>
+        /// <param name="id">Id of the Bar</param>
+        /// <returns>BarDTO</returns>
+        public async Task<BarDTO> GetBarForEditAsync(string id)
+        {
+            try
+            {
+                var bar = await _context.Bars
+                    .AsNoTracking()
+                    .Include(b => b.BarCocktails)
+                        .ThenInclude(b => b.Cocktail)
+                    .Where(b => !b.IsDeleted)
+                    .FirstOrDefaultAsync(b => b.BarId == id);
+
+                return bar.ToDTO();
+            }
+            catch (Exception)
+            {
+                throw new Exception("This bar does not exists!");
+            }
         }
 
         /// <summary>
@@ -220,39 +242,30 @@ namespace Cocktail_Magician_Services
         }
 
         /// <summary>
-        /// This method Adds the new Review to the Database and calls the private method UpdateRating
+        /// This method checks if the User with the given Id has already reviewed the Bar 
+        /// with the given Id.
         /// </summary>
-        /// <param name="barReviewDTO">BarReviewDTO object with data for the review (UserId, 
-        /// BarId, Rating, Text, DateCreated the review</param>
-        /// <returns>BarReviewDTO</returns>
-        public async Task<BarReviewDTO> CreateBarReviewAsync(BarReviewDTO barReviewDTO)
+        /// <param name="barId">Id of the Bar</param>
+        /// <param name="userId">Id of the User</param>
+        /// <returns>Boolean</returns>
+        public async Task<bool> IsReviewGiven(string barId, string userId)
         {
-            if (barReviewDTO.Grade != 0)
-            {
-                var barReview = barReviewDTO.ToEntity();
-
-                await _context.BarReviews.AddAsync(barReview);
-                await _context.SaveChangesAsync();
-
-                await UpdateRating(barReviewDTO.BarId);
-            }
-            else
-                await _context.SaveChangesAsync();
-
-            return barReviewDTO;
+            return await _context.BarReviews.AnyAsync(br => br.BarId == barId && br.UserId == userId);
         }
-        
+
         /// <summary>
-        /// This method returns all the Bars from the Database which property IsDeleted = false, with no
-        /// attached Collections
+        /// This method takes id and search for the respected Bar.
+        /// If found modifieds the prperty IsDeleted to true and updates the Database
         /// </summary>
-        /// <returns>List of BarDTO</returns>
-        public async Task<ICollection<BarDTO>> GetAllBarsAsync()
+        /// <param name="id">Id of the Bar to be deleted</param>
+        /// <returns>Task</returns>
+        public async Task RemoveBar(string id)
         {
-            var listOfBars = await _context.Bars
-                .Where(b => !b.IsDeleted)
-                .ToListAsync();
-            return listOfBars.ToDTO();
+            var bars = await GetBar(id);
+            
+            bars.IsDeleted = true;
+            _context.Bars.Update(bars.ToBar());
+            await _context.SaveChangesAsync();
         }
 
         /// <summary>

@@ -36,11 +36,5 @@ namespace Cocktail_Magician_Services.Mappers
             };
             return barReview;
         }
-
-        public static ICollection<BarReviewDTO> ToDTO(this ICollection<BarReview> barReviews)
-        {
-            var newCollection = barReviews.Select(c => c.ToDTO()).ToList();
-            return newCollection;
-        }
     }
 }

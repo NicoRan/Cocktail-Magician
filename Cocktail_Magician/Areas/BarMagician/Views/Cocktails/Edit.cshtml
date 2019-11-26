@@ -1,37 +1,107 @@
-﻿@*@model Cocktail_Magician_DB.Models.Cocktail
+﻿@model EditCocktailViewModel
 
 @{
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Edit</h1>
+<div class="container pt-30">
+    <div class="row gap-20 gap-lg-40">
+        <div class="col-12 col-lg-7">
+            <div class="content-wrapper">
+                <div class="form-draft-payment">
 
-<h4>Cocktail</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                    <!-- Editing Cocktail Form start -->
+                    <form asp-action="Edit" method="post">
+                        <input asp-for="@Model.Cocktail.CocktailId" class="form-control" hidden />
+                        <input asp-for="@Model.Cocktail.Rating" class="form-control" hidden />
+                        <h4 class="heading-title"><span>Edit Cocktail: "@Model.Cocktail.Name"</span></h4>
+                        <div class="row gap-15 mb-15">
+                            <div class="w-100 d-block d-md-none"></div>
+                            <div class="col-6 col-md-5">
+                                <div class="form-group">
+                                    <label>Name</label>
+                                    <input asp-for="@Model.Cocktail.Name" class="form-control" />
+                                    <span asp-validation-for="@Model.Cocktail.Name" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-6 col-sm-6 col-md-7">
+                                <div class="form-group">
+                                    <label>Picture</label>
+                                    <input asp-for="@Model.Cocktail.Picture" class="form-control" />
+                                    <span asp-validation-for="@Model.Cocktail.Picture" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="mv-40">
+                        <div class="row gap-15 mb-15">
+                            <div class="col-6 col-md-12">
+                                <div class="form-group chosen-bg-light">
+                                    <label>Ingredients To Remove</label>
+                                    <select asp-for="@Model.IngredientsToRemove" class="chosen-the-basic chosen-container-multi">
+                                        @foreach (var ingredient in Model.Cocktail.CocktailIngredients)
+                                        {
+                                            <option value="@ingredient.IngredientName">@ingredient.IngredientName</option>
+                                        }
+                                    </select>
+                                    <span asp-validation-for="@Model.IngredientsToRemove" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="mv-40">
+                        <div class="row gap-15 mb-15">
+                            <div class="col-6 col-md-12">
+                                <div class="form-group chosen-bg-light">
+                                    <label>Ingredients To Add</label>
+                                    <select asp-for="@Model.IngredientsToAdd" class="chosen-the-basic chosen-container-multi">
+                                        @if (Model.IngreddientsThatCanAdd.Count() > 0)
+                                        {
+                                            @foreach (var ingredient in Model.IngreddientsThatCanAdd)
+                                            {
+                                                <option value="@ingredient.Name">@ingredient.Name</option>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <option disabled>No ingredients found</option>
+                                        }
+                                    </select>
+                                    <span asp-validation-for="@Model.IngredientsToAdd" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-20">
+                            <div class="col-sm-8 col-md-6">
+                                <button type="submit" class="btn btn-primary">Submit Now</button>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- Editing Cocktail Form end -->
+
+                </div>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsDeleted" /> @Html.DisplayNameFor(model => model.IsDeleted)
-                </label>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+
+
+        </div>
+        <div class="col-12 col-lg-5">
+            <!-- Side bar instruction start -->
+            <aside class="sticky-kit sidebar-wrapper no-border">
+                <div class="booking-box">
+                    <div class="box-heading"><h3 class="h6 text-white text-uppercase">Edit Cocktail Instructions</h3></div>
+                    <div class="box-content">
+                        <ul class="border-top mt-20 pt-15">
+                            <li class="clearfix"><i class="elegent-icon-check_alt2 text-success"></i> In the Select Option: "Ingredients To Remove", chose from the list which ingredients you want to REMOVE from the recipe.</li>
+                            <li class="clearfix"><i class="elegent-icon-check_alt2 text-success"></i> In the Slecet Option: "Ingredients To Add", chose from the list which ingredients you want to ADD to the recipe.</li>
+                            <li class="clearfix border-top font700 text-uppercase"></li>
+                        </ul>
+                    </div>
+                    <div class="box-bottom bg-light">
+                        <h6 class="font-sm">We are the best site for a night out in Sofia</h6>
+                        <p class="font-sm">Our custom tour program, direct call <span class="text-primary">+66857887444</span>.</p>
+                    </div>
+                </div>
+            </aside>
+            <!-- Side bar instruction end -->
+        </div>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>*@
-

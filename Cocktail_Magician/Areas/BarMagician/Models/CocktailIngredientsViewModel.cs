@@ -1,6 +1,6 @@
-﻿namespace Cocktail_Magician_Services.DTO
+﻿namespace Cocktail_Magician.Areas.BarMagician.Models
 {
-    public class CocktailIngredientDTO
+    public class CocktailIngredientsViewModel
     {
         public string CocktailId { get; set; }
         public string IngredientId { get; set; }

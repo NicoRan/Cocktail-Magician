@@ -45,38 +45,30 @@ namespace Cocktail_Magician_Services
                     cocktailToAdd.CocktailIngredient.Add(new CocktailIngredient() { Cocktail = cocktailToAdd, Ingredient = findIngredient.ToEntity() });
                 }
             }
-            cocktailToAdd.Information = CocktailsRecipe(ingredients);
+            cocktailToAdd.Information = CreateCocktailsRecipe(ingredients);
             await _context.Cocktails.AddAsync(cocktailToAdd);
             await _context.SaveChangesAsync();
         }
 
         /// <summary>
-        /// This method returns the first 4 Cocktails from the Database sorted by the highest rating
-        /// and by Name (if Cocktails with the exact same rating).
+        /// This method display the ingredients
         /// </summary>
-        /// <returns>List of CocktailDTO</returns>
-        public async Task<ICollection<CocktailDTO>> GetTopRatedCocktails()
+        /// <param name="ingredients">list of ingredients</param>
+        /// <returns>string<CocktailReviewDTO></returns>
+        private string CreateCocktailsRecipe(List<string> ingredients)
         {
-            var topRatedCocktails = _context.Cocktails
-                .Include(b => b.CocktailReviews)
-                .ThenInclude(b => b.User)
-                .OrderByDescending(c => c.Rating)
-                .ThenBy(c => c.Name)
-                .Where(c => c.IsDeleted == false)
-                .Take(4)
-                .Select(c => c.ToDTO());
-            
-            return await topRatedCocktails.ToListAsync();
+            return string.Join("," + " ", ingredients.ToArray());
         }
+
         /// <summary>
         /// This method checks if the User with the given Id has already reviewed the Bar 
         /// with the given Id.
         /// </summary>
         /// <param name="cocktailReviewDTO">CocktailReviewDTO object with the needed data for the review</param>
-        /// <returns>CocktailReviewDTO</returns>
-        public async Task<CocktailReviewDTO> CreateCocktailReviewAsync(CocktailReviewDTO cocktailReviewDTO)
+        /// <returns>Task</returns>
+        public async Task CreateCocktailReviewAsync(CocktailReviewDTO cocktailReviewDTO)
         {
-            if (cocktailReviewDTO.Grade != 0)
+            if (cocktailReviewDTO.Grade > 0)
             {
                 var cocktailReview = cocktailReviewDTO.ToEntity();
 
@@ -86,28 +78,90 @@ namespace Cocktail_Magician_Services
                 await UpdateRating(cocktailReviewDTO.CocktailId);
             }
             else
-            await _context.SaveChangesAsync();
-
-            return cocktailReviewDTO;
+                await _context.SaveChangesAsync();
         }
 
         /// <summary>
-        /// This method finds all reviews of the Cocktail and calculates its average rating. After that updates the rating
+        /// This method finds the ciresponding Cocktail to update and updates its properties with the new values.
+        /// Updates the Cocktails recipe by calling the method UpdateInformation.
         /// </summary>
-        /// <param name="cocktailId">Id of the Cocktail</param>
+        /// <param name="cocktail">Object of type Cocktail with new values to update</param>
+        /// <param name="ingredientsToRemove">List of ingredients names to remove from Recipe</param>
+        /// <param name="ingredientsToAdd">List of ingredients names to add to the recipe</param>
         /// <returns>Task</returns>
-        private async Task UpdateRating(string cocktailId)
+        public async Task EditCocktailAsync(CocktailDTO cocktail, List<string> ingredientsToRemove, List<string> ingredientsToAdd)
         {
-            var rating = _context.CocktailReviews
-                .Where(c => c.CocktailId == cocktailId)
-                .Average(cr => cr.Grade);
-            var cocktail = _context.Cocktails.Find(cocktailId);
-            cocktail.Rating = Math.Round(rating, 1);
+            var cocktailToUpdate = await _context.Cocktails.Include(c => c.CocktailIngredient).FirstOrDefaultAsync(c => c.Id == cocktail.Id);
+            cocktailToUpdate.Name = cocktail.Name;
+            cocktailToUpdate.Picture = cocktail.Picture;
+            if (ingredientsToRemove.Count() > 0 && ingredientsToAdd.Count() > 0)
+            {
+                foreach (var ingredient in ingredientsToRemove)
+                {
+                    var ingredientToRemove = await _ingredientManager.FindIngredientByNameAsync(ingredient);
+                    _context.CocktailIngredients.Remove(cocktailToUpdate.CocktailIngredient.FirstOrDefault(ci => ci.CocktailId == cocktailToUpdate.Id && ci.IngredientId == ingredientToRemove.Id));
+                }
+                foreach (var ingredient in ingredientsToAdd)
+                {
+                    var ingredientToAdd = await _ingredientManager.FindIngredientByNameAsync(ingredient);
+                    cocktailToUpdate.CocktailIngredient.Add(new CocktailIngredient()
+                    {
+                        Cocktail = cocktailToUpdate,
+                        Ingredient = ingredientToAdd.ToEntity()
+                    });
+                }
+            }
+            else if (ingredientsToRemove.Count() > 0 && ingredientsToAdd.Count() == 0)
+            {
+                foreach (var ingredient in ingredientsToRemove)
+                {
+                    var ingredientToRemove = await _ingredientManager.FindIngredientByNameAsync(ingredient);
+                    _context.CocktailIngredients.Remove(cocktailToUpdate.CocktailIngredient.FirstOrDefault(ci => ci.CocktailId == cocktailToUpdate.Id && ci.IngredientId == ingredientToRemove.Id));
+                }
+            }
+            else if (ingredientsToRemove.Count() == 0 && ingredientsToAdd.Count() > 0)
+            {
+                foreach (var ingredient in ingredientsToAdd)
+                {
+                    var ingredientToAdd = await _ingredientManager.FindIngredientByNameAsync(ingredient);
+                    cocktailToUpdate.CocktailIngredient.Add(new CocktailIngredient()
+                    {
+                        Cocktail = cocktailToUpdate,
+                        Ingredient = ingredientToAdd.ToEntity()
+                    });
+                }
+            }
 
-            _context.Cocktails.Update(cocktail);
+            _context.Cocktails.Update(cocktailToUpdate);
             await _context.SaveChangesAsync();
+
+            await UpdateInformation(cocktailToUpdate.Id);
         }
 
+        /// <summary>
+        /// This method ruturn a list with all cocktail that are not set with deleted status
+        /// </summary>
+        /// <returns>List<Cocktail></returns>
+        public async Task<ICollection<CocktailDTO>> GetAllCocktailsAsync()
+        {
+            var listCocktails = await _context.Cocktails
+                .Where(cocktail => !cocktail.IsDeleted)
+                .ToListAsync();
+            return listCocktails.ToCatalogDTO();
+        }
+
+        /// <summary>
+        /// This method finds all of the reviews for the given cocktail by it's id 
+        /// </summary>
+        /// <param name="cocktailId">Id of the cocktail</param>
+        /// <param name="cocktailId">Id of the cocktail</param>
+        /// <returns>ICollection<CocktailReviewDTO></returns>
+        public async Task<ICollection<CocktailReviewDTO>> GetAllReviewsByCocktailID(string cocktailId)
+        {
+            var reviews = await _context.CocktailReviews.Include(c => c.User).Where(c => c.CocktailId == cocktailId).ToListAsync();
+
+            return reviews.ToDTO();
+        }
 
         /// <summary>
         /// This method finds all cocktails with no deleted status 
@@ -121,16 +175,17 @@ namespace Cocktail_Magician_Services
                 var cocktail = await _context.Cocktails
                     .Include(c => c.CocktailIngredient)
                     .Include(c => c.CocktailReviews)
-                        .ThenInclude(c=>c.User)
+                        .ThenInclude(c => c.User)
                     .Where(c => !c.IsDeleted)
                     .FirstOrDefaultAsync(c => c.Id == id);
                 return cocktail.ToDTO();
             }
-            catch (InvalidOperationException)
+            catch (Exception)
             {
-                throw new Exception();
+                throw new Exception("Cocktail not foun!");
             }
         }
+
         /// <summary>
         /// This method finds the cocktail with a given name
         /// </summary>
@@ -140,19 +195,81 @@ namespace Cocktail_Magician_Services
         {
             try
             {
-                var result = await _context.Cocktails.FirstOrDefaultAsync(cocktail => cocktail.Name == name);
-                var resultDTO = result.ToEditDTO();
+                var result = await _context.Cocktails.SingleOrDefaultAsync(cocktail => cocktail.Name == name);
+                var resultDTO = result.ToCatalogDTO();
                 return resultDTO;
+            }
+            catch (Exception)
+            {
+                throw new Exception("More then one Cocktail found with the specified name!");
+            }
+        }
+
+        /// <summary>
+        /// This method this method finds cocktail by it's 
+        /// </summary>
+        /// <param name="cocktailId">if of the cocktail</param>
+        /// <returns>Cocktail</returns>
+        private async Task<Cocktail> GetCocktailEntity(string cocktailId)
+        {
+            return await _context.Cocktails.FirstOrDefaultAsync(c => c.Id == cocktailId);
+        }
+
+        /// <summary>
+        /// This method returns a Cocktail with the specified Id and attached Collection CocktailIngredient and
+        /// included to the collection is attached Collection of Ingredients.
+        /// </summary>
+        /// <param name="id">Id of the cocktail</param>
+        /// <returns>CocktailDTO</returns>
+        public async Task<CocktailDTO> GetCocktailForEdit(string id)
+        {
+            try
+            {
+                var cocktail = await _context.Cocktails
+                    .Include(c => c.CocktailIngredient).ThenInclude(c => c.Ingredient)
+                    .Where(c => !c.IsDeleted)
+                    .FirstOrDefaultAsync(c => c.Id == id);
+                return cocktail.ToEditDTO();
             }
             catch (Exception)
             {
                 throw new Exception("Cocktail not foun!");
             }
         }
+
+        /// <summary>
+        /// This method returns the first 4 Cocktails from the Database sorted by the highest rating
+        /// and by Name (if Cocktails with the exact same rating).
+        /// </summary>
+        /// <returns>List of CocktailDTO</returns>
+        public async Task<ICollection<CocktailDTO>> GetTopRatedCocktails()
+        {
+            var topRatedCocktails = await _context.Cocktails
+                .OrderByDescending(c => c.Rating)
+                .ThenBy(c => c.Name)
+                .Where(c => c.IsDeleted == false)
+                .Take(4)
+                .Select(c => c.ToCatalogDTO())
+                .ToListAsync();
+
+            return topRatedCocktails;
+        }
+
+        /// <summary>
+        /// This method check does the user gave review to the cocktail 
+        /// </summary>
+        /// <param name="cocktailId">Id of the cocktail</param>
+        /// <param name="userId">Id of the user</param>
+        /// <returns>Bool</returns>
+        public async Task<bool> IsReviewGiven(string cocktailId, string userId)
+        {
+            return await _context.CocktailReviews.AnyAsync(cr => cr.CocktailId == cocktailId && cr.UserId == userId);
+        }
+
         /// <summary>
         /// This method remove a cocktail by it's id using the method GetCocktailEntity to find the cocktail by id and set it status to deleted
         /// </summary>
-        /// <param name="cocktailId">Id of the Cocktail</param>
+        /// <param name="id">Id of the Cocktail</param>
         /// <returns>Task</returns>
         public async Task RemoveCocktail(string id)
         {
@@ -168,58 +285,44 @@ namespace Cocktail_Magician_Services
                 throw new Exception("Cocktail to remove not found!");
             }
         }
+
         /// <summary>
-        /// This method check does the user gave review to the cocktail 
+        /// This method finds all CocktailIngredient by Cocktail id from Database with attached table Ingredient
+        /// creates a List of strings with ingredients names, calls the method CreateCocktailsRecipe with the same
+        /// lists and updates the property Information of the coresponding Cocktail with "id".
         /// </summary>
-        /// <param name="cocktailId">Id of the cocktail</param>
-        /// <param name="userId">Id of the user</param>
-        /// <returns>Bool</returns>
-        public async Task<bool> IsReviewGiven(string cocktailId, string userId)
+        /// <param name="id">Id of Cocktail</param>
+        /// <returns>Task</returns>
+        private async Task UpdateInformation(string id)
         {
-            return await _context.CocktailReviews.AnyAsync(cr => cr.CocktailId == cocktailId && cr.UserId == userId);
+            var listIngredients = await _context.CocktailIngredients.Include(ci => ci.Ingredient).Where(ci => ci.CocktailId == id).ToListAsync();
+            var result = new List<string>();
+            foreach (var ingredient in listIngredients)
+            {
+                result.Add(ingredient.Ingredient.Name);
+            }
+            var recipe = CreateCocktailsRecipe(result);
+            var cocktailToUpdate = await _context.Cocktails.FirstOrDefaultAsync(c => c.Id == id);
+            cocktailToUpdate.Information = recipe;
+            _context.Cocktails.Update(cocktailToUpdate);
+            await _context.SaveChangesAsync();
         }
 
         /// <summary>
-        /// This method ruturn a list with all cocktail that are not set with deleted status
+        /// This method finds all reviews of the Cocktail and calculates its average rating. After that updates the rating
         /// </summary>
-        /// <returns>List<Cocktail></returns>
-        public async Task<ICollection<CocktailDTO>> GetAllCocktailsAsync()
+        /// <param name="cocktailId">Id of the Cocktail</param>
+        /// <returns>Task</returns>
+        private async Task UpdateRating(string cocktailId)
         {
-            var listCocktails = await _context.Cocktails
-                .Where(cocktail => !cocktail.IsDeleted)
-                .ToListAsync();
-            return listCocktails.ToCatalogDTO();
-        }
-        /// <summary>
-        /// This method finds all of the reviews for the given cocktail by it's id 
-        /// </summary>
-        /// <param name="cocktailId">Id of the cocktail</param>
-        /// <param name="cocktailId">Id of the cocktail</param>
-        /// <returns>ICollection<CocktailReviewDTO></returns>
-        public async Task<ICollection<CocktailReviewDTO>> GetAllReviewsByCocktailID(string cocktailId)
-        {
-            var reviews = await _context.CocktailReviews.Include(c => c.User).Where(c => c.CocktailId == cocktailId).ToListAsync();
+            var rating = await _context.CocktailReviews
+                .Where(c => c.CocktailId == cocktailId)
+                .AverageAsync(cr => cr.Grade);
+            var cocktail = await _context.Cocktails.FindAsync(cocktailId);
+            cocktail.Rating = Math.Round(rating, 1);
 
-            return reviews.ToDTO();
-        }
-        /// <summary>
-        /// This method display the ingredients
-        /// </summary>
-        /// <param name="ingredients">list of ingredients</param>
-        /// <returns>string<CocktailReviewDTO></returns>
-        private string CocktailsRecipe(List<string> ingredients)
-        {
-            var result = String.Join(", ", ingredients.ToArray());
-            return result;
-        }
-        /// <summary>
-        /// This method this method finds cocktail by it's 
-        /// </summary>
-        /// <param name="cocktailId">if of the cocktail</param>
-        /// <returns>Cocktail</returns>
-        private async Task<Cocktail> GetCocktailEntity(string cocktailId)
-        {
-            return await _context.Cocktails.FirstOrDefaultAsync(c => c.Id == cocktailId);
+            _context.Cocktails.Update(cocktail);
+            await _context.SaveChangesAsync();
         }
     }
 }

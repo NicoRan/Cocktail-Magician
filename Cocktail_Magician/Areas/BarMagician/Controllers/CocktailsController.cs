@@ -39,7 +39,6 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
         // POST: Cocktails/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator")]
@@ -64,59 +63,61 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
             }
         }
 
+        //TODO IMPLEMENT EDIT ACTION AND METHOD
         // GET: Cocktails/Edit/5
-        //public async Task<IActionResult> Edit(string id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var cocktail = await _context.Cocktails.FindAsync(id);
-        //    if (cocktail == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return View(cocktail);
-        //}
+        [HttpGet]
+        [Authorize(Roles = "Administrator")]
+        public async Task<IActionResult> Edit(string id)
+        {
+            try
+            {
+                var cocktailToEdit = await _cocktailManager.GetCocktailForEdit(id);
+                var cocktailToEditVM = new EditCocktailViewModel();
+                cocktailToEditVM.Cocktail = cocktailToEdit.ToEditVM();
+                var listOfIngredients = await _ingredientManager.GetIngredientsAsync();
+                foreach (var ingredient in listOfIngredients)
+                {
+                    if (!cocktailToEditVM.Cocktail.CocktailIngredients.Any(ci => ci.IngredientId == ingredient.Id))
+                    {
+                        cocktailToEditVM.IngreddientsThatCanAdd.Add(ingredient.ToVM());
+                    }
+                }
+                return View(cocktailToEditVM);
+            }
+            catch(Exception ex)
+            {
+                return RedirectToAction("ErrorAction", "Error", new { errorCode = "404", errorMessage = ex.Message });
+            }
+        }
 
         // POST: Cocktails/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(string id, [Bind("Id,Name,IsDeleted")] Cocktail cocktail)
-        //{
-        //    if (id != cocktail.Id)
-        //    {
-        //        return NotFound();
-        //    }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
+        public async Task<IActionResult> Edit(List<string> ingredientsToRemove, List<string> ingredientsToAdd, CocktailViewModel cocktail)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    ModelState.AddModelError(string.Empty, "Invalid bar parameters!");
+            //    return View(cocktail);
+            //}
+            try
+            {
+                await _cocktailManager.EditCocktailAsync(cocktail.ToEditDTO(), ingredientsToRemove, ingredientsToAdd);
+                return Redirect("/BarCrower/Cocktails/Details/" + cocktail.CocktailId);
+            }
+            catch(Exception ex)
+            {
+                return RedirectToAction("ErrorAction", "Error", new { errorCode = "404", errorMessage = ex.Message });
+            }
+        }
 
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            _context.Update(cocktail);
-        //            await _context.SaveChangesAsync();
-        //        }
-        //        catch (DbUpdateConcurrencyException)
-        //        {
-        //            if (!CocktailExists(cocktail.Id))
-        //            {
-        //                return NotFound();
-        //            }
-        //            else
-        //            {
-        //                throw;
-        //            }
-        //        }
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(cocktail);
-        //}
+            // GET: Cocktails/Delete/5
 
-        // GET: Cocktails/Delete/5
         [HttpGet]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(string id)
         {
             try
@@ -134,6 +135,7 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
         // POST: Cocktails/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
             try

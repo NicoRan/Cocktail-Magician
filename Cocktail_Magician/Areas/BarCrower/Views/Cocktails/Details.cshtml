@@ -40,7 +40,7 @@
                         <h5 class="mt-30">Ingredients</h5>
                         <!-- Make a foreach loop to get all cocktails the bar offers start -->
                         <ul class="list-icon-data-attr font-ionicons">
-                            <li data-content="&#xf383">@Model.Information</li>
+                            <li><i class="elegent-icon-document_alt text-warning"></i> @Model.Information</li>
                         </ul>
                         <!-- Make a foreach loop to get all cocktails the bar offers end -->
                     </div>
@@ -49,11 +49,12 @@
                     <div id="detail-content-sticky-nav-06" class="fullwidth-horizon-sticky-section">
                         @if (User.IsInRole("Administrator"))
                         {
-                            <div class="row mt-25">
-                                <div class="col-12 col-md-8 col-lg-9 offset-md-4 offset-lg-3">
-                                    <div class="col-inner">
-                                        <a asp-area="BarMagician" asp-controller="Cocktails" asp-action="Delete" asp-route-id="@Model.CocktailId" method="get" class="btn btn-primary btn-wide"><i class="elegent-icon-error-oct_alt"></i>  Delete Cocktail</a>
-                                    </div>
+                            <div class="d-flex flex-column flex-sm-row align-items-sm-center mb-20 justify-content-center">
+                                <div class="col-3 col-md-5">
+                                    <a asp-area="BarMagician" asp-controller="Cocktails" asp-action="Delete" asp-route-id="@Model.CocktailId" class="btn btn-primary btn-wide"><i class="elegent-icon-error-oct_alt"></i>  Delete Cocktail <i class="elegent-icon-error-oct_alt"></i></a>
+                                </div>
+                                <div class="col-3 col-md-5">
+                                    <a asp-area="BarMagician" asp-controller="Cocktails" asp-action="Edit" asp-route-id="@Model.CocktailId" method="get" class="btn btn-success btn-wide"> Edit Cocktail </a>
                                 </div>
                             </div>
                         }

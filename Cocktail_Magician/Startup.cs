@@ -13,6 +13,7 @@ using Cocktail_Magician.Infrastructure.Extensions;
 using Cocktail_Magician_DB.DataSeeder;
 using Cocktail_Magician_Services.Contracts;
 using Cocktail_Magician_Services;
+using Cocktail_Magician_Services.Factories;
 
 namespace Cocktail_Magician
 {
@@ -61,6 +62,7 @@ namespace Cocktail_Magician
             services.AddScoped<IIngredientManager, IngredientManager>();
             services.AddScoped<ISearchManager, SearchManager>();
             services.AddScoped<IAdditionalUserManager, AdditionalUserManager>();
+            services.AddScoped<IBarFactory, BarFactory>();
             services.AddHostedService<BackgroundManager>();
         }
 

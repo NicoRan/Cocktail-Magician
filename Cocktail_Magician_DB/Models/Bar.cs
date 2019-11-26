@@ -9,11 +9,10 @@ namespace Cocktail_Magician_DB.Models
         {
 
         }
-        public Bar(string name, string address, double rating, string information, string picture, string mapDirections)
+        public Bar(string name, string address, string information, string picture, string mapDirections)
         {
             Name = name;
             Address = address;
-            Rating = rating;
             Information = information;
             Picture = picture;
             MapDirections = mapDirections;
@@ -23,7 +22,7 @@ namespace Cocktail_Magician_DB.Models
         [MinLength(3, ErrorMessage = "Name should be between 3 and 35 symbols!"),
             MaxLength(35, ErrorMessage = "Name should be between 3 and 35 symbols!")]
         public string Name { get; set; }
-        [MinLength(5, ErrorMessage = "Address should at least 5 symbols!")]
+        [MinLength(5, ErrorMessage = "Address should be at least 5 symbols!")]
         public string Address { get; set; }
         [MinLength(5, ErrorMessage = "Information should be atleast 5 symbols!")]
         public string Information { get; set; }
@@ -34,6 +33,5 @@ namespace Cocktail_Magician_DB.Models
         public bool IsDeleted { get; set; }
         public ICollection<BarCocktail> BarCocktails { get; set; }
         public ICollection<BarReview> BarReviews { get; set; }
-
     }
 }
