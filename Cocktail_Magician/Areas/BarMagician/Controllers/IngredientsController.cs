@@ -53,17 +53,19 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
                 return RedirectToAction("ErrorAction", "Error", new { errorCode = "500", errorMessage = ex.Message });
             }
         }
-
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> IngredientCatalog()
         {
             return View((await _ingredientManager.GetIngredientsAsync()).ToVM());
         }
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(string Id)
         {
             var ingredientDTO = await _ingredientManager.GetIngredientById(Id);
             return View(ingredientDTO.ToVM());
         }
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(IngredientViewModel ingredientViewModel)
         {
             var result =  (await _ingredientManager.Edit(ingredientViewModel.Id,ingredientViewModel.Name)).ToVM();
@@ -86,15 +88,16 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
         //    return View(ingredient);
         //}
 
-        // POST: BarMagician/Ingredients/Delete/5
-        //[HttpPost, ActionName("Delete")]
+        //POST: BarMagician/Ingredients/Delete/5
+        [HttpGet]
         //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> DeleteConfirmed(string id)
-        //{
-        //    var ingredient = await _context.Ingredients.FindAsync(id);
-        //    _context.Ingredients.Remove(ingredient);
-        //    await _context.SaveChangesAsync();
-        //    return RedirectToAction(nameof(Index));
-        //}
+        [Authorize(Roles = "Administrator")]
+        public async Task<IActionResult> Delete(string id)
+        {
+            var ingredient = await _ingredientManager.GetIngredientById(id);
+            await _ingredientManager.RemoveIngredientById(ingredient.Id);
+            
+            return RedirectToAction("IngredientCatalog", "Ingredients");
+        }
     }
 }

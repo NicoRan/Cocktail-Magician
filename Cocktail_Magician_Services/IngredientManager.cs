@@ -39,6 +39,13 @@ namespace Cocktail_Magician_Services
             return ingredientToFind.ToDTO();
         }
 
+        public async Task RemoveIngredientById(string ingredientId)
+        {
+            var result = await _context.Ingredients.FirstOrDefaultAsync(c => c.IngredientId == ingredientId);
+            _context.Ingredients.Remove(result);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task<IngredientDTO> Edit(string ingredientId, string newName)
         {
             var ingredients = await _context.Ingredients.FirstOrDefaultAsync(i => i.IngredientId == ingredientId);
@@ -71,8 +78,8 @@ namespace Cocktail_Magician_Services
 
         public async Task<ICollection<IngredientDTO>> GetIngredientsAsync()
         {
-           var allIngredients = await _context.Ingredients.OrderBy(i => i.Name).ToListAsync();
-            return allIngredients.ToDTO();
+           var allIngredients = await _context.Ingredients.Include(i => i.CocktailIngredient).Where(c => c.CocktailIngredient.FirstOrDefault(cc => cc.IngredientId == c.IngredientId) == null).ToListAsync();
+           return allIngredients.ToDTO();
         }
 
         private bool CheckIfIngredientExist(string name)

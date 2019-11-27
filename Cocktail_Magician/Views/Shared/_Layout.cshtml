@@ -89,6 +89,10 @@
                                                     <ul>
                                                         <li><a asp-area="" asp-controller="Home" asp-action="BarCatalog"> All Bars</a></li>
                                                         <li><a asp-area="" asp-controller="Home" asp-action="CocktailCatalog"> All Cocktails</a></li>
+                                                        @if (User.IsInRole("Administrator"))
+                                                        {
+                                                            <li><a asp-area="BarMagician" asp-controller="Ingredients" asp-action="IngredientCatalog"> Unused Ingredients</a></li>
+                                                        }
                                                     </ul>
                                                 </li>
                                                 <li>
@@ -293,8 +297,8 @@
                         <div class="form-login">
 
                             <div class="form-header">
-                                <h4>Welcome Back to SiteName</h4>
-                                <p>Sign in to your account to continue using SiteName</p>
+                                <h4>Welcome To Art & Cocktails</h4>
+                                <p>Sign in to your account to continue using Cocktail Magician</p>
                             </div>
 
                             <div class="form-body">
@@ -309,8 +313,8 @@
                     <div role="tabpanel" class="tab-pane fade in" id="loginFormTabInModal-register">
                         <div class="form-login">
                             <div class="form-header">
-                                <h4>Join SiteName for Free</h4>
-                                <p>Access thousands of online classes in design, business, and more!</p>
+                                <h4>Join Art & Cocktails for Free</h4>
+                                <p>Access all the bars around you and check the cocktails they offer!</p>
                             </div>
 
                             <div class="form-body">
