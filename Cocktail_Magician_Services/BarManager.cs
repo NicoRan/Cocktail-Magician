@@ -44,15 +44,15 @@ namespace Cocktail_Magician_Services
                 await _context.Bars.AddAsync(barToAdd);
                 await _context.SaveChangesAsync();
             }
-            catch(InvalidOperationException)
+            catch (InvalidOperationException)
             {
                 throw new InvalidOperationException("Bar already exists in the database!");
             }
-            catch(Exception)
+            catch (Exception)
             {
                 throw new Exception("Wrong parameters for Bar!");
             }
-            
+
         }
 
         /// <summary>
@@ -161,19 +161,12 @@ namespace Cocktail_Magician_Services
         /// <returns>BarDTO</returns>
         public async Task<BarDTO> GetBar(string id)
         {
-            try
-            {
-                var bar = await _context.Bars
-                    .AsNoTracking()
-                    .Where(b => !b.IsDeleted)
-                    .FirstOrDefaultAsync(b => b.BarId == id);
+            var bar = await _context.Bars
+                .AsNoTracking()
+                .Where(b => !b.IsDeleted)
+                .FirstOrDefaultAsync(b => b.BarId == id) ?? throw new Exception("This bar does not exists!");
 
-                return bar.ToDTO();
-            }
-            catch (Exception)
-            {
-                throw new Exception("This bar does not exists!");
-            }
+            return bar.ToDTO();
         }
 
         /// <summary>
@@ -184,23 +177,15 @@ namespace Cocktail_Magician_Services
         /// <returns>BarDTO</returns>
         public async Task<BarDTO> GetBarForDetails(string id)
         {
-            try
-            {
-                var bar = await _context.Bars
-                    .AsNoTracking()
-                    .Include(b => b.BarCocktails)
-                        .ThenInclude(b => b.Cocktail)
-                    .Include(b => b.BarReviews)
-                        .ThenInclude(br => br.User)
-                    .Where(b => !b.IsDeleted)
-                    .FirstOrDefaultAsync(b => b.BarId == id);
-
-                return bar.ToDTO();
-            }
-            catch (Exception)
-            {
-                throw new Exception("This bar does not exists!");
-            }
+            var bar = await _context.Bars
+                .AsNoTracking()
+                .Include(b => b.BarCocktails)
+                    .ThenInclude(b => b.Cocktail)
+                .Include(b => b.BarReviews)
+                    .ThenInclude(br => br.User)
+                .Where(b => !b.IsDeleted)
+                .FirstOrDefaultAsync(b => b.BarId == id) ?? throw new Exception("This bar does not exists!");
+            return bar.ToDTO();
         }
 
         /// <summary>
@@ -264,7 +249,7 @@ namespace Cocktail_Magician_Services
         public async Task RemoveBar(string id)
         {
             var bars = await GetBar(id);
-            
+
             bars.IsDeleted = true;
             _context.Bars.Update(bars.ToBar());
             await _context.SaveChangesAsync();
