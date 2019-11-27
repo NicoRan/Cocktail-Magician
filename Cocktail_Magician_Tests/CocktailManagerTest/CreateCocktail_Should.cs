@@ -119,7 +119,7 @@ namespace Cocktail_Magician_Tests.CocktailManagerTest
             using (var assertContext = new CMContext(options))
             {
                 var sut = new CocktailManager(mockIngredient.Object, assertContext);
-                await Assert.ThrowsExceptionAsync<InvalidOperationException>(() => sut.CreateCocktail(cocktailDTO, igredients), "Cocktail already exists in the database");
+                await Assert.ThrowsExceptionAsync<InvalidOperationException>(() => sut.CreateCocktail(cocktailDTO, igredients), "Cocktail already exists in the");
             }
         }
     }
