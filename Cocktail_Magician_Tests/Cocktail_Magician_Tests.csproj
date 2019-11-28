@@ -16,8 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ImgredientManager\" />
     <Folder Include="AdditionalUserManagerTests\" />
+    <Folder Include="ImgredientManager\" />
     <Folder Include="SearchManager\" />
   </ItemGroup>
 

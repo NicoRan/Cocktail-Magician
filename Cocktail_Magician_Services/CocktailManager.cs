@@ -82,7 +82,7 @@ namespace Cocktail_Magician_Services
         }
 
         /// <summary>
-        /// This method finds the ciresponding Cocktail to update and updates its properties with the new values.
+        /// This method finds the corresponding Cocktail to update and updates its properties with the new values.
         /// Updates the Cocktails recipe by calling the method UpdateInformation.
         /// </summary>
         /// <param name="cocktail">Object of type Cocktail with new values to update</param>
