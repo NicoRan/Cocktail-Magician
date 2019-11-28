@@ -15,11 +15,13 @@ namespace Cocktail_Magician_Services
     {
         private readonly CMContext _context;
         private readonly IIngredientManager _ingredientManager;
+        private readonly ICocktailFactory _cocktailFactory;
 
-        public CocktailManager(IIngredientManager ingredientManager, CMContext context)
+        public CocktailManager(IIngredientManager ingredientManager, CMContext context, ICocktailFactory cocktailFactory)
         {
             _context = context;
             _ingredientManager = ingredientManager;
+            _cocktailFactory = cocktailFactory;
         }
 
         /// <summary>
@@ -35,7 +37,7 @@ namespace Cocktail_Magician_Services
                 throw new InvalidOperationException("Cocktail already exists in the database");
             }
 
-            var cocktailToAdd = cocktail.ToCreateEntity();
+            var cocktailToAdd = _cocktailFactory.CreateNewCocktail(cocktail.Name, cocktail.Picture);
             cocktailToAdd.CocktailIngredient = new List<CocktailIngredient>();
             foreach (var ingredient in ingredients)
             {
@@ -70,7 +72,7 @@ namespace Cocktail_Magician_Services
         {
             if (cocktailReviewDTO.Grade > 0)
             {
-                var cocktailReview = cocktailReviewDTO.ToEntity();
+                var cocktailReview = _cocktailFactory.CreateNewCocktailReview(cocktailReviewDTO.Grade, cocktailReviewDTO.Comment, cocktailReviewDTO.UserId, cocktailReviewDTO.CocktailId, cocktailReviewDTO.CreatedOn);
 
                 await _context.CocktailReviews.AddAsync(cocktailReview);
                 await _context.SaveChangesAsync();

@@ -19,5 +19,14 @@ namespace Cocktail_Magician_Services.Factories
 
             return new Bar(name, address, information, picture, mapDirection);
         }
+
+        public BarReview CreateNewBarReview(double grade, string comment, string userId, string barId, DateTime createdOn)
+        {
+            if (comment.Length > 500)
+                throw new Exception("Comment should be not more than 500 characters!");
+            if(grade < 0 || grade > 5)
+                throw new Exception("Grade should be between 0 and 5!");
+            return new BarReview(grade, comment, userId, barId, createdOn);
+        }
     }
 }

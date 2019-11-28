@@ -61,9 +61,16 @@
                                 <div class="form-group chosen-bg-light">
                                     <label>Cocktails To Remove</label>
                                     <select asp-for="@Model.CocktailsToRemove" class="chosen-the-basic chosen-container-multi">
-                                        @foreach (var cocktail in Model.Bar.BarCocktailViewModels)
+                                        @if (Model.Bar.BarCocktailViewModels.Count() > 0)
                                         {
-                                            <option value="@cocktail.CocktailName">@cocktail.CocktailName</option>
+                                            @foreach (var cocktail in Model.Bar.BarCocktailViewModels)
+                                            {
+                                                <option value="@cocktail.CocktailName">@cocktail.CocktailName</option>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <option disabled>No cocktails found</option>
                                         }
                                     </select>
                                     <span asp-validation-for="@Model.CocktailsToRemove" class="text-danger"></span>

@@ -1,81 +1,60 @@
 ﻿@model IEnumerable<BarViewModel>
+@*@model ReflectionIT.Mvc.Paging.PagingList<BarViewModel>
+@addTagHelper*,ReflectionIT.Mvc.Paging*@
 
 @{
     ViewData["Title"] = "BarCatalog";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="row gap-20 gap-lg-40">
-    <div class="col-12 col-lg-12">
-        <div class="content-wrapper">
-            <div class="section-title border-bottom w-100">
-                <div class="d-flex flex-column flex-sm-row align-items-lg-end">
-                    <div>
-                        <h2><span><span>Our</span> Bars</span></h2>
-                    </div>
-                    <div class="ml-sm-auto">
-                        <div class="sort-box mt-10 mt-sm-0">
-                            <div class="d-flex align-items-center sort-item">
-                                <label class="sort-label d-none d-sm-flex">Category:</label>
-                                <div class="sort-form">
-                                    <select class="chosen-the-basic form-control" tabindex="2">
-                                        <option value="sort-by-1">A - Z</option>
-                                        <option value="sort-by-2">Z - A</option>
-                                        <option value="sort-by-3">From top rated</option>
-                                        <option value="sort-by-4">From loest rated</option>
-                                    </select>
-                                </div>
-                            </div>
+    @*<nav aria-label="All Bars">
+        @await this.Component.InvokeAsync("Pager", new { paginglist = this.Model })
+    </nav>*@
+    <div class="row gap-20 gap-lg-40">
+        <div class="col-12 col-lg-12">
+            <div class="content-wrapper">
+                <div class="section-title border-bottom w-100">
+                    <div class="d-flex flex-column flex-sm-row align-items-lg-end">
+                        <div>
+                            <h2><span><span>Our</span> Bars</span></h2>
                         </div>
                     </div>
                 </div>
+                <div class="row equal-height cols-1 cols-sm-2 cols-lg-3 gap-20 mt-50">
+                    <table>
+                        <tbody>
+                            @foreach (var bar in Model)
+                            {
+                                <div class="col">
+                                    <article class="post-grid-01">
+                                        <figure class="destination-grid-item-01">
+                                            <a asp-area="BarCrower" asp-controller="Bars" asp-action="Details" asp-route-Id="@bar.BarId" class="h6">
+                                                <div class="image">
+                                                    <img src="@bar.Picture" alt="images" style="height:250px;width:auto;" />
+                                                </div>
+                                                <div class="content">
+                                                    <div class="rating-item rating-inline">
+                                                        <div class="rating-icons">
+                                                            <input type="hidden" class="rating" data-filled="rating-icon ri-star rating-rated" data-empty="rating-icon ri-star-empty" data-fractions="2" data-readonly value="@bar.Rating" />
+                                                        </div>
+                                                        <p class="rating-text font600 text-muted font-12 letter-spacing-1"><span class="text-dark mr-3">@bar.Rating / 5</span></p>
+                                                    </div>
+                                                    <h4>@bar.Name</h4>
+                                                    Go to Bar <i class="elegent-icon-arrow_right"></i>
+                                                </div>
+                                            </a>
+                                        </figure>
+                                    </article>
+                                </div>
+                            }
+                        </tbody>
+                    </table>
+                    
+                </div>
+
             </div>
-            <div class="row equal-height cols-1 cols-sm-2 cols-lg-3 gap-20 mt-50">
-                @foreach (var bar in Model.OrderByDescending(b=>b.Rating))
-                {
-                    <div class="col">
-                        <article class="post-grid-01">
-                            <figure class="destination-grid-item-01">
-                                <a asp-area="BarCrower" asp-controller="Bars" asp-action="Details" asp-route-Id="@bar.BarId" class="h6">
-                                    <div class="image">
-                                        <img src="@bar.Picture" alt="images" style="height:250px;width:auto;" />
-                                    </div>
-                                    <div class="content">
-                                        <div class="rating-item rating-inline">
-                                            <div class="rating-icons">
-                                                <input type="hidden" class="rating" data-filled="rating-icon ri-star rating-rated" data-empty="rating-icon ri-star-empty" data-fractions="2" data-readonly value="@bar.Rating" />
-                                            </div>
-                                            <p class="rating-text font600 text-muted font-12 letter-spacing-1"><span class="text-dark mr-3">@bar.Rating / 5</span></p>
-                                        </div>
-                                        <h4>@bar.Name</h4>
-                                        Go to Bar <i class="elegent-icon-arrow_right"></i>
-                                    </div>
-                                </a>
-                            </figure>
-                        </article>
-                    </div>
-                }
-            </div>
-            <nav class="pager-wrappper mt-50">
-                <ul class="pagination justify-content-center mb-0 pb-0">
-                    <li>
-                        <a href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li class="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><span>...</span></li>
-                    <li><a href="#">11</a></li>
-                    <li><a href="#">12</a></li>
-                    <li><a href="#">13</a></li>
-                    <li>
-                        <a href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+
         </div>
+        @*<nav aria-label="All Bars">
+            <vc:pager paging-list="@Model" />
+        </nav>*@
     </div>
-</div>

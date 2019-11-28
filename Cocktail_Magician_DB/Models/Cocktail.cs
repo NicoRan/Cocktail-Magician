@@ -9,7 +9,11 @@ namespace Cocktail_Magician_DB.Models
         {
 
         }
-
+        public Cocktail(string name, string picture)
+        {
+            Name = name;
+            Picture = picture;
+        }
         public string Id { get; set; }
         [Required(ErrorMessage = "A name is required!")]
         [MinLength(3, ErrorMessage = "Name should be between 3 and 35 symbols!"),

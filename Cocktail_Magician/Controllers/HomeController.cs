@@ -6,6 +6,8 @@ using Cocktail_Magician.Models;
 using Cocktail_Magician_Services.Contracts;
 using Cocktail_Magician.Areas.BarMagician.Models;
 using Cocktail_Magician.Infrastructure.Mappers;
+using ReflectionIT.Mvc.Paging;
+using Cocktail_Magician_DB;
 
 namespace Cocktail_Magician.Controllers
 {
@@ -35,16 +37,18 @@ namespace Cocktail_Magician.Controllers
         }
 
         [ResponseCache(Duration = 10)]
-        public async Task<IActionResult> BarCatalog()
+        public async Task<IActionResult> BarCatalog(int page = 1)
         {
             var listOfBars = await _barManager.GetAllBarsAsync();
-            var listOfBarsViewModel = new List<BarViewModel>();
+            var listofBarsView = new List<BarViewModel>();
             foreach (var bar in listOfBars)
             {
                 var mapToView = bar.ToVM();
-                listOfBarsViewModel.Add(mapToView);
+                listofBarsView.Add(mapToView);
             }
-            return View(listOfBarsViewModel);
+            //var query = listofBarsView.AsQueryable().OrderBy(l => l.Name);
+            //var pagingModel = PagingList.Create(query, 3, page);
+            return View(listofBarsView);
         }
 
         [ResponseCache(Duration = 10)]

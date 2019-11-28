@@ -14,6 +14,7 @@ using Cocktail_Magician_DB.DataSeeder;
 using Cocktail_Magician_Services.Contracts;
 using Cocktail_Magician_Services;
 using Cocktail_Magician_Services.Factories;
+using ReflectionIT.Mvc.Paging;
 
 namespace Cocktail_Magician
 {
@@ -56,13 +57,15 @@ namespace Cocktail_Magician
                 .AddEntityFrameworkStores<CMContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
+            
             services.AddScoped<IBarManager, BarManager>();
             services.AddScoped<ICocktailManager, CocktailManager>();
             services.AddScoped<IIngredientManager, IngredientManager>();
             services.AddScoped<ISearchManager, SearchManager>();
             services.AddScoped<IAdditionalUserManager, AdditionalUserManager>();
             services.AddScoped<IBarFactory, BarFactory>();
+            services.AddScoped<ICocktailFactory, CocktailFactory>();
+            
             //services.AddHostedService<BackgroundManager>();
         }
 

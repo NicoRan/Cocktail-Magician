@@ -65,7 +65,7 @@ namespace Cocktail_Magician_Services
         {
             if (barReviewDTO.Grade > 0)
             {
-                var barReview = barReviewDTO.ToEntity();
+                var barReview = _barFactory.CreateNewBarReview(barReviewDTO.Grade, barReviewDTO.Comment, barReviewDTO.UserId, barReviewDTO.BarId, barReviewDTO.DateCreated);
 
                 await _context.BarReviews.AddAsync(barReview);
                 await _context.SaveChangesAsync();
@@ -146,6 +146,7 @@ namespace Cocktail_Magician_Services
         public async Task<ICollection<BarDTO>> GetAllBarsAsync()
         {
             var listOfBars = await _context.Bars
+                .OrderByDescending(b => b.Rating)
                 .Where(b => !b.IsDeleted)
                 .ToListAsync();
             if (listOfBars.Count() == 0 || listOfBars == null)
