@@ -57,7 +57,10 @@ namespace Cocktail_Magician.Controllers
             var listOfCocktails = await _cocktailManager.GetAllCocktailsAsync();
             return View(listOfCocktails.ToCatalogVM());
         }
-
+        public IActionResult PageNotFoundFourOFour()
+        {
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();
@@ -76,10 +79,6 @@ namespace Cocktail_Magician.Controllers
             return View(aboutUs);
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error(ErrorViewModel error)
-        {
-            return View(error);
-        }
+
     }
 }

@@ -20,6 +20,8 @@ namespace Cocktail_Magician_Tests.CocktailManagerTest
         {
             var options = TestUtilities.GetOptions(nameof(ReturnCorrentCount));
             var mockIngredient = new Mock<IIngredientManager>();
+            var mockFactory = new Mock<ICocktailFactory>();
+
 
             var cocktailOne = new Cocktail()
             {
@@ -70,7 +72,7 @@ namespace Cocktail_Magician_Tests.CocktailManagerTest
 
             using (var assertContext = new CMContext(options))
             {
-                var sut = new CocktailManager(mockIngredient.Object, assertContext);
+                var sut = new CocktailManager(mockIngredient.Object, assertContext,mockFactory.Object);
                 var result = await sut.GetTopRatedCocktails();
                 Assert.AreEqual(4,result.Count());
             }
@@ -81,6 +83,8 @@ namespace Cocktail_Magician_Tests.CocktailManagerTest
         {
             var options = TestUtilities.GetOptions(nameof(ReturntOrderedResult));
             var mockIngredient = new Mock<IIngredientManager>();
+            var mockFactory = new Mock<ICocktailFactory>();
+
 
             var cocktailOne = new Cocktail()
             {
@@ -131,7 +135,7 @@ namespace Cocktail_Magician_Tests.CocktailManagerTest
 
             using (var assertContext = new CMContext(options))
             {
-                var sut = new CocktailManager(mockIngredient.Object, assertContext);
+                var sut = new CocktailManager(mockIngredient.Object, assertContext,mockFactory.Object);
                 var result = await sut.GetTopRatedCocktails();
                 Assert.AreEqual(cocktailOne.Rating,result.ElementAt(0).Rating);
                 Assert.AreEqual(cocktailTwo.Rating,result.ElementAt(1).Rating);

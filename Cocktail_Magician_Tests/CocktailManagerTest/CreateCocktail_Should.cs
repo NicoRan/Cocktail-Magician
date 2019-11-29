@@ -21,6 +21,9 @@ namespace Cocktail_Magician_Tests.CocktailManagerTest
         {
             var options = TestUtilities.GetOptions(nameof(CreateCocktail));
             var mockIngredient = new Mock<IIngredientManager>();
+            var mockFactory = new Mock<ICocktailFactory>();
+            //var factoryMock = new Mock<ICocktailFactory>();
+
             var igredients = new List<string> { "first" };
             var ingredient = new Ingredient()
             {
@@ -39,7 +42,7 @@ namespace Cocktail_Magician_Tests.CocktailManagerTest
             {
                 await arrangeContext.Ingredients.AddAsync(ingredient);
                 await arrangeContext.SaveChangesAsync();
-                var sut = new CocktailManager(mockIngredient.Object, arrangeContext);
+                var sut = new CocktailManager(mockIngredient.Object, arrangeContext, mockFactory.Object);
                 await sut.CreateCocktail(cocktailDTO, igredients);
 
             }
@@ -53,6 +56,8 @@ namespace Cocktail_Magician_Tests.CocktailManagerTest
         {
             var options = TestUtilities.GetOptions(nameof(ThrowExceptionIfCocktailNameExist));
             var mockIngredient = new Mock<IIngredientManager>();
+            var factoryMock = new Mock<ICocktailFactory>();
+
             var igredients = new List<string> { "first" };
             var ingredient = new Ingredient()
             {
@@ -81,7 +86,7 @@ namespace Cocktail_Magician_Tests.CocktailManagerTest
             }
             using (var assertContext = new CMContext(options))
             {
-                var sut = new CocktailManager(mockIngredient.Object, assertContext);
+                var sut = new CocktailManager(mockIngredient.Object, assertContext, factoryMock.Object);
                 await Assert.ThrowsExceptionAsync<InvalidOperationException>(() => sut.CreateCocktail(cocktailDTO, igredients));
             }
         }        
@@ -90,6 +95,8 @@ namespace Cocktail_Magician_Tests.CocktailManagerTest
         {
             var options = TestUtilities.GetOptions(nameof(ThrowExceptionIfCocktailNameExist));
             var mockIngredient = new Mock<IIngredientManager>();
+            var mockFactory = new Mock<ICocktailFactory>();
+
             var igredients = new List<string> { "first" };
             var ingredient = new Ingredient()
             {
@@ -118,7 +125,7 @@ namespace Cocktail_Magician_Tests.CocktailManagerTest
             }
             using (var assertContext = new CMContext(options))
             {
-                var sut = new CocktailManager(mockIngredient.Object, assertContext);
+                var sut = new CocktailManager(mockIngredient.Object, assertContext,mockFactory.Object);
                 await Assert.ThrowsExceptionAsync<InvalidOperationException>(() => sut.CreateCocktail(cocktailDTO, igredients), "Cocktail already exists in the");
             }
         }

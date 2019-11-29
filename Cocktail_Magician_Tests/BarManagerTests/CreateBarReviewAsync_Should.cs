@@ -23,7 +23,7 @@ namespace Cocktail_Magician_Tests.BarManagerTests
         {
             barForTest = new Bar()
             {
-                BarId = "One",
+                BarId = "TwoOne",
                 Address = "Solunska 2",
                 Information = "Information",
                 MapDirections = "Go south",
@@ -56,6 +56,9 @@ namespace Cocktail_Magician_Tests.BarManagerTests
         {
             var options = TestUtilities.GetOptions(nameof(AddReview_When_ValidValuesArePassed));
 
+            barFactoryMoq.Setup(b => b.CreateNewBarReview(createReviewForTest.Grade, createReviewForTest.Comment,
+                    createReviewForTest.UserId, createReviewForTest.BarId, createReviewForTest.CreatedOn))
+                .Returns(createReviewForTest);
             using (var arrangeContext = new CMContext(options))
             {
                 arrangeContext.Bars.Add(barForTest);
@@ -63,9 +66,12 @@ namespace Cocktail_Magician_Tests.BarManagerTests
                 await arrangeContext.SaveChangesAsync();
             }
 
+            
+
             using (var assertContext = new CMContext(options))
             {
                 var sut = new BarManager(assertContext, cocktailManagerMoq.Object, barFactoryMoq.Object);
+                
                 await sut.CreateBarReviewAsync(createReviewForTest.ToDTO());
 
                 Assert.AreEqual(1, assertContext.BarReviews.Count());
@@ -88,12 +94,12 @@ namespace Cocktail_Magician_Tests.BarManagerTests
                 UserId = userForTests.Id
             };
 
-            using (var arrangeContext = new CMContext(options))
-            {
-                arrangeContext.Bars.Add(barForTest);
-                arrangeContext.Users.Add(userForTests);
-                await arrangeContext.SaveChangesAsync();
-            }
+            //using (var arrangeContext = new CMContext(options))
+            //{
+            //    arrangeContext.Bars.Add(barForTest);
+            //    arrangeContext.Users.Add(userForTests);
+            //    await arrangeContext.SaveChangesAsync();
+            //}
 
             using (var assertContext = new CMContext(options))
             {
