@@ -28,7 +28,7 @@ namespace Cocktail_Magician.Areas.BarMagician.Controllers
         {
             var createCocktail = new CreateCocktailViewModel();
             createCocktail.Ingredients = new List<string>();
-            var listOfIngredients = await _ingredientManager.GetIngredientsAsync();
+            var listOfIngredients = await _ingredientManager.GetAllIngredientsAsync();
             foreach (var item in listOfIngredients)
             {
                 createCocktail.Ingredients.Add(item.Name);
