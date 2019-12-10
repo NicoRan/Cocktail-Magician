@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Cocktail_Magician_DB;
 using Cocktail_Magician_DB.Models;
 using Cocktail_Magician.Infrastructure.Extensions;
+using Cocktail_Magician.Infrastructure.Middlewares;
 using Cocktail_Magician_DB.DataSeeder;
 using Cocktail_Magician_Services.Contracts;
 using Cocktail_Magician_Services;
@@ -92,6 +93,8 @@ namespace Cocktail_Magician
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+
+            app.UseMiddleware<PageNotFoundMiddleware>();
             app.UseAuthentication();
 
             app.UseMvc(routes =>

@@ -22,6 +22,7 @@ namespace Cocktail_Magician_Tests.CocktailManagerTest
             var mockIngredient = new Mock<IIngredientManager>();
             var mockFactory = new Mock<ICocktailFactory>();
 
+
             var cocktailOne = new Cocktail()
             {
                 Name = "name",

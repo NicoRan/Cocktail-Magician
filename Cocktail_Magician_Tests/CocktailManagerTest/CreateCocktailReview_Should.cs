@@ -41,12 +41,13 @@ namespace Cocktail_Magician_Tests.CocktailManagerTest
             {
                 await arrangeContext.Cocktails.AddAsync(cocktail);
                 await arrangeContext.SaveChangesAsync();
-                var sut = new CocktailManager(mockIngredient.Object, arrangeContext, mockFactory.Object);
-                await sut.CreateCocktailReviewAsync(mockCocktailReviewDTO);
+                
             }
 
             using (var assertContext = new CMContext(options))
             {
+                var sut = new CocktailManager(mockIngredient.Object, assertContext, factoryMock.Object);
+                await sut.CreateCocktailReviewAsync(mockCocktailReviewDTO);
                 Assert.AreEqual(1,assertContext.CocktailReviews.Count());
             }
         }
