@@ -20,6 +20,7 @@ namespace Cocktail_Magician_Tests.CocktailManagerTest
         {
             var options = TestUtilities.GetOptions(nameof(GetAllCocktails));
             var mockIngredient = new Mock<IIngredientManager>();
+            var mockFactory = new Mock<ICocktailFactory>();
 
             var cocktail = new Cocktail()
             {
@@ -40,7 +41,7 @@ namespace Cocktail_Magician_Tests.CocktailManagerTest
 
             using (var assertContext = new CMContext(options))
             {
-                var sut = new CocktailManager(mockIngredient.Object, assertContext);
+                var sut = new CocktailManager(mockIngredient.Object, assertContext, mockFactory.Object);
                 var result = await sut.GetAllCocktailsAsync();
                 Assert.AreEqual(1,result.Count);
             }

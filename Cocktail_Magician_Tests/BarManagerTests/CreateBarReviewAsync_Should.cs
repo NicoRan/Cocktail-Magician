@@ -15,6 +15,7 @@ namespace Cocktail_Magician_Tests.BarManagerTests
     public class CreateBarReviewAsync_Should
     {
         private Bar barForTest;
+        private Bar barTwoTest;
         private User userForTests;
         private BarReview createReviewForTest;
         private Mock<ICocktailManager> cocktailManagerMoq = new Mock<ICocktailManager>();
@@ -32,6 +33,17 @@ namespace Cocktail_Magician_Tests.BarManagerTests
                 Rating = 4.5d
             };
 
+            barTwoTest = new Bar()
+            {
+                BarId = "Two",
+                Address = "Solunska",
+                Information = "Information",
+                MapDirections = "Go south",
+                Name = "Bar",
+                Picture = "Picture",
+                Rating = 4.5d
+            };
+
             userForTests = new User()
             {
                 Id = "TheOne",
@@ -41,8 +53,8 @@ namespace Cocktail_Magician_Tests.BarManagerTests
 
             createReviewForTest = new BarReview()
             {
-                Bar = barForTest,
-                BarId = barForTest.BarId,
+                Bar = barTwoTest,
+                BarId = barTwoTest.BarId,
                 Comment = "Comment",
                 CreatedOn = DateTime.MinValue,
                 Grade = 3.5d,
@@ -58,6 +70,7 @@ namespace Cocktail_Magician_Tests.BarManagerTests
 
             using (var arrangeContext = new CMContext(options))
             {
+                arrangeContext.Bars.Add(barTwoTest);
                 arrangeContext.Bars.Add(barForTest);
                 arrangeContext.Users.Add(userForTests);
                 await arrangeContext.SaveChangesAsync();
@@ -66,6 +79,7 @@ namespace Cocktail_Magician_Tests.BarManagerTests
             using (var assertContext = new CMContext(options))
             {
                 var sut = new BarManager(assertContext, cocktailManagerMoq.Object, barFactoryMoq.Object);
+                barFactoryMoq.Setup(b => b.CreateNewBarReview(3.5d, "Comment", "TheOne", "Two", DateTime.MinValue)).Returns(createReviewForTest);
                 await sut.CreateBarReviewAsync(createReviewForTest.ToDTO());
 
                 Assert.AreEqual(1, assertContext.BarReviews.Count());

@@ -22,6 +22,7 @@ namespace Cocktail_Magician_Tests.CocktailManagerTest
             var options = TestUtilities.GetOptions(nameof(CreateCocktailReview));
 
             var mockIngredient = new Mock<IIngredientManager>();
+            var mockFactory = new Mock<ICocktailFactory>();
 
             var mockCocktailReviewDTO = new CocktailReviewDTO()
             {
@@ -40,7 +41,7 @@ namespace Cocktail_Magician_Tests.CocktailManagerTest
             {
                 await arrangeContext.Cocktails.AddAsync(cocktail);
                 await arrangeContext.SaveChangesAsync();
-                var sut = new CocktailManager(mockIngredient.Object, arrangeContext);
+                var sut = new CocktailManager(mockIngredient.Object, arrangeContext, mockFactory.Object);
                 await sut.CreateCocktailReviewAsync(mockCocktailReviewDTO);
             }
 
