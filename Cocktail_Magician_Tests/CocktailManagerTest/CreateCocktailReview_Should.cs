@@ -46,7 +46,7 @@ namespace Cocktail_Magician_Tests.CocktailManagerTest
 
             using (var assertContext = new CMContext(options))
             {
-                var sut = new CocktailManager(mockIngredient.Object, assertContext, factoryMock.Object);
+                var sut = new CocktailManager(mockIngredient.Object, assertContext, mockFactory.Object);
                 await sut.CreateCocktailReviewAsync(mockCocktailReviewDTO);
                 Assert.AreEqual(1,assertContext.CocktailReviews.Count());
             }
